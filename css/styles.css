@@ -73,11 +73,10 @@
 .post {
     text-align: justify;
 }
-.post-list {
+.post-list {}
 
-}
 .post-elem {
-    border-left: 1px solid #eee;
+    border-left: 1px solid #ccc;
 }
 .post-title {
     margin-left: 1rem;
