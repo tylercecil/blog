@@ -1,0 +1,21 @@
+<div class="post-list container">
+  $for(posts)$
+  <div class="post-elem">
+    <div class="row post-title">
+      <div class="two-thirds column"><a href="$url$"><h3>
+            $title$
+      </h3></a></div>
+      <div class="one-third column"><h6>
+          $date$
+      </h6></div>
+    </div>
+
+    <p class="post-blerb">
+      $blerb$
+    </p>
+  </div>
+
+  <br>
+
+  $endfor$
+</div>
