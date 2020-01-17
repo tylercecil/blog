@@ -1,0 +1,15 @@
+---
+posts:
+  - title: Making make Easy
+    date: 2016-04-18
+    abstract: How to write more general makefiles. An “easymake oven,” if you will. Covers pointers for organizing your C / C++ projects.
+    url: posts/2016-04-18-easymake.html
+  - title: Circular Programming
+    date: 2015-07-29
+    abstract: Or “How I Learned to Stop Worrying and Love Lazy Evaluation”
+    url: posts/2015-07-29-circular.html
+  - title: Paratype
+    date: 2014-05-01
+    abstract: A proof-of-concept experiment written in Go to understand static monomorphising. Given a program in a toy dummy language with a Haskell-like type system, Paratype will perform type inference and type checking. If type checking passed, it will generate a monomorphic code realization of the given program.
+    url: posts/2014-05-01-paratype.html
+---
