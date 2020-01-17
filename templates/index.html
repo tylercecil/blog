@@ -19,14 +19,14 @@
       </div>
 
       <h2>Posts</h2>
-      <div class="post-list container">
+      <div class="post-list">
         ${ for(posts) }
         <div class="post-elem">
           <div class="row post-title">
             <div class="two-thirds column"><a href="$it.url$"><h3>
                   $it.title$
                 </h3></a></div>
-                <div class="one-third column"><h6>
+                <div class="one-third column"><h6 style="text-align:right">
                     $it.date$
                   </h6></div>
           </div>
@@ -35,7 +35,6 @@
           $it.abstract$
           </p>
         </div>
-        <br>
         ${ endfor }
       </div>
 
