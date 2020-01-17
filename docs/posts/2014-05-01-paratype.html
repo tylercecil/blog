@@ -67,17 +67,9 @@
     <nav class="navbar">
       <div class="container">
         <ul class="navbar-list">
-          <li class="navbar-item">
-            <a class="navbar-link "
-               href="/">Home</a>
-          </li>
-          <li class="navbar-item">
-            <a class="navbar-link "
-               href="/blog">Blog</a>
-          </li>
-          <li class="navbar-item">
-            <a class="navbar-link "
-               href="/About">About</a>
+          <li class="navbar-item"> <a class="navbar-link" href="/">Home</a> </li>
+          <li class="navbar-item"> <a class="navbar-link" href="/blog">Blog</a> </li>
+          <li class="navbar-item"> <a class="navbar-link" href="/About">About</a>
           </li>
         </ul>
       </div>
@@ -93,15 +85,12 @@
         <p>Type checking is of course a well documented field. With a Hindley-Milner type system, <a href="http://en.wikipedia.org/wiki/Hindley%E2%80%93Milner_type_system#Algorithm_W">Algorithm W</a> is the canonical algorithm for type inference and checking. Paratype, however, sought a parallel way of type checking (100% because we felt like it).</p>
         <p>Our solution was to let every function be an actor, and types be messages. Functions would communicate to each other type information they have, and slowly build a list of their concrete (monomorphic) types. This, unfortunately, does not mean the problem is as simple as dataflow analysis, as the paper is sure to stress. To learn more, read the paper linked above. Don’t worry if this project seems absolutely bonkers to you — it is! We were just having some fun learning Go!</p>
       </div>
-      <h5 class="post-linkback"><a href="/blog"> Read other posts?  </a> </h5>
+      <h5 class="post-linkback"><a href="/"> Read other posts?  </a> </h5>
     </div>
 
     <div id="footer">
       <div class="container">
-        <div class="row">
-          <div  class="one-third column"><h6>&copy; 2020 Tyler Cecil</h6></div>
-          <div class="two-thirds column"> </div>
-        </div>
+      <h6 style="text-align:right;">&copy; 2020 Tyler Cecil</h6>
       </div>
     </div>
   </body>
