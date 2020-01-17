@@ -19,7 +19,7 @@ $(TARGET)/posts/%.html: posts/%.md $(TEMPLATES)
 	$(eval DATE := $(shell echo $< | ag -o '\d\d\d\d-\d\d-\d\d'))
 	$(C) $(CFLAGS) -M date=$(DATE) -f markdown -t html $< -o $@
 
-$(TARGET)/index.html: $(TARGET)/posts/all.yaml templates/index.html
+$(TARGET)/index.html: $(TARGET)/posts/all.yaml templates/index.html $(TEMPLATES)
 	$(C) $(CFLAGS) -f markdown $< -t html -M title=Posts --template=templates/index.html -o $@
 
 $(TARGET)/posts/all.yaml: $(POSTSRC)
