@@ -8,7 +8,7 @@ TEMPLATES:=$(shell find templates -name "*.html")
 
 .PHONEY: clean re serve
 
-$(TARGET): $(TARGET)/css/ $(TARGET)/images/ $(POSTS)
+$(TARGET): $(TARGET)/css/ $(TARGET)/images/ $(TARGET)/index.html $(POSTS)
 
 $(TARGET)/%: %
 	@mkdir -p $$(dirname $@)
@@ -19,16 +19,22 @@ $(TARGET)/posts/%.html: posts/%.md $(TEMPLATES)
 	$(eval DATE := $(shell echo $< | ag -o '\d\d\d\d-\d\d-\d\d'))
 	$(C) $(CFLAGS) -M date=$(DATE) -f markdown -t html $< -o $@
 
+$(TARGET)/index.html: $(TARGET)/posts/all.yaml templates/index.html
+	$(C) $(CFLAGS) -f markdown $< -t html -M title=Posts --template=templates/index.html -o $@
+
 $(TARGET)/posts/all.yaml: $(POSTSRC)
+	@mkdir -p $$(dirname $@)
 	@echo "Making $@..."
 	@touch $@
-	@echo "posts=[" > $@
+	@echo "---" > $@
+	@echo "posts:" >> $@
 	@for f in $^; do \
 		echo "  Gathering metadata for $$f..."; \
-		$(C) --template=templates/debug.html $$f >> $@; \
-		echo ", " >> $@; \
+		DATE=`echo $$f | ag -o '\d\d\d\d-\d\d-\d\d'`; \
+		URL=`echo $$f | sed 's/.md/.html/g'`; \
+		$(C) -M date=$$DATE -M url=$$URL --template=templates/post_record.yaml $$f >> $@; \
 	done
-	@echo "]" >> $@
+	@echo "---" >> $@
 	@echo "Done!"
 
 serve: $(TARGET)

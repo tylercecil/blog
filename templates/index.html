@@ -1,15 +1,45 @@
-<h1> $header$ </h1>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    ${ header.html() }
+  </head>
+  <body>
 
-<div style="background:url($picture$) right no-repeat;
-            background-size:480px; background-position:center;
-            width:260px; height:260px; border-radius:190px;
-            -webkit-border-radius: 190px;
-            -moz-border-radius: 190px; margin: 0 auto"></div>
+    ${ navbar.html() }
 
-<div style="padding:20px; text-align:justify;">
-  $body$
-</div>
+    <div class="container">
+      <h1> Hey, I'm Tyler, </h1>
+      <div style="background:url(/images/of_me/touchup1.jpg) right no-repeat;
+                    background-size:480px; background-position:center;
+                    width:260px; height:260px; border-radius:190px;
+                    -webkit-border-radius: 190px;
+                    -moz-border-radius: 190px; margin: 0 auto"></div>
+      <div style="padding:20px; text-align:right;">
+        <h3>a master of very little.</h3>
+      </div>
 
-<h2>Recent Posts</h2>
-$partial("templates/post-list.html")$
-<i>For more posts <a href="/blog"> see here</a>.</i>
+      <h2>Posts</h2>
+      <div class="post-list container">
+        ${ for(posts) }
+        <div class="post-elem">
+          <div class="row post-title">
+            <div class="two-thirds column"><a href="$it.url$"><h3>
+                  $it.title$
+                </h3></a></div>
+                <div class="one-third column"><h6>
+                    $it.date$
+                  </h6></div>
+          </div>
+
+          <p class="post-blerb">
+          $it.abstract$
+          </p>
+        </div>
+        <br>
+        ${ endfor }
+      </div>
+
+      ${ footer.html() }
+
+  </body>
+</html>
