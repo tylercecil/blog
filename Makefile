@@ -2,7 +2,7 @@ C := ~/Downloads/pandoc-2.9.1.1/bin/pandoc
 CFLAGS := --template=templates/post.html --mathjax
 
 TARGET := docs
-POSTSRC := $(shell find  posts -name "*.md")
+POSTSRC := $(shell find  posts -name "*.md" | sort -r)
 POSTS:=$(patsubst %, $(TARGET)/%, $(POSTSRC:.md=.html))
 TEMPLATES:=$(shell find templates -name "*.html")
 
