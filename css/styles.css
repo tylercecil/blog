@@ -116,3 +116,10 @@ td.sourceCode { padding-left: 5px; }
 .sourceCode span.fu { color: #06287e; }
 .sourceCode span.re { }
 .sourceCode span.er { color: red; font-weight: bold; }
+/* Comma between footnotes */
+.footnote-ref ~ .footnote-ref ::before {
+  content: ', ';
+  color: black;
+  text-decoration:none;
+  display:inline-block;
+}
