@@ -1,5 +1,5 @@
 C := ~/Downloads/pandoc-2.9.1.1/bin/pandoc
-CFLAGS := --template=templates/post.html --mathjax
+CFLAGS := --mathjax --shift-heading-level-by=1 -f markdown -t html
 
 TARGET := docs
 POSTSRC := $(shell find  posts -name "*.md" | sort -r)
@@ -17,10 +17,10 @@ $(TARGET)/%: %
 $(TARGET)/posts/%.html: posts/%.md $(TEMPLATES)
 	@mkdir -p $$(dirname $@)
 	$(eval DATE := $(shell echo $< | ag -o '\d\d\d\d-\d\d-\d\d'))
-	$(C) $(CFLAGS) -M date=$(DATE) -f markdown -t html $< -o $@
+	$(C) $(CFLAGS) --template=templates/post.html -M date=$(DATE) $< -o $@
 
 $(TARGET)/index.html: $(TARGET)/posts/all.yaml templates/index.html $(TEMPLATES)
-	$(C) $(CFLAGS) -f markdown $< -t html -M title=Posts --template=templates/index.html -o $@
+	$(C) $(CFLAGS) $< -M title=Posts --template=templates/index.html -o $@
 
 $(TARGET)/posts/all.yaml: $(POSTSRC)
 	@mkdir -p $$(dirname $@)
