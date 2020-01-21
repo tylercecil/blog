@@ -25,7 +25,6 @@ $(TARGET)/index.html: $(TARGET)/posts/all.yaml templates/index.html $(TEMPLATES)
 $(TARGET)/posts/all.yaml: $(POSTSRC)
 	@mkdir -p $$(dirname $@)
 	@echo "Making $@..."
-	@touch $@
 	@echo "---" > $@
 	@echo "posts:" >> $@
 	@for f in $^; do \
@@ -37,8 +36,8 @@ $(TARGET)/posts/all.yaml: $(POSTSRC)
 	@echo "---" >> $@
 	@echo "Done!"
 
-serve: $(TARGET)
-	cd $(TARGET) && python -m http.server 8000
+serve:
+	python -m http.server 8000 --directory $(TARGET)
 
 re: clean $(TARGET)
 
