@@ -12,7 +12,7 @@ $(TARGET): $(TARGET)/css/ $(TARGET)/images/ $(TARGET)/index.html $(POSTS)
 
 $(TARGET)/%: %
 	@mkdir -p $$(dirname $@)
-	rsync -r $< $@
+	rsync -r --del $< $@
 
 $(TARGET)/posts/%.html: posts/%.md $(TEMPLATES)
 	@mkdir -p $$(dirname $@)
