@@ -1,21 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    ${ header.html() }
+  ${ header.html() }
   </head>
   <body>
     <div class="container">
       <h1>$title$</h1>
       $if(subtitle)$<h5>$subtitle$</h5>$endif$
       <div class="post-info"><h6>Posted on $date$</h6></div>
+
       <div class="post">
-        $body$
+
+$body$
+
       </div>
+
       <h5 class="post-linkback"><a href="/"> Read other posts?  </a> </h5>
+      ${ footer.html() }
+
     </div>
-
-    ${ footer.html() }
-
   </body>
-
 </html>
