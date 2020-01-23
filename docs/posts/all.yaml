@@ -1,5 +1,9 @@
 ---
 posts:
+  - title: Words that Ever Play Well
+    date: 2020-01-19
+    abstract: “Any” is such a common word; with “for-all”-like semantic. “Any” has hardly ever troubled anyone. Then again… “Any” has ever troubled anyone.
+    url: posts/2020-01-19-NPI.html
   - title: Making make Easy
     date: 2016-04-18
     abstract: How to write more general makefiles. An “easymake oven,” if you will. Covers pointers for organizing your C / C++ projects.
