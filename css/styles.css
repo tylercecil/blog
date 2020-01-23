@@ -88,6 +88,24 @@
 .post-info {}
 .post-linkback{}
 
+caption {
+  font-size: 90%;
+  text-align: justify;
+}
+
+table {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+*[role="doc-endnote"] {
+  font-size: 90%;
+}
+
+li p {
+  display: inline;
+}
+
 /****************************************************************
  * Pandoc Style
  ****************************************************************/
