@@ -22,7 +22,7 @@ $(TARGET)/posts/%.html: posts/%.md $(TEMPLATES)
 $(TARGET)/index.html: $(TARGET)/posts/all.yaml templates/index.html $(TEMPLATES)
 	$(C) $(CFLAGS) $< -M title=Posts --template=templates/index.html -o $@
 
-$(TARGET)/posts/all.yaml: $(POSTSRC)
+$(TARGET)/posts/all.yaml: $(POSTSRC) templates/post_record.yaml
 	@mkdir -p $$(dirname $@)
 	@echo "Making $@..."
 	@echo "---" > $@
