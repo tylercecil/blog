@@ -27,11 +27,11 @@ $(TARGET)/posts/all.yaml: $(POSTSRC) templates/post_record.yaml
 	@echo "Making $@..."
 	@echo "---" > $@
 	@echo "posts:" >> $@
-	@for f in $^; do \
+	@for f in $(POSTSRC); do \
 		echo "  Gathering metadata for $$f..."; \
 		DATE=`echo $$f | ag -o '\d\d\d\d-\d\d-\d\d'`; \
 		URL=`echo $$f | sed 's/.md/.html/g'`; \
-		$(C) -M date=$$DATE -M url=$$URL --template=templates/post_record.yaml $$f >> $@; \
+		$(C) --mathjax -M date=$$DATE -M url=$$URL --template=templates/post_record.yaml $$f >> $@; \
 	done
 	@echo "---" >> $@
 	@echo "Done!"
