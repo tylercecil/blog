@@ -1,4 +1,5 @@
   - title: $title$
+    subtitle: $subtitle$
     date: $date$
     abstract: $abstract$
     url: $url$

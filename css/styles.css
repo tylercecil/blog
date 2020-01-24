@@ -69,25 +69,39 @@
 }
 
 /****************************************************************
+ * Post List Settings
+ ****************************************************************/
+.post-list {}
+
+.post-elem {
+    border-left: 1px solid #E1E1E1E1;
+    padding-left: 1rem;
+    margin-bottom: 2rem;
+}
+
+.post-elem * {
+  margin-bottom: 0;
+}
+
+.post-blerb {
+    text-align: justify;
+}
+
+/****************************************************************
  * Post Settings
  ****************************************************************/
 .post>p {
     text-align: justify;
 }
-.post-list {}
 
-.post-elem {
-    border-left: 1px solid #E1E1E1E1;
+#title {
+  margin-bottom: 2rem;
 }
-.post-title {
-    margin-left: 1rem;
+
+#title * {
+  margin-bottom: 0;
+  margin-top: 0;
 }
-.post-blerb {
-    text-align: justify;
-    margin-left: 1rem;
-}
-.post-info {}
-.post-linkback{}
 
 caption {
   font-size: 90%;
