@@ -22,9 +22,10 @@
         ${ for(posts) }
         <div class="post-elem">
           <div class="row post-title">
-            <div class="ten columns"><a href="$it.url$"><h3>
-                  $it.title$
-                </h3></a></div>
+            <div class="ten columns"><a href="$it.url$">
+                <h3> $it.title$ </h3>
+                $if(it.subtitle)$<h5> &mdash; $it.subtitle$</h5>$endif$
+              </a></div>
                 <div class="two columns"><h6 class="date">
                     $it.date$
                   </h6></div>

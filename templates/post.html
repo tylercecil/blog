@@ -5,17 +5,21 @@
   </head>
   <body>
     <div class="container">
-      <h1>$title$</h1>
-      $if(subtitle)$<h5>$subtitle$</h5>$endif$
-      <div class="post-info"><h6>Posted on $date$</h6></div>
 
+      <div id="title">
+      <h1>$title$</h1>
+        $if(subtitle)$<h5>$subtitle$</h5>$endif$
+        <h6>Posted on $date$</h6>
+        <hr>
+      </div>
       <div class="post">
 
 $body$
 
       </div>
 
-      <h5 class="post-linkback"><a href="/"> Read other posts?  </a> </h5>
+      <h4><a href="/"> See More Posts </a> </h4>
+
       ${ footer.html() }
 
     </div>
