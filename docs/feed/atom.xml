@@ -1,0 +1,67 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns='http://www.w3.org/2005/Atom' xmlns:g='http://base.google.com/ns/1.0'>
+  <title>Tyler Cecil</title>
+  <subtitle>Language, Logic, Life</subtitle>
+  <author>
+    <name>Tyler Cecil</name>
+    <email>tyler.i.cecil@gmail.com</email>
+  </author>
+  <updated>2020-01-26T00:00:00Z</updated>
+  <rights type="text">Copyright © 2020 Tyler Cecil. All rights reserved.</rights>
+  <id>https://tylercecil.com/</id>
+  <link rel='self' href='https://tylercecil.com/'/>
+  <link type="application/atom+xml" href="https://tylercecil.com/feed/atom.xml" rel="self"/>
+
+      <entry>
+    <title>Words that Ever Play Well</title>
+    <id>https://tylercecil.com/posts/2020-01-19-NPI.html</id>
+    <link href='https://tylercecil.com/posts/2020-01-19-NPI.html'/>
+    <published>2020-01-19T00:00:00Z</published>
+    <updated>2020-01-24T00:00:00Z</updated>
+    <summary type="xhtml">
+      <div xmlns="http://www.w3.org/1999/xhtml">
+                Part I on Negative Polarity Items
+        <br/>
+                “Any” is such a common word; with “for-all”-like semantic. “Any” has hardly ever troubled anyone. Then again… “Any” has ever troubled anyone.
+      </div>
+    </summary>
+  </entry>
+      <entry>
+    <title>Making make Easy</title>
+    <id>https://tylercecil.com/posts/2016-04-18-easymake.html</id>
+    <link href='https://tylercecil.com/posts/2016-04-18-easymake.html'/>
+    <published>2016-04-18T00:00:00Z</published>
+    <updated>2020-01-19T00:00:00Z</updated>
+    <summary type="xhtml">
+      <div xmlns="http://www.w3.org/1999/xhtml">
+                How to write more general makefiles. An “easymake oven,” if you will. Covers pointers for organizing your C / C++ projects.
+      </div>
+    </summary>
+  </entry>
+      <entry>
+    <title>Circular Programming</title>
+    <id>https://tylercecil.com/posts/2015-07-29-circular.html</id>
+    <link href='https://tylercecil.com/posts/2015-07-29-circular.html'/>
+    <published>2015-07-29T00:00:00Z</published>
+    <updated>2020-01-19T00:00:00Z</updated>
+    <summary type="xhtml">
+      <div xmlns="http://www.w3.org/1999/xhtml">
+                Or “How I Learned to Stop Worrying and Love Lazy Evaluation”
+      </div>
+    </summary>
+  </entry>
+      <entry>
+    <title>Paratype</title>
+    <id>https://tylercecil.com/posts/2014-05-01-paratype.html</id>
+    <link href='https://tylercecil.com/posts/2014-05-01-paratype.html'/>
+    <published>2014-05-01T00:00:00Z</published>
+    <updated>2020-01-19T00:00:00Z</updated>
+    <summary type="xhtml">
+      <div xmlns="http://www.w3.org/1999/xhtml">
+                An Actor Model for Monomorphisers
+        <br/>
+                A proof-of-concept experiment written in Go to understand static monomorphising. Given a program in a toy dummy language with a Haskell-like type system, Paratype will perform type inference and type checking. If type checking passed, it will generate a monomorphic code realization of the given program.
+      </div>
+    </summary>
+  </entry>
+    </feed>

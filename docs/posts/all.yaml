@@ -1,28 +1,28 @@
 ---
+title: Posts
 posts:
-  - title: Words that Ever Play Well
-    subtitle: Part I on Negative Polarity Items
-    date: 2020-01-19
-    abstract: “Any” is such a common word; with “for-all”-like semantic. “Any” has hardly ever troubled anyone. Then again… “Any” has ever troubled anyone.
-    url: posts/2020-01-19-NPI.html
-  - title: Making make Easy
-    subtitle: 
-    date: 2016-04-18
-    abstract: How to write more general makefiles. An “easymake oven,” if you will. Covers pointers for organizing your C / C++ projects.
-    url: posts/2016-04-18-easymake.html
-  - title: Circular Programming
-    subtitle: 
-    date: 2015-07-29
-    abstract: Or “How I Learned to Stop Worrying and Love Lazy Evaluation”
-    url: posts/2015-07-29-circular.html
-  - title: Paratype
-    subtitle: An Actor Model for Monomorphisers
-    date: 2014-05-01
-    abstract: A proof-of-concept experiment written in Go to understand static monomorphising. Given a program in a toy dummy language with a Haskell-like type system, Paratype will perform type inference and type checking. If type checking passed, it will generate a monomorphic code realization of the given program.
-    url: posts/2014-05-01-paratype.html
-  - title: 
-    subtitle: 
-    date: 
-    abstract: 
-    url: templates/post_record.yaml
+  - title: "Words that Ever Play Well"
+    subtitle: "Part I on Negative Polarity Items"
+    date: "2020-01-19"
+    update: "2020-01-24"
+    abstract: "“Any” is such a common word; with “for-all”-like semantic. “Any” has hardly ever troubled anyone. Then again… “Any” has ever troubled anyone."
+    url: "posts/2020-01-19-NPI.html"
+  - title: "Making make Easy"
+    subtitle: ""
+    date: "2016-04-18"
+    update: "2020-01-19"
+    abstract: "How to write more general makefiles. An “easymake oven,” if you will. Covers pointers for organizing your C / C++ projects."
+    url: "posts/2016-04-18-easymake.html"
+  - title: "Circular Programming"
+    subtitle: ""
+    date: "2015-07-29"
+    update: "2020-01-19"
+    abstract: "Or “How I Learned to Stop Worrying and Love Lazy Evaluation”"
+    url: "posts/2015-07-29-circular.html"
+  - title: "Paratype"
+    subtitle: "An Actor Model for Monomorphisers"
+    date: "2014-05-01"
+    update: "2020-01-19"
+    abstract: "A proof-of-concept experiment written in Go to understand static monomorphising. Given a program in a toy dummy language with a Haskell-like type system, Paratype will perform type inference and type checking. If type checking passed, it will generate a monomorphic code realization of the given program."
+    url: "posts/2014-05-01-paratype.html"
 ---
