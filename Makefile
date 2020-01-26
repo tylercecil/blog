@@ -23,7 +23,7 @@ FEED   := $(SITE)/feed/atom.xml
 SITE_URL     := https://tylercecil.com
 SITE_UPDATED := $(shell $(GET_UPDATE))
 
-.PHONEY: clean serve
+.PHONEY: clean serve watch
 all: $(SITE)
 $(SITE): $(STATIC) $(PLIST) $(POSTS) $(FEED)
 
@@ -63,6 +63,9 @@ $(FEED): $(ALL_P) $(T_FEED)
 
 serve:
 	python -m http.server 8000 --directory $(SITE)
+
+watch:
+	while true; do make; inotifywait -qre close_write ./; done
 
 clean:
 	rm -rf $(SITE)
