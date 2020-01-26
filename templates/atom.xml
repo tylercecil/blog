@@ -1,0 +1,33 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns='http://www.w3.org/2005/Atom' xmlns:g='http://base.google.com/ns/1.0'>
+  <title>Tyler Cecil</title>
+  <subtitle>Language, Logic, Life</subtitle>
+  <author>
+    <name>Tyler Cecil</name>
+    <email>tyler.i.cecil@gmail.com</email>
+  </author>
+  <updated>$updated$T00:00:00Z</updated>
+  <rights type="text">Copyright © 2020 Tyler Cecil. All rights reserved.</rights>
+  <id>$url$/</id>
+  <link rel='self' href='$url$/'/>
+  <link type="application/atom+xml" href="$url$/feed/atom.xml" rel="self"/>
+
+    $for(posts)$
+  <entry>
+    <title>$it.title$</title>
+    <id>$url$/$it.url$</id>
+    <link href='$url$/$it.url$'/>
+    <published>$it.date$T00:00:00Z</published>
+    <updated>$if(it.update)$$it.update$$else$$it.date$$endif$T00:00:00Z</updated>
+    <summary type="xhtml">
+      <div xmlns="http://www.w3.org/1999/xhtml">
+        $if(it.subtitle)$
+        $it.subtitle$
+        <br/>
+        $endif$
+        $it.abstract$
+      </div>
+    </summary>
+  </entry>
+    $endfor$
+</feed>
