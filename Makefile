@@ -45,7 +45,7 @@ $(ALL_P): $(MD) $(T_ALL_P)
 	@mkdir -p $$(dirname $@)
 	@echo "Making $@..."
 	@echo "---" > $@
-	@echo "title: All Posts" >> $@
+	@echo "title: Posts" >> $@
 	@echo "posts:" >> $@
 	@for f in $(MD); do \
 		echo "  Gathering metadata for $$f..."; \
