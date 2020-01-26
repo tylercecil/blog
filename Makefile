@@ -1,45 +1,61 @@
-C := ~/Downloads/pandoc-2.9.1.1/bin/pandoc
+# Build Configuration
+C      := pandoc
 CFLAGS := --mathjax --shift-heading-level-by=1 -f markdown -t html
 
-TARGET := docs
-POSTSRC := $(shell find  posts -name "*.md" | sort -r)
-POSTS:=$(patsubst %, $(TARGET)/%, $(POSTSRC:.md=.html))
-TEMPLATES:=$(shell find templates -name "*.html")
+# Input Files
+MD       := $(shell find  posts -name "*.md" | sort -r)
+T_PARTS  := templates/header.html templates/footer.html templates/navbar.html
+T_PLIST  := templates/index.html
+T_POST   := templates/post.html
+T_ALL_P  := templates/post_record.yaml
+T_FEED   := templates/atom.xml
 
-.PHONEY: clean re serve
+# Output Files
+SITE   := docs
+POSTS  := $(patsubst %, $(SITE)/%, $(MD:.md=.html))
+STATIC := $(SITE)/css/ $(SITE)/images/
+PLIST  := $(SITE)/index.html
+ALL_P  := $(SITE)/posts/all.yaml
+FEED   := $(SITE)/feed/atom.xml
 
-$(TARGET): $(TARGET)/css/ $(TARGET)/images/ $(TARGET)/index.html $(POSTS)
+.PHONEY: clean serve
+all: $(SITE)
+$(SITE): $(STATIC) $(PLIST) $(POSTS) $(FEED)
 
-$(TARGET)/%: %
+$(SITE)/%: %
 	@mkdir -p $$(dirname $@)
 	rsync -r --del $< $@
 
-$(TARGET)/posts/%.html: posts/%.md $(TEMPLATES)
+$(SITE)/posts/%.html: posts/%.md $(T_PARTS) $(T_POST)
 	@mkdir -p $$(dirname $@)
 	$(eval DATE := $(shell echo $< | ag -o '\d\d\d\d-\d\d-\d\d'))
-	$(C) $(CFLAGS) --template=templates/post.html -M date=$(DATE) $< -o $@
+	$(C) $(CFLAGS) --template=$(T_POST) -M date=$(DATE) $< -o $@
 
-$(TARGET)/index.html: $(TARGET)/posts/all.yaml templates/index.html $(TEMPLATES)
-	$(C) $(CFLAGS) $< -M title=Posts --template=templates/index.html -o $@
+$(PLIST): $(ALL_P) $(T_PLIST) $(T_PARTS)
+	@mkdir -p $$(dirname $@)
+	$(C) $(CFLAGS) $< --template=$(T_PLIST) -o $@
 
-$(TARGET)/posts/all.yaml: $(POSTSRC) templates/post_record.yaml
+$(ALL_P): $(MD) $(T_ALL_P)
 	@mkdir -p $$(dirname $@)
 	@echo "Making $@..."
 	@echo "---" > $@
+	@echo "title: All Posts" >> $@
 	@echo "posts:" >> $@
-	@for f in $(POSTSRC); do \
+	@for f in $(MD); do \
 		echo "  Gathering metadata for $$f..."; \
 		DATE=`echo $$f | ag -o '\d\d\d\d-\d\d-\d\d'`; \
 		URL=`echo $$f | sed 's/.md/.html/g'`; \
-		$(C) --mathjax -M date=$$DATE -M url=$$URL --template=templates/post_record.yaml $$f >> $@; \
+		$(C) --mathjax -M date=$$DATE -M url=$$URL --template=$(T_ALL_P) $$f >> $@; \
 	done
 	@echo "---" >> $@
 	@echo "Done!"
 
-serve:
-	python -m http.server 8000 --directory $(TARGET)
+$(FEED): $(ALL_P) $(T_FEED)
+	@mkdir -p $$(dirname $@)
+	$(C) $(CFLAGS) $< --template=$(T_FEED) -o $@
 
-re: clean $(TARGET)
+serve:
+	python -m http.server 8000 --directory $(SITE)
 
 clean:
-	rm -rf $(TARGET)
+	rm -rf $(SITE)
