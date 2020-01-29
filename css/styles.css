@@ -103,6 +103,25 @@
   margin-top: 0;
 }
 
+.note {
+  margin-left:  5rem;
+  margin-right: 5rem;
+  margin-bottom: 2.5rem;
+  padding: 1em;
+  font-size:     80%;
+  text-align:    justify;
+  border-top-color: #E1E1E1;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-bottom-color: #E1E1E1;
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+}
+
+.note p {
+  margin-bottom: 0;
+}
+
 caption {
   font-size: 90%;
   text-align: justify;

@@ -12,6 +12,11 @@
         <h6>Posted on $date$</h6>
         <hr>
       </div>
+      $if(note)$
+      <div class="note">
+        $note$
+      </div>
+      $endif$
       <div class="post">
 
 $body$
