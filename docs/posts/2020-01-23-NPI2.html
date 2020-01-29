@@ -93,10 +93,6 @@
           padding: 1rem 1.5rem;
         }
 
-        dt::before {
-          font-weight: bold;
-        }
-
         dt {
           font-weight: bold;
         }
@@ -182,20 +178,10 @@
 <td>Yes</td>
 <td style="text-align: left;">Yes</td>
 </tr>
-<tr class="odd">
-<td style="text-align: left;">Blargs can run.</td>
-<td>Yes(ish)</td>
-<td style="text-align: left;"><del>No</del><a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a></td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Blarg run home.</td>
-<td><del>No</del></td>
-<td style="text-align: left;"><del>No</del><a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a></td>
-</tr>
 </tbody>
 </table>
 <h3 id="npi-errors">NPI Errors</h3>
-<p>What about <del>“#I found <em>anyone</em>”</del>? Is that a failure of meaning, like (3), or of grammar, like (4)? Qualitatively, it feels closer to a grammar problem than a semantic problem.<a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a> It has that “it hurts my ears” quality to it.</p>
+<p>What about <del>“#I found <em>anyone</em>”</del>? Is that a failure of meaning, like (3), or of grammar, like (4)? Qualitatively, it feels closer to a grammar problem than a semantic problem.<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a> It has that “it hurts my ears” quality to it.</p>
 <p>And that is my (somewhat abstract) point — we have been talking about NPI errors as <em>semantic</em> in nature, having to do with what a sentence <em>means</em>, rather than the structure of the sentence itself. Well-formedness, however, is thought of as being essentially <em>syntactic</em>. <strong>NPI errors bring into question whether semantics play a roll in well-formedness.</strong></p>
 <h2 id="situations-not-covered-by-de">Situations Not Covered by DE</h2>
 <p>OK, back to the task at hand! We’ve already found one example where DE seemed to fail us. We labeled it as <em>non-monotonic</em>, meaning neither UE nor DE. There is a quick band-aid that could seem to save us — non-UE. It is clear that Non-UE <span class="math inline">\(\subseteq\)</span> DE.</p>
@@ -215,7 +201,7 @@
 Pick any painting. <span class="math inline">\(\not\vdash\)</span> Pick any blue painting.</p>
 </blockquote>
 <h3 id="others">Others</h3>
-<p>In Giannakidou (2011) Section 3.2.3<a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a>, a number of other examples are laid out, including <em>habituals</em>, <em>deontic</em> sentences, and (probably most interesting) <em>disjunction</em>. Most are non-obvious why they don’t fall under DE, and some don’t have English equivalents. This post is already more technical than I wanted, so let’s just leave things easy for today.</p>
+<p>In Giannakidou (2011) Section 3.2.3<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a>, a number of other examples are laid out, including <em>habituals</em>, <em>deontic</em> sentences, and (probably most interesting) <em>disjunction</em>. Most are non-obvious why they don’t fall under DE, and some don’t have English equivalents. This post is already more technical than I wanted, so let’s just leave things easy for today.</p>
 <h2 id="a-solution">A Solution</h2>
 <p>Alright kids, buckle up! We started things off by talking about why this matters — the interface between semantics and grammar. Then we examined some sentences which are not downward entailing, but which do allow NPIs. Here’s what I want to do now:</p>
 <ol type="1">
@@ -246,7 +232,7 @@ Pick any painting. <span class="math inline">\(\not\vdash\)</span> Pick any blue
 </tr>
 </tbody>
 </table>
-<p>“Found”, “looking”, and “there is no” can all be called <em>operators</em>. They operate on the existence of <span class="math inline">\(p\)</span>, the meaning of life. If I <em>“find”</em> some <span class="math inline">\(p\)</span>, then I know <span class="math inline">\(p\)</span> exists. I could write that as <span class="math inline">\(O_\text{find}p \to p\)</span>.<a href="#fn8" class="footnote-ref" id="fnref8" role="doc-noteref"><sup>8</sup></a></p>
+<p>“Found”, “looking”, and “there is no” can all be called <em>operators</em>. They operate on the existence of <span class="math inline">\(p\)</span>, the meaning of life. If I <em>“find”</em> some <span class="math inline">\(p\)</span>, then I know <span class="math inline">\(p\)</span> exists. I could write that as <span class="math inline">\(O_\text{find}p \to p\)</span>.<a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a></p>
 <p>For practice, let’s see what these sentences say (or don’t say) about <span class="math inline">\(p\)</span>:</p>
 <table>
 <tbody>
@@ -316,7 +302,7 @@ Pick any painting. <span class="math inline">\(\not\vdash\)</span> Pick any blue
 <li>Because <span class="math inline">\(C\)</span> is DE, we know <span class="math inline">\((p\wedge \neg p)Cq\)</span>.</li>
 <li>Because <span class="math inline">\(C\)</span> is veridical, we know <span class="math inline">\((p\wedge\neg p)\)</span>.</li>
 </ol>
-<p>This is obviously a contradiction, therefore <span class="math inline">\(C\)</span> was impossible!<a href="#fn9" class="footnote-ref" id="fnref9" role="doc-noteref"><sup>9</sup></a> That means that <strong>any connector that is DE must be nonveridical.</strong></p>
+<p>This is obviously a contradiction, therefore <span class="math inline">\(C\)</span> was impossible!<a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a> That means that <strong>any connector that is DE must be nonveridical.</strong></p>
 <h3 id="nonveridacity-the-npi-context">Nonveridacity: The NPI Context</h3>
 <p>We already know that nonveridacity covers all cases we addressed in <a href="./2020-01-19-NPI.html#have-we-found-our-solution">Part I</a>. But how bout these new ones?</p>
 <blockquote>
@@ -338,7 +324,7 @@ Pick any painting. <span class="math inline">\(\not\vdash\)</span> Pick any blue
 <p>In the last two post we’ve looked at NPIs in English — mostly <em>ever</em> and <em>any</em>, but there are actually plenty. We showed that downward entailment does a good job of predicting where these words can be used. We then showed some limitations of DE, and expanded DE with a new concept called <strong>nonveridicality</strong>.</p>
 <p>Nonveridicality does an <em>even better</em> job of explaining where these words pop up, but what about our original problem child?</p>
 <blockquote>
-<p>Exactly 10 people have ever been to my house.<a href="#fn10" class="footnote-ref" id="fnref10" role="doc-noteref"><sup>10</sup></a></p>
+<p>Exactly 10 people have ever been to my house.<a href="#fn8" class="footnote-ref" id="fnref8" role="doc-noteref"><sup>8</sup></a></p>
 </blockquote>
 <p>I… Uh… Oh no…</p>
 <h3 id="all-kinda-of-polarity">All Kinda of Polarity!</h3>
@@ -384,13 +370,11 @@ Pick any painting. <span class="math inline">\(\not\vdash\)</span> Pick any blue
 <li id="fn1" role="doc-endnote"><p>“The talking dog can bark” is meaningless in a subtle kind of way. The problem is, it <em>presupposes</em> that there is a talking dog. Because there is no such thing, the “subject” is an empty set. “Colorless green things are bad” is more obviously wrong, but for the same reason — there is no such thing. Interestingly, we are able to say what they <em>would</em> mean if there <em>were</em> such things.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn2" role="doc-endnote"><p>One could argue “the dog bark can” is meaningful — an English speaker could “get the gist”, even though it’s not a sentence. This is another topic for another day.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn3" role="doc-endnote"><p>This kind of error is known as a <em>category faliure</em>. It’s a kind of lexical anomaly that bind certain categories together. Here, the lexical category of people may not possess capitals.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn4" role="doc-endnote"><p>Although “blargs” isn’t a word, it fits the phonetic rules of English. Any speaker would be able to identify it as a plural noun.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn5" role="doc-endnote"><p>Again, the phonetics of English tell us that “blarg” must be a singular noun. This, then, is a morphology problem — “run” cannot be used with a singular subject.<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn6" role="doc-endnote"><p>I am almost entirely ignorant of psycho-linguistics, but there is fascinating data to support this. Biophasic N400 patterns reflect attempts to process a sentence syntactically. P600 patterns reflect attempts to process information semantically. NPI errors illicit <em>both</em> patterns, suggesting <strong>NPI errors are taking place at both the semantic and syntactic level.</strong><a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn7" role="doc-endnote"><p><a href="https://www.researchgate.net/publication/255578263_Negative_and_positive_polarity_items_Variation_licensing_and_compositionality">Giannakidou, Anastasia. (2011)</a>. Negative and positive polarity items: Variation, licensing, and compositionality. Semantics: An International Handbook of Natural Language Meaning.<a href="#fnref7" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn8" role="doc-endnote"><p>If you’re reading carefully, you’ll note I’m conflating <span class="math inline">\(p\)</span> exists, and <span class="math inline">\(p\)</span> is true. This conflation is somewhat normal in semantics. You’ll have to trust me that it doesn’t break anything.<a href="#fnref8" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn9" role="doc-endnote"><p>If you know much about my beliefs, you should know I’m cringing right now. There is so much to say about this proof, but this post is already way too long.<a href="#fnref9" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn10" role="doc-endnote"><p>One solution to this particular sentence is <em>Rescuing by nonverridacality.</em><a href="#fnref10" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4" role="doc-endnote"><p>I am almost entirely ignorant of psycho-linguistics, but there is fascinating data to support this. Biophasic N400 patterns reflect attempts to process a sentence syntactically. P600 patterns reflect attempts to process information semantically. NPI errors illicit <em>both</em> patterns, suggesting <strong>NPI errors are taking place at both the semantic and syntactic level.</strong><a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn5" role="doc-endnote"><p><a href="https://www.researchgate.net/publication/255578263_Negative_and_positive_polarity_items_Variation_licensing_and_compositionality">Giannakidou, Anastasia. (2011)</a>. Negative and positive polarity items: Variation, licensing, and compositionality. Semantics: An International Handbook of Natural Language Meaning.<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn6" role="doc-endnote"><p>If you’re reading carefully, you’ll note I’m conflating <span class="math inline">\(p\)</span> exists, and <span class="math inline">\(p\)</span> is true. This conflation is somewhat normal in semantics. You’ll have to trust me that it doesn’t break anything.<a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn7" role="doc-endnote"><p>If you know much about my beliefs, you should know I’m cringing right now. There is so much to say about this proof, but this post is already way too long.<a href="#fnref7" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn8" role="doc-endnote"><p>One solution to this particular sentence is <em>Rescuing by nonverridacality.</em><a href="#fnref8" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section>
 
