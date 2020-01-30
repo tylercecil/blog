@@ -2,6 +2,12 @@
 title: Posts
 posts:
   - title: "Words that Ever Play Well"
+    subtitle: "Part II on Negative Polarity Items"
+    date: "2020-01-29"
+    update: ""
+    abstract: "<p>In Part II we dive into the work of Anastasia Giannakidou, and come up with a new, more general, more powerful, and more correct licensing condition: the <em>nonveridicality approach</em>.</p>"
+    url: "posts/2020-01-29-NPI2.html"
+  - title: "Words that Ever Play Well"
     subtitle: "Part I on Negative Polarity Items"
     date: "2020-01-19"
     update: "2020-01-24"
