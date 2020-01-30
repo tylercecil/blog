@@ -34,8 +34,7 @@ $(SITE)/%: %
 $(SITE)/posts/%.html: posts/%.md $(T_PARTS) $(T_POST)
 	@mkdir -p $$(dirname $@)
 	$(eval DATE   := $(shell echo $< | ag -o '\d\d\d\d-\d\d-\d\d'))
-	$(eval UPDATE := $(shell $(GET_UPDATE) $<))
-	$(C) $(CFLAGS) --template=$(T_POST) -M date=$(DATE) -M update=$(UPDATE) $< -o $@
+	$(C) $(CFLAGS) --template=$(T_POST) -M date=$(DATE) $< -o $@
 
 $(PLIST): $(ALL_P) $(T_PLIST) $(T_PARTS)
 	@mkdir -p $$(dirname $@)
@@ -50,9 +49,8 @@ $(ALL_P): $(MD) $(T_ALL_P)
 	@for f in $(MD); do \
 		echo "  Gathering metadata for $$f..."; \
 		DATE=`echo $$f | ag -o '\d\d\d\d-\d\d-\d\d'`; \
-		UPDATE=`$(GET_UPDATE) $$f`; \
 		URL=`echo $$f | sed 's/.md/.html/g'`; \
-		$(C) --mathjax -M date=$$DATE -M update=$$UPDATE -M url=$$URL --template=$(T_ALL_P) $$f >> $@; \
+		$(C) --mathjax -M date=$$DATE -M url=$$URL --template=$(T_ALL_P) $$f >> $@; \
 	done
 	@echo "---" >> $@
 	@echo "Done!"
