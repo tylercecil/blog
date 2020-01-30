@@ -6,7 +6,7 @@
     <name>Tyler Cecil</name>
     <email>tyler.i.cecil@gmail.com</email>
   </author>
-  <updated>2020-01-28T00:00:00Z</updated>
+  <updated>2020-01-29T00:00:00Z</updated>
   <rights type="text">Copyright © 2020 Tyler Cecil. All rights reserved.</rights>
   <id>https://tylercecil.com/</id>
   <link rel='self' href='https://tylercecil.com/'/>
@@ -34,7 +34,7 @@
     <id>https://tylercecil.com/posts/2020-01-19-NPI.html</id>
     <link href='https://tylercecil.com/posts/2020-01-19-NPI.html'/>
     <published>2020-01-19T00:00:00Z</published>
-    <updated>2020-01-27T00:00:00Z</updated>
+    <updated>2020-01-24T00:00:00Z</updated>
     <summary type="xhtml">
       <div xmlns="http://www.w3.org/1999/xhtml">
                 Part I on Negative Polarity Items
@@ -49,7 +49,7 @@
     <id>https://tylercecil.com/posts/2016-04-18-easymake.html</id>
     <link href='https://tylercecil.com/posts/2016-04-18-easymake.html'/>
     <published>2016-04-18T00:00:00Z</published>
-    <updated>2020-01-19T00:00:00Z</updated>
+    <updated>2016-04-18T00:00:00Z</updated>
     <summary type="xhtml">
       <div xmlns="http://www.w3.org/1999/xhtml">
                 How to write more general makefiles. An “easymake oven,” if you will. Covers pointers for organizing your C / C++ projects.
@@ -62,7 +62,7 @@
     <id>https://tylercecil.com/posts/2015-07-29-circular.html</id>
     <link href='https://tylercecil.com/posts/2015-07-29-circular.html'/>
     <published>2015-07-29T00:00:00Z</published>
-    <updated>2020-01-19T00:00:00Z</updated>
+    <updated>2015-07-29T00:00:00Z</updated>
     <summary type="xhtml">
       <div xmlns="http://www.w3.org/1999/xhtml">
                 Or “How I Learned to Stop Worrying and Love Lazy Evaluation”
@@ -75,7 +75,7 @@
     <id>https://tylercecil.com/posts/2014-05-01-paratype.html</id>
     <link href='https://tylercecil.com/posts/2014-05-01-paratype.html'/>
     <published>2014-05-01T00:00:00Z</published>
-    <updated>2020-01-19T00:00:00Z</updated>
+    <updated>2014-05-01T00:00:00Z</updated>
     <summary type="xhtml">
       <div xmlns="http://www.w3.org/1999/xhtml">
                 An Actor Model for Monomorphisers
