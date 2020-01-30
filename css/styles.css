@@ -144,6 +144,26 @@ svg {
   fill: currentColor;
 }
 
+#refs {
+  font-size: 90%;
+}
+
+#refs a {
+  word-break: break-all;
+}
+
+#refs p {
+  margin-bottom: 1rem;
+}
+
+.hanging-indent p {
+  text-indent: -1rem;
+  padding-left: 1rem;
+}
+
+.citation {
+}
+
 /****************************************************************
  * Pandoc Style
  ****************************************************************/
