@@ -1,6 +1,7 @@
 # Build Configuration
 C          := pandoc
 CFLAGS     := --mathjax --shift-heading-level-by=1 -f markdown -t html
+CFLAGS     += --filter pandoc-citeproc -M link-citations
 GET_UPDATE := git --no-pager log -1 --date=short --pretty="format:%cd"
 
 # Input Files
