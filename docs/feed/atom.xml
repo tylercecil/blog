@@ -6,7 +6,7 @@
     <name>Tyler Cecil</name>
     <email>tyler.i.cecil@gmail.com</email>
   </author>
-  <updated>2020-01-29T00:00:00Z</updated>
+  <updated>2020-01-31T00:00:00Z</updated>
   <rights type="text">Copyright © 2020 Tyler Cecil. All rights reserved.</rights>
   <id>https://tylercecil.com/</id>
   <link rel='self' href='https://tylercecil.com/'/>
@@ -27,7 +27,6 @@
                 </p>
       </div>
     </summary>
-    <content src="https://tylercecil.com/posts/2020-01-29-NPI2.html"></content>
   </entry>
       <entry>
     <title>Words that Ever Play Well</title>
@@ -42,7 +41,6 @@
                 “Any” is such a common word; with “for-all”-like semantic. “Any” has hardly ever troubled anyone. Then again… “Any” has ever troubled anyone.
       </div>
     </summary>
-    <content src="https://tylercecil.com/posts/2020-01-19-NPI.html"></content>
   </entry>
       <entry>
     <title>Making make Easy</title>
@@ -55,7 +53,6 @@
                 How to write more general makefiles. An “easymake oven,” if you will. Covers pointers for organizing your C / C++ projects.
       </div>
     </summary>
-    <content src="https://tylercecil.com/posts/2016-04-18-easymake.html"></content>
   </entry>
       <entry>
     <title>Circular Programming</title>
@@ -68,7 +65,6 @@
                 Or “How I Learned to Stop Worrying and Love Lazy Evaluation”
       </div>
     </summary>
-    <content src="https://tylercecil.com/posts/2015-07-29-circular.html"></content>
   </entry>
       <entry>
     <title>Paratype</title>
@@ -83,6 +79,5 @@
                 A proof-of-concept experiment written in Go to understand static monomorphising. Given a program in a toy dummy language with a Haskell-like type system, Paratype will perform type inference and type checking. If type checking passed, it will generate a monomorphic code realization of the given program.
       </div>
     </summary>
-    <content src="https://tylercecil.com/posts/2014-05-01-paratype.html"></content>
   </entry>
     </feed>
