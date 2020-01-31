@@ -28,7 +28,6 @@
         $it.abstract$
       </div>
     </summary>
-    <content src="$url$/$it.url$"></content>
   </entry>
     $endfor$
 </feed>
