@@ -9,7 +9,7 @@
   <updated>2020-01-31T00:00:00Z</updated>
   <rights type="text">Copyright © 2020 Tyler Cecil. All rights reserved.</rights>
   <id>https://tylercecil.com/</id>
-  <link rel='self' href='https://tylercecil.com/'/>
+  <link rel='self' href='https://tylercecil.com/feed/atom.xml'/>
   <link type="application/atom+xml" href="https://tylercecil.com/feed/atom.xml" rel="self"/>
 
       <entry>
