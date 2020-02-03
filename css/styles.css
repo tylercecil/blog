@@ -106,14 +106,30 @@
   margin-bottom: 0;
 }
 
-caption {
+caption, figcaption {
   font-size: 90%;
   text-align: justify;
+  text-align-last: center;
 }
 
-table {
+.post table {
   margin-left: auto;
   margin-right: auto;
+}
+
+.post figure {
+    text-align: center;
+}
+
+.post img {
+    max-width: 100%;
+    max-height: 500px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.post .center * {
+   text-align: center;
 }
 
 /* Pandoc Style */
