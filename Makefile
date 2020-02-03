@@ -11,11 +11,13 @@ T_PLIST  := templates/index.html
 T_POST   := templates/post.html
 T_ALL_P  := templates/post_record.yaml
 T_FEED   := templates/atom.xml
+STATDIRS := css/ images/
+STATFS   := $(shell find $(STATDIRS) -type f)
 
 # Output Files
 SITE   := docs
+STATIC := $(patsubst %, $(SITE)/%, $(STATFS))
 POSTS  := $(patsubst %, $(SITE)/%, $(MD:.md=.html))
-STATIC := $(SITE)/css/ $(SITE)/images/
 PLIST  := $(SITE)/index.html
 ALL_P  := $(SITE)/posts/all.yaml
 FEED   := $(SITE)/feed/atom.xml
@@ -25,12 +27,13 @@ SITE_URL     := https://tylercecil.com
 SITE_UPDATED := $(shell $(GET_UPDATE))
 
 .PHONEY: clean serve watch
+
 all: $(SITE)
 $(SITE): $(STATIC) $(PLIST) $(POSTS) $(FEED)
 
-$(SITE)/%: %
+$(STATIC): $(SITE)/%: %
 	@mkdir -p $$(dirname $@)
-	rsync -r --del $< $@
+	cp $< $@
 
 $(SITE)/posts/%.html: posts/%.md $(T_PARTS) $(T_POST)
 	@mkdir -p $$(dirname $@)
