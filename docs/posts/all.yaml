@@ -1,6 +1,12 @@
 ---
 title: Posts
 posts:
+  - title: "Beta für Dich"
+    subtitle: "Die Ursprung des wichtigstes Worts Kletterns"
+    date: "2020-02-02"
+    update: ""
+    abstract: "A German writing exercise. Es gibt ein Wort, das man stets in der Kletterhalle hört — “Beta”. “Darf ich dir das Beta geben?” “Kann ich ein bisschen Beta bekommen?” Was hießt es, und wieso benutzen wir es überhaupt?"
+    url: "posts/2020-02-02-beta.html"
   - title: "Words that Ever Play Well"
     subtitle: "Part II on Negative Polarity Items"
     date: "2020-01-29"
