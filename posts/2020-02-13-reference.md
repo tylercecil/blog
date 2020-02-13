@@ -1,7 +1,10 @@
 ---
 title: What's In A Name?
 subtitle: Problems with Reference
-abstract: yo no se
+abstract: Are "the number of Godfather Movies" and "3" the same thing? We tend
+  to hope so, but what about my friend Alison, who thinks there is only 1
+  Godfather movie? Are "Alison thinks the number of Godfather Movies is 1" and
+  "Alison thinks 3 is 1" the same sentences?
 note: |
   **News:** I've decided to bring comments up. I'm using
   [Commento](https://commento.io/), which is not a free service. If people seem
