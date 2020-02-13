@@ -29,7 +29,7 @@ SITE_UPDATED := $(shell $(GET_UPDATE))
 .PHONEY: clean serve watch
 
 all: $(SITE)
-$(SITE): $(STATIC) $(PLIST) $(POSTS) $(FEED)
+$(SITE): $(STATIC) $(POSTS) $(PLIST) $(FEED)
 
 $(STATIC): $(SITE)/%: %
 	@mkdir -p $$(dirname $@)
