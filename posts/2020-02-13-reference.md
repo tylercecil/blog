@@ -1,8 +1,12 @@
 ---
-title: What's In A Name
+title: What's In A Name?
 subtitle: Problems with Reference
-abstract: I'm not exactly sure yet.
-note:
+abstract: yo no se
+note: |
+  **News:** I've decided to bring comments up. I'm using
+  [Commento](https://commento.io/), which is not a free service. If people seem
+  to use it, I'll figure out how to keep it up (would anyone be interested in
+  hosting a Commento server for me?).
 references:
 - id: quine
   type: article-journal
