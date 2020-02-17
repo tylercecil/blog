@@ -2,6 +2,7 @@
 <html lang="en">
   <head>
     ${ header.html() }
+    <script src="https://cdn.commento.io/js/count.js"></script>
   </head>
   <body>
     <div class="container">
@@ -15,12 +16,12 @@
                      -webkit-border-radius: 190px;
                      -moz-border-radius: 190px;
                      margin-left: auto; margin-right: auto;
-                     margin-bottom: 2rem;"></div>
+                     margin-bottom: 2rem;">
+        </div>
         <h3 style="text-align:right;">a master of very little.</h3>
       </div>
 
       <div class="post-list">
-      <h2>Posts</h2>
         ${ for(posts) }
         <div class="post-elem">
           <div class="row post-title">
@@ -39,6 +40,7 @@
           <p>
           $it.abstract$
           </p>
+          <a href="$it.url$#commento"></a>
         </div>
         ${ endfor }
       </div>
