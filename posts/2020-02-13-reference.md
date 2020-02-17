@@ -1,15 +1,22 @@
 ---
 title: What's In A Name?
 subtitle: Problems with Reference
-abstract: Are "the number of Godfather Movies" and "3" the same thing? We tend
-  to hope so, but what about my friend Alison, who thinks there is only 1
-  Godfather movie? Are "Alison thinks the number of Godfather Movies is 1" and
-  "Alison thinks 3 is 1" the same sentences?
+abstract: If two things are equal, they can always replace each other, no?
+  Well, "the number of Godfather Movies" equals "3". My friend Alison only
+  knows the first movie. Why is it that I might say *"Alison thinks the number
+  of Gadfather Movies is 1"*, but I wouldn't say *"Alison thinks 3 is 1"?*
 note: |
-  **News:** I've decided to bring comments up. I'm using
-  [Commento](https://commento.io/), which is not a free service. If people seem
-  to use it, I'll figure out how to keep it up (would anyone be interested in
-  hosting a Commento server for me?).
+  **News:** Comments exist now, powered by [Commento](https://commento.io/)!
+  Leaving a comment would really mean a lot to me --- it will help keep me
+  motivated to keep this research diary up!
+
+  **News:** You can now subscribe via email, powered by
+  [BlogTrottr](https://blogtrottr.com/) (really, that means if you don't know
+  what to do with an RSS feed, I took care of it for you). Subscribing would
+  mean a lot, too!
+
+  *Thanks for the support!*
+
 references:
 - id: quine
   type: article-journal
