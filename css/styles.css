@@ -52,8 +52,12 @@
     height: 8.5rem;
 }
 
-#rss svg {
+#footer .subscribe svg {
   fill: currentColor;
+}
+
+#footer a.subscribe {
+  text-decoration: none;
 }
 
 /**** Post List Settings */
