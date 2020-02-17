@@ -10,25 +10,19 @@
 /**** Navbar Settings */
 .navbar {
     display: block;
-    border-bottom: 1px solid #E1E1E1;
-    padding: 1rem 0;
-    margin-bottom: 1rem;
-    text-align: right;
+    margin-bottom: 2rem;
+    text-align: center;
 }
 .navbar-link {
     text-transform: uppercase;
     font-size: 11px;
     font-weight: 600;
     letter-spacing: .2rem;
-    margin-right: 15px;
+    margin: 0 15px;
     color: #222;
 }
 
-.navbar .logo {
-  height: 2rem;
-  float: left;
-}
-
+/**** Index Page Header */
 #index-title {
   margin-bottom: 2rem;
 }
