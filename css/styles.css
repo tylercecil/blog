@@ -18,28 +18,34 @@
     font-size: 11px;
     font-weight: 600;
     letter-spacing: .2rem;
-    margin: 0 15px;
+    margin: 0 10px;
     color: #222;
 }
 
 /**** Index Page Header */
 #index-title {
   margin-bottom: 2rem;
+  text-align: center;
 }
 
 #index-title .icon {
-  width:260px;
-  height:260px;
-
-  border-radius: 50%;
-  -webkit-border-radius: 50%;
-  -moz-border-radius: 50%;
-  margin-left: auto;
-  margin-right: auto;
+  width:100%;
+  max-width: 200px;
+  margin: auto;
+  display: block;
 }
 
 #index-title * {
-  margin-bottom: 1rem;
+  margin-bottom: 0rem;
+}
+
+#index-title .about {
+  width: 70%;
+  margin: 1rem auto;
+  padding: 1rem;
+  color: grey;
+  border-top: 1px solid #E1E1E1;
+  border-bottom: 1px solid #E1E1E1;
 }
 
 /**** Footer Settings */
