@@ -39,13 +39,12 @@
   margin-bottom: 0rem;
 }
 
-#index-title .about {
-  width: 70%;
-  margin: 1rem auto;
-  padding: 1rem;
-  color: grey;
-  border-top: 1px solid #E1E1E1;
-  border-bottom: 1px solid #E1E1E1;
+/**** About Page */
+#about-icon {
+  width: 100%;
+  max-width: 250px;
+  margin: 2rem auto;
+  display:block;
 }
 
 /**** Footer Settings */

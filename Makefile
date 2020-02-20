@@ -8,6 +8,7 @@ GET_UPDATE := git --no-pager log -1 --date=short --pretty="format:%cd"
 MD       := $(shell find  posts -name "*.md" | sort -r)
 T_PARTS  := templates/header.html templates/footer.html templates/navbar.html
 T_PLIST  := templates/index.html
+T_ABOUT  := templates/about.html
 T_POST   := templates/post.html
 T_ALL_P  := templates/post_record.yaml
 T_FEED   := templates/atom.xml
@@ -19,6 +20,7 @@ SITE   := docs
 STATIC := $(patsubst %, $(SITE)/%, $(STATFS))
 POSTS  := $(patsubst %, $(SITE)/%, $(MD:.md=.html))
 PLIST  := $(SITE)/index.html
+ABOUT  := $(SITE)/about/index.html
 ALL_P  := $(SITE)/posts/all.yaml
 FEED   := $(SITE)/feed/atom.xml
 
@@ -29,13 +31,17 @@ SITE_UPDATED := $(shell $(GET_UPDATE))
 .PHONEY: clean serve watch
 
 all: $(SITE)
-$(SITE): $(STATIC) $(POSTS) $(PLIST) $(FEED)
+$(SITE): $(STATIC) $(ABOUT) $(POSTS) $(PLIST) $(FEED)
 
 $(STATIC): $(SITE)/%: %
 	@mkdir -p $$(dirname $@)
 	cp $< $@
 
-$(SITE)/posts/%.html: posts/%.md $(T_PARTS) $(T_POST)
+$(ABOUT): $(T_ABOUT) $(T_PARTS)
+	@mkdir -p $$(dirname $@)
+	$(C) $(CFLAGS) /dev/null --template=$< -o $@
+
+$(POSTS): $(SITE)/posts/%.html: posts/%.md $(T_PARTS) $(T_POST)
 	@mkdir -p $$(dirname $@)
 	$(eval DATE   := $(shell echo $< | ag -o '\d\d\d\d-\d\d-\d\d'))
 	$(C) $(CFLAGS) --template=$(T_POST) -M date=$(DATE) $< -o $@
