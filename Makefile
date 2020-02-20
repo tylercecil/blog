@@ -9,6 +9,7 @@ MD       := $(shell find  posts -name "*.md" | sort -r)
 T_PARTS  := templates/header.html templates/footer.html templates/navbar.html
 T_PLIST  := templates/index.html
 T_ABOUT  := templates/about.html
+T_SUB    := templates/subscribe.html
 T_POST   := templates/post.html
 T_ALL_P  := templates/post_record.yaml
 T_FEED   := templates/atom.xml
@@ -21,6 +22,7 @@ STATIC := $(patsubst %, $(SITE)/%, $(STATFS))
 POSTS  := $(patsubst %, $(SITE)/%, $(MD:.md=.html))
 PLIST  := $(SITE)/index.html
 ABOUT  := $(SITE)/about/index.html
+SUB    := $(SITE)/subscribe/index.html
 ALL_P  := $(SITE)/posts/all.yaml
 FEED   := $(SITE)/feed/atom.xml
 
@@ -31,13 +33,17 @@ SITE_UPDATED := $(shell $(GET_UPDATE))
 .PHONEY: clean serve watch
 
 all: $(SITE)
-$(SITE): $(STATIC) $(ABOUT) $(POSTS) $(PLIST) $(FEED)
+$(SITE): $(STATIC) $(ABOUT) $(SUB) $(POSTS) $(PLIST) $(FEED)
 
 $(STATIC): $(SITE)/%: %
 	@mkdir -p $$(dirname $@)
 	cp $< $@
 
 $(ABOUT): $(T_ABOUT) $(T_PARTS)
+	@mkdir -p $$(dirname $@)
+	$(C) $(CFLAGS) /dev/null --template=$< -o $@
+
+$(SUB): $(T_SUB) $(T_PARTS)
 	@mkdir -p $$(dirname $@)
 	$(C) $(CFLAGS) /dev/null --template=$< -o $@
 
