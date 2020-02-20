@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    ${ header.html() }
+  </head>
+  <body>
+
+    <div class="page subscribe container">
+      ${ navbar.html() }
+
+      <h1> Subscribe </h1>
+      <p>
+      Subscribing would mean a lot to me! I have an RSS feed, as well as email
+      subscriptions for those who would prefer that. Email subscriptions are
+      powered by BlogTrotter.
+      </p>
+      <p>
+      If you liked my content enough to subscribe, I would also love comments!
+      All feedback and questions are more than welcome (even just saying
+      "thanks for the read" means something to me).
+      </p>
+      <div style="text-align:center;" class="row">
+        <div class="one-half column">
+          <h2>Via RSS</h2>
+          <a href="/feed/atom.xml">
+            <!-- SVG taken from: http://genericons.com/ -->
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"
+                                                    width="50%">
+              <rect x="0" fill="none" width="16" height="16"/>
+              <g>
+              <path d="M2 6v2c3.3 0 6 2.7 6 6h2c0-4.4-3.6-8-8-8zm0-4v2c5.5 0 10 4.5 10 10h2C14 7.4 8.6 2 2 2zm1.5 9c-.8 0-1.5.7-1.5 1.5S2.7 14 3.5 14 5 13.3 5 12.5 4.3 11 3.5 11z"/>
+              </g>
+            </svg>
+          </a>
+        </div>
+        <div class="one-half column">
+          <h2 style="margin-bottom:0;">Via Email</h2>
+          <h6>Powered by Blogtrottr</h6>
+          <form class="blogtrottr" method='post'
+                action='https://blogtrottr.com'>
+            <input type='text' name='btr_email' placeholder="Email Address"/>
+            <br/>
+            <input type='hidden' name='btr_url'
+                   value='https://tylercecil.com/feed/atom.xml' />
+            <input type='hidden' name='schedule_type' value='1' />
+            <input type='submit' value='Follow feed via email' />
+          </form>
+        </div>
+      </div>
+
+      ${ footer.html() }
+
+    </div>
+  </body>
+</html>

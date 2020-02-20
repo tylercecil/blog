@@ -47,6 +47,15 @@
   display:block;
 }
 
+/**** Subscribe Page */
+.subscribe a svg {
+  fill: currentColor;
+}
+
+.subscribe .blogtrottr input {
+  width: 80%;
+}
+
 /**** Footer Settings */
 #footer {
     margin-top: 3rem;
