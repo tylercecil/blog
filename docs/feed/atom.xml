@@ -6,7 +6,7 @@
     <name>Tyler Cecil</name>
     <email>tyler.i.cecil@gmail.com</email>
   </author>
-  <updated>2020-02-17T00:00:00Z</updated>
+  <updated>2020-02-20T00:00:00Z</updated>
   <rights type="text">Copyright © 2020 Tyler Cecil. All rights reserved.</rights>
   <id>https://tylercecil.com/</id>
   <link rel='self' href='https://tylercecil.com/feed/atom.xml'/>
@@ -22,7 +22,7 @@
       <div xmlns="http://www.w3.org/1999/xhtml">
                 Problems with Reference
         <br/>
-                If two things are equal, they can always replace each other, no? Well, “the number of Godfather Movies” equals “3”. My friend Alison only knows the first movie. Why is it that I might say <em>“Alison thinks the number of Gadfather Movies is 1”</em>, but I wouldn’t say <em>“Alison thinks 3 is 1”?</em>
+                If two things are equal, they can always replace each other, no? Well, “the number of Godfather Movies” equals “3”. My friend Alison only knows the first movie. Why is it that I might say <em>“Alison thinks the number of Godfather Movies is 1”</em>, but I wouldn’t say <em>“Alison thinks 3 is 1”?</em>
       </div>
     </summary>
   </entry>
