@@ -4,7 +4,7 @@ subtitle: Problems with Reference
 abstract: If two things are equal, they can always replace each other, no?
   Well, "the number of Godfather Movies" equals "3". My friend Alison only
   knows the first movie. Why is it that I might say *"Alison thinks the number
-  of Gadfather Movies is 1"*, but I wouldn't say *"Alison thinks 3 is 1"?*
+  of Godfather Movies is 1"*, but I wouldn't say *"Alison thinks 3 is 1"?*
 note: |
   **News:** Comments exist now, powered by [Commento](https://commento.io/)!
   Leaving a comment would really mean a lot to me --- it will help keep me
