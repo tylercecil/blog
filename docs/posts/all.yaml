@@ -1,6 +1,12 @@
 ---
 title: Posts
 posts:
+  - title: "Donkey Sentences"
+    subtitle: "The Limits of Lexical Scope"
+    date: "2020-02-24"
+    update: ""
+    abstract: "A very brief introduction to <em>Discourse Representation Theory</em>, a method of using dynamic scope to better model natural language. Featuring Russell and <em>his</em> donkey."
+    url: "posts/2020-02-24-drt.html"
   - title: "What’s In A Name?"
     subtitle: "Problems with Reference"
     date: "2020-02-13"
