@@ -133,7 +133,7 @@ e.g. “<span class="n1">The president was there</span>, and <span class="n1"><
 </ol>
 <p>That would make our life easy, but the simple solution of (3) doesn’t always work. Trying the same method on (1):</p>
 <ol start="4" class="example" type="1">
-<li>Russel saw a donkey. <em>Russell</em> smiled at <em>a donkey</em>.</li>
+<li>Russell saw a donkey. <em>Russell</em> smiled at <em>a donkey</em>.</li>
 </ol>
 <p>This isn’t exactly the same sentence — it’s not clear that we’re talking about the same donkey.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> It’s also worth mentioning that anaphora don’t just extend across sentences, but can happen within sentences, too!</p>
 <ol start="5" class="example" type="1">
@@ -179,7 +179,7 @@ e.g. “<span class="n1">The president was there</span>, and <span class="n1"><
 [\exists x : \text{DONKEY}(x) ]\; \text{SEE}(r, x)
 \]</span></p>
 <p>We converted “a donkey” into <span class="math inline">\([\exists x : \text{DONKEY}(x) ]\)</span>, which is pretty reasonable. However, this commits us to a scope for <span class="math inline">\(x\)</span> — outside this <span class="math inline">\(\exists\)</span>-expression, <span class="math inline">\(x\)</span> will be thrown out.</p>
-<p>Russell, on the other hand, was simply assigned to <span class="math inline">\(r\)</span>. <span class="math inline">\(r\)</span> has no quantifier, and therefore no scope. Russel is “global” — there is only one (relevant) Russell to speak of, and we can put him wherever we like in our sentences.</p>
+<p>Russell, on the other hand, was simply assigned to <span class="math inline">\(r\)</span>. <span class="math inline">\(r\)</span> has no quantifier, and therefore no scope. Russell is “global” — there is only one (relevant) Russell to speak of, and we can put him wherever we like in our sentences.</p>
 <p>And that’s the main difference: Russell isn’t giving us any trouble, because <span class="math inline">\(r\)</span> has no scope. “A donkey”, however, is confusing because <strong>it’s not clear how big the scope of <span class="math inline">\(x\)</span> should be.</strong></p>
 <h3 id="dynamic-scoping">Dynamic Scoping</h3>
 <p>Here’s a hot take: <strong>language is stateful.</strong> When I say something about a donkey, you don’t just throw it away once the sentence is over. Maybe this donkey will make an appearance later on down the road — who’s to say? You incrementally keep a model of what is being said. This is so intuitive, it borders on obvious, yet trying to fit language into lexical scope is wilfully ignoring this reality!</p>
@@ -297,7 +297,7 @@ e.g. “<span class="n1">The president was there</span>, and <span class="n1"><
 <hr />
 <ol>
 <li id="fn1" role="doc-endnote"><p>Specifically, this is the tradition of Montague grammar (which is pretty pervasive). Montague’s thesis is essentially that <em>natural languages</em> and <em>formal languages</em> (like programming languages) ultimately can be treated the same way.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn2" role="doc-endnote"><p>This is a bit more clear with a sentence added in the middle. e.g. <em>“Russel saw a donkey. In fact, he saw hundreds of donkeys. Russel smiled at a donkey”.</em><a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2" role="doc-endnote"><p>This is a bit more clear with a sentence added in the middle. e.g. <em>“Russell saw a donkey. In fact, he saw hundreds of donkeys. Russell smiled at a donkey”.</em><a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn3" role="doc-endnote"><p>This includes sign languages, which I find to be objectively cool. Look up some recent work by Philippe Schlenker for more information.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn4" role="doc-endnote"><p>If you want a programming example to draw intuition from, I would point out <code>bash</code>. In <code>bash</code>, all variables are global, and they only come into existence when you first assign something to them.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn5" role="doc-endnote"><p>This is actually essentially the same of converting to logical notation, but now we keep a dynamic list of names.<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
