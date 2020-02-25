@@ -5,7 +5,7 @@ CFLAGS     += --filter pandoc-citeproc -M link-citations
 GET_UPDATE := git --no-pager log -1 --date=short --pretty="format:%cd"
 
 # Input Files
-MD       := $(shell find  posts -name "*.md" | sort -r)
+MD       := $(shell find posts -path posts/draft -prune -o -name "*.md" -print | sort -r)
 T_PARTS  := templates/header.html templates/footer.html templates/navbar.html
 T_PLIST  := templates/index.html
 T_ABOUT  := templates/about.html
