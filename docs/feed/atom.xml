@@ -6,12 +6,42 @@
     <name>Tyler Cecil</name>
     <email>tyler.i.cecil@gmail.com</email>
   </author>
-  <updated>2020-02-24T00:00:00Z</updated>
+  <updated>2020-03-10T00:00:00Z</updated>
   <rights type="text">Copyright © 2020 Tyler Cecil. All rights reserved.</rights>
   <id>https://tylercecil.com/</id>
   <link rel='self' href='https://tylercecil.com/feed/atom.xml'/>
   <link type="application/atom+xml" href="https://tylercecil.com/feed/atom.xml" rel="self"/>
 
+      <entry>
+    <title>Winograd Schema Challenge</title>
+    <id>https://tylercecil.com/posts/2020-03-10-b-winograd.html</id>
+    <link href='https://tylercecil.com/posts/2020-03-10-b-winograd.html'/>
+    <published>2020-03-10T00:00:00Z</published>
+    <updated>2020-03-10T00:00:00Z</updated>
+    <summary type="xhtml">
+      <div xmlns="http://www.w3.org/1999/xhtml">
+                Going Beyond the Imitation Game
+        <br/>
+                <p>
+                The Winograd Schema Challenge is an alternative to the Turing Test, with some very practical advantages. The test itself boils so much down into a single, simple, and well-defined linguistic function: anaphora resolution.
+                </p>
+      </div>
+    </summary>
+  </entry>
+      <entry>
+    <title>Language and Thought</title>
+    <id>https://tylercecil.com/posts/2020-03-10-a-turing-prelim.html</id>
+    <link href='https://tylercecil.com/posts/2020-03-10-a-turing-prelim.html'/>
+    <published>2020-03-10T00:00:00Z</published>
+    <updated>2020-03-10T00:00:00Z</updated>
+    <summary type="xhtml">
+      <div xmlns="http://www.w3.org/1999/xhtml">
+                Preliminaries on The Turing Test
+        <br/>
+                Did you try and read my post on <a href="/posts/2020-03-09-b-winograd.html">Winograd Schema</a>, and realize you don’t understand or have never heard of the Turing Test? If so, this post is for you!
+      </div>
+    </summary>
+  </entry>
       <entry>
     <title>Donkey Sentences</title>
     <id>https://tylercecil.com/posts/2020-02-24-drt.html</id>

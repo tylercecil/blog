@@ -1,52 +1,64 @@
 ---
 title: Posts
 posts:
-  - title: "Donkey Sentences"
-    subtitle: "The Limits of Lexical Scope"
-    date: "2020-02-24"
-    update: ""
-    abstract: "A very brief introduction to <em>Discourse Representation Theory</em>, a method of using dynamic scope to better model natural language. Featuring Russell and <em>his</em> donkey."
-    url: "posts/2020-02-24-drt.html"
-  - title: "What’s In A Name?"
-    subtitle: "Problems with Reference"
-    date: "2020-02-13"
-    update: ""
-    abstract: "If two things are equal, they can always replace each other, no? Well, “the number of Godfather Movies” equals “3”. My friend Alison only knows the first movie. Why is it that I might say <em>“Alison thinks the number of Godfather Movies is 1”</em>, but I wouldn’t say <em>“Alison thinks 3 is 1”?</em>"
-    url: "posts/2020-02-13-reference.html"
-  - title: "Beta für Dich"
-    subtitle: "Die Ursprung des wichtigstes Worts Kletterns"
-    date: "2020-02-02"
-    update: ""
-    abstract: "A German writing exercise. Es gibt ein Wort, das man stets in der Kletterhalle hört — “Beta”. “Darf ich dir das Beta geben?” “Kann ich ein bisschen Beta bekommen?” Was hießt es, und wieso benutzen wir es überhaupt?"
-    url: "posts/2020-02-02-beta.html"
-  - title: "Words that Ever Play Well"
-    subtitle: "Part II on Negative Polarity Items"
-    date: "2020-01-29"
-    update: ""
-    abstract: "<p>In Part II we dive into the work of Anastasia Giannakidou, and come up with a new, more general, more powerful, and more correct licensing condition: the <em>nonveridicality approach</em>.</p>"
-    url: "posts/2020-01-29-NPI2.html"
-  - title: "Words that Ever Play Well"
-    subtitle: "Part I on Negative Polarity Items"
-    date: "2020-01-19"
-    update: "2020-01-24"
-    abstract: "“Any” is such a common word; with “for-all”-like semantic. “Any” has hardly ever troubled anyone. Then again… “Any” has ever troubled anyone."
-    url: "posts/2020-01-19-NPI.html"
-  - title: "Making make Easy"
-    subtitle: ""
-    date: "2016-04-18"
-    update: ""
-    abstract: "How to write more general makefiles. An “easymake oven,” if you will. Covers pointers for organizing your C / C++ projects."
-    url: "posts/2016-04-18-easymake.html"
-  - title: "Circular Programming"
-    subtitle: ""
-    date: "2015-07-29"
-    update: ""
-    abstract: "Or “How I Learned to Stop Worrying and Love Lazy Evaluation”"
-    url: "posts/2015-07-29-circular.html"
-  - title: "Paratype"
-    subtitle: "An Actor Model for Monomorphisers"
-    date: "2014-05-01"
-    update: ""
-    abstract: "A proof-of-concept experiment written in Go to understand static monomorphising. Given a program in a toy dummy language with a Haskell-like type system, Paratype will perform type inference and type checking. If type checking passed, it will generate a monomorphic code realization of the given program."
-    url: "posts/2014-05-01-paratype.html"
+  - title: 'Winograd Schema Challenge'
+    subtitle: 'Going Beyond the Imitation Game'
+    date: '2020-03-10'
+    update: ''
+    abstract: '<p>The Winograd Schema Challenge is an alternative to the Turing Test, with some very practical advantages. The test itself boils so much down into a single, simple, and well-defined linguistic function: anaphora resolution.</p>'
+    url: 'posts/2020-03-10-b-winograd.html'
+  - title: 'Language and Thought'
+    subtitle: 'Preliminaries on The Turing Test'
+    date: '2020-03-10'
+    update: ''
+    abstract: 'Did you try and read my post on <a href="/posts/2020-03-09-b-winograd.html">Winograd Schema</a>, and realize you don’t understand or have never heard of the Turing Test? If so, this post is for you!'
+    url: 'posts/2020-03-10-a-turing-prelim.html'
+  - title: 'Donkey Sentences'
+    subtitle: 'The Limits of Lexical Scope'
+    date: '2020-02-24'
+    update: ''
+    abstract: 'A very brief introduction to <em>Discourse Representation Theory</em>, a method of using dynamic scope to better model natural language. Featuring Russell and <em>his</em> donkey.'
+    url: 'posts/2020-02-24-drt.html'
+  - title: 'What’s In A Name?'
+    subtitle: 'Problems with Reference'
+    date: '2020-02-13'
+    update: ''
+    abstract: 'If two things are equal, they can always replace each other, no? Well, “the number of Godfather Movies” equals “3”. My friend Alison only knows the first movie. Why is it that I might say <em>“Alison thinks the number of Godfather Movies is 1”</em>, but I wouldn’t say <em>“Alison thinks 3 is 1”?</em>'
+    url: 'posts/2020-02-13-reference.html'
+  - title: 'Beta für Dich'
+    subtitle: 'Die Ursprung des wichtigstes Worts Kletterns'
+    date: '2020-02-02'
+    update: ''
+    abstract: 'A German writing exercise. Es gibt ein Wort, das man stets in der Kletterhalle hört — “Beta”. “Darf ich dir das Beta geben?” “Kann ich ein bisschen Beta bekommen?” Was hießt es, und wieso benutzen wir es überhaupt?'
+    url: 'posts/2020-02-02-beta.html'
+  - title: 'Words that Ever Play Well'
+    subtitle: 'Part II on Negative Polarity Items'
+    date: '2020-01-29'
+    update: ''
+    abstract: '<p>In Part II we dive into the work of Anastasia Giannakidou, and come up with a new, more general, more powerful, and more correct licensing condition: the <em>nonveridicality approach</em>.</p>'
+    url: 'posts/2020-01-29-NPI2.html'
+  - title: 'Words that Ever Play Well'
+    subtitle: 'Part I on Negative Polarity Items'
+    date: '2020-01-19'
+    update: '2020-01-24'
+    abstract: '“Any” is such a common word; with “for-all”-like semantic. “Any” has hardly ever troubled anyone. Then again… “Any” has ever troubled anyone.'
+    url: 'posts/2020-01-19-NPI.html'
+  - title: 'Making make Easy'
+    subtitle: ''
+    date: '2016-04-18'
+    update: ''
+    abstract: 'How to write more general makefiles. An “easymake oven,” if you will. Covers pointers for organizing your C / C++ projects.'
+    url: 'posts/2016-04-18-easymake.html'
+  - title: 'Circular Programming'
+    subtitle: ''
+    date: '2015-07-29'
+    update: ''
+    abstract: 'Or “How I Learned to Stop Worrying and Love Lazy Evaluation”'
+    url: 'posts/2015-07-29-circular.html'
+  - title: 'Paratype'
+    subtitle: 'An Actor Model for Monomorphisers'
+    date: '2014-05-01'
+    update: ''
+    abstract: 'A proof-of-concept experiment written in Go to understand static monomorphising. Given a program in a toy dummy language with a Haskell-like type system, Paratype will perform type inference and type checking. If type checking passed, it will generate a monomorphic code realization of the given program.'
+    url: 'posts/2014-05-01-paratype.html'
 ---
