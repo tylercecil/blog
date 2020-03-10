@@ -197,6 +197,10 @@ caption, figcaption {
    text-align: center;
 }
 
+.comment {
+  display: none;
+}
+
 /* Pandoc Style */
 table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode, table.sourceCode pre
                                                                      { margin: 0; padding: 0; border: 0; vertical-align: baseline; border: none; }
