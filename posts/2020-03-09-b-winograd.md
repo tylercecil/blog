@@ -7,7 +7,9 @@ abstract: >
   a single, simple, and well-defined linguistic function: anaphora resolution.
 update:
 bibliography: posts/winograd.bib
-note:
+note: "**Note:** Did you *also* not understand (or had never heard of) the
+  Turing Test? I wrote a [preliminary
+  post](/posts/2020-03-09-a-turing-prelim.html) just for you!"
 header-includes: >
   <style>
     .comment { display: none; }
@@ -76,9 +78,9 @@ really cut to the heart of the matter:[^edit]
 
 Yes Eugene... Anything else.
 
-This is a very real practical problem with the Imitation Game --- people don't
-always seem to get the point. If the judge doesn't understand the test, the
-whole enterprise is worthless!
+This is a very real practical problem with the Imitation Game --- **people
+don't always seem to get the point.** If the judge doesn't understand the test,
+the whole enterprise is worthless!
 
 That isn't an argument against Turing, by the way; the Turing test stands as
 one of the most compelling definitions of intelligence we have. But for those
@@ -307,13 +309,25 @@ This schema has what Levesque calls the "googleable problem." In (@w-stat),
 indeed slow and fast *could* be attributed to both [the racecar]{.n1} and [the
 school bus]{.n2}, but there is a *strong association* with racecars and speed.
 Simply knowing that "fast" and "racecare" appear near each other in texts would
-be enough to solve this schema.
+be enough to solve this schema.[^better]
 
-A better test here would be, instead of having a special word, swapping the
-order of the noun phrases.
+[^better]: A better test here would be, instead of having a special word,
+  swapping the order of the noun phrases, so that sometimes the school bus
+  is passing the racecar.
 
 We want to avoid cases like this, which could be easily solved by systems such
-as [IBM's Watson](https://en.wikipedia.org/wiki/Watson_(computer)).
+as [IBM's Watson](https://en.wikipedia.org/wiki/Watson_(computer)), which only
+use statistical methods to answer questions. For example:
+
+(@w-age) [Fred]{.n1} is the only man alive who still remembers [my father]{.n2}
+  as an infant. When Fred first saw my father, [he]{.nq} was twelve
+  [years/months]{.sp} old.
+  <div class="q">
+  Who was twelve [years/months]{.sp} old?
+  </div>
+
+It's hard to imagine a system using only "dumb" statistical methods being able
+to answer (@w-age). What corpus would possibly contain an answer?
 
 Avoiding Hard Questions
 -----------------------
@@ -330,10 +344,6 @@ sentences which humans aren't actually able to solve.
 In the first case, Frank is jealous that Bill won. In the other case,
 however, there isn't a clear answer. Is Frank happy for Bill, or is Frank happy
 for himself? Without more context, this question isn't necessarily answerable.
-
-::: comment
-A section about reasoning
-:::
 
 Better Than Turing?
 -------------------
@@ -354,6 +364,7 @@ That being said, it has a huge amount of pragmatic benefits. Perhaps my
 favorite aspect of Winograd schema is **it helps people understand what the
 point of the Imitation Game really is.** It shows off how effortlessly we
 leverage complex reasoning into simple sentences.
+
 
 Current Progress
 ================
