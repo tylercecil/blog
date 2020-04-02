@@ -174,8 +174,8 @@ caption, figcaption {
   margin-right: 1rem;
 }
 
-.post .example * {
-  margin: 0;
+.post .example *:last-child {
+  margin-bottom: 0;
 }
 
 .post dl {
