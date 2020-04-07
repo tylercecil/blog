@@ -71,6 +71,10 @@
       text-align: center;
       width: 100%;
     }
+    .math.display > mjx-container {
+      overflow-x: scroll;
+      overflow-y: hidden;
+    }
   </style>
   </head>
   <body>
@@ -425,9 +429,13 @@ Show/Hide Answer
 \]</span></p>
 <p>So we have two pre-defined terms <span class="math inline">\(M\)</span> and <span class="math inline">\(N\)</span>. Using only those two terms, can you write a lambda expression of type <span class="math inline">\((B \to E) \to D\)</span>? Probably you can! But let me change the question…</p>
 <div class="example">
-<p><strong>Question:</strong> Prove<br />
-<span class="math inline">\(((A \to B) \to C) \to D,\; (A \to E) \to C) \vdash (B \to E) \to D\)</span>?<br />
-<em>(Just a warning, this one is pretty tedious)</em></p>
+<strong>Question:</strong> Prove
+<div style="font-size:80%;">
+<p><span class="math display">\[
+((A \to B) \to C) \to D,\; (A \to E) \to C) \vdash (B \to E) \to D
+\]</span></p>
+</div>
+<p><em>(Just a warning, this one is pretty tedious)</em></p>
 <button onclick="toggleDisplay(&#39;ans-6&#39;)">
 Show/Hide Answer
 </button>
