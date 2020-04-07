@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <!-- Meta info
+    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <meta charset="utf-8">
+    <meta name="description" content="Personal website of Tyler Cecil">
+    <meta name="author" content="Tyler I. Cecil">
+    <title>Natural Deduction</title>
+    <!-- Mobile Specific Metas
+      –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Favicon <link rel="icon" type="image/png" href="/images/favicon.png">
+      –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon/favicon-16x16.png">
+    <link rel="manifest" href="/images/favicon/site.webmanifest">
+    <link rel="mask-icon" href="/images/favicon/safari-pinned-tab.svg" color="#5bbad5">
+    <link rel="shortcut icon" href="/images/favicon/favicon.ico">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="msapplication-config" content="/images/favicon/browserconfig.xml">
+    <meta name="theme-color" content="#ffffff">
+    <!-- FONT
+      –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans|Raleway|Roboto&display=swap" rel="stylesheet">
+    <!-- CSS
+      –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <link href="/css/normalize.css" rel="stylesheet">
+    <link href="/css/skeleton.css" rel="stylesheet">
+    <link href="/css/styles.css" rel="stylesheet">
+    <!-- JS
+      –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async
+            src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+    </script>
+    <!-- HEADER-INCLUDES:
+      –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <script>
+  function toggleDisplay(id) {
+    var e = document.getElementById(id);
+    if (e.style.display === "" || e.style.display === "none") {
+      e.style.display = "block";
+    } else if (e.style.display === "block") {
+      e.style.display = "none";
+    }
+  }
+  </script>
+  <style>
+    .ans {
+      display: none;
+      border: 1px solid #bbb;
+      border-radius: 4px;
+      padding: 1rem 1.5rem;
+      margin-bottom: 2.5rem;
+    }
+    .ans .math.display{
+      font-size: 70%;
+    }
+    #rules {
+      font-size: 80%;
+    }
+    #rules mjx-container {
+      margin: 0;
+    }
+    .example mjx-container {
+      margin: 0;
+    }
+    .example button {
+      text-align: center;
+      width: 100%;
+    }
+  </style>
+  </head>
+  <body>
+    <div class="container">
+
+      <!-- Navigation Bar -->
+      <nav class="navbar">
+        <a class="navbar-link" href="/">Posts</a>
+        &bull;
+        <a class="navbar-link" href="/about/">About</a>
+        &bull;
+        <a class="navbar-link" href="/subscribe/">Subscribe</a>
+      </nav>
+      <!-- /.Navigation Bar -->
+      <div id="title">
+      <h1>Natural Deduction</h1>
+        <h5>Notation for the Uninitiated</h5>
+        <h6>Posted on 2020-04-06</h6>
+        
+        <hr>
+      </div>
+            <div class="note">
+        <strong>Update:</strong> I hope everyone is doing well during the COVID crisis. Here’s something to keep your minds busy and entertained while we all wait out the storm. Please be safe everyone!</br> <strong>Note:</strong> If anything is confusing, just leave a comment, and I’ll make this better!
+      </div>
+            <div class="post">
+
+<div class="comment">
+$$
+<p>$$</p>
+</div>
+<p>Mathematical logic, despite being a bit obscure, gets used by a lot of other fields. A computer scientist, linguist, and philosopher could conceivably be reading something, and suddenly greeted by a mash of symbols like so</p>
+<p><span class="math display">\[
+\dfrac { \dfrac{ \dfrac{ \dfrac{}{A}u \quad \dfrac{}{B}w }
+                       {A \wedge B} \wedge_I }
+               {B \to A \wedge B} \to_{I^w}}
+       { A \to B \to A \wedge B } \to_{I^u}
+\]</span></p>
+<p>The thing is, that same computer scientist, linguist, or philosopher could have just as likely never taken a course on formal logic before, and might have just audibly groaned out <em>“oooh nooo”.</em> They might not even know how to Google what the hell they’re looking at right now.</p>
+<blockquote>
+<p>Well I’ll tell you what you’re looking at — that’s called a <strong>natural deduction proof</strong>, and it’s nothing you need to be afraid of.</p>
+</blockquote>
+<p>This post is for anyone in one of these logic-adjacent fields (or anyone bored in COVID-Quarantine™) who might be new to this notation. We’ll cover:</p>
+<div class="row">
+<div class="one-half column">
+<ol type="1">
+<li><a href="#motivation">What natural deduction is for</a></li>
+<li><a href="#reading-natural-deduction">How to read it</a></li>
+</ol>
+</div>
+<div class="one-half column">
+<ol start="3" type="1">
+<li><a href="#writing-simple-proofs">How to work with it</a></li>
+<li><a href="#lambda-calculus">The relation to lambda-calculus</a> (for those who might care).</li>
+</ol>
+</div>
+</div>
+<p>As always, skip over what you know, jump to what’s new, skim liberally — and this time I’ve included some exercises to play around with! <strong>Now let’s get to it!</strong></p>
+<h2 id="motivation">Motivation</h2>
+<p>I don’t want this to be an introduction to proof theory, but it’s probably important to understand <em>why</em> natural deduction was invented. Otherwise we’d just talking about some random symbols with no context.</p>
+<p>Natural deduction is what is known as a <strong>formal proof system</strong> or a <strong>proof calculus</strong>.</p>
+<dl>
+<dt>Proof Calculus</dt>
+<dd>A proof calculus is a set of rules that describe how one can go from a set of assumptions (called <strong>axioms</strong>) to some conclusion.<br />
+It is called “formal” because these rules are syntactic — that is, they only tell us how to move symbols around. We should be able to “mindlessly” read a formal proof.
+</dd>
+</dl>
+<p>Natural deduction was developed by the German mathematician Gerhard Gentzen in 1934, and is, what some might call, kinda a big deal. It<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> rendered older proof calculi<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> totally obsolete and has really been the gold standard ever since.</p>
+<p>Gentzen style systems can also be called <strong>structural/analytic proofs</strong>. Normally in math, you write a proof <em>about</em> some mathematical object. In a <em>structural proof</em>, the proof itself <em>is</em> a mathematical object. What the hell does that mean? We can ask questions like <em>“is proof 1 equal to proof 2?”</em> or <em>“can proof 1 combine with proof 2?”</em> Now we can <strong>study the proofs themselves.</strong></p>
+<p>It is this structural property that makes Gentzen systems useful for computer scientists, linguists, and philosophers. For today, though, all we really need to know is <strong>natural deduction is a formal system for writing proofs.</strong></p>
+<div class="comment">
+<p>maybe put this later on in the post to keep the flow exciting.</p>
+<p>It’s also worth mentioning that a Gentzen system could be developed for different applications. Perhaps a linguist wants to use temporal logic to model tense — you could make a natural deduction proof for that. Or a computer scientist wants to use linear logic to model a parallel system — there’s a natural deduction system for that too.</p>
+</div>
+<h2 id="reading-natural-deduction">Reading Natural Deduction</h2>
+<p>To read a natural deduction proof, we ultimately only need to know two things: what is a judgment, and what is an inference.</p>
+<h3 id="judgment-and-inference">Judgment and Inference</h3>
+<dl>
+<dt>Judgement</dt>
+<dd>A Judgment is anything that is <em>knowable</em>. A judgment <span class="math inline">\(\Gamma\)</span> might be formal, such as <em>“<span class="math inline">\(A\)</span> is true”</em>, or informal, such as <em>“Matha is in love”</em>.
+</dd>
+</dl>
+<p>That is meant to be as vague as possible. You may want to judge the type of a program, the veracity of a mathematical statement, or the meaning of a sentence in Navajo.</p>
+<dl>
+<dt>The Inference Line</dt>
+<dd>Let <span class="math inline">\(\Gamma\)</span> and <span class="math inline">\(\Delta\)</span> be judgements. We read <span class="math inline">\(\cfrac{\Gamma}{\Delta}\)</span> as <em>“<span class="math inline">\(\Delta\)</span> can be inferred from <span class="math inline">\(\Gamma\)</span>”.</em> <span class="math inline">\(\Gamma\)</span> is referred to as the <strong>premise</strong>, and <span class="math inline">\(\Delta\)</span> the <strong>conclusion</strong>. There might be zero or more premises, and always one conclusion.
+</dd>
+</dl>
+<p>Now reading these trees becomes pretty easy:</p>
+<div class="example">
+<p><span class="math display">\[ \cfrac{ \;A \quad B\; }{ A \wedge B } \]</span></p>
+<div class="center">
+<p><strong>Premise:</strong> “<span class="math inline">\(A\)</span>” is known and “<span class="math inline">\(B\)</span>” is known.<br />
+<strong>Conclusion:</strong> “<span class="math inline">\(A \wedge B\)</span>” can be known.</p>
+</div>
+</div>
+<p>And then, of course, they can be stacked:</p>
+<div class="example">
+<p><span class="math display">\[ \dfrac{\cfrac{ \;A \quad B\; }{ A \wedge B } \quad C}
+         {(A \wedge B) \wedge C)} \]</span></p>
+</div>
+<h3 id="introduction-and-elimination">Introduction and Elimination</h3>
+<p>OK, now that we can read the “flow” of a natural deduction proof, we need to ask ourselves <strong>“what conclusions are legal?”</strong> There have to be rules, dammit!</p>
+<p>And those rules will be our <strong>introduction and elimination rules</strong>. Every symbol in our system will be defined by a set of introduction rules (telling us when it’s legal to <em>add</em> the symbol) and elimination rules (telling us when we can <em>remove</em> it).</p>
+<p>This is way better with an example, so let’s start with <em>conjunction</em>.<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a></p>
+<table>
+<caption>The introduction and elimination rules for <em>conjunction.</em> By convention, the rule being used is written to the right of the inference line.</caption>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(\cfrac{A \quad B}{A \wedge B}\wedge_I\)</span></td>
+<td style="text-align: left;"><strong>Introduction Rule</strong></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(\cfrac{A \wedge B}{A}\wedge_{E1}\)</span></td>
+<td style="text-align: left;"><strong>Elimination Rule 1</strong></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(\cfrac{A \wedge B}{B}\wedge_{E2}\)</span></td>
+<td style="text-align: left;"><strong>Elmination Rule 2</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>These rules define how conjunction works.</strong> Do you see how <span class="math inline">\(\wedge_I\)</span> allows you to <em>introduce</em> the “<span class="math inline">\(\wedge\)</span>” symbol, whereas <span class="math inline">\(\wedge_{E1}\)</span> and <span class="math inline">\(\wedge_{E2}\)</span> allow you to eliminate it?</p>
+<p>So that was pretty simple — OK, now you try!</p>
+<div class="example">
+<p><strong>Question:</strong> What are the <em>Introduction Rules</em> for disjunction?<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a> <em>(Hint: there should be two).</em></p>
+<button onclick="toggleDisplay(&#39;ans-1&#39;)">
+Show/Hide Answer
+</button>
+<div id="ans-1" class="ans">
+<table>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(\cfrac{A}{A \vee B}\vee_{I1}\)</span></td>
+<td style="text-align: left;"><strong>Introduction Rule 1</strong></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(\cfrac{B}{A \vee B}\vee_{I2}\)</span></td>
+<td style="text-align: left;"><strong>Introduction Rule 2</strong></td>
+</tr>
+</tbody>
+</table>
+<p>That is, simply knowing either <span class="math inline">\(A\)</span> or <span class="math inline">\(B\)</span> is sufficient for knowing <span class="math inline">\(A \vee B\)</span>.</p>
+</div>
+</div>
+<p>Now what about the <em>Elimination Rule</em> for <span class="math inline">\(\vee\)</span>? Can you come up with an English explanation of the rule? To write the rule down formally, we need one last bit of notation.</p>
+<h3 id="hypotheticals">Hypotheticals</h3>
+<p>What’s missing is we have no way of working with “hypothetical situations”. Something like <em>“if <span class="math inline">\(A\)</span> were true (and I’m not saying it is), <span class="math inline">\(B\)</span> would follow”.</em></p>
+<dl>
+<dt>Hypothetical</dt>
+<dd>A hypothetical premise <span class="math inline">\(\Gamma\)</span> is written as so: <span class="math display">\[ \cfrac{}{\Gamma} x\]</span> Where <span class="math inline">\(x\)</span> is a number unique for this hypothetical situation.
+</dd>
+</dl>
+<p>Now we can write down an Elimination Rule for disjunction!<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a></p>
+<p><span class="math display">\[
+  \cfrac{A\vee B\quad\begin{array}[b]{c}
+    \begin{array}[b]{c}\dfrac{}{A}\scriptsize{1}\end{array} \\ \vdots \\ C
+  \end{array}\quad\begin{array}[b]{c}
+    \begin{array}[b]{c}\dfrac{}{B}\scriptsize{2}\end{array} \\ \vdots \\ C
+  \end{array}}{C}\vee_{E^{1,2}}
+\]</span></p>
+<p>In plain English:</p>
+<table style="width:97%;">
+<colgroup>
+<col style="width: 70%" />
+<col style="width: 26%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>I know</th>
+<th>I conclude</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><ol type="1">
+<li><span class="math inline">\(A \vee B\)</span></li>
+<li>Hypothetically speaking, <span class="math inline">\(A\)</span> leads me to <span class="math inline">\(C\)</span>.</li>
+<li>Hypothetically speaking, <span class="math inline">\(B\)</span> leads me to <span class="math inline">\(C\)</span>.</li>
+</ol></td>
+<td><span class="math inline">\(C\)</span> must be true.</td>
+</tr>
+</tbody>
+</table>
+<p>Now your turn!</p>
+<div class="example">
+<p><strong>Question:</strong> What are the Introduction and Elimination Rules for <em>implication</em>?<a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a><br />
+<em>(Hint: You should need only 1 of each)</em><br />
+<em>(Hint: You might notice that hypotheticals are already a kind of implication)</em></p>
+<button onclick="toggleDisplay(&#39;ans-2&#39;)">
+Show/Hide Answer
+</button>
+<div id="ans-2" class="ans">
+<table>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(\cfrac{\begin{array}[b]{c}
+    \begin{array}[b]{c}\dfrac{}{A}\scriptsize{1}\end{array} \\ \vdots \\ B
+  \end{array}}{A \to B}\to_{I^1}\)</span></td>
+<td style="text-align: left;"><strong>Introduction Rule 1</strong></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(\cfrac{A\to B \quad A}{B}\to_{E}\)</span></td>
+<td style="text-align: left;"><strong>Elimination Rule 1</strong></td>
+</tr>
+</tbody>
+</table>
+<p>In plain English:</p>
+<table>
+<colgroup>
+<col style="width: 23%" />
+<col style="width: 76%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>Introduction:</strong></td>
+<td style="text-align: left;"><em>having a proof from <span class="math inline">\(A\)</span> to <span class="math inline">\(B\)</span> can demonstrate <span class="math inline">\(A \to B\)</span>.</em><a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Elimination:</strong></td>
+<td style="text-align: left;"><em>knowing <span class="math inline">\(A\)</span> and <span class="math inline">\(A \to B\)</span> can lead to <span class="math inline">\(B\)</span>.</em></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<h2 id="writing-simple-proofs">Writing Simple Proofs</h2>
+<p>I think <span class="math inline">\(\wedge\)</span>, <span class="math inline">\(\vee\)</span>, and <span class="math inline">\(\to\)</span> should be enough to test what we’ve learned.<a href="#fn8" class="footnote-ref" id="fnref8" role="doc-noteref"><sup>8</sup></a> Let’s work through some example proofs. <strong>At each step, we can only use one of the introduction and elimination rules we’ve defined</strong>, relisted here:</p>
+<div id="rules">
+<table>
+<caption>Introduction and elimination rules for conjunction, disjunction, and implication.</caption>
+<colgroup>
+<col style="width: 52%" />
+<col style="width: 47%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td><span class="math display">\[\dfrac{A \quad B}{A \wedge B}\wedge_I\]</span></td>
+<td style="text-align: left;"><span class="math display">\[\dfrac{A \wedge B}{A}\wedge_{E1}\]</span></td>
+</tr>
+<tr class="even">
+<td><span class="math display">\[\dfrac{A}{A \vee B}\vee_{I1}\]</span></td>
+<td style="text-align: left;"><span class="math display">\[\dfrac{A \wedge B}{B}\wedge_{E2}\]</span></td>
+</tr>
+<tr class="odd">
+<td><span class="math display">\[\dfrac{B}{A \vee B}\vee_{I2}\]</span></td>
+<td style="text-align: left;"><span class="math display">\[\dfrac{A \vee B
+\quad \begin{array}[b]{c}
+    \begin{array}[b]{c}\dfrac{}{A}\scriptsize{x}\end{array} \\ \vdots \\ C
+  \end{array}
+\quad \begin{array}[b]{c}
+    \begin{array}[b]{c}\dfrac{}{B}\scriptsize{y}\end{array} \\ \vdots \\ C
+  \end{array}}
+{C}\vee_{E^{x,y}}\]</span></td>
+</tr>
+<tr class="even">
+<td><span class="math display">\[\dfrac{\begin{array}[b]{c}
+    \begin{array}[b]{c}\dfrac{}{A}\scriptsize{x}\end{array} \\ \vdots \\ B
+  \end{array}}{A \to B}
+\to_{I^x}\]</span></td>
+<td style="text-align: left;"><span class="math display">\[\dfrac{A \quad A \to B}{B}\to_E\]</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Each proof will take some starting point <span class="math inline">\(\Gamma\)</span> to some conclusion <span class="math inline">\(\Delta\)</span>. I’ll write <span class="math inline">\(\Gamma \vdash \Delta\)</span> to mean “use <span class="math inline">\(\Gamma\)</span> to prove <span class="math inline">\(\Delta\)</span>”.<a href="#fn9" class="footnote-ref" id="fnref9" role="doc-noteref"><sup>9</sup></a></p>
+<div class="example">
+<p><strong>Example 1:</strong> prove that <span class="math inline">\(A \to B,\; A \wedge C \vdash B\)</span>:</p>
+<p><span class="math display">\[
+\dfrac{\dfrac{A \wedge C}{A} \wedge_{E1}
+       \quad
+       A \to B}
+      {B} \to_E
+\]</span></p>
+</div>
+<p>Make sure that you can read that, and that every step is justified. For the next example, let’s look at something using a hypothetical judgment.</p>
+<div class="example">
+<p><strong>Example 2:</strong> prove that <span class="math inline">\(A \to B, \; B \to C \vdash A \to C\)</span>:</p>
+<p><span class="math display">\[
+\dfrac{ \dfrac{ \begin{array}[b]{c}\dfrac{}{A}\scriptsize{1}\end{array} \quad A \to B }{ B }\to_E
+                \quad
+                B \to C}
+              { \dfrac{C}{A \to C}\to_{I^1} }\to_E
+\]</span></p>
+</div>
+<p>Notice how the hypothetical <span class="math inline">\(\overline{A}^1\)</span> gets used by the <span class="math inline">\(\to_{I^1}\)</span>. Every hypothetical must be eventual used by some rule — otherwise we would just assume our goal and call it a day! <strong>A proof tree with an unaccounted-for hypothetical is an unfinished proof!</strong></p>
+<p>Here are a few more exercises to try your hand at. When working through them, don’t be afraid to work backwards! You could write down the goal, and work your way to the assumptions, or vice versa.</p>
+<div class="example">
+<p><strong>Question 1:</strong> Prove <span class="math inline">\(A \wedge B,\; B \to C \vdash A \wedge C\)</span></p>
+<button onclick="toggleDisplay(&#39;ans-5&#39;)">
+Show/Hide Answer
+</button>
+<div id="ans-5" class="ans">
+<p><span class="math display">\[
+\dfrac{ \dfrac{A \wedge B}{A}\wedge_{E1}
+        \quad\quad
+        \dfrac{ \dfrac{A \wedge B}{B}\wedge_{E2} \quad B \to C}{C}\to_E}
+      {A \wedge C} \wedge_I
+\]</span></p>
+</div>
+<p><strong>Question 2:</strong> Prove <span class="math inline">\(A \to B,\; B \to C \vdash A \to (B \wedge C)\)</span></p>
+<button onclick="toggleDisplay(&#39;ans-4&#39;)">
+Show/Hide Answer
+</button>
+<div id="ans-4" class="ans">
+<p><span class="math display">\[
+\dfrac{
+      \dfrac{\begin{array}[b]{c}\dfrac{}{A}\scriptsize{1}\end{array} \quad A \to B}
+            {B}\to_E
+      \quad\quad
+      \dfrac{\dfrac{ \begin{array}[b]{c}\dfrac{}{A}\scriptsize{1}\end{array} \quad A \to B }
+                   {B}\to_E
+             \quad
+             B \to C}
+            {C}\to_E}
+      {\dfrac{B \wedge C}{A \to (B \wedge C)}\to_{I^1}} \wedge_I
+\]</span></p>
+<p>Note that here, we used one hypothesis <span class="math inline">\(\overline{A}^1\)</span> twice; once to give use <span class="math inline">\(B\)</span>, and again to give us <span class="math inline">\(C\)</span>. It is, of course, only one hypothesis, even though it appears twice.</p>
+</div>
+<p><strong>Question 3:</strong> Prove <span class="math inline">\((A \to B) \vee (A \to C) \vdash A \to (B \vee C)\)</span></p>
+<button onclick="toggleDisplay(&#39;ans-3&#39;)">
+Show/Hide Answer
+</button>
+<div id="ans-3" class="ans">
+<p><span class="math display">\[
+\dfrac{
+(A \to B) \vee (A \to C)
+\quad
+\dfrac{\dfrac{\dfrac{\begin{array}[b]{c}\dfrac{}{A \to B}\scriptsize{1}\end{array} \begin{array}[b]{c}\dfrac{}{A}\scriptsize{2}\end{array}}{B} \to_E}
+             {B \vee C} \vee_{I1}}
+      {A \to (B \vee C)} \to_{I^2}
+\quad
+\dfrac{\dfrac{\dfrac{\begin{array}[b]{c}\dfrac{}{A \to C}\scriptsize{3}\end{array} \begin{array}[b]{c}\dfrac{}{A}\scriptsize{4}\end{array}}{C} \to_E}
+             {B \vee C} \vee_{I2}}
+      {A \to (B \vee C)} \to_{I^4}
+}{A \to (B \vee C)}\vee_{E^{1,3}}
+\]</span></p>
+</div>
+</div>
+<h2 id="lambda-calculus">Lambda Calculus</h2>
+<p>There_ are a glut of reasons why you might run into a natural deduction proof. Philosophers have all kinds of reasons to study the process of reasoning. Computer science’s tie to logic is rather obvious — often the semantics of programming languages are described in terms of natural deduction inferences, for example. Linguists have been using logic to model semantics ever since Montague, and the study of syntax can be just as formal.</p>
+<p>But each one of these fields all use another tool; one which seems much more common place. And they might not know it, but that tool is bound tight to natural deduction.</p>
+<p><strong>I’m talking about <span class="math inline">\(\lambda\)</span>-calculus!</strong><a href="#fn10" class="footnote-ref" id="fnref10" role="doc-noteref"><sup>10</sup></a></p>
+<p>There is this idea known as <strong>the Curry-Howard correspondence</strong>, which very loosely says one can convert between a proof and a program. Here, I want to look at the most simple case of how this works, using only simply typed <span class="math inline">\(\lambda\)</span>-calculus.</p>
+<h3 id="simple-type-proofs">Simple Type Proofs</h3>
+<p>In simply typed <span class="math inline">\(\lambda\)</span>-calculus we write <span class="math inline">\(x : A \to B\)</span> to mean <em>“the element <span class="math inline">\(x\)</span> is of type <span class="math inline">\(A\)</span> to <span class="math inline">\(B\)</span>”.</em> Well this “<span class="math inline">\(\to\)</span>” is, in fact, the same “<span class="math inline">\(\to\)</span>” we’ve been looking at in natural deduction!</p>
+<p>Normally I would take a baby example, and work our way up. This time, though, I think we should dive right into a pretty meaty example. It might take you a bit with a pen and paper to get it all, but don’t worry, you have all the time in the world! I won’t be giving a test.</p>
+<p><span class="math display">\[
+\begin{align*}
+  &amp;M: ((A \to B) \to C) \to D\\
+  &amp;N: (A \to E) \to C\\
+\end{align*}
+\]</span></p>
+<p>So we have two pre-defined terms <span class="math inline">\(M\)</span> and <span class="math inline">\(N\)</span>. Using only those two terms, can you write a lambda expression of type <span class="math inline">\((B \to E) \to D\)</span>? Probably you can! But let me change the question…</p>
+<div class="example">
+<p><strong>Question:</strong> Prove<br />
+<span class="math inline">\(((A \to B) \to C) \to D,\; (A \to E) \to C) \vdash (B \to E) \to D\)</span>?<br />
+<em>(Just a warning, this one is pretty tedious)</em></p>
+<button onclick="toggleDisplay(&#39;ans-6&#39;)">
+Show/Hide Answer
+</button>
+<div id="ans-6" class="ans">
+<p><span class="math display">\[
+\dfrac{((A \to B) \to C) \to D
+       \quad\quad
+       \dfrac{(A \to E) \to C
+              \quad\quad
+              \dfrac{{\begin{array}[b]{c}\dfrac{}{B \to E}\scriptsize{x}\end{array}}
+                     \quad
+                     \dfrac{{\begin{array}[b]{c}\dfrac{}{A\to B}\scriptsize{y}\end{array}} \quad {\begin{array}[b]{c}\dfrac{}{A}\scriptsize{z}\end{array}}}{B}\to_E}
+                    {\dfrac{E}{A \to E}{ \to_{Iz}}}\to_E
+              }
+             {\dfrac{C}{(A \to B) \to C}{\to_{Iy}}}\to_E
+      }
+      {\dfrac{D}{(B \to E) \to D}{\to_{Ix}}}\to_E
+\]</span></p>
+</div>
+</div>
+<p>I want to zoom into the upper-right part of this tree really quick.</p>
+<p><span class="math display">\[
+\fcolorbox{blue}{white}{$
+\dfrac{\fcolorbox{orange}{white}{$\dfrac{\begin{array}[b]{c}\dfrac{}{B \to E}\scriptsize{x}\end{array}
+                    \quad
+                    \fcolorbox{red}{white}{$\dfrac{\begin{array}[b]{c}\dfrac{}{A\to B}\scriptsize{y}\end{array} \quad \begin{array}[b]{c}\dfrac{}{A}\scriptsize{z}\end{array}}{B}\to_E$}}
+                   {E}\to_E$}}
+      {A \to E} \to_{Iz}
+$}
+\]</span></p>
+<p>Now I’m going to re-write this; every hypothetical will be a variable, every elimination will be a function application, and ever introduction will be a lambda abstraction. <em>(I’ve added a little color highlighting to make this clearer.)</em></p>
+<p><span class="math display">\[
+{\color{blue} \overbrace{\color{black}  \lambda z. {\color{orange} \underbrace{\color{black} x {\color{red} \overbrace{\color{black}  (y z)}}}}}} : A \to E
+\]</span></p>
+<blockquote>
+<p><em>You probably want to stare at that, and see how it lines up.</em></p>
+</blockquote>
+<p>Do you see what we’ve done? <strong>We’ve converted a proof from assumptions to conclusions into a program from variable to output.</strong> Implication introduction is the same as creating a function, and implication elimination is the same as function application!</p>
+<div class="example">
+<p><strong>Question:</strong> Can you convert the rest of this proof into a lambda term?</p>
+<button onclick="toggleDisplay(&#39;ans-7&#39;)">
+Show/Hide Answer
+</button>
+<div id="ans-7" class="ans">
+<div style="font-size: 120%;">
+<p><span class="math display">\[
+{\color{red} \underbrace{\color{black} \lambda x. M ( {\color{orange} \overbrace{\color{black}  \lambda y. N( {\color{blue} \underbrace{\color{black} \lambda z. x(y z)}})}})}}: (B \to E) \to D
+\]</span></p>
+</div>
+<p>Just for clarity, I’ve highlighted each lambda abstraction on the original proof.</p>
+<p><span class="math display">\[
+\dfrac{((A \to B) \to C) \to D
+       \quad\quad
+       \dfrac{(A \to E) \to C
+              \quad\quad
+              \dfrac{{\color{red}\begin{array}[b]{c}\dfrac{}{B \to E}\scriptsize{x}\end{array}}
+                     \quad
+                     \dfrac{{\color{orange}\begin{array}[b]{c}\dfrac{}{A\to B}\scriptsize{y}\end{array}} \quad {\color{blue}\begin{array}[b]{c}\dfrac{}{A}\scriptsize{z}\end{array}}}{B}\to_E}
+                    {\dfrac{E}{A \to E}{\color{blue} \to_{Iz}}}\to_E
+              }
+             {\dfrac{C}{(A \to B) \to C}{\color{orange}\to_{Iy}}}\to_E
+      }
+      {\dfrac{D}{(B \to E) \to D}{\color{red}\to_{Ix}}}\to_E
+\]</span></p>
+<p>For more practice, try converting the other exercises in this post! You’ll need to think a bit about how you might treat <span class="math inline">\(\wedge\)</span> and <span class="math inline">\(\vee\)</span> though…</p>
+</div>
+</div>
+<p>Now if you’re thinking to yourself, “Tyler… it would have been <em>way</em> easier to just write the lambda terms without any of this gobbledygook.”</p>
+<blockquote>
+<p>Yes, that might be true! But it works the other way, too!</p>
+</blockquote>
+<p><strong>You could write a lambda expression, and convert it back to a proof</strong>. In fact, the takeaway here is <strong>lambda terms are proof trees.</strong> But I can tell we all have a little smoke coming out of our ears right now, so why don’t I just leave it here.</p>
+<h2 id="further-reading">Further Reading</h2>
+<p>I know this was a long post, but it was also very elementary. I just wanted to set people up to be able to access and understand other introductory resources on proof theory, natural deduction notation, and related things.</p>
+<p>From here, I would <em>highly</em> recommend three resources</p>
+<ul>
+<li><a href="https://www.cs.uoregon.edu/research/summerschool/summer15/curriculum.html">Frank Pfenning’s “Basic Proof Theory” lectures from OPLSS 2015</a> A world-class introduction to proof theory.</li>
+<li><a href="http://logitext.mit.edu/tutorial">Interactive Tutorial of the Sequent Calculus</a> A very short but fun introduction to the Sequent Calculus — the “big brother” of what we’ve been working on. It’s an easy read, and (as the title says) is interactive!</li>
+<li><a href="https://softwarefoundations.cis.upenn.edu/">Software Foundations</a> for a deeper look into the Curry-Howard correspondence. Everything you do in Coq revolves around this switching between natural deduction and lambda calculus.</li>
+</ul>
+<p><strong>As always thanks for reading!</strong> Leave a comment with any questions you might have — I’d love feedback to improve this post!</p>
+<section class="footnotes" role="doc-endnotes">
+<hr />
+<ol>
+<li id="fn1" role="doc-endnote"><p>I’m actually lying to you right now — natural deduction has a brother called <strong>the sequent calculus</strong> which is <em>really</em> the gold standard. It’s relatively similar, though, so no worries. At the end of this post I’ll link to some resources on sequent calculus.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2" role="doc-endnote"><p>What were these older proof calculi, and what was bad about them? They are usually referred to as <em>“Hilbert Systems”,</em> and probably the most famous such system was the one in <em>Principia Mathematica</em>. The main difference between a Gentzen system and a Hilbert system was that a Hilbert system preferred to used <em>axioms</em> instead of <em>inference rules</em>. That made them a bit difficult to deal with, which is why it took <a href="https://quod.lib.umich.edu/cgi/t/text/pageviewer-idx?c=umhistmath&amp;cc=umhistmath&amp;idno=aat3201.0001.001&amp;frm=frameset&amp;view=image&amp;seq=401">Principia 379 pages to get to “1 + 1 = 2”.</a><a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3" role="doc-endnote"><p><em>Conjunction</em> here means “logical and”. So when you see <span class="math inline">\(A \wedge B\)</span>, it’s usually read as “<span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span>”.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4" role="doc-endnote"><p><em>Disjunction</em>, of course, means “logical or”. Reading <span class="math inline">\(A \vee B\)</span> would read as “<span class="math inline">\(A\)</span> and/or <span class="math inline">\(B\)</span>”.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn5" role="doc-endnote"><p>Did you notice we called the rule <span class="math inline">\(\vee_{E^{1,2}}\)</span>? The “1,2” is there to note that “this rule used hypothetical situations 1 and 2”. That way we can keep track of what each hypothetical situation is doing.<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn6" role="doc-endnote"><p>Implication, written as <span class="math inline">\(A \to B\)</span>, means "<em>knowing <span class="math inline">\(A\)</span> leads to <span class="math inline">\(B\)</span>".</em><a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn7" role="doc-endnote"><p>Do you feel like you don’t understand the difference between a hypothetical and implication? Don’t worry, it’s a subtle difference! They seem to capture the same idea of “assume <span class="math inline">\(A\)</span> gets you to <span class="math inline">\(B\)</span>”. The difference is that <span class="math inline">\(A \to B\)</span> is only a statement, and statements need proof. The proof for that statement takes the form of a hypothetical.<a href="#fnref7" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn8" role="doc-endnote"><p>You might be asking me, "isn’t this just Boolean Algebra, but hard? Can’t I just write out a truth table to do this? We could actual define much more complicated rules for things like <span class="math inline">\(\forall\)</span> and <span class="math inline">\(\exists\)</span> (and even more!) that a truth table would never be able to deal with. For now, though, I just wanted to keep things simple.<a href="#fnref8" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn9" role="doc-endnote"><p>Wait, another way to say <em>“from <span class="math inline">\(x\)</span> we conclude <span class="math inline">\(y\)</span>”</em>, you ask? Don’t get too caught up in this right now. I’m only going to use this notation to ask the question “can you prove this?” for the moment.<a href="#fnref9" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn10" role="doc-endnote"><p>Don’t know what <span class="math inline">\(\lambda\)</span>-calculus is? Then this section isn’t for you! Consider reading a good introduction on the subject like <a href="http://www.cse.chalmers.se/research/group/logic/TypesSS05/Extra/geuvers.pdf">this one!</a><a href="#fnref10" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
+
+      </div>
+
+      <img id="sig" src="/images/tc-logo.svg"/>
+      <h6 style="text-align:center">Comments mean a lot!</h6>
+      <h5>
+        <a href="/"> More Posts </a>
+        <a href="mailto:blog@tylercecil.com?Subject=Natural Deduction" style="float: right">Write Me</a>
+      </h5>
+
+      <div id="commento"></div>
+      <script src="https://cdn.commento.io/js/commento.js"></script>
+
+      <div id="footer" class="container">
+        <h6 style="float: right">&copy; 2020 Tyler Cecil</h6>
+        <a class="subscribe" href="/feed/atom.xml">
+          <!-- SVG taken from: http://genericons.com/ -->
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"
+                                                  height="1.5rem" width="1.5rem">
+            <rect x="0" fill="none" width="16" height="16"/>
+            <g>
+            <path d="M2 6v2c3.3 0 6 2.7 6 6h2c0-4.4-3.6-8-8-8zm0-4v2c5.5 0 10 4.5 10 10h2C14 7.4 8.6 2 2 2zm1.5 9c-.8 0-1.5.7-1.5 1.5S2.7 14 3.5 14 5 13.3 5 12.5 4.3 11 3.5 11z"/>
+            </g>
+          </svg>
+          Subscribe via RSS
+        </a>
+        <br/>
+        <a class="subscribe"
+           href="https://blogtrottr.com/?subscribe=https://tylercecil.com/feed/atom.xml"
+           target="_blank"
+           title="Powered by BlogTrottr">
+          <!-- SVG taken from: http://genericons.com/ -->
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"
+                                                  height="1.5rem" width="1.5rem">
+            <rect x="0" fill="none" width="16" height="16"/>
+            <g>
+            <path d="M15 9h-5c-.6 0-1 .4-1 1v5c0 .6.4 1 1 1h5c.6 0 1-.4 1-1v-5c0-.6-.4-1-1-1zm0 4h-2v2h-1v-2h-2v-1h2v-2h1v2h2v1zm-3-5V5c0-1.1-.9-2-2-2H2C.9 3 0 3.9 0 5v5c0 1.1.9 2 2 2h6v-2c0-1.2.8-2 2-2h2zM6 9.1L1 6.2V5l5 2.9L11 5v1.2L6 9.1z"/>
+            </g>
+          </svg>
+          Subscribe via Email
+        </a>
+      </div>
+    </div>
+  </body>
+</html>
