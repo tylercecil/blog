@@ -4,7 +4,7 @@ posts:
   - title: 'Natural Deduction'
     subtitle: 'Notation for the Uninitiated'
     date: '2020-04-06'
-    update: ''
+    update: '04-27-2020'
     abstract: 'A beginners introduction into how the hell you read those proof trees that all the scary logicians keep using. Filled with lots of exercises to keep you busy!'
     url: 'posts/2020-04-06-natduc.html'
   - title: 'Winograd Schema Challenge'
