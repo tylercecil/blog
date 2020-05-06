@@ -47,6 +47,22 @@
   display:block;
 }
 
+.about .social {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.about .social a {
+  text-decoration: none;
+}
+
+.about .social svg {
+  width: 15%;
+  min-width: 40px;
+  padding: 0 1em;
+  fill: currentColor;
+}
+
 /**** Subscribe Page */
 .subscribe a svg {
   fill: currentColor;
