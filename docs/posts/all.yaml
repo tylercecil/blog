@@ -1,6 +1,12 @@
 ---
 title: Posts
 posts:
+  - title: 'The Curious Case of Population Variance'
+    subtitle: 'Estimating Variance without Bias'
+    date: '2020-05-10'
+    update: ''
+    abstract: 'This post is a short introduction to Bessel’s correct — an solution to an unexpected problem in statistics. As it turns out, estimating the variance of a collection of samples the way you might think will almost always underestimate the true variance!'
+    url: 'posts/2020-05-10-bessel.html'
   - title: 'Natural Deduction'
     subtitle: 'Notation for the Uninitiated'
     date: '2020-04-06'

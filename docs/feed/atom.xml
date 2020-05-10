@@ -6,12 +6,26 @@
     <name>Tyler Cecil</name>
     <email>tyler.i.cecil@gmail.com</email>
   </author>
-  <updated>2020-05-04T00:00:00Z</updated>
+  <updated>2020-05-06T00:00:00Z</updated>
   <rights type="text">Copyright © 2020 Tyler Cecil. All rights reserved.</rights>
   <id>https://tylercecil.com/</id>
   <link rel='self' href='https://tylercecil.com/feed/atom.xml'/>
   <link type="application/atom+xml" href="https://tylercecil.com/feed/atom.xml" rel="self"/>
 
+      <entry>
+    <title>The Curious Case of Population Variance</title>
+    <id>https://tylercecil.com/posts/2020-05-10-bessel.html</id>
+    <link href='https://tylercecil.com/posts/2020-05-10-bessel.html'/>
+    <published>2020-05-10T00:00:00Z</published>
+    <updated>2020-05-10T00:00:00Z</updated>
+    <summary type="xhtml">
+      <div xmlns="http://www.w3.org/1999/xhtml">
+                Estimating Variance without Bias
+        <br/>
+                This post is a short introduction to Bessel’s correct — an solution to an unexpected problem in statistics. As it turns out, estimating the variance of a collection of samples the way you might think will almost always underestimate the true variance!
+      </div>
+    </summary>
+  </entry>
       <entry>
     <title>Natural Deduction</title>
     <id>https://tylercecil.com/posts/2020-04-06-natduc.html</id>
