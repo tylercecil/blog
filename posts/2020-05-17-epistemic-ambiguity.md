@@ -28,18 +28,29 @@ meanings appears to be changing in modern English.
 
 # Modality
 
-No matter how you read (@survive), we would all agree: **the expert did not say
-they survived.**
+First, what exactly was the ambiguity in (@survive)?
 
-$$ \cancel{\text{SURVIVE}(\text{they})} $$
+(@log) "They might have survived, if the lions hadn't found them."
+(@epi) "They might have survived --- we haven't found any bodies."
 
+In (@log), it is clear that our heros met an unsavory end. However, (@epi) is
+markedly more positive, expressing uncertainty about their fate. In both cases,
+though, **the expert did not say they survived.** So then, how do we model this
+sentence logically?
 
+To answer that, we need to understand *logical modality*. I've actually
+[written about modality before](posts/2020-02-13-reference.html#modal), but
+let's recap.
 
-## Logical
-## Epistemic
+Lovers separated by great distances feel comfort knowing that at night they can
+look up and see the same stars. A bit like that, I feel comfort knowing that
+every alternate reality me
 
-# Other Modalities?
+Modality
+: Modality expresses **necessity** or **possibility**.
 
-# References
-::: refs
-:::
+## Types of Modality
+
+"The set of all worlds" is kinda a tricky idea, though. As it happens,
+
+# Might and May
