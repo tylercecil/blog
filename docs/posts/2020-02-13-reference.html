@@ -260,10 +260,10 @@
 <h2 id="a-computational-connection">A Computational Connection</h2>
 <p>References are essentially a kind of program — call it <code>ref</code>. If I say the name “Le Guin”, I’m asking you the listener to bring to mind the person who has that name. <code>(ref "Le Guin")</code>. Similarly, if I say "the author of <em>The Dispossessed"</em>, I’m asking you to bring to mind the person who fits that description. <code>(ref "The author of The Dispossessed")</code>. I can only assume that, in your mind, those should be the same individuals.</p>
 <p><strong>But the result depends which “machine” runs <code>ref</code>!</strong> Remember Jozefína?</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode lisp"><code class="sourceCode commonlisp"><span id="cb1-1"><a href="#cb1-1"></a>You-Machine&gt; (ref <span class="st">&quot;Num English Letters&quot;</span>)</span>
-<span id="cb1-2"><a href="#cb1-2"></a>  <span class="dv">26</span></span>
-<span id="cb1-3"><a href="#cb1-3"></a>Jozefína-Machína&gt; (ref <span class="st">&quot;Num English Letters&quot;</span>)</span>
-<span id="cb1-4"><a href="#cb1-4"></a>  <span class="dv">46</span></span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode lisp"><code class="sourceCode commonlisp"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true"></a>You-Machine&gt; (ref <span class="st">&quot;Num English Letters&quot;</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true"></a>  <span class="dv">26</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true"></a>Jozefína-Machína&gt; (ref <span class="st">&quot;Num English Letters&quot;</span>)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true"></a>  <span class="dv">46</span></span></code></pre></div>
 <p>The programing language Lisp is famously able to “talk about programs”.</p>
 <table>
 <caption>The single quote before a list signals that you are writing <em>about</em> code rather than <em>with</em> code.</caption>
@@ -283,12 +283,12 @@
 </tbody>
 </table>
 <p>In natural language, we also can easily switch between talking with words (known as <strong>de re</strong> statements) and talking about words (known as <strong>de dicto</strong> statements). If I want to say “Jozefína thinks the number of English letters is 26”, there are two interpretations</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode lisp"><code class="sourceCode commonlisp"><span id="cb2-1"><a href="#cb2-1"></a><span class="co">;; De Re Interpretation</span></span>
-<span id="cb2-2"><a href="#cb2-2"></a><span class="co">;; (no normal speaker would parse this way).</span></span>
-<span id="cb2-3"><a href="#cb2-3"></a>(<span class="kw">eq</span> (eval-jozefína (ref <span class="st">&quot;English Letters&quot;</span>) <span class="dv">26</span>)</span>
-<span id="cb2-4"><a href="#cb2-4"></a><span class="co">;; De Dicto Interpretation</span></span>
-<span id="cb2-5"><a href="#cb2-5"></a><span class="co">;; (the intended meaning).</span></span>
-<span id="cb2-6"><a href="#cb2-6"></a>(<span class="kw">eq</span> (eval-jozefína &#39;(ref <span class="st">&quot;English Letters&quot;</span>) <span class="dv">26</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode lisp"><code class="sourceCode commonlisp"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true"></a><span class="co">;; De Re Interpretation</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true"></a><span class="co">;; (no normal speaker would parse this way).</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true"></a>(<span class="kw">eq</span> (eval-jozefína (ref <span class="st">&quot;English Letters&quot;</span>) <span class="dv">26</span>)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true"></a><span class="co">;; De Dicto Interpretation</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true"></a><span class="co">;; (the intended meaning).</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true"></a>(<span class="kw">eq</span> (eval-jozefína &#39;(ref <span class="st">&quot;English Letters&quot;</span>) <span class="dv">26</span>)</span></code></pre></div>
 <p><strong>De dicto</strong> literally means “about words”, so a de dicto reading means “this person thinks/wants/believes <em>these exact words</em>”.</p>
 <p><strong>De re</strong> means “about the thing”, so a de re reading would be “this person thinks/wants/believes <em>the things these words mean</em>”.</p>
 <h2 id="scope-is-always-tricky">Scope Is Always Tricky</h2>
@@ -331,9 +331,9 @@
 <li>Yolanda thinks the girl down the street is an amazing painter.</li>
 </ol>
 <p>Antonio “translated” the reference <em>“that painter”</em> (which Antonio’s sister wouldn’t understand) to <em>“the girl down the street”</em> (which Yolanda wouldn’t understand). Antonio’s sister hears the sentence as:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode lisp"><code class="sourceCode commonlisp"><span id="cb3-1"><a href="#cb3-1"></a>(think yolanda (is (ref <span class="st">&quot;the girl down the street&quot;</span>) amazing-painter))</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode lisp"><code class="sourceCode commonlisp"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true"></a>(think yolanda (is (ref <span class="st">&quot;the girl down the street&quot;</span>) amazing-painter))</span></code></pre></div>
 <p>And because Yolanda doesn’t know who the girl down the street is, she would not likely think:<a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a><a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a></p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode lisp"><code class="sourceCode commonlisp"><span id="cb4-1"><a href="#cb4-1"></a>(think yolanda &#39;(is (ref <span class="st">&quot;the girl down the street&quot;</span>) amazing-painter))</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode lisp"><code class="sourceCode commonlisp"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true"></a>(think yolanda &#39;(is (ref <span class="st">&quot;the girl down the street&quot;</span>) amazing-painter))</span></code></pre></div>
 <p>We could also think back to (17) — the de dicto reading is false, because Omar didn’t know who Ulyanov was. However, when his mother made the same statement to a different audience, it was received with a de re meaning, and was therefore true.</p>
 <h2 id="parting-notes">Parting Notes</h2>
 <p>I hope you enjoyed following along with me on my topic of the week. Referential Opacity can seem a little abstract; historically the main problem had always been that modeling language would never be possible without understanding reference. <span class="citation" data-cites="quine">Quine (<a href="#ref-quine" role="doc-biblioref">1956</a>)</span> is a remarkably entertaining paper, and I would highly recommend it (it’s a short read, full of great examples)! It and <span class="citation" data-cites="partee">Hall-Partee (<a href="#ref-partee" role="doc-biblioref">1979</a>)</span> do a good job laying out why the problem matters.</p>

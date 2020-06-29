@@ -1,6 +1,12 @@
 ---
 title: Posts
 posts:
+  - title: 'May, Might, Modality'
+    subtitle: 'Probable Words about Possible Worlds'
+    date: '2020-06-29'
+    update: ''
+    abstract: '<p>An introduction to linguistic modality, as modeled by possible worlds. In particular, what is the difference between the worlds “may” and “might”?</p>'
+    url: 'posts/2020-06-29-may-might.html'
   - title: 'The Curious Case of Population Variance'
     subtitle: 'Estimating Variance without Bias'
     date: '2020-05-10'
