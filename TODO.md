@@ -22,4 +22,5 @@ Technical Things
 [] Use jq to parse the document metadata. Or something else?
    (I can use this to make better archive pages, do date stuff, etc.)
 [] Archive Page
+[] Clean up CSS / templates
 
