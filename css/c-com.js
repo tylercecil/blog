@@ -13,7 +13,7 @@ const nodeSize = 18;
 const heightMultiplier = 45;
 const margin = {v: 20, h: 20};
 
-initTree(d3.select('#tree'));
+d3.selectAll('div.tree').each(function(p, j) { initTree(d3.select(this)); });
 
 function initTree(div) {
   const treeString = div.text()
@@ -24,7 +24,8 @@ function initTree(div) {
   const height = (root.height + 1) * heightMultiplier;
 
   const treeLayout = d3.cluster()
-    .size([width - 2 * margin.h, height - 2 * margin.v]);
+    .size([width - 2 * margin.h, height - 2 * margin.v])
+    .separation((a, b) => 1);
   treeLayout(root);
 
   const svg = div.append('svg')
@@ -44,35 +45,31 @@ function initTree(div) {
 function updateTree(root, svg) {
   // Nodes
   svg.select('g.nodes')
-    .selectAll('circle.node')
+    .selectAll('g.node')
     .data(root.descendants())
     .join(
-      enter => enter.append('circle')
-        .classed('node', true)
-        .attr('cx', function(d) {return d.x;})
-        .attr('cy', function(d) {return d.y;})
-        .attr('r', nodeSize)
-        .on('click', click),
+      function(enter) {
+        const node = enter.append('g')
+          .classed('node', true)
+          .on('click', click)
+          .on('mouseover', hoverOn)
+          .on('mouseout', hoverOff);
+        node.append('circle')
+          .attr('cx', function(d) {return d.x;})
+          .attr('cy', function(d) {return d.y;})
+          .attr('r', nodeSize)
+        node.append('text')
+          .text(d => d.data.name)
+          .attr('x', d => d.x)
+          .attr('y', d => d.y)
+          .attr('dominant-baseline', 'middle')
+          .attr('text-anchor', 'middle');
+        return node;
+      },
       update => update
         .classed('selected', d => d.selected)
         .classed('commanded', d => d.commanded)
-    );
-
-  svg.select('g.nodes')
-    .selectAll('text.node')
-    .data(root.descendants())
-    .join(
-      enter => enter.append('text')
-        .text(d => d.data.name)
-        .attr('x', d => d.x)
-        .attr('y', d => d.y)
-        .attr('dominant-baseline', 'middle')
-        .attr('text-anchor', 'middle')
-        .attr('fill', 'black')
-        .on('click', click),
-      update => update
-        .classed('selected', d => d.selected)
-        .classed('commanded', d => d.commanded)
+        .classed('hover', d => d.hover)
     );
 
   // Links
@@ -87,7 +84,7 @@ function updateTree(root, svg) {
     .attr('x2', function(d) {return d.target.x;})
     .attr('y2', function(d) {return d.target.y;});
 
-  function reset_nodes(root) {
+  function resetCommand(root) {
     for (const node of root.descendants()) {
       node.selected = false;
       node.commanded = false;
@@ -96,13 +93,23 @@ function updateTree(root, svg) {
   }
 
   function click(d) {
-    reset_nodes(root);
+    resetCommand(root);
     d.selected = true;
 
     for (const node of ccom(d)) {
       node.commanded = true;
     }
 
+    updateTree(root, svg);
+  }
+
+  function hoverOn(d) {
+    d.hover = true;
+    updateTree(root, svg);
+  }
+
+  function hoverOff(d) {
+    d.hover = false;
     updateTree(root, svg);
   }
 }
