@@ -13,12 +13,11 @@ T_SUB    := templates/subscribe.html
 T_POST   := templates/post.html
 T_ALL_P  := templates/post_record.yaml
 T_FEED   := templates/atom.xml
-STATDIRS := css/ images/
-STATFS   := $(shell find $(STATDIRS) -type f)
+STATFS   := $(shell find static/ -type f)
 
 # Output Files
 SITE   := docs
-STATIC := $(patsubst %, $(SITE)/%, $(STATFS))
+STATIC := $(patsubst static/%, $(SITE)/%, $(STATFS))
 POSTS  := $(patsubst %, $(SITE)/%, $(MD:.md=.html))
 PLIST  := $(SITE)/index.html
 ABOUT  := $(SITE)/about/index.html
@@ -35,7 +34,7 @@ SITE_UPDATED := $(shell $(GET_UPDATE))
 all: $(SITE)
 $(SITE): $(STATIC) $(ABOUT) $(SUB) $(POSTS) $(PLIST) $(FEED)
 
-$(STATIC): $(SITE)/%: %
+$(STATIC): $(SITE)/%: static/%
 	@mkdir -p $$(dirname $@)
 	cp $< $@
 
