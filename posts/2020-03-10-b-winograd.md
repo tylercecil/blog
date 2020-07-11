@@ -9,7 +9,7 @@ update:
 bibliography: posts/winograd.bib
 note: "**Note:** Did you *also* not understand (or had never heard of) the
   Turing Test? I wrote a [preliminary
-  post](/posts/2020-03-09-a-turing-prelim.html) just for you!"
+  post](/posts/2020-03-10-a-turing-prelim.html) just for you!"
 header-includes: >
   <style>
     .comment { display: none; }
