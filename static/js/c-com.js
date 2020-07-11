@@ -54,10 +54,11 @@ function updateTree(root, svg) {
           .on('click', click)
           .on('mouseover', hoverOn)
           .on('mouseout', hoverOff);
-        node.append('circle')
+        node.append('ellipse')
           .attr('cx', function(d) {return d.x;})
           .attr('cy', function(d) {return d.y;})
-          .attr('r', nodeSize)
+          .attr('ry', nodeSize)
+          .attr('rx', d => nodeSize * Math.ceil(d.data.name.length / 5))
         node.append('text')
           .text(d => d.data.name)
           .attr('x', d => d.x)
