@@ -23,7 +23,7 @@ function initTree(div) {
   const width  = Math.round(Number(div.style('width').slice(0, -2)));
   const height = (root.height + 1) * heightMultiplier;
 
-  const treeLayout = d3.cluster()
+  const treeLayout = d3.tree()
     .size([width - 2 * margin.h, height - 2 * margin.v])
     .separation((a, b) => 1);
   treeLayout(root);
