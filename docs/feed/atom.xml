@@ -6,12 +6,26 @@
     <name>Tyler Cecil</name>
     <email>tyler.i.cecil@gmail.com</email>
   </author>
-  <updated>2020-07-11T00:00:00Z</updated>
+  <updated>2020-07-13T00:00:00Z</updated>
   <rights type="text">Copyright © 2020 Tyler Cecil. All rights reserved.</rights>
   <id>https://tylercecil.com/</id>
   <link rel='self' href='https://tylercecil.com/feed/atom.xml'/>
   <link type="application/atom+xml" href="https://tylercecil.com/feed/atom.xml" rel="self"/>
 
+      <entry>
+    <title>Go C-Command Yourself!</title>
+    <id>https://tylercecil.com/posts/2020-07-05-c-command.html</id>
+    <link href='https://tylercecil.com/posts/2020-07-05-c-command.html'/>
+    <published>2020-07-05T00:00:00Z</published>
+    <updated>2020-07-05T00:00:00Z</updated>
+    <summary type="xhtml">
+      <div xmlns="http://www.w3.org/1999/xhtml">
+                An Introduction to Binding
+        <br/>
+                When do we use “himself/herself” instead of “him/her”? It’s a more tricky story than you might think, and it all comes down to a simple (albeit unsual) relationship with trees.
+      </div>
+    </summary>
+  </entry>
       <entry>
     <title>May, Might, Modality</title>
     <id>https://tylercecil.com/posts/2020-06-29-may-might.html</id>
@@ -82,7 +96,7 @@
       <div xmlns="http://www.w3.org/1999/xhtml">
                 Preliminaries on The Turing Test
         <br/>
-                Did you try and read my post on <a href="/posts/2020-03-09-b-winograd.html">Winograd Schema</a>, and realize you don’t understand or have never heard of the Turing Test? If so, this post is for you!
+                Did you try and read my post on <a href="/posts/2020-03-10-b-winograd.html">Winograd Schema</a>, and realize you don’t understand or have never heard of the Turing Test? If so, this post is for you!
       </div>
     </summary>
   </entry>

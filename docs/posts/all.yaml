@@ -1,6 +1,12 @@
 ---
 title: Posts
 posts:
+  - title: 'Go C-Command Yourself!'
+    subtitle: 'An Introduction to Binding'
+    date: '2020-07-05'
+    update: ''
+    abstract: 'When do we use “himself/herself” instead of “him/her”? It’s a more tricky story than you might think, and it all comes down to a simple (albeit unsual) relationship with trees.'
+    url: 'posts/2020-07-05-c-command.html'
   - title: 'May, Might, Modality'
     subtitle: 'Probable Words about Possible Worlds'
     date: '2020-06-29'
@@ -29,7 +35,7 @@ posts:
     subtitle: 'Preliminaries on The Turing Test'
     date: '2020-03-10'
     update: ''
-    abstract: 'Did you try and read my post on <a href="/posts/2020-03-09-b-winograd.html">Winograd Schema</a>, and realize you don’t understand or have never heard of the Turing Test? If so, this post is for you!'
+    abstract: 'Did you try and read my post on <a href="/posts/2020-03-10-b-winograd.html">Winograd Schema</a>, and realize you don’t understand or have never heard of the Turing Test? If so, this post is for you!'
     url: 'posts/2020-03-10-a-turing-prelim.html'
   - title: 'Donkey Sentences'
     subtitle: 'The Limits of Lexical Scope'
