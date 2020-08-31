@@ -11,7 +11,7 @@
 [] Research review of people I'm interested in
 [] Taxonimy of linguistics. (Branches of syntax theory)
 [] Get more into that proof on NPI.
-[] Binding Theory
+[x] Binding Theory
 [] One Replacement with Adjuncts
 
 Technical Things
@@ -23,4 +23,3 @@ Technical Things
    (I can use this to make better archive pages, do date stuff, etc.)
 [] Archive Page
 [] Clean up CSS / templates
-
