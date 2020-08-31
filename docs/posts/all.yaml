@@ -4,7 +4,7 @@ posts:
   - title: 'Go C-Command Yourself!'
     subtitle: 'An Introduction to Binding'
     date: '2020-07-05'
-    update: ''
+    update: '2020-08-31'
     abstract: 'When do we use “himself/herself” instead of “him/her”? It’s a more tricky story than you might think, and it all comes down to a simple (albeit unsual) relationship with trees.'
     url: 'posts/2020-07-05-c-command.html'
   - title: 'May, Might, Modality'
