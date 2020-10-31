@@ -14,6 +14,12 @@
 [x] Binding Theory
 [] One Replacement with Adjuncts
 
+TOP OF LIST POSTS
+[] Egarative Languages
+[] https://sites.google.com/a/google.com/zawgyi/
+[] Page 331 of Syntax book.
+[] Speach act theory of meaning
+
 Technical Things
 [] Pagination
 [] Margin Notes
@@ -23,3 +29,4 @@ Technical Things
    (I can use this to make better archive pages, do date stuff, etc.)
 [] Archive Page
 [] Clean up CSS / templates
+[] Definition CSS does not match examples!
