@@ -75,7 +75,7 @@ $(FEED): $(ALL_P) $(T_FEED)
 	$(C) $(CFLAGS) -M url=$(SITE_URL) -M updated=$(SITE_UPDATED) $< --template=$(T_FEED) -o $@
 
 serve:
-	python -m http.server 8000 --directory $(SITE)
+	python3 -m http.server 8000 --directory $(SITE)
 
 watch:
 	while true; do make; inotifywait -qre close_write ./; done
