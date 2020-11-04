@@ -96,7 +96,7 @@
 <span id="cb4-7"><a href="#cb4-7" aria-hidden="true"></a>    <span class="cf">return</span> <span class="va">None</span></span></code></pre></div>
 <div class="sourceCode" id="cb5"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true"></a>plot_variance_exp(s_uncorrected)</span></code></pre></div>
 <figure>
-<img src="/images/posts/bessel/output_6_0.png" alt="Estimated Variance using s^2_n" /><figcaption aria-hidden="true">Estimated Variance using <span class="math inline">\(s^2_n\)</span></figcaption>
+<img src="/images/posts/bessel/output_6_0.png" alt="" /><figcaption>Estimated Variance using <span class="math inline">\(s^2_n\)</span></figcaption>
 </figure>
 <p><strong>After running 100,000 experiments, being off by 2% sure seems like a lot!</strong> And again, it’s not just wrong, but consistently too small!</p>
 <h2 id="correcting-the-bias">Correcting the Bias</h2>
@@ -117,7 +117,7 @@
 <div class="sourceCode" id="cb7"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true"></a>s_corrected <span class="op">=</span> np.apply_along_axis(bessel_variance, <span class="dv">0</span>, samples)</span></code></pre></div>
 <div class="sourceCode" id="cb8"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true"></a>plot_variance_exp(s_corrected)</span></code></pre></div>
 <figure>
-<img src="/images/posts/bessel/output_11_0.png" alt="Estimated Variance using s^2_{n-1}" /><figcaption aria-hidden="true">Estimated Variance using <span class="math inline">\(s^2_{n-1}\)</span></figcaption>
+<img src="/images/posts/bessel/output_11_0.png" alt="" /><figcaption>Estimated Variance using <span class="math inline">\(s^2_{n-1}\)</span></figcaption>
 </figure>
 <p>That’s more like it, huh! Now we’re seeing <span class="math inline">\(\overline{s^2_{n-1}}\)</span> being within 0.01% of the true <span class="math inline">\(\text{Var}(X)\)</span>.</p>
 <h2 id="so-what-just-happened">So… What Just Happened?</h2>
@@ -153,7 +153,7 @@
 <div class="sourceCode" id="cb10"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true"></a>s_errors <span class="op">=</span> np.apply_along_axis(error_variance, <span class="dv">0</span>, samples)</span></code></pre></div>
 <div class="sourceCode" id="cb11"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true"></a>plot_variance_exp(s_errors)</span></code></pre></div>
 <figure>
-<img src="/images/posts/bessel/output_16_0.png" alt="Estimated Variance using s^2_{n} and the true \mu." /><figcaption aria-hidden="true">Estimated Variance using <span class="math inline">\(s^2_{n}\)</span> and the true <span class="math inline">\(\mu\)</span>.</figcaption>
+<img src="/images/posts/bessel/output_16_0.png" alt="" /><figcaption>Estimated Variance using <span class="math inline">\(s^2_{n}\)</span> and the true <span class="math inline">\(\mu\)</span>.</figcaption>
 </figure>
 <p>This, in fact, gives us an unbiased estimator! <strong>So obviously the secret lies in the difference between errors and residuals.</strong></p>
 <p><span class="math inline">\(X_i - \mu\)</span> and <span class="math inline">\(X_i - \overline{X}\)</span> don’t seem that different, especially considering <span class="math inline">\(\overline{X}\)</span> is an estimator for <span class="math inline">\(\mu\)</span>. As an estimator, though, <span class="math inline">\(\overline{X}\)</span> is itself a random variable. The crux is that <span class="math inline">\(X_i\)</span> and <span class="math inline">\(\overline{X}\)</span> <strong>are not independent variables!</strong> A small part of <span class="math inline">\(X_i\)</span> is “inside” <span class="math inline">\(\overline{X}\)</span>. So even though we are adding <span class="math inline">\(n\)</span> terms together, we actually only have <span class="math inline">\(n-1\)</span> degrees of freedom between those terms.</p>
@@ -238,7 +238,7 @@
 <div class="sourceCode" id="cb15"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true"></a>s_mse_min <span class="op">=</span> np.apply_along_axis(mse_min_variance, <span class="dv">0</span>, samples)</span></code></pre></div>
 <div class="sourceCode" id="cb16"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true"></a>plot_variance_exp(s_mse_min)</span></code></pre></div>
 <figure>
-<img src="/images/posts/bessel/output_26_0.png" alt="Estimated Variance using s^2_{n+1}" /><figcaption aria-hidden="true">Estimated Variance using <span class="math inline">\(s^2_{n+1}\)</span></figcaption>
+<img src="/images/posts/bessel/output_26_0.png" alt="" /><figcaption>Estimated Variance using <span class="math inline">\(s^2_{n+1}\)</span></figcaption>
 </figure>
 <div class="sourceCode" id="cb17"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true"></a>MSE(s_mse_min)</span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true"></a></span>

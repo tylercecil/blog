@@ -1,6 +1,12 @@
 ---
 title: Posts
 posts:
+  - title: 'You Can Contract If You Wanna'
+    subtitle: 'The Story of Wanna-Contraction'
+    date: '2020-11-03'
+    update: ''
+    abstract: 'Syntax textbooks everywhere love, need, and wanna explain what’s up with “wanna”.'
+    url: 'posts/2020-11-03-wanna.html'
   - title: 'Go C-Command Yourself!'
     subtitle: 'An Introduction to Binding'
     date: '2020-07-05'
