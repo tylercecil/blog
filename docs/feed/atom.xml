@@ -6,12 +6,26 @@
     <name>Tyler Cecil</name>
     <email>tyler.i.cecil@gmail.com</email>
   </author>
-  <updated>2020-11-03T00:00:00Z</updated>
+  <updated>2021-01-31T00:00:00Z</updated>
   <rights type="text">Copyright © 2020 Tyler Cecil. All rights reserved.</rights>
   <id>https://tylercecil.com/</id>
   <link rel='self' href='https://tylercecil.com/feed/atom.xml'/>
   <link type="application/atom+xml" href="https://tylercecil.com/feed/atom.xml" rel="self"/>
 
+      <entry>
+    <title>Let’s Come Somewhere Else</title>
+    <id>https://tylercecil.com/posts/2021-01-31-come-go.html</id>
+    <link href='https://tylercecil.com/posts/2021-01-31-come-go.html'/>
+    <published>2021-01-31T00:00:00Z</published>
+    <updated>2021-01-31T00:00:00Z</updated>
+    <summary type="xhtml">
+      <div xmlns="http://www.w3.org/1999/xhtml">
+                The Semantics of “Come” and “Go”
+        <br/>
+                
+      </div>
+    </summary>
+  </entry>
       <entry>
     <title>You Can Contract If You Wanna</title>
     <id>https://tylercecil.com/posts/2020-11-03-wanna.html</id>

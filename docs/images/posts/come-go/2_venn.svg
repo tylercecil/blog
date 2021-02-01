@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:osb="http://www.openswatchbook.org/uri/2009/osb"
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="100"
+   height="80"
+   viewBox="0 0 26.458333 21.166667"
+   version="1.1"
+   id="svg8"
+   inkscape:version="1.0.1 (3bc2e813f5, 2020-09-07)"
+   sodipodi:docname="2_venn.svg">
+  <defs
+     id="defs2">
+    <linearGradient
+       id="linearGradient2922"
+       osb:paint="solid">
+      <stop
+         style="stop-color:#392d5e;stop-opacity:1;"
+         offset="0"
+         id="stop2920" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient2914"
+       osb:paint="solid">
+      <stop
+         style="stop-color:#392d5e;stop-opacity:1;"
+         offset="0"
+         id="stop2912" />
+    </linearGradient>
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="2.8"
+     inkscape:cx="10.156441"
+     inkscape:cy="94.83507"
+     inkscape:document-units="mm"
+     inkscape:current-layer="g3071"
+     inkscape:document-rotation="0"
+     showgrid="false"
+     units="px"
+     inkscape:snap-bbox="true"
+     inkscape:snap-object-midpoints="true"
+     inkscape:snap-text-baseline="false"
+     inkscape:window-width="2554"
+     inkscape:window-height="1388"
+     inkscape:window-x="0"
+     inkscape:window-y="49"
+     inkscape:window-maximized="0"
+     inkscape:snap-grids="true"
+     inkscape:snap-to-guides="true">
+    <inkscape:grid
+       type="xygrid"
+       id="grid10"
+       spacingx="2.6458333"
+       spacingy="2.6458333" />
+  </sodipodi:namedview>
+  <metadata
+     id="metadata5">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="U"
+     inkscape:groupmode="layer"
+     id="g3059"
+     style="display:inline">
+    <rect
+       style="fill:#b9ffb9;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.3;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect3096"
+       width="26.458332"
+       height="21.166668"
+       x="0"
+       y="0" />
+  </g>
+  <g
+     inkscape:label="A"
+     inkscape:groupmode="layer"
+     id="layer1"
+     style="display:inline">
+    <path
+       id="path14"
+       style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.13386;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="M 29.796875,11.654297 A 28.346457,28.346457 0 0 0 1.6542969,40 28.346457,28.346457 0 0 0 30,68.345703 28.346457,28.346457 0 0 0 50,60.087891 28.346457,28.346457 0 0 1 41.654297,40 28.346457,28.346457 0 0 1 50,19.912109 28.346457,28.346457 0 0 0 30,11.654297 a 28.346457,28.346457 0 0 0 -0.203125,0 z"
+       transform="scale(0.26458333)" />
+  </g>
+  <g
+     inkscape:label="B"
+     inkscape:groupmode="layer"
+     id="g3071"
+     style="display:inline">
+    <path
+       id="circle3069"
+       style="fill:#000000;fill-opacity:0;fill-rule:nonzero;stroke:#000000;stroke-width:1.13386;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="M 69.796875,11.654297 A 28.346457,28.346457 0 0 0 50,19.912109 28.346457,28.346457 0 0 1 58.345703,40 28.346457,28.346457 0 0 1 50,60.087891 28.346457,28.346457 0 0 0 70,68.345703 28.346457,28.346457 0 0 0 98.345703,40 28.346457,28.346457 0 0 0 70,11.654297 a 28.346457,28.346457 0 0 0 -0.203125,0 z"
+       transform="scale(0.26458333)" />
+  </g>
+  <g
+     inkscape:label="AB"
+     inkscape:groupmode="layer"
+     id="g3065"
+     style="display:inline">
+    <path
+       id="circle3061"
+       style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.13386;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="M 50,19.912109 A 28.346457,28.346457 0 0 0 41.654297,40 28.346457,28.346457 0 0 0 50,60.087891 28.346457,28.346457 0 0 0 58.345703,40 28.346457,28.346457 0 0 0 50,19.912109 Z"
+       transform="scale(0.26458333)" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer2"
+     inkscape:label="Text">
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:1.94028px;line-height:1.25;font-family:sans-serif;text-align:start;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       x="1.471"
+       y="10.270966"
+       id="text3107"><tspan
+         sodipodi:role="line"
+         x="1.471"
+         y="10.270966"
+         style="font-size:1.94028px;text-align:start;writing-mode:lr-tb;direction:ltr;text-anchor:start;stroke-width:0.264583"
+         id="tspan3109">SPEAKER</tspan><tspan
+         sodipodi:role="line"
+         x="1.471"
+         y="12.696316"
+         style="font-size:1.94028px;text-align:start;writing-mode:lr-tb;direction:ltr;text-anchor:start;stroke-width:0.264583"
+         id="tspan3115">   in NY</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:1.94027778px;line-height:1.25;font-family:sans-serif;text-align:start;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583;"
+       x="16.325621"
+       y="10.243061"
+       id="text3107-2"><tspan
+         sodipodi:role="line"
+         x="16.325621"
+         y="10.243061"
+         style="text-align:start;writing-mode:lr-tb;direction:ltr;text-anchor:start;stroke-width:0.264583;font-size:1.94027778px;"
+         id="tspan3115-7">HEARER</tspan><tspan
+         sodipodi:role="line"
+         x="16.325621"
+         y="12.888899"
+         style="text-align:start;writing-mode:lr-tb;direction:ltr;text-anchor:start;stroke-width:0.264583;font-size:1.94027778px;"
+         id="tspan3160"> in NY</tspan></text>
+  </g>
+</svg>
