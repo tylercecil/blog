@@ -217,6 +217,33 @@ caption, figcaption {
   display: none;
 }
 
+@keyframes flash {
+            0%, 50%, 100% {
+              opacity: 1;
+            }
+            25%, 75% {
+              opacity: 0;
+            }
+         }
+
+#refs :target {
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+  animation-name: flash;
+  background: #F1F1F1;
+}
+
+.footnotes :target {
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+  animation-name: flash;
+  background: #F1F1F1;
+}
+
 /* Pandoc Style */
 table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode, table.sourceCode pre
                                                                      { margin: 0; padding: 0; border: 0; vertical-align: baseline; border: none; }
