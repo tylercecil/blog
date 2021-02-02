@@ -171,6 +171,7 @@ caption, figcaption {
   border: 1px solid #E1E1E1;
   border-radius: 4px;
   margin-bottom: 2.5rem;
+  overflow-y: auto;
 }
 
 .post {
