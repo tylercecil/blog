@@ -7,7 +7,7 @@ note: |
   **Note:** This post is a small adaptaion of a paper I wrote for the
   University of Washington's *Ling 578* course. If you'd rather read the paper,
   you can find it [here](/static/posts/come-go/paper.pdf).
-bibliography: posts/come-go.bib
+bibliography: come-go.bib
 header-includes: >
   <style>
     img.fig {

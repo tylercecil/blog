@@ -14,7 +14,6 @@ note: "**Note:** I originally wrote this as a introduction to my [Winograd
 
   If you are familiar with the Turing Test, feel free to skip to the [main
   event.](/posts/2020-03-10-b-winograd.html)"
-bibliography:
 header-includes:
 ---
 

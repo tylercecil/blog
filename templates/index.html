@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    ${ header.html() }
+    ${ common/header.html() }
     <script src="https://cdn.commento.io/js/count.js"></script>
   </head>
   <body>
@@ -15,7 +15,7 @@
       </div>
 
       <div id="post-list">
-        ${ navbar.html() }
+        ${ common/navbar.html() }
 
         ${ for(posts) }
         <div class="post-elem">
@@ -40,7 +40,7 @@
         ${ endfor }
       </div>
 
-      ${ footer.html() }
+      ${ common/footer.html() }
 
   </body>
 </html>

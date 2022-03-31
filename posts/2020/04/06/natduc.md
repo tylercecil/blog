@@ -18,7 +18,6 @@ note: "**Updated:** I've done a lot of work to simplify and clarify this post!
   **Note:** I hope everyone is doing well during the COVID crisis. Here's
   something to keep your minds busy and entertained while we all wait out the
   storm. Please be safe everyone!</br>"
-bibliography:
 header-includes: |
   <script>
   function toggleDisplay(id) {

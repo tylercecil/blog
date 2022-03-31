@@ -9,7 +9,7 @@ note: >
   **Note:** I've been on a bit of a hiatus, but it's important to me that I get
   back to writing! This post is a bit less polished than I'd like, but it's
   short, which I think is a good way to keep me writing on a regular schedule.
-bibliography: posts/may-might.bib
+bibliography: may-might.bib
 header-includes: >
   <style>
     .bad { color: red; }

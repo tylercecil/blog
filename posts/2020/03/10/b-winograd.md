@@ -6,7 +6,7 @@ abstract: >
   with some very practical advantages. The test itself boils so much down into
   a single, simple, and well-defined linguistic function: anaphora resolution.
 update:
-bibliography: posts/winograd.bib
+bibliography: winograd.bib
 note: "**Note:** Did you *also* not understand (or had never heard of) the
   Turing Test? I wrote a [preliminary
   post](/posts/2020-03-10-a-turing-prelim.html) just for you!"

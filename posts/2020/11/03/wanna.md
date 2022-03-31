@@ -6,7 +6,7 @@ abstract:
   "wanna".
 update:
 note:
-bibliography: posts/wanna.bib
+bibliography: wanna.bib
 header-includes: >
   <style>
     .bad {

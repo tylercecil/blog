@@ -4,7 +4,7 @@ subtitle: Part I on Negative Polarity Items
 abstract: '"Any" is such a common word; with "for-all"-like semantic. "Any" has
     hardly ever troubled anyone. Then again... maybe "any" *has* troubled
     *anyone.*'
-bibliography: posts/npi.bib
+bibliography: npi.bib
 header-includes: >
   <style>
     blockquote {

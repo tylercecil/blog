@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang=$if(lang)$$lang$$else$"en"$endif$>
   <head>
-  ${ header.html() }
+  ${ common/header.html() }
   </head>
   <body>
     <div class="container">
 
-      ${ navbar.html() }
+      ${ common/navbar.html() }
 
       <div id="title">
       <h1>$title$</h1>
@@ -36,7 +36,7 @@ $body$
       <div id="commento"></div>
       <script src="https://cdn.commento.io/js/commento.js"></script>
 
-      ${ footer.html() }
+      ${ common/footer.html() }
 
     </div>
   </body>

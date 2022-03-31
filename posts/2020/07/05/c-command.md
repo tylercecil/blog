@@ -18,7 +18,7 @@ note: "
   [ChomTree](https://github.com/tylercecil/chomTree)! Let me know if you notice
   any bugs!
   "
-bibliography: "posts/binding.bib"
+bibliography: binding.bib
 header-includes: >
   <style>
 
