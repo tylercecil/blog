@@ -4,43 +4,46 @@
     ${ common/header.html() }
     <script src="https://cdn.commento.io/js/count.js"></script>
   </head>
+
   <body>
-    <div class="container">
 
-      <div id=index-title>
-        <img class="icon" src="/images/tc-logo.svg"/>
-        <h1>Tyler Cecil's Blog</h1>
-        <h5 style="margin: -1rem;">on</h5>
-        <h4>Language, Logic, and Life</h4>
-      </div>
+    <header style="text-align: center">
+      <img class="icon"
+           src="/images/tc-logo.svg"
+           style="width: 100%; max-width: 200px; margin: auto"
+      />
+      <h1 style="margin: 0;">
+        Tyler Cecil's Blog
+      </h1>
+      <h5 style="margin: -1rem 0;">on</h5>
+      <h4>Language, Logic, and Life</h4>
+    </header>
 
-      <div id="post-list">
-        ${ common/navbar.html() }
+    ${ common/navbar.html() }
 
-        ${ for(posts) }
-        <div class="post-elem">
-          <div class="row post-title">
-            <div class="ten columns"><a href="$it.url$">
-                <h3> $it.title$ </h3>
-                $if(it.subtitle)$<h5>$it.subtitle$</h5>$endif$
-              </a></div>
-                <div class="two columns">
-                  <h6 class="date"> $it.date$ </h6>
-                  $if(it.update)$
-                  <h6 class="update"><i>Updated: $it.update$</i></h6>
-                  $endif$
-                </div>
+    ${ for(posts) }
+    <div class="post-elem">
+      <div class="row post-title">
+        <div class="ten columns"><a href="$it.url$">
+            <h3> $it.title$ </h3>
+            $if(it.subtitle)$<h5>$it.subtitle$</h5>$endif$
+          </a></div>
+          <div class="two columns">
+            <h6 class="date"> $it.date$ </h6>
+            $if(it.update)$
+            <h6 class="update"><i>Updated: $it.update$</i></h6>
+            $endif$
           </div>
-
-          <p>
-          $it.abstract$
-          </p>
-          <a href="$it.url$#commento"></a>
-        </div>
-        ${ endfor }
       </div>
 
-      ${ common/footer.html() }
+      <p>
+      $it.abstract$
+      </p>
+      <a href="$it.url$#commento"></a>
+    </div>
+    ${ endfor }
+
+    ${ common/footer.html() }
 
   </body>
 </html>

@@ -1,30 +1,30 @@
 <!DOCTYPE html>
 <html lang=$if(lang)$$lang$$else$"en"$endif$>
+
   <head>
   ${ common/header.html() }
   </head>
+
+  ${ common/navbar.html() }
+
   <body>
-    <div class="container">
-
-      ${ common/navbar.html() }
-
-      <div id="title">
+    <header>
       <h1>$title$</h1>
-        $if(subtitle)$<h5>$subtitle$</h5>$endif$
-        <h6>Posted on $date$</h6>
-        $if(update)$<h6>Last updated on $update$</h6>$endif$
-        <hr>
-      </div>
+      $if(subtitle)$<h5>$subtitle$</h5>$endif$
+      <h6>Posted on $date$</h6>
+      $if(update)$<h6>Last updated on $update$</h6>$endif$
+      <hr>
+
       $if(note)$
       <div class="note">
         $note$
       </div>
       $endif$
-      <div class="post">
+    </header>
 
-$body$
-
-      </div>
+    <article>
+      $body$
+    </article>
 
       <img id="sig" src="/images/tc-logo.svg"/>
       <h6 style="text-align:center">Comments mean a lot!</h6>
