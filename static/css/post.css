@@ -1,0 +1,362 @@
+@import url("https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,700;1,400;1,700&family=Open+Sans:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Raleway:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Source+Code+Pro:wght@400;500&display=swap");
+
+:root {
+  --content-max-width: 700px;
+  --element-margin: 1.5rem;
+  --indent: 2rem;
+  --box-padding: 0.5em 0.75em;
+  --color-bg-box: #f1f1f1;
+  --color-fg-box: black;
+  --color-bg: white;
+  --color-fg: black;
+  --color-link: #33c3f0;
+  --color-link-active: #1eaedb;
+  --color-table-odd: #d1d1d1;
+  --color-table-even: #f9f9f9;
+  --box-border: 2px solid #e1e1e1;
+  --side-border: 5px solid #e1e1e1;
+  --box-border-rad: 4px;
+  --font-family: "Open Sans", helvetica, sans-serif;
+  --font-size: 1.5rem;
+  --font-family-h: "Raleway", helvetica, sans-serif;
+  --font-family-mono: "Source Code Pro", monospace;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 10px;
+}
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-fg);
+  font-family: var(--font-family);
+  line-height: 1.6;
+  text-align: justify;
+  font-size: var(--font-size);
+  margin: auto;
+  max-width: var(--content-max-width);
+  padding: 5px;
+  hyphens: auto;
+}
+
+/** Spacing Rules ************************************************ **/
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+table,
+figure,
+img,
+ol,
+ul,
+blockquote,
+p,
+.example,
+dl,
+code,
+pre {
+  margin-top: 0;
+  margin-bottom: var(--element-margin);
+}
+
+li {
+  margin-top: 0;
+  margin-bottom: 0.25em;
+}
+
+li:last-child {
+  margin-bottom: 0;
+}
+
+/** Headings ***************************************************** **/
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+header {
+  font-weight: 300;
+  font-family: var(--font-family-h);
+  text-align: left;
+}
+h1 { font-size: 4rem;   line-height: 1.2;  letter-spacing: -0.1rem; }
+h2 { font-size: 3.6rem; line-height: 1.25; letter-spacing: -0.1rem; }
+h3 { font-size: 3rem;   line-height: 1.3;  letter-spacing: -0.1rem; }
+h4 { font-size: 2.4rem; line-height: 1.35; letter-spacing: -0.08rem; }
+h5 { font-size: 1.8rem; line-height: 1.5;  letter-spacing: -0.05rem; }
+h6 { font-size: 1.5rem; line-height: 1.6;  letter-spacing: 0; }
+
+/* Larger than phablet */
+@media (min-width: 600px) {
+  h1 { font-size: 5rem; }
+  h2 { font-size: 4.2rem; }
+  h3 { font-size: 3.6rem; }
+  h4 { font-size: 3rem; }
+  h5 { font-size: 2.4rem; }
+  h6 { font-size: 1.5rem; }
+}
+
+header {
+  font-size: 2.5rem;
+  line-height: 2.5rem;
+  padding: var(--element-margin) 0;
+  border-bottom: var(--box-border);
+  margin-bottom: calc(var(--element-margin) * 1.5);
+}
+
+header h1,
+header h2,
+header h3,
+header h4,
+header h5,
+header h6,
+header p {
+  display: block;
+  margin-bottom: 0;
+}
+
+header small {
+  font-size: var(--font-size);
+  font-style: italic;
+}
+
+/** Example Boxes ************************************************ **/
+dl,
+pre > code,
+.example
+{
+  display: block;
+  padding: var(--box-padding);
+  background: var(--color-bg-box);
+  color: var(--color-fg-box);
+  border: var(--box-border);
+  border-radius: var(--box-border-rad);
+  overflow-y: auto;
+  overflow-x: auto;
+}
+
+dl *:last-child,
+pre > code *:last-child,
+.example *:last-child
+{
+  margin-bottom: 0;
+}
+
+/** Figures ****************************************************** **/
+table,
+figure,
+img {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 100%;
+}
+
+figure,
+.center {
+  text-align: center;
+}
+
+img {
+  display: block;
+  max-height: calc(var(--content-max-width) * 0.9);
+}
+
+caption,
+figcaption {
+  font-size: 90%;
+  font-style: italic;
+  text-align: justify;
+  text-align-last: center;
+}
+
+/** Links ******************************************************** **/
+a { color: var(--color-link); }
+a:hover { color: var(--color-link-active); }
+
+/** Definition Lists and Quotes ********************************** **/
+dt { font-weight: bold; }
+
+dd,
+blockquote {
+  margin-left: calc(var(--indent) * 1.2);
+  padding-left: calc(var(--indent) * 0.8);
+  border-left: var(--side-border);
+}
+
+.comment { display: none; }
+
+hr {
+  margin-top: var(--element-margin);
+  margin-bottom: calc(var(--element-margin) * 1.6);
+  border-width: 0;
+  border-top: var(--box-border);
+}
+
+/** Tables ******************************************************* **/
+th,
+td {
+  padding: 0.25em 0.5em;
+  border-bottom: var(--box-border);
+}
+
+th:first-child,
+td:first-child {
+  padding-left: 0;
+}
+
+th:last-child,
+td:last-child {
+  padding-right: 0;
+}
+
+/** Lists ******************************************************** **/
+ul { list-style: circle inside; }
+ol { list-style: decimal inside; }
+
+ol,
+ul {
+  padding: 0 0 0 var(--indent);
+}
+
+ul ul,
+ul ol,
+ol ol,
+ol ul {
+  font-size: 90%;
+}
+li { margin-bottom: calc(var(--element-margin) * 0.5); }
+
+/** Code ********************************************************* **/
+code {
+  font-family: var(--font-family-mono);
+  font-size: 90%;
+  white-space: nowrap;
+  padding: var(--box-padding);
+  background: var(--color-bg-box);
+  color: var(--color-fg-box);
+  border: var(--box-border);
+  border-radius: var(--box-border-rad);
+}
+
+pre > code {
+  display: block;
+  white-space: pre;
+}
+
+.sourceCode span.kw { color: #007020; font-weight: bold; }
+.sourceCode span.dt { color: #902000; }
+.sourceCode span.dv { color: #40a070; }
+.sourceCode span.bn { color: #40a070; }
+.sourceCode span.fl { color: #40a070; }
+.sourceCode span.ch { color: #4070a0; }
+.sourceCode span.st { color: #4070a0; }
+.sourceCode span.co { color: #60a0b0; font-style: italic; }
+.sourceCode span.ot { color: #007020; }
+.sourceCode span.al { color: red; font-weight: bold; }
+.sourceCode span.fu { color: #06287e; }
+.sourceCode span.re { }
+.sourceCode span.er { color: red; font-weight: bold; }
+
+/** Footnotes and Refs ******************************************* **/
+.footnotes {
+  font-size: 90%;
+}
+.footnotes ol { padding: 0; }
+.footnotes li { display: block; }
+
+.footnotes li p {
+  display: list-item;
+  margin-bottom: 1rem;
+}
+
+.footnote-ref + .footnote-ref > sup::before {
+  content: ", ";
+  color: black;
+  padding-right: 0.25em;
+  display: inline-block;
+}
+
+#refs { font-size: 90%; }
+
+#refs a {
+  word-break: break-all;
+}
+
+.hanging-indent div {
+  text-indent: -1rem;
+  padding-left: 1rem;
+}
+
+@keyframes flash {
+  0%,
+  50%,
+  100% {
+    opacity: 1;
+  }
+
+  25%,
+  75% {
+    opacity: 0;
+  }
+}
+
+#refs :target,
+.footnotes :target {
+  animation-duration: 1s;
+  animation-fill-mode: both;
+  animation-name: flash;
+  background: var(--color-bg-box);
+  color: var(--color-fg-box);
+  border: var(--box-border);
+  border-radius: var(--box-border-rad);
+}
+
+/** Reactive Two Columns ***************************************** **/
+.note {
+  max-width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: var(--element-margin);
+  padding: var(--box-padding);
+  font-size: 90%;
+  text-align: justify;
+  border-top: var(--box-border);
+  border-bottom: var(--box-border);
+}
+
+.note p {
+  margin-bottom: 0;
+}
+
+/** Reactive Two Columns ***************************************** **/
+.multicol {
+  position: relative;
+  margin: 0 auto;
+  padding: var(--element-margin);
+  display: grid;
+  grid-gap: var(--element-margin);
+  gap: var(--element-margin);
+
+  /* by default use min 200px wide columns auto-fit into width */
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 600px) {
+  .multicol,
+  .multicol.two,
+  .multicol.three {
+    grid-template-columns: repeat(2, 1fr);
+    padding: 10px 0;
+  }
+}
+
+@media (min-width: 900px) {
+  .multicol.three {
+    grid-template-columns: repeat(3, 1fr);
+    padding: 10px 0;
+  }
+}
