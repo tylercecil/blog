@@ -2,40 +2,50 @@
 <html lang="en">
   <head>
     ${ common/header.html() }
+    <style>
+      .post {
+        border-left: var(--side-border);
+        padding-left: var(--indent);
+        margin-bottom: var(--element-margin);
+      }
+
+      .post:hover {
+        border-color: var(--color-link-active);
+      }
+
+      .post * {
+        margin-bottom: 0;
+      }
+    </style>
     <script src="https://cdn.commento.io/js/count.js"></script>
   </head>
 
   <body>
 
-    <header style="text-align: center">
-      <img class="icon"
-           src="/images/tc-logo.svg"
+    <header>
+      <img src="/images/tc-logo.svg"
+           alt="Tyler Cecil's Blog"
            style="width: 100%; max-width: 200px; margin: auto"
       />
-      <h1 style="margin: 0;">
+      <h1 style="text-align:center; margin: 0;">
         Tyler Cecil's Blog
       </h1>
-      <h5 style="margin: -1rem 0;">on</h5>
-      <h4>Language, Logic, and Life</h4>
+      <h5 style="text-align: center; margin: -1rem 0;">on</h5>
+      <h4 style="text-align: center;">Language, Logic, and Life</h4>
     </header>
 
     ${ common/navbar.html() }
 
     ${ for(posts) }
-    <div class="post-elem">
-      <div class="row post-title">
-        <div class="ten columns"><a href="$it.url$">
-            <h3> $it.title$ </h3>
-            $if(it.subtitle)$<h5>$it.subtitle$</h5>$endif$
-          </a></div>
-          <div class="two columns">
-            <h6 class="date"> $it.date$ </h6>
-            $if(it.update)$
-            <h6 class="update"><i>Updated: $it.update$</i></h6>
-            $endif$
-          </div>
-      </div>
-
+    <div class="post">
+      <a href="$it.url$">
+        <h3> $it.title$ </h3>
+        $if(it.subtitle)$<h5>$it.subtitle$</h5>$endif$
+      </a>
+      <h6> $it.date$ </h6>
+      $if(it.update)$
+      <h6><i>Updated: $it.update$</i></h6>
+      $endif$
       <p>
       $it.abstract$
       </p>

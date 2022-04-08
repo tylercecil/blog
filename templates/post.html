@@ -5,51 +5,56 @@
   ${ common/header.html() }
   </head>
 
-  ${ common/navbar.html() }
-
   <body>
+
+    ${ common/navbar.html() }
+
     <header>
       <h1>$title$</h1>
-      $if(subtitle)$<h5>$subtitle$</h5>$endif$
-      <h6>Posted on $date$</h6>
-      $if(update)$<h6>Last updated on $update$</h6>$endif$
-      <hr>
-
-      $if(note)$
-      <div class="note">
-        $note$
-      </div>
+      $if(subtitle)$<p><strong>$subtitle$</strong></p>$endif$
+      <p><small>Posted on $date$</small></p>
+      $if(update)$
+      <p><small>Last updated on $update$</small></p>
       $endif$
     </header>
+
+    $if(note)$
+    <div class="note">
+      $note$
+    </div>
+    $endif$
 
     <article>
       $body$
     </article>
 
-      <img id="sig" src="/images/tc-logo.svg"/>
-      <h6 style="text-align:center">Comments mean a lot!</h6>
-      <h5>
-        <a href="/"> More Posts </a>
-        <a href="mailto:blog@tylercecil.com?Subject=$title$" style="float: right">Write Me</a>
-      </h5>
+    <img id="sig" src="/images/tc-logo.svg" alt="Tyler Cecil's Blog"/>
+    <h6 style="text-align:center">Comments mean a lot!</h6>
+    <h5>
+      <a href="/"> More Posts </a>
+      <a href="mailto:blog@tylercecil.com?Subject=$title/chomp$"
+         style="float: right">
+        Write Me
+      </a>
+    </h5>
 
-      <div id="commento"></div>
-      <script src="https://cdn.commento.io/js/commento.js"></script>
+    <div id="commento"></div>
+    <script src="https://cdn.commento.io/js/commento.js"></script>
 
-      ${ common/footer.html() }
+    ${ common/footer.html() }
 
-    </div>
+    <script>
+      // Causes external links to open in a new tab
+      // TODO: This should really be done by pandoc
+      (function (){
+              var links = document.links;
+
+              for (var i = 0, linksLength = links.length; i < linksLength; i++) {
+                      if (links[i].hostname != window.location.hostname) {
+                              links[i].target = '_blank';
+                            }
+                    }})();
+    </script>
+
   </body>
-  <script>
-    // Causes external links to open in a new tab
-    // TODO: This should really be done by pandoc
-    (function (){
-    var links = document.links;
-
-    for (var i = 0, linksLength = links.length; i < linksLength; i++) {
-      if (links[i].hostname != window.location.hostname) {
-        links[i].target = '_blank';
-      }
-    }})();
-  </script>
 </html>

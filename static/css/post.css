@@ -6,6 +6,7 @@
   --indent: 2rem;
   --box-padding: 0.5em 0.75em;
   --color-bg-box: #f1f1f1;
+  --color-bg-box-border: #e1e1e1;
   --color-fg-box: black;
   --color-bg: white;
   --color-fg: black;
@@ -13,8 +14,8 @@
   --color-link-active: #1eaedb;
   --color-table-odd: #d1d1d1;
   --color-table-even: #f9f9f9;
-  --box-border: 2px solid #e1e1e1;
-  --side-border: 5px solid #e1e1e1;
+  --box-border: 2px solid var(--color-bg-box-border);
+  --side-border: 5px solid var(--color-bg-box-border);
   --box-border-rad: 4px;
   --font-family: "Open Sans", helvetica, sans-serif;
   --font-size: 1.5rem;
@@ -71,6 +72,23 @@ li:last-child {
   margin-bottom: 0;
 }
 
+
+/** Nav Bar ****************************************************** **/
+nav {
+  text-align: center;
+  margin-bottom: var(--element-margin);
+}
+
+nav a {
+  font-size: 90%;
+  color: black;
+  font-weight: 600;
+  letter-spacing: .3rem;
+  text-transform: uppercase;
+
+  margin: 0 10px;
+}
+
 /** Headings ***************************************************** **/
 h1,
 h2,
@@ -106,6 +124,12 @@ header {
   padding: var(--element-margin) 0;
   border-bottom: var(--box-border);
   margin-bottom: calc(var(--element-margin) * 1.5);
+}
+
+footer {
+  margin-top: calc(var(--element-margin) * 1.5);
+  border-top: var(--box-border);
+  padding: var(--element-margin) 0;
 }
 
 header h1,
