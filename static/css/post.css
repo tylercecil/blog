@@ -10,6 +10,7 @@
   --color-fg-box: black;
   --color-bg: white;
   --color-fg: black;
+  --color-fg-soft: #555;
   --color-link: #33c3f0;
   --color-link-active: #1eaedb;
   --color-table-odd: #d1d1d1;
@@ -37,7 +38,7 @@ body {
   font-size: var(--font-size);
   margin: auto;
   max-width: var(--content-max-width);
-  padding: 5px;
+  padding: 2rem;
   hyphens: auto;
 }
 
@@ -48,6 +49,10 @@ h3,
 h4,
 h5,
 h6,
+button,
+input,
+textarea,
+select,
 table,
 figure,
 img,
@@ -161,6 +166,7 @@ pre > code,
   border-radius: var(--box-border-rad);
   overflow-y: auto;
   overflow-x: auto;
+  font-size: 110%;
 }
 
 dl *:last-child,
@@ -207,7 +213,9 @@ dt { font-weight: bold; }
 dd,
 blockquote {
   margin-left: calc(var(--indent) * 1.2);
+  margin-right: calc(var(--indent) * 1.2);
   padding-left: calc(var(--indent) * 0.8);
+  padding-right: calc(var(--indent) * 0.8);
   border-left: var(--side-border);
 }
 
@@ -354,6 +362,105 @@ pre > code {
 
 .note p {
   margin-bottom: 0;
+}
+
+/** Buttons ****************************************************** **/
+.button,
+button,
+input[type="submit"],
+input[type="reset"],
+input[type="button"] {
+  display: inline-block;
+  height: 3.5rem;
+  padding: 0 3rem;
+  color: var(--color-fg-soft);
+  text-align: center;
+  font-weight: 600;
+  letter-spacing: .1rem;
+  text-transform: uppercase;
+  text-decoration: none;
+  white-space: nowrap;
+  background-color: transparent;
+  border-radius: var(--box-border-rad);
+  border: var(--box-border);
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+.button:hover,
+button:hover,
+input[type="submit"]:hover,
+input[type="reset"]:hover,
+input[type="button"]:hover,
+.button:focus,
+button:focus,
+input[type="submit"]:focus,
+input[type="reset"]:focus,
+input[type="button"]:focus {
+  border-color: var(--color-link);
+  outline: 0;
+}
+
+/** Forms ******************************************************** **/
+input[type="email"],
+input[type="number"],
+input[type="search"],
+input[type="text"],
+input[type="tel"],
+input[type="url"],
+input[type="password"],
+textarea,
+select {
+  height: 3.5rem;
+  padding: 0.5em 1em;
+  border: var(--box-border);
+  border-radius: var(--box-border-rad);
+  box-shadow: none;
+  box-sizing: border-box;
+}
+/* Removes awkward default styles on some inputs for iOS */
+input[type="email"],
+input[type="number"],
+input[type="search"],
+input[type="text"],
+input[type="tel"],
+input[type="url"],
+input[type="password"],
+textarea {
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+}
+textarea {
+  min-height: 6rem;
+  padding-top: .5rem;
+  padding-bottom: .5rem;
+}
+input[type="email"]:focus,
+input[type="number"]:focus,
+input[type="search"]:focus,
+input[type="text"]:focus,
+input[type="tel"]:focus,
+input[type="url"]:focus,
+input[type="password"]:focus,
+textarea:focus,
+select:focus {
+  border-color: var(--color-link);
+  outline: 0;
+}
+label,
+legend {
+  display: block;
+  margin-bottom: .5rem;
+  font-weight: 600;
+}
+fieldset {
+  padding: 0;
+  border-width: 0;
+}
+input[type="checkbox"],
+input[type="radio"] {
+  display: inline;
 }
 
 /** Reactive Two Columns ***************************************** **/
