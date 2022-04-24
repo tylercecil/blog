@@ -5,6 +5,8 @@
   --element-margin: 1.5rem;
   --indent: 2rem;
   --box-padding: 0.5em 0.75em;
+  --code-padding: 0 0.25em;
+  --example-list-padding: calc(var(--indent) + 1.33em);
   --color-bg-box: #f1f1f1;
   --color-bg-box-border: #e1e1e1;
   --color-fg-box: black;
@@ -246,13 +248,29 @@ td:last-child {
 }
 
 /** Lists ******************************************************** **/
-ul { list-style: circle inside; }
-ol { list-style: decimal inside; }
+ul         { list-style: circle outside;  }
+ol         { list-style: decimal outside; }
 
 ol,
 ul {
   padding: 0 0 0 var(--indent);
 }
+
+/* Example lists use a custom formatting.
+ * Pandoc will reference examples like "Example (1)", so
+ * I want the counters to match that. */
+article{ counter-reset: examp; }
+ol.example {
+  list-style: none;
+  padding-left: var(--example-list-padding);
+}
+ol.example > li { counter-increment: examp; }
+ol.example > li::marker {
+  content: "(" counter(examp) ")  ";
+  font-weight: bold;
+}
+
+
 
 ul ul,
 ul ol,
@@ -260,14 +278,15 @@ ol ol,
 ol ul {
   font-size: 90%;
 }
-li { margin-bottom: calc(var(--element-margin) * 0.5); }
+li {
+margin-bottom: calc(var(--element-margin) * 0.5); }
 
 /** Code ********************************************************* **/
 code {
   font-family: var(--font-family-mono);
   font-size: 90%;
   white-space: nowrap;
-  padding: var(--box-padding);
+  padding: var(--code-padding);
   background: var(--color-bg-box);
   color: var(--color-fg-box);
   border: var(--box-border);
