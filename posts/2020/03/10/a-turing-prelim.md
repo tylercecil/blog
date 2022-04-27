@@ -99,14 +99,14 @@ Turing's Observation on Intelligence
 Describe one thing we do that is indescribable... It's OK, I'll wait. While
 I'm waiting, let's make clear some things a human *could* speak about:
 
-<div class="row" style="font-size: 90%">
-<div class="one-half column">
+<div class="multicol" style="font-size: 90%">
+<div>
 - She could explain why one chess move is better than another.
 - She could prove why a solution to a math problem is correct.
 - She could describe any political system, as well as it's merits and
   detriments.
 </div>
-<div class="one-half column">
+<div>
 - She could express how she thinks someone else feels about something.
 - She could hypothesize what would happen if people had wheels instead of legs.
 - She could discuss why Turing saw language as central to intelligence.

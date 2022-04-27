@@ -7,21 +7,6 @@ abstract: '"Any" is such a common word; with "for-all"-like semantic. "Any" has
 bibliography: npi.bib
 header-includes: >
   <style>
-    blockquote {
-      margin-bottom: 2.5rem;
-      margin-left: 0;
-      margin-right: 0;
-    }
-
-    blockquote > ol, blockquote > p {
-      margin: 0 .2rem;
-      font-size: 110%;
-      background: #F1F1F1;
-      border: 1px solid #E1E1E1;
-      border-radius: 4px;
-      padding: 1rem 1.5rem;
-    }
-
     /* I'll use ~~ ~~ to mark bad sentences */
     del {
       color: red;
@@ -35,20 +20,26 @@ note: "**Note:** be sure to read [Part II](/posts/2020-01-29-NPI2.html) once
 ---
 Here's a wholly unremarkable English sentence:
 
-> Nobody lifted a finger to stop him.
+::::example
+Nobody lifted a finger to stop him.
+::::
 
 A week ago, I would have had nothing to say about this sentence. It *does* have
 the idiom *"to lift a finger"*. Most English speakers would define that as "to
 take action". If those have the same semantics, we should be able to swap them
 out:
 
-> Nobody took action to stop him.
+:::example
+Nobody took action to stop him.
+:::
 
 Yup, seems to work! Now, we all know *someone* who's just not going to sit
 around when there's villain-stopping to be done!
 
-> Somebody took action to stop him.\
-> ~~#Somebody lifted a finger to stop him.~~
+:::example
+Somebody took action to stop him.\
+~~#Somebody lifted a finger to stop him.~~
+:::
 
 That last sentence is objectively wrong (though subjectively entertaining). But
 what *makes* that sentence wrong? What was missing in our definition of the
@@ -63,13 +54,14 @@ Polarity Items**!
 
 Strange Lexical Items
 =====================
+
 Let's start by zooming out: "lift a finger" isn't going to be the only *lexical
 item*^[A *lexical item* is just any "chunk" we can give a definition to. Think
 words and idioms.] we're worried about. In fact, let's look at a set of
 way more common items:
 
-<div class="row">
-<div class="one-half column">
+<div class="multicol">
+<div>
 1. ever
    - I don't ever want to go there.
    - ~~#I want to ever go there.~~
@@ -77,7 +69,7 @@ way more common items:
    - She didn't go to any of the meetings.
    - ~~#She went to any of the meetings.~~
 </div>
-<div class="one-half column">
+<div>
 3. yet
    - Dogs haven't learned to talk yet.
    - ~~#Dogs have learned to talk yet.~~
@@ -99,9 +91,11 @@ How "Negative Context" Falls Short
 Finding counter-examples in linguistics just happens to be a hobby of mine.
 Let's break this *"Negative Context"* hypothesis:
 
-> No one has ever been to my house.\
-> ~~#Someone has ever been to my house.~~\
-> Exactly 10 people have ever been to my house.
+:::example
+No one has ever been to my house.\
+~~#Someone has ever been to my house.~~\
+Exactly 10 people have ever been to my house.
+:::
 
 Welp, there goes negativity! The last sentence seems pretty reasonable --- and
 decidedly non-negative. The question, then, is still open: **under what
@@ -129,8 +123,10 @@ step might be to test an NPI with a set of quantifiers.
 "Ever" *could* show up in both the **Noun Phrase** and the **Verb Phrase** of a
 sentence. We can test how both work with this example:
 
-> **NP:** [ *Quantifier* ] who has **ever** seen the film will recommend it.\
-> **VP:** [ *Quantifier* ] who has seen the film will **ever** recommend it.
+:::example
+**NP:** [ *Quantifier* ] who has **ever** seen the film will recommend it.\
+**VP:** [ *Quantifier* ] who has seen the film will **ever** recommend it.
+:::
 
 Now we just try out some quantifiers, and see which sentences work. The
 following table shows a few results.
@@ -158,8 +154,8 @@ Downward Entailment
 **downward entailment**. This is a concept which merits its own post, so I'll
 try and be brief. Here are two simple entailments:
 
-> (@up) You are a father. $\vDash$ You are a man. \
-> (@down) No man can swim. $\vDash$ No father can swim.
+(@up) You are a father. $\vDash$ You are a man. \
+(@down) No man can swim. $\vDash$ No father can swim.
 
 The set of fathers $F$ is a subset of the set of men $M$ (we typical write this
 as $F \subseteq M$). The thing to note here is the direction of entailment. In
@@ -187,13 +183,15 @@ either be *up* or *down* (to a superset or subset)^[Sometimes this is referd to
 as monotonic increasing or decreasing.]. We can test these very simply with a
 NP and a VP.
 
-> **NP:** "Apples" $\subseteq$ "Fruits"\
-> **VP:** "People who sing well" $\subseteq$ "People who sing"
+:::example
+**NP:** "Apples" $\subseteq$ "Fruits"\
+**VP:** "People who sing well" $\subseteq$ "People who sing"
+:::
 
 Testing the quantifier "every", we get
 
-> (@np) "Every fruit is red" $\vDash$ "Every apple is red"\
-> (@vp) "Everyone sings well" $\vDash$ "Everyone sings"
+(@np) "Every fruit is red" $\vDash$ "Every apple is red"\
+(@vp) "Everyone sings well" $\vDash$ "Everyone sings"
 
 In (@np), we go from superset to subset. That's *downward entailment!* In (@vp),
 however, we go from subset to superset --- *upward entailment!* Try going
@@ -214,6 +212,7 @@ Every                 Down            ~~Up~~
 
 Have We Found our Solution?
 ===========================
+
 I was introduced to NPIs by Kate Kearns's book *"Semantics"* -@kearns in a
 chapter on Generalized Quantifiers, so this was my first look at NPIs and
 downward entailment. But it turns out that
@@ -246,8 +245,10 @@ Degree Words            She was **{ too smart / ~~smart enough~~ }** to *ever*
 For more examples, see page 458 in Ladusaw (1980). In all of these
 cases, you can see a natural direction of entailment.
 
-> I rarely see movies $\vDash$ I rarely see action movies.\
-> I often see movies $\not\vDash$ I often see action movies.
+:::example
+I rarely see movies $\vDash$ I rarely see action movies.\
+I often see movies $\not\vDash$ I often see action movies.
+:::
 
 Try making tests for the other sentences in the table, and convince yourself
 that only those with *downward entailment* are acceptable.
@@ -265,8 +266,10 @@ related to the un-intuitive nature of downward entailment. The more "normal"
 direction is upward. The use of an NPI in a sentence may, in fact, signal that
 the entailment direction in the sentence was *unusual*.
 
-> I go to parks $\vDash$ I go outside.\
-> I don't *ever* go outside $\vDash$ I don't *ever* go to parks.
+:::example
+I go to parks $\vDash$ I go outside.\
+I don't *ever* go outside $\vDash$ I don't *ever* go to parks.
+:::
 
 Originally there was thinking that *ever* was bringing attention to the
 negative polarity of the sentence (possibly making up for English's lack of
@@ -278,16 +281,20 @@ Finished?
 I've labeled this post as Part I, because, horror of horrors, we actually
 haven't come up with an answer! Remember this sentence?
 
-> Exactly 10 people have ever been to my house
+:::example
+Exactly 10 people have ever been to my house
+:::
 
 This sentence doesn't exactly jive with our idea of downward entailment.
 Actually... it doesn't jive with our idea of upward entailment either.
 
-> Exactly 10 cool people have been to my house. \
-> $\not\vDash$ Exactly 10 people have been to my house.\
-> \
-> Exactly 10 people have been to my house.\
-> $\not\vDash$ Exactly 10 cool people have been to my house.
+:::example
+Exactly 10 cool people have been to my house. \
+$\not\vDash$ Exactly 10 people have been to my house.\
+\
+Exactly 10 people have been to my house.\
+$\not\vDash$ Exactly 10 cool people have been to my house.
+::::
 
 This is called a *non-monoton quantifier*. In Part II, we'll expand our
 licencing context for NPIs even further, to include these (and some other

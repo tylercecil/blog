@@ -95,12 +95,12 @@ the hell they're looking at right now.
 This post is for anyone in one of these logic-adjacent fields (or anyone bored
 in COVID-Quarantine™) who might be new to this notation. We'll cover:
 
-<div class="row">
-<div class="one-half column">
+<div class="multicol">
+<div>
 1. [What natural deduction is for](#motivation)
 2. [How to read it](#reading-natural-deduction)
 </div>
-<div class="one-half column">
+<div>
 3. [How to work with it](#writing-simple-proofs)
 4. [The relation to lambda-calculus](#lambda-calculus) (for those who might
     care).

@@ -16,21 +16,6 @@ note: >
 
 header-includes: >
   <style>
-    blockquote {
-      margin-bottom: 2.5rem;
-      margin-left: 0;
-      margin-right: 0;
-    }
-
-    blockquote > ol, blockquote > p {
-      margin: 0 .2rem;
-      font-size: 110%;
-      background: #F1F1F1;
-      border: 1px solid #E1E1E1;
-      border-radius: 4px;
-      padding: 1rem 1.5rem;
-    }
-
     /* I'll use ~~ ~~ to mark bad sentences */
     del {
       color: red;
@@ -60,19 +45,23 @@ Ultimately we came up with (what I would call) a pretty compelling answer;
 *downward entailment* is when something you know about $X$ tells you
 something about a subset of $X$.
 
-> (@dd) No dog can fly. $\vDash$ No talking dog can fly.
-> (@du) A talking dog can fly. $\vDash$ A dog can fly.
+(@dd) No dog can fly. $\vDash$ No talking dog can fly.
+(@du) A talking dog can fly. $\vDash$ A dog can fly.
 
 Because "talking dogs" $\subseteq$ "dogs", we call (@dd) a *downward
 entailment* (or *DE*) and (@du) an *upward entailment* (or *UE*). And the magic
 is that **DEs *licence* our troublesome NPIs**! [@ladusaw]
 
-> No dog can *ever* fly.\
-> ~~#A dog can *ever* fly.~~
+:::example
+No dog can *ever* fly.\
+~~#A dog can *ever* fly.~~
+:::
 
 In the end, however, we were left with a problematic sentence:
 
-> Exactly 10 people have *ever* been to my house.
+:::example
+Exactly 10 people have *ever* been to my house.
+:::
 
 This sentence is **neither upward nor downward entailing.** In this post, we're
 going to do something about that!
@@ -91,7 +80,7 @@ Well-Formedness
 ---------------
 To answer your question:
 
-> (@col) Colorless green ideas sleep furiously.
+(@col) Colorless green ideas sleep furiously.
 
 Noam Chompsky said that, and I think he knows a thing or two![^noam] It was to
 demonstrate (among other things) **there exists well-formed sentences that are
@@ -102,7 +91,7 @@ meaningless**. So what do I mean by well-formed?
   which could be considered the birth of [Transformational
   Grammar](https://en.wikipedia.org/wiki/Transformational_grammar).
 
-> (@bcol) ~~#Furiously sleep ideas green colorless.~~
+(@bcol) ~~#Furiously sleep ideas green colorless.~~
 
 Your brain was able to "read" (@col). Were I to ask you "what sleeps?" you
 could respond "colorless green ideas... whatever that means." Example (@bcol),
@@ -166,7 +155,10 @@ understand just exactly when it fails.
 
 Questions
 ---------
-> Have you *ever* seen *anyone*?
+
+:::example
+Have you *ever* seen *anyone*?
+:::
 
 Questions don't entail much of anything. If I ask "were is the milk", at
 best you could infer that I don't know where the milk is (and that I would
@@ -180,13 +172,18 @@ languages), so this is a real problem for us!
 
 Imperatives
 -----------
-> Pick *any* painting.
+
+::::example
+Pick *any* painting.
+::::
 
 Subtly, this isn't DE --- no one asked you to "pick *any blue
 painting*". You *may*, but that would be a different sentence.
 
-> Pick any painting. $\vDash$ You may pick any blue painting.\
-> Pick any painting. $\not\vDash$ Pick any blue painting.
+:::example
+Pick any painting. $\vDash$ You may pick any blue painting.\
+Pick any painting. $\not\vDash$ Pick any blue painting.
+:::
 
 Others
 ------
@@ -324,14 +321,18 @@ about the new problems?
 
 ### Questions
 
-> Have you *ever* seen *anyone*?
+:::example
+Have you *ever* seen *anyone*?
+:::
 
 A question, inherently, does not imply truth --- if you already knew something
 was true, why are you asking?
 
 ### Commands
 
-> Find *anyone!*
+:::example
+Find *anyone!*
+:::
 
 The same goes for commands. "Name one good Matrix Sequel" --- see, you can't!
 That sentence didn't say such a thing exists (almost the opposite).
@@ -341,10 +342,12 @@ That sentence didn't say such a thing exists (almost the opposite).
 
 ## Quantifiers
 
-> All students who saw *anything* went to the police.\
-> Zero students who saw *anything* went to the police.\
-> ~~#Both students who saw *anything* went to the police.~~\
-> ~~#One student who saw *anything* sent to the police.~~
+:::example
+All students who saw *anything* went to the police.\
+Zero students who saw *anything* went to the police.\
+~~#Both students who saw *anything* went to the police.~~\
+~~#One student who saw *anything* sent to the police.~~
+:::
 
 Think about what each quantifier really means:
 
@@ -362,7 +365,9 @@ The Jury Isn't Out
 DE does a pretty good job predicting when NPIs can be used. Nonveridicality
 does an *even better job.* But what about our original problem child?
 
-> Exactly 10 people have ever been to my house.[^rescue]
+:::example
+Exactly 10 people have ever been to my house.[^rescue]
+:::
 
 [^rescue]: One solution to this particular sentence is *Rescuing by
     nonverridacality.* [@giann Page 20]
@@ -397,8 +402,10 @@ Each type has related but different rules that govern their usages.  Especially
 looking at other languages casts light on the differences that come up; each
 language has troves of examples. Here's one, for instance:
 
-> Exactly two students said anything.\
-> ~~#Akrivos dio fitites ipan tipota.~~ (Greek translation)
+:::example
+Exactly two students said anything.\
+~~#Akrivos dio fitites ipan tipota.~~ (Greek translation)
+:::
 
 Our problem child behaves as expected in Greek! Maybe... maybe that's going to
 have to be good enough for today.

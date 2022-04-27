@@ -1,17 +1,17 @@
-@import url("https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,700;1,400;1,700&family=Open+Sans:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Raleway:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Source+Code+Pro:wght@400;500&display=swap");
+ @import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Raleway:ital,wght@0,100;0,300;0,400;0,600;1,300;1,400;1,600&family=Source+Code+Pro:ital,wght@0,400;0,500;0,600;1,400&display=swap');
 
 :root {
-  --content-max-width: 600px;
-  --element-margin: 1.5rem;
+  --content-max-width: 618px;
+  --element-margin: 2.5rem;
   --indent: 2rem;
   --box-padding: 0.5em 0.75em;
-  --code-padding: 0 0.25em;
+  --code-padding: 0em 0.25em;
   --example-list-padding: calc(var(--indent) + 1.33em);
   --color-bg-box: #f1f1f1;
   --color-bg-box-border: #e1e1e1;
-  --color-fg-box: black;
+  --color-fg-box: #222;
   --color-bg: white;
-  --color-fg: black;
+  --color-fg: #222;
   --color-fg-soft: #555;
   --color-link: #33c3f0;
   --color-link-active: #1eaedb;
@@ -104,7 +104,7 @@ h4,
 h5,
 h6,
 header {
-  font-weight: 300;
+  font-weight: 400;
   font-family: var(--font-family-h);
   text-align: left;
 }
@@ -128,7 +128,7 @@ h6 { font-size: 1.5rem; line-height: 1.6;  letter-spacing: 0; }
 header {
   font-size: 2.5rem;
   line-height: 2.5rem;
-  padding: var(--element-margin) 0;
+  padding: calc(0.25 * var(--element-margin)) 0;
   border-bottom: var(--box-border);
   margin-bottom: calc(var(--element-margin) * 1.5);
 }
@@ -153,6 +153,11 @@ header p {
 header small {
   font-size: var(--font-size);
   font-style: italic;
+}
+
+/** Text Markup ************************************************** **/
+b, strong {
+  font-weight: 600;
 }
 
 /** Example Boxes ************************************************ **/
@@ -210,7 +215,7 @@ a { color: var(--color-link); }
 a:hover { color: var(--color-link-active); }
 
 /** Definition Lists and Quotes ********************************** **/
-dt { font-weight: bold; }
+dt { font-weight: 600; }
 
 dd,
 blockquote {
@@ -233,7 +238,7 @@ hr {
 /** Tables ******************************************************* **/
 th,
 td {
-  padding: 0.25em 0.5em;
+  padding: 0.75em 1em;
   border-bottom: var(--box-border);
 }
 
@@ -245,6 +250,10 @@ td:first-child {
 th:last-child,
 td:last-child {
   padding-right: 0;
+}
+
+th {
+  font-weight: 600;
 }
 
 /** Lists ******************************************************** **/
@@ -267,7 +276,7 @@ ol.example {
 ol.example > li { counter-increment: examp; }
 ol.example > li::marker {
   content: "(" counter(examp) ")  ";
-  font-weight: bold;
+  font-weight: 600;
 }
 
 
@@ -277,6 +286,7 @@ ul ol,
 ol ol,
 ol ul {
   font-size: 90%;
+  margin-top: calc(var(--element-margin) * 0.5);
 }
 li {
 margin-bottom: calc(var(--element-margin) * 0.5); }
@@ -296,6 +306,7 @@ code {
 pre > code {
   display: block;
   white-space: pre;
+  font-size: 90%;
 }
 
 .sourceCode span.kw { color: #007020; font-weight: bold; }
@@ -316,7 +327,7 @@ pre > code {
 .footnotes {
   font-size: 90%;
 }
-.footnotes ol { padding: 0; }
+.footnotes ol { padding: 0 2rem; }
 .footnotes li { display: block; }
 
 .footnotes li p {
@@ -488,17 +499,15 @@ input[type="radio"] {
   margin: 0 auto;
   padding: var(--element-margin);
   display: grid;
-  grid-gap: var(--element-margin);
-  gap: var(--element-margin);
+  grid-column-gap: var(--element-margin);
+  column-gap: var(--element-margin);
 
   /* by default use min 200px wide columns auto-fit into width */
   grid-template-columns: 1fr;
 }
 
 @media (min-width: 600px) {
-  .multicol,
-  .multicol.two,
-  .multicol.three {
+  .multicol {
     grid-template-columns: repeat(2, 1fr);
     padding: 10px 0;
   }

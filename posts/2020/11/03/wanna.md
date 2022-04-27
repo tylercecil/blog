@@ -48,7 +48,6 @@ header-includes: >
 
   .example > .example {
     font-size: 100%;
-    padding: 0rem;
     border: none;
   }
 

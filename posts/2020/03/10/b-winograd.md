@@ -37,7 +37,7 @@ header-includes: >
     }
     .sp { text-decoration: underline; }
 
-    .post .example .q {
+    .example .q {
       width: 70%;
       margin: 1rem auto;
       border-top: 1px solid grey;

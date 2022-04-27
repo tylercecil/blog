@@ -11,6 +11,7 @@ bibliography: come-go.bib
 header-includes: >
   <style>
     img.fig {
+      display: inline-block;
       max-width: 25%;
       min-width: 150px;
       padding: 0 1em;
@@ -54,6 +55,9 @@ header-includes: >
 
     .vens img {
       width: 100%;
+    }
+    .vens figure {
+      width: 90%;
     }
   </style>
 ---
@@ -265,23 +269,18 @@ In the present tense, we can look at the results as a bunch of Venn diagrams.
 **Each circle of the Venn Diagram shows if someone is or isn't in New York.**
 We have a "Speaker" circle, "Hearer" circle, and maybe a "3rd Person" circle.
 
-<div class="vens">
-<div class="row">
-<div class="one-half column">
+<div class="vens multicol">
 ![**"I am coming to New York!"**](/images/posts/come-go/pres_1_come.svg)
+
+![**"I am going to New York!"**](/images/posts/come-go/pres_1_go.svg)
 
 ![**"You are coming to New York!"**](/images/posts/come-go/pres_2_come.svg)
 
-![**"Sven is coming to New York!"**](/images/posts/come-go/pres_3_come.svg)
-</div>
-<div class="one-half column">
-![**"I am going to New York!"**](/images/posts/come-go/pres_1_go.svg)
-
 ![**"You are going to New York!"**](/images/posts/come-go/pres_2_go.svg)
 
+![**"Sven is coming to New York!"**](/images/posts/come-go/pres_3_come.svg)
+
 ![**"Sven is going to New York!"**](/images/posts/come-go/pres_3_go.svg)
-</div>
-</div>
 </div>
 
 Now we can see that "I am coming to New York" works if the listener is in New

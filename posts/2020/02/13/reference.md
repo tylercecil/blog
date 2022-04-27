@@ -128,14 +128,15 @@ words) that "point" to something (if you have a CS background, your intuitions
 might be useful here). Broadly speaking we could break references into two
 categories: **names** and **descriptions**.
 
-<div class="row"> <div class="one-half column">
+<div class="multicol">
+<div>
 - **Names**
   - Names, in general, are single lexical items.
   - e.g. *"Tyler Cecil"* refers to a (rather hansom) individual.
   - e.g. *"You"* refers to another attractive individual (though it requires
     context to know which).
 </div>
-<div class="one-half column">
+<div>
 - **(Definite) Descriptions**
   - A definite description is a description quantified by "the" (meaning there
     is only one).
@@ -159,8 +160,8 @@ some.
 He breaks down the usage of references into two categories: well behaved
 **transparent references**, and the more problematic **opaque references**.
 
-<div class="row">
-<div class="one-half column">
+<div class="multicol">
+<div>
 - **Transparent References**
   - Seem to allow for substitution of "equal" references.
   - Are simple to model logically.
@@ -168,7 +169,7 @@ He breaks down the usage of references into two categories: well behaved
   - e.g. *"The first odd prime plus 2 is 5".* This sentence can easily be
     re-written using any other reference for 3.
 </div>
-<div class="one-half column">
+<div>
 - **Opaque References**
   - Do not always allow substitution of "equal" references.
   - Not obvious how to model logically.
@@ -392,14 +393,14 @@ decided, "was that reference de dicto, or de re?" For example:
 When you hear this sentence, there are two totally legitimate ways to interpret
 it.
 
-<div class="row">
-<div class="one-half column">
+<div class="multicol">
+<div>
 - **De Dicto:**
   - Gloria thinks that, among the people here, one of them must be a
     murderer.
   - Here Gloria thinks *the words* "someone here is a murderer".
 </div>
-<div class="one-half column">
+<div>
 - **De Re:**
   - There is a person here, and Gloria thinks they are a murderer.
   - Here the speaker is saying "someone" to the listener, to describe what
