@@ -1,3 +1,17 @@
+# IN PROGRESS
+[x] Add Forms & Buttons Back to CSS
+[x] KaTeX > MathJaX
+[x] Check Every Post
+[x] Commento Links
+[] rg 'posts/\d\d\d\d-\d\d-\d\d'
+
+## TOP OF LIST POSTS
+[] Egarative Languages
+[] https://sites.google.com/a/google.com/zawgyi/
+[] Page 331 of Syntax book.
+[] Speach act theory of meaning
+
+## Backlog
 [] "Sie sind ärgerlich, weil er hätte kommen sollen."
 [] Kripke Semantics and Modal Logic
 [] My Linguistics Program
@@ -14,16 +28,8 @@
 [x] Binding Theory
 [] One Replacement with Adjuncts
 
-TOP OF LIST POSTS
-[] Egarative Languages
-[] https://sites.google.com/a/google.com/zawgyi/
-[] Page 331 of Syntax book.
-[] Speach act theory of meaning
-
-Technical Things
+# Technical Things
 [] Pagination
-[] Margin Notes
-[] Reference Links
 [] External links in new tabs, NO JS
 [] Use jq to parse the document metadata. Or something else?
    (I can use this to make better archive pages, do date stuff, etc.)

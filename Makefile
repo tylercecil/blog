@@ -68,7 +68,9 @@ $(POSTS): $(SITE)/posts/%.html: posts/%.md $(COMMON_T) $(POST_T)
 	@mkdir -p $$(dirname $@)
 	$(eval DIR    := $(shell dirname $<))
 	$(eval DATE   := $(shell echo $< | $(RG_DATE)))
-	$(C) $(CFLAGS) --resource-path=.:$(DIR) --template=$(POST_T) -M date=$(DATE) $< -o $@
+	$(eval FNAME  := $(shell basename $<))
+	$(C) $(CFLAGS) --resource-path=.:$(DIR) --template=$(POST_T) \
+		-M date=$(DATE) -M basefile=$(FNAME) $< -o $@
 
 $(INDEX): $(ALL_P) $(INDEX_T) $(COMMON_T)
 	@mkdir -p $$(dirname $@)
