@@ -1,14 +1,13 @@
-# IN PROGRESS
-[x] Add Forms & Buttons Back to CSS
-[x] KaTeX > MathJaX
-[x] Check Every Post
-[x] Commento Links
-[] rg 'posts/\d\d\d\d-\d\d-\d\d'
+IN PROGRESS
+===========
 
-## TOP OF LIST POSTS
+
+Posts
+===================
+
+## Upcoming
+[] Comparative Illusions
 [] Egarative Languages
-[] https://sites.google.com/a/google.com/zawgyi/
-[] Page 331 of Syntax book.
 [] Speach act theory of meaning
 
 ## Backlog
@@ -27,12 +26,17 @@
 [] Get more into that proof on NPI.
 [x] Binding Theory
 [] One Replacement with Adjuncts
+[] https://sites.google.com/a/google.com/zawgyi/
+[] Page 331 of Syntax book.
 
-# Technical Things
-[] Pagination
+Technical Tasks
+===============
+
+[] Update about page
+   (This relates to general goal setting)
+
+[] Building pages should also build metadata file
+  [] Pagination
+  [] Archive Page
+[] Proper publishing
 [] External links in new tabs, NO JS
-[] Use jq to parse the document metadata. Or something else?
-   (I can use this to make better archive pages, do date stuff, etc.)
-[] Archive Page
-[] Clean up CSS / templates
-[] Definition CSS does not match examples!
