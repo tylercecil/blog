@@ -24,6 +24,7 @@
   --font-size: 1.5rem;
   --font-family-h: "Raleway", helvetica, sans-serif;
   --font-family-mono: "Source Code Pro", monospace;
+  --media-width-1: 600px;
 }
 
 html {
@@ -511,11 +512,16 @@ input[type="radio"] {
     grid-template-columns: repeat(2, 1fr);
     padding: 10px 0;
   }
+
 }
 
 @media (min-width: 900px) {
   .multicol.three {
     grid-template-columns: repeat(3, 1fr);
     padding: 10px 0;
+  }
+
+  .wide {
+    grid-column-end: span 2;
   }
 }
