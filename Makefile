@@ -2,11 +2,12 @@
 # ===============================================
 #
 # Requirements
-#   - pandoc  (Tested with version 2.17)
-#   - fd      (For collecting source files)
-#   - rg      (Various text replacement)
-#   - python3 (For webserver)
-#   - inotify (For watching / auto-make)
+#   - pandoc     (Tested with version 2.17)
+#   - fd         (For collecting source files)
+#   - rg         (Various text replacement)
+#   - python3    (For webserver)
+#   - inotify    (For watching / auto-make)
+#   - ghp-import (For publishing)
 
 # Pandoc Settings
 C := pandoc
@@ -37,13 +38,16 @@ ALL_P     := $(SITE)/posts/all.yaml
 FEED      := $(SITE)/feed/atom.xml
 
 # Website Config
-SITE_URL     := https://tylercecil.com
+CNAME        := tylercecil.com
+SITE_URL     := https://$(CNAME)
 SITE_UPDATED := $(shell git --no-pager log -1 --date=short --pretty="format:%cd")
+GHP_BRANCH   := gh-pages
+GHP_REMOTE   := origin
 
 # Script Macros
 RG_DATE := rg -o '(\d\d\d\d)/(\d\d)/(\d\d)' -r '$$1-$$2-$$3'
 
-.PHONEY: clean serve watch
+.PHONEY: clean serve watch publish
 
 all: $(SITE)
 $(SITE): $(ABOUT) $(FEED) $(INDEX) $(POSTS) $(POST_STAT) $(STATIC) $(SUB)
@@ -103,3 +107,8 @@ watch:
 
 clean:
 	rm -rf $(SITE)
+
+publish: $(SITE)
+	ghp-import --no-history --cname=$(CNAME) --remote=$(GHP_REMOTE) \
+	           --branch=$(GHP_BRANCH) --message "Published with ghp-import." \
+	           $(SITE)
