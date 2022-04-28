@@ -2,18 +2,18 @@
 title: Language and Thought
 subtitle: Preliminaries on The Turing Test
 abstract: Did you try and read my post on [Winograd
-  Schema](/posts/2020-03-10-b-winograd.html), and realize you don't understand
+  Schema](/posts/2020/03/10/b-winograd.html), and realize you don't understand
   or have never heard of the Turing Test? If so, this post is for you!
 update:
 note: "**Note:** I originally wrote this as a introduction to my [Winograd
-  Schema post](/posts/2020-03-10-b-winograd.html), but cut it.
+  Schema post](/posts/2020/03/10/b-winograd.html), but cut it.
 
   Because not all my readers are familiar with the Turing Test, however, I made
   it into a short and easy standalone post. It's not as polished as my normal
   posts.
 
   If you are familiar with the Turing Test, feel free to skip to the [main
-  event.](/posts/2020-03-10-b-winograd.html)"
+  event.](/posts/2020/03/10/b-winograd.html)"
 header-includes:
 ---
 

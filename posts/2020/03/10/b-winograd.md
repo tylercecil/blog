@@ -9,7 +9,7 @@ update:
 bibliography: winograd.bib
 note: "**Note:** Did you *also* not understand (or had never heard of) the
   Turing Test? I wrote a [preliminary
-  post](/posts/2020-03-10-a-turing-prelim.html) just for you!"
+  post](/posts/2020/03/10/a-turing-prelim.html) just for you!"
 header-includes: >
   <style>
     .comment { display: none; }
@@ -147,7 +147,7 @@ Winograd Schema
 A very promising solution is known as the *"Winograd Schema Test"*, developed
 by Levesque [-@levesque-2012]. I said this new test was going to revolve around a single
 linguistic function, and as it happens, I introduced this linguistic function
-in my [last post on donkey sentences](/posts/2020-02-24-drt.html#anaphora):
+in my [last post on donkey sentences](/posts/2020/02/24/drt.html#anaphora):
 **anaphora resolution.**
 
 Anaphora
@@ -249,7 +249,7 @@ Cross Linguistic
 ----------------
 
 Of course, all languages have anaphora ([of many
-types](/posts/2020-02-24-drt.html#not-just-nouns)), so we're not bound to
+types](/posts/2020/02/24/drt.html#not-just-nouns)), so we're not bound to
 English. We could translate (@w-prob) into Japanese, for example:
 
 (@w-jap) じゃがいもの入った袋が、小麦粉の入った袋の**[上/下]**にあるので

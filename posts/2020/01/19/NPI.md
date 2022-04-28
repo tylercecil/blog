@@ -15,7 +15,7 @@ header-includes: >
   </style>
 
 update: 2020-01-24
-note: "**Note:** be sure to read [Part II](/posts/2020-01-29-NPI2.html) once
+note: "**Note:** be sure to read [Part II](/posts/2020/01/29/NPI2.html) once
   you've finished!"
 ---
 Here's a wholly unremarkable English sentence:
@@ -302,7 +302,7 @@ situations as well). And (hopefully) we will have enough time to get into
 *Positive Polarity Items* and some cross-linguistic examples! No promises,
 though!
 
-**Read on to [Part II](/posts/2020-01-29-NPI2.html) once you've finished!**
+**Read on to [Part II](/posts/2020/01/29/NPI2.html) once you've finished!**
 
 References
 ==========

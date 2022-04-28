@@ -11,7 +11,7 @@ note: >
   Notebook](https://github.com/tylercecil/bessels-correction)!\
 
   **Note:** Let me know if you'd like me to annotate the math with hover-over
-  text, like I did in [my last post](/posts/2020-04-06-natduc.html).
+  text, like I did in [my last post](/posts/2020/04/06/natduc.html).
 
 header-includes:
 ---

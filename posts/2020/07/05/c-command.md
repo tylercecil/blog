@@ -140,10 +140,10 @@ Note how "he" could refer to Jeremy (likely how you read it without context),
 It's that flexibility that makes "he" a pronoun, and the lack of flexibility
 "himself" an anaphor.
 
-[^ref]: [Well, kinda](/posts/2020-02-13-reference.html)... but that's not the
+[^ref]: [Well, kinda](/posts/2020/02/13/reference.html)... but that's not the
   point right now!
 [^ana]: I've used the word anaphor in my post on [Winograd
-  schema](/posts/2020-03-10-b-winograd.html). I have to admit, I think I may
+  schema](/posts/2020/03/10/b-winograd.html). I have to admit, I think I may
   have been using it incorrectly / confusingly. Consider this an updated
   definition.
 [^dist]: "Governs the distribution" might sound a bit technical, but it's

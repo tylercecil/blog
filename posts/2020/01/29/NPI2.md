@@ -37,7 +37,7 @@ header-includes: >
 
 Review
 ======
-[In Part I](./2020-01-19-NPI.html) we introduced *Negative Polarity Items*, a
+[In Part I](/posts/2020/01/19/NPI.html) we introduced *Negative Polarity Items*, a
 special class of words that just don't seem to *ever* play right. We tried to
 tackle the question **"in what contexts can we use NPIs?"**.
 
@@ -294,7 +294,7 @@ Downward Connective
   "If $p$ then $q$" is DE with respect to $q$.
 
 This is really the same definition we used in [Part
-I](./2020-01-19-NPI.html#downward-entailment), but now we are saying $r \to p$,
+I](/posts/2020/01/19/NPI.html#downward-entailment), but now we are saying $r \to p$,
 rather than $R \subseteq P$.  Showing that DE $\subseteq$ Nonveridacity is now
 very strait-forward. We can prove that **no connector $C$ can be both DE and
 veridical.**
@@ -316,7 +316,7 @@ means that **any connector that is DE must be nonveridical.**
 Nonveridacity Solves Our Problems
 ---------------------------------
 Last step: show that nonveridacity actually solves our problems! Everything in
-[Part I](./2020-01-19-NPI.html#have-we-found-our-solution) is covered, but what
+[Part I](/posts/2020/01/19/NPI.html#have-we-found-our-solution) is covered, but what
 about the new problems?
 
 ### Questions

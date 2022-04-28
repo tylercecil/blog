@@ -54,7 +54,7 @@ though, **the expert did not say they necessarily survived.** So then, how do
 we model these logically?
 
 To answer that, we need to understand *logical modality*. I've actually
-[written about modality before](/posts/2020-02-13-reference.html#modal), but
+[written about modality before](/posts/2020/02/13/reference.html#modal), but
 let's recap.
 
 There are things in this world that are true, like *"stop signs are red"*.
