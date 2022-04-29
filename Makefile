@@ -111,4 +111,4 @@ clean:
 publish: $(SITE)
 	ghp-import --no-history --cname=$(CNAME) --remote=$(GHP_REMOTE) \
 	           --branch=$(GHP_BRANCH) --message "Published with ghp-import." \
-	           $(SITE)
+	           --push $(SITE)
