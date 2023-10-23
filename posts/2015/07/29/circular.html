@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <!-- Meta info
+    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <meta charset="utf-8"/>
+    <meta name="description" content="Personal website of Tyler Cecil"/>
+    <meta name="author" content="Tyler I. Cecil"/>
+    <title>Circular Programming</title>
+    <!-- Mobile Specific Metas
+      –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+    <!-- Favicon <link rel="icon" type="image/png" href="/images/favicon.png">
+      –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon/favicon-16x16.png">
+    <link rel="manifest" href="/images/favicon/site.webmanifest">
+    <link rel="mask-icon" href="/images/favicon/safari-pinned-tab.svg" color="#5bbad5">
+    <link rel="shortcut icon" href="/images/favicon/favicon.ico">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="msapplication-config" content="/images/favicon/browserconfig.xml">
+    <meta name="theme-color" content="#ffffff">
+    <!-- FONT
+      –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+      <!-- <link href="https://fonts.googleapis.com/css?family=Open+Sans|Raleway|Roboto&display=swap" rel="stylesheet"> -->
+    <!-- CSS
+      –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <link href="/css/normalize.css" rel="stylesheet">
+    <link href="/css/post.css" rel="stylesheet">
+    <!-- JS
+      –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async
+            src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+    </script>
+    <!-- HEADER-INCLUDES:
+      –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+      </head>
+
+  <body>
+
+    <nav>
+      <a href="/">Posts</a>
+      &bull;
+      <a href="/about/">About</a>
+      &bull;
+      <a href="/subscribe/">Subscribe</a>
+    </nav>
+    <header>
+      <h1>Circular Programming</h1>
+      
+      <p><small>Posted on 2015-07-29</small></p>
+          </header>
+
+    
+    <article>
+      <p>Remember how you felt the first time you saw a recursive
+      function? Today I was reminded… My mentor at LANL (a true
+      functional guru) wrote a bit of code using what he called
+      “circular programming.” He, of course, figured it was no big deal,
+      but it was more than my feeble little mind could take. Based on <a
+      href="http://stackoverflow.com/questions/29226483/circular-programming-replace-list-elements-by-minimum-value">this</a>
+      Stack Overflow post, I made this little run-through on what’s
+      going on, in order to test my own understanding.</p>
+      <h2 id="the-problem">The Problem</h2>
+      <p>Let’s say I want to replace every element of a list with the
+      minimum element of that list. The naive approach is to pass the
+      list twice: once to find the minimum element, and another to
+      replace every value with it. (Obviously there are better ways to
+      do this, but bear with me… I want to start with an easy
+      example).</p>
+      <p>How might we go about this with a single pass? If we were in C,
+      the answer would be fairly simple (provided our list was an array
+      of pointers to our elements): replace every pointer with a pointer
+      to a common element, and store the minimum element in this common
+      placeholder. I will show you a way in Haskell, using a very clever
+      (and possibly existentially terrifying) trick called <a
+      href="https://wiki.haskell.org/Circular_programming">Circular
+      Programming</a>. Despite what some parts of the Internet will have
+      you think, this has almost nothing to do with Arrows, so don’t
+      worry. However it is conceptually identical to <a
+      href="https://en.wikipedia.org/wiki/Continuation-passing_style">continuation
+      passing style</a>.</p>
+      <h2 id="two-functions-one-magic-trick">Two Functions, One Magic
+      Trick</h2>
+      <p>We start off with the magic… Try reading through this
+      function.</p>
+      <h4 id="trace"><code>trace</code></h4>
+      <div class="sourceCode" id="cb1"><pre
+      class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ot">trace ::</span> (a <span class="ot">-&gt;</span> c <span class="ot">-&gt;</span> (b, c)) <span class="ot">-&gt;</span> a <span class="ot">-&gt;</span> b</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>trace f a <span class="ot">=</span> b</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="kw">where</span> (b, c) <span class="ot">=</span> f a c</span></code></pre></div>
+      <p>Do you feel uneasy? Let’s take a look at this where clause…
+      <code>where (b, c) = f a c</code>. So we are saying that
+      <code>b</code> and <code>c</code> are return values of
+      <code>f</code> when <code>f</code> is applied to <code>a</code>
+      and <code>c</code>. <code>c</code> is both a return value and a
+      parameter of the function <code>f</code>! At first glance this
+      might seem like a time travel paradox!</p>
+      <p>We’ll get back to this, but the hint for why this is possible
+      is lazy evaluation. Don’t feel bad if this doesn’t make sense yet
+      — we’re going to keep exploring</p>
+      <h4 id="repminlist"><code>repminList'</code></h4>
+      <div class="sourceCode" id="cb2"><pre
+      class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ot">repminList&#39; ::</span> (<span class="dt">Ord</span> a) <span class="ot">=&gt;</span> [a] <span class="ot">-&gt;</span> a <span class="ot">-&gt;</span> ([a], a)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>repminList&#39; [x] m <span class="ot">=</span> ([m], x)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>repminList&#39; (x<span class="op">:</span>xs) m <span class="ot">=</span> <span class="kw">let</span> (replaced, m&#39;) <span class="ot">=</span> repminList&#39; xs m</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>                       <span class="kw">in</span> (m <span class="op">:</span> replaced, <span class="fu">min</span> x m&#39;)</span></code></pre></div>
+      <p>Next we have <code>repminList'</code>, which is actually doing
+      the work. This function should be fairly understandable. The
+      function gets a list <code>xs</code> and an element
+      <code>m</code>, and returns a tuple. The first element is the list
+      <code>xs</code> with every element replaced with <code>m</code>.
+      The second element is the minimum element of <code>xs</code>.</p>
+      <p>Running in <code>ghci</code>:</p>
+      <pre><code> *Main&gt; repminList&#39; [1..10] 0
+ ([0,0,0,0,0,0,0,0,0,0], 1)</code></pre>
+      <p>See, I’m not lying!</p>
+      <h4 id="repminlist-1"><code>repminList</code></h4>
+      <div class="sourceCode" id="cb4"><pre
+      class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ot">repminList ::</span> (<span class="dt">Ord</span> a) <span class="ot">=&gt;</span> [a] <span class="ot">-&gt;</span> [a]</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>repminList <span class="ot">=</span> trace repminList&#39;</span></code></pre></div>
+      <p>Finally <code>repminList</code> performs our task for us, by
+      using our magical function <code>trace</code> and applying it to
+      <code>repminList'</code>. Again, running in <code>ghci</code> we
+      find:</p>
+      <pre><code>*Main&gt; repminList [1..10]
+ [1,1,1,1,1,1,1,1,1,1]
+</code></pre>
+      <p>Ok. Think things over a bit, and see if you can understand how
+      the system as a whole is working. Remember: the secret is lazy
+      evaluation.</p>
+      <h2 id="call-by-need">Call-by-Need</h2>
+      <p>Some people seem to think of lazy evaluation as “Oh, the user
+      needs the return value! Go run the function!” But what does it
+      mean to “run a function” in Haskell? In lambda calculus we do not
+      “run” lambda abstractions — we take applications, and apply
+      \(\beta\)-reductions. \[ (x . T) :: y T[x := y] \] Of course, one
+      can use a number of different reduction strategies in lambda
+      calculus (e.g. full reduction, normal order, call-by-value, …);
+      Haskell uses what’s known as <a
+      href="http://homepages.inf.ed.ac.uk/wadler/papers/need-journal/need-journal.ps">call-by-need</a>.
+      In this evaluation strategy, an idea of aliasing is employed. So
+      for any lambda term \(T\), applications such as \[ (x . x : x) ::
+      T T_1 : T_2 \] result in \(T_1\) and \(T_2\) “referring” to the
+      same value. So if at any reduction step \(T_1 T’\), then \(T_2
+      T’\) occurs at the same step. Call-by-need (or lazy-execution) is
+      essentially creating a graph of how all names depend on each
+      other. Typically, we call the vertices of this graph <a
+      href="https://wiki.haskell.org/Thunk">thunks</a>. In Haskell each
+      thunk knows its type, what data constructor created it, and the
+      thunks of its components. Conceptually, Haskell definitions are
+      creating an <em>abstract syntax graph</em> (as opposed to a tree);
+      computations are traversals and reductions of this graph.
+      (<em>Note that I necessarily don’t mean this literally; I am no
+      ghc expert, and could not tell you exactly what’s going on in the
+      inner workings of Haskell. I simply mean conceptually.</em>)</p>
+      <h4 id="an-example">An Example</h4>
+      <p>Let’s say we have <code>xs = [1, 2, 3]</code>. The <em>ASG</em>
+      will look something like this:</p>
+      <p><img src="/images/posts/circ/list_thunk.svg" width="100%"></p>
+      <p>So when we ask for the first element of a list <code>xs</code>
+      in Haskell, this is what really happens:</p>
+      <ol type="1">
+      <li>Inspect the <code>xs</code> thunk, and see what data
+      constructor made it.</li>
+      <li>Hopefully <code>xs</code> was constructed with the
+      <code>(:)</code> constructor. The only other list constructor is
+      <code>[]</code>, which contains references to no other
+      thunks.</li>
+      <li>The <code>(:)</code> refers to two other thunks: the
+      <code>head</code> and the <code>tail</code>.</li>
+      <li>We can then return a reference to the head thunk.</li>
+      </ol>
+      <p>So in order to calculate <code>head xs</code>, we only needed
+      to “evaluate” two nodes: the list constructor, and its head.
+      Consider if <code>xs = [1, undefined, undefined]</code>.
+      <code>head xs</code> in this case would return the same result,
+      even though there are undefined thunks in our <em>ASG</em>. In
+      Haskell we can define even more bizarre structures. For instance,
+      a typical representation of a term with type <a
+      href="https://wiki.haskell.org/Bottom">\(\)</a> is
+      <code>let bot = bot</code>.</p>
+      <p><img src="/images/posts/circ/bot.svg" width="25%" style="margin-left:37.5%;"></p>
+      <p>If we ever want to evaluate <code>bot</code>, first
+      <code>bot</code> must be evaluated. Therefore, if we were to ask
+      for this value, our code will hang. Lazy execution is what lets us
+      do dirty things like this. In general, whenever we have a cycle
+      like this, we have the <em>potential</em> for our code to
+      hang.</p>
+      <p>For some deeper look into lazy-evaluation, I suggest looking at
+      <a
+      href="https://hackhands.com/lazy-evaluation-works-haskell/">this
+      post</a> or <a
+      href="https://wiki.haskell.org/Haskell/Lazy_evaluation">the
+      haskell wiki</a>.</p>
+      <h2 id="another-look-at-trace">Another Look at
+      <code>trace</code></h2>
+      <p>Now that we have stronger background knowledge of Call-by-need,
+      let’s go back to <code>trace</code>, the function which we have
+      come to fear. Specifically <code>(b, c) = f a c</code>; this will
+      test our understanding of lazy evaluation. Let’s re-write this
+      function using better names than found in that Stack Overflow
+      post, to try and appeal to intuition a bit more.</p>
+      <div class="sourceCode" id="cb6"><pre
+      class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>trace f init_thunk <span class="ot">=</span> ans_thunk</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">where</span> (ans_thunk, feedback_thunk) <span class="ot">=</span> f init_thunk feedback_thunk</span></code></pre></div>
+      <p>We need to understand<code>(b, c) = f a c</code> is only
+      asserting that the name <code>c</code> is bound in the above way.
+      Specifically “<code>f</code>’s second returned value will be the
+      same <em>thunk</em> as <code>f</code>’s second parameter.” By
+      inspecting <code>repminList [1..10]</code>, <code>trace</code>
+      demands a value for <code>b</code>. In this case,
+      <code>b = [c,c,c,c,c,c,c,c,c,c]</code>, where <code>c</code> is
+      just that — whatever the value of <code>c</code> turns out to be.
+      <code>c</code> itself has yet to be needed, and therefore yet to
+      be evaluated. So <code>b</code> depends on the value of
+      <code>c</code>, but not vice-versa, allowing our code not to hang.
+      In the process of finding the value for <code>b</code>,
+      <code>repminList'</code> has calculated the minimum element of the
+      list, and bound that value back into <code>c</code>.</p>
+      <p>And that’s that! We walk through the list, making a new list
+      with a common placeholder value (just like the C solution)! This
+      all works because of the laziness. This technique allows a whole
+      host of computations that would normally require multiple passes
+      over a data-structure to be done in a single pass!</p>
+      <p>I strongly suggest playing with these functions to get a feel
+      for what’s going on.</p>
+      <h2 id="corecursion">Corecursion</h2>
+      <p>We are correct in thinking <em>circular programming</em> is
+      actually related to recursion: it is, in fact, the <em>dual to
+      recursion</em>! <a
+      href="http://link.springer.com/article/10.1007/BF00264249">Richard
+      Bird</a> and <a
+      href="http://www.csse.monash.edu.au/~lloyd/tildeFP/1989SPE/">Lloyd
+      Allison</a> were responsible for some of the early development of
+      the technique “circular programming”, which would later be
+      generalized into something known as <a
+      href="https://en.wikipedia.org/wiki/Corecursion">corecursion</a>.
+      In recursion we take a big problem and break it down to it’s base
+      cases. The idea behind corecusion is to start with the base cases,
+      and build your data up. Corecursive algorithms produce small
+      chunks of data, and then use them to make more complex (possibly
+      infinite) data structures.</p>
+      <p>For a simple and cute example, let’s consider generating a
+      stream of the Fibonacci numbers.</p>
+      <div class="sourceCode" id="cb7"><pre
+      class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>fibs <span class="ot">=</span> <span class="dv">0</span> <span class="op">:</span> <span class="dv">1</span> <span class="op">:</span> <span class="fu">zipWith</span> (<span class="op">+</span>) fibs (<span class="fu">tail</span> fibs)</span></code></pre></div>
+      <p>Instead of defining a function in terms of itself, we have
+      defined data in terms of itself! It’s a pretty neat and useful
+      idea. For more examples, I suggest reading the Wikipedia post for
+      corecursion — it gives as good of a treatment on the subject as I
+      could.</p>
+      <h2 id="parting-notes">Parting Notes</h2>
+      <p>That was a brief introduction to circular programming, lazy
+      evaluation, and in general how to define data in terms of itself
+      (corecursion). Please let me know what you think/are confused by!
+      I wrote this not only to help my own understanding, but hopefully
+      to help others!</p>
+    </article>
+
+    <img id="sig" src="/images/tc-logo.svg" alt="Tyler Cecil's Blog"/>
+    <h6 style="text-align:center">Comments mean a lot!</h6>
+    <h5>
+      <a href="/"> More Posts </a>
+      <a href="mailto:blog@tylercecil.com?Subject=Circular Programming"
+         style="float: right">
+        Write Me
+      </a>
+    </h5>
+
+    <script
+      defer src="https://commento-tylercecil.herokuapp.com/js/commento.js">
+    </script>
+    <div id="commento"></div>
+
+    <footer>
+      <h6 style="float: right">&copy; 2023 Tyler Cecil</h6>
+      <a href="/feed/atom.xml"
+         style="text-decoration: none;">
+        <!-- SVG taken from: http://genericons.com/ -->
+        <svg xmlns="http://www.w3.org/2000/svg"
+             viewBox="0 0 16 16"
+             height="1.5rem"
+             width="1.5rem"
+             style="fill: currentColor;">
+          <rect x="0" fill="none" width="16" height="16"/>
+          <g>
+          <path d="M2 6v2c3.3 0 6 2.7 6 6h2c0-4.4-3.6-8-8-8zm0-4v2c5.5 0 10 4.5 10 10h2C14 7.4 8.6 2 2 2zm1.5 9c-.8 0-1.5.7-1.5 1.5S2.7 14 3.5 14 5 13.3 5 12.5 4.3 11 3.5 11z"/>
+          </g>
+        </svg>
+        Subscribe via RSS
+      </a>
+      <br/>
+      <a
+         href="https://blogtrottr.com/?subscribe=https://tylercecil.com/feed/atom.xml"
+         target="_blank"
+         title="Powered by BlogTrottr"
+         style="text-decoration: none;">
+        <!-- SVG taken from: http://genericons.com/ -->
+        <svg xmlns="http://www.w3.org/2000/svg"
+             viewBox="0 0 16 16"
+             height="1.5rem"
+             width="1.5rem"
+             style="fill: currentColor;">
+          <rect x="0" fill="none" width="16" height="16"/>
+          <g>
+          <path d="M15 9h-5c-.6 0-1 .4-1 1v5c0 .6.4 1 1 1h5c.6 0 1-.4 1-1v-5c0-.6-.4-1-1-1zm0 4h-2v2h-1v-2h-2v-1h2v-2h1v2h2v1zm-3-5V5c0-1.1-.9-2-2-2H2C.9 3 0 3.9 0 5v5c0 1.1.9 2 2 2h6v-2c0-1.2.8-2 2-2h2zM6 9.1L1 6.2V5l5 2.9L11 5v1.2L6 9.1z"/>
+          </g>
+        </svg>
+        Subscribe via Email
+      </a>
+    </footer>
+    <script>
+      // Causes external links to open in a new tab
+      // TODO: This should really be done by pandoc
+      (function (){
+              var links = document.links;
+
+              for (var i = 0, linksLength = links.length; i < linksLength; i++) {
+                      if (links[i].hostname != window.location.hostname) {
+                              links[i].target = '_blank';
+                            }
+                    }})();
+    </script>
+
+  </body>
+</html>

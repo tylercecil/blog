@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <!-- Meta info
+    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <meta charset="utf-8"/>
+    <meta name="description" content="Personal website of Tyler Cecil"/>
+    <meta name="author" content="Tyler I. Cecil"/>
+    <title>What’s In A Name?</title>
+    <!-- Mobile Specific Metas
+      –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+    <!-- Favicon <link rel="icon" type="image/png" href="/images/favicon.png">
+      –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon/favicon-16x16.png">
+    <link rel="manifest" href="/images/favicon/site.webmanifest">
+    <link rel="mask-icon" href="/images/favicon/safari-pinned-tab.svg" color="#5bbad5">
+    <link rel="shortcut icon" href="/images/favicon/favicon.ico">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="msapplication-config" content="/images/favicon/browserconfig.xml">
+    <meta name="theme-color" content="#ffffff">
+    <!-- FONT
+      –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+      <!-- <link href="https://fonts.googleapis.com/css?family=Open+Sans|Raleway|Roboto&display=swap" rel="stylesheet"> -->
+    <!-- CSS
+      –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <link href="/css/normalize.css" rel="stylesheet">
+    <link href="/css/post.css" rel="stylesheet">
+    <!-- JS
+      –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async
+            src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+    </script>
+    <!-- HEADER-INCLUDES:
+      –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+      <style>
+        .rf {
+          float: right;
+          padding-left: 1rem;
+        }
+        .t {
+          font-weight: bold;
+          color: green;
+        }
+        .f {
+          font-weight: bold;
+          color: red;
+        }
+        .q {
+          font-weight: bold;
+          color: orange;
+        }
+      </style>
+      </head>
+
+  <body>
+
+    <nav>
+      <a href="/">Posts</a>
+      &bull;
+      <a href="/about/">About</a>
+      &bull;
+      <a href="/subscribe/">Subscribe</a>
+    </nav>
+    <header>
+      <h1>What’s In A Name?</h1>
+      <p>Problems with Reference</p>
+      <p><small>Posted on 2020-02-13</small></p>
+          </header>
+
+        <div class="note">
+      <p><strong>News:</strong> Comments exist now, powered by <a
+      href="https://commento.io/">Commento</a>! Leaving a comment would
+      really mean a lot to me — it will help keep me motivated to keep
+      this research diary up!</p>
+      <p><strong>News:</strong> You can now subscribe via email, powered
+      by <a href="https://blogtrottr.com/">BlogTrottr</a> (really, that
+      means if you don’t know what to do with an RSS feed, I took care
+      of it for you). Subscribing would mean a lot, too!</p>
+      <p><em>Thanks for the support!</em></p>
+    </div>
+    
+    <article>
+      <p>Most of us have this intuitive idea that <strong>two equal
+      things can substitute each other without consequence.</strong><a
+      href="#fn1" class="footnote-ref" id="fnref1"
+      role="doc-noteref"><sup>1</sup></a> To show what I mean, consider
+      Vladimir Ulyanov, better known to the word simply as “Lenin”.</p>
+      <ol class="example" type="1">
+      <li><span class="t rf">true</span> Vladimir Ulyanov = Lenin.</li>
+      <li><span class="t rf">true</span> <strong>Ulyanov</strong> [ was
+      the first Premier of the Soviet Union ].</li>
+      <li><span class="t rf">true</span> <strong>Lenin</strong> [ was
+      the first Premier of the Soviet Union ].</li>
+      </ol>
+      <p>Ulyanov and Lenin are the same person, therefore I can always
+      swap them out. And actually, we just found a new “name” for Lenin
+      — <em>“the first Premier of the Soviet Union”.</em></p>
+      <ol start="4" class="example" type="1">
+      <li><span class="t rf">true</span> <strong>Lenin</strong> [
+      founded Iskra ].</li>
+      <li><span class="t rf">true</span> <strong>The first Premier of
+      the Soviet Union</strong> [ founded Iskra ].</li>
+      </ol>
+      <p>Of course, Lenin might not have been the leader he was —
+      perhaps Julius Martov could have become the leader of the
+      Soviets.</p>
+      <ol start="6" class="example" type="1">
+      <li><span class="t rf">true</span> Ulyanov might not have been the
+      first Premier of the Soviet Union.</li>
+      <li><span class="f rf">false</span> Ulyanov might not have been
+      Ulyanov.</li>
+      </ol>
+      <p>Awesome… we broke it…</p>
+      <p>In this post, let’s look at exactly how (7) just broke; was
+      “the first Premier” just a bad name, or do our problems go deeper?
+      It might seem like a pedantic question, but if we want to
+      understand or model language, equality would be a pretty important
+      thing to nail down!</p>
+      <h2 id="references">References</h2>
+      <p>The technical term we’re discussing is <a
+      href="https://plato.stanford.edu/entries/reference/"><strong>reference</strong></a>
+      — a word (or words) that “point” to something (if you have a CS
+      background, your intuitions might be useful here). Broadly
+      speaking we could break references into two categories:
+      <strong>names</strong> and <strong>descriptions</strong>.</p>
+      <div class="multicol">
+      <div>
+      <ul>
+      <li><strong>Names</strong>
+      <ul>
+      <li>Names, in general, are single lexical items.</li>
+      <li>e.g. <em>“Tyler Cecil”</em> refers to a (rather hansom)
+      individual.</li>
+      <li>e.g. <em>“You”</em> refers to another attractive individual
+      (though it requires context to know which).</li>
+      </ul></li>
+      </ul>
+      </div>
+      <div>
+      <ul>
+      <li><strong>(Definite) Descriptions</strong>
+      <ul>
+      <li>A definite description is a description quantified by “the”
+      (meaning there is only one).</li>
+      <li>e.g. <em>“The number of states in the USA”</em> refers to the
+      number 50 (and no other number).</li>
+      <li>e.g. <em>“The Shinings’s director”</em> refers to Stanley
+      Kubrick.</li>
+      </ul></li>
+      </ul>
+      </div>
+      </div>
+      <p>The important note here is that <strong>references are not the
+      things themselves</strong>. If the word “rose” were a rose, then a
+      rose by any other name would not be a rose. And that’s the root of
+      our problems — the space between our words, and the world we’re
+      describing.</p>
+      <p>Linguists, philosophers, and logicians have had a knot in their
+      stomachs about reference for ages, but their conversations are not
+      always the most accessible. It doesn’t need to be that way,
+      though; a few good examples can demonstrate just how sticky the
+      topic is, and I think <span class="citation"
+      data-cites="quine">Quine (<a href="#ref-quine"
+      role="doc-biblioref">1956</a>)</span> did a great job providing
+      some.</p>
+      <p>He breaks down the usage of references into two categories:
+      well behaved <strong>transparent references</strong>, and the more
+      problematic <strong>opaque references</strong>.</p>
+      <div class="multicol">
+      <div>
+      <ul>
+      <li><strong>Transparent References</strong>
+      <ul>
+      <li>Seem to allow for substitution of “equal” references.</li>
+      <li>Are simple to model logically.</li>
+      <li>Don’t tend to be ambiguous.</li>
+      <li>e.g. <em>“The first odd prime plus 2 is 5”.</em> This sentence
+      can easily be re-written using any other reference for 3.</li>
+      </ul></li>
+      </ul>
+      </div>
+      <div>
+      <ul>
+      <li><strong>Opaque References</strong>
+      <ul>
+      <li>Do not always allow substitution of “equal” references.</li>
+      <li>Not obvious how to model logically.</li>
+      <li>Can often be ambiguous.</li>
+      <li>e.g. <em>“He thinks the first odd prime is 5”.</em> Rewriting
+      this sentence with some other reference for 3 wouldn’t have the
+      same meaning.</li>
+      </ul></li>
+      </ul>
+      </div>
+      </div>
+      <p>So, <em>when do opaque references occure?</em></p>
+      <h3 id="modal">Modal</h3>
+      <p>Sentences with worlds like “must”, “may”, “could”, and “might”
+      are called <em>modal sentences</em>. The modern way to think about
+      modality is with two operators: necessity, and possibility.<a
+      href="#fn2" class="footnote-ref" id="fnref2"
+      role="doc-noteref"><sup>2</sup></a></p>
+      <dl>
+      <dt>Necessity <span class="math inline">\(\square P\)</span></dt>
+      <dd>
+      In all possible words, <span class="math inline">\(P\)</span> must
+      be true.
+      </dd>
+      <dt>Possibility <span class="math inline">\(\lozenge
+      P\)</span></dt>
+      <dd>
+      There exists a word in which <span
+      class="math inline">\(P\)</span> is true.
+      </dd>
+      </dl>
+      <p>We actually already saw an example of a modal reference with
+      (7), and could express it using “<span
+      class="math inline">\(\lozenge\)</span>”.</p>
+      <p><span class="math display">\[
+      \begin{align*}
+        &amp;\text{Ulyanov} = \text{First Premier}               &amp;
+      \text{true}\\
+        \lozenge &amp; \text{Ulyanov} \not= \text{First Premier} &amp;
+      \text{true}\\
+        \lozenge &amp; \text{Ulyanov} \not= \text{Ulynov}        &amp;
+      \text{false}\\
+      \end{align*}
+      \]</span></p>
+      <p>Written out explicitly like this, it’s more clear exactly how
+      (7) failed. References seem to operate slightly differently within
+      the scope of “<span class="math inline">\(\lozenge\)</span>”.<a
+      href="#fn3" class="footnote-ref" id="fnref3"
+      role="doc-noteref"><sup>3</sup></a></p>
+      <p>Here’s another example, this time using necessity:</p>
+      <ol start="8" class="example" type="1">
+      <li><span class="t rf">true</span> The number of English letters
+      is 26.</li>
+      <li><span class="t rf">true</span> Necessarily 26 should be
+      26.</li>
+      <li><span class="f rf">false</span> Necessarily the number of
+      English letters should be 26.</li>
+      </ol>
+      <p>Now, written with our <span
+      class="math inline">\(\square\)</span> operator:</p>
+      <p><span class="math display">\[
+      \begin{align*}
+        n \, \text{letters}        &amp;= 26 &amp;\text{true}\\
+        \square 26                 &amp;= 26 &amp;\text{true}\\
+        \square n \,\text{letters} &amp;= 26 &amp;\text{false}
+      \end{align*}
+      \]</span></p>
+      <p>Again we see that “the number of English letters” under the
+      scope of “<span class="math inline">\(\square\)</span>” can refer
+      to different numbers, whereas the name “26”, in all possible
+      words, can only refer to the number 26.</p>
+      <h3 id="propositional-attitudes">Propositional Attitudes</h3>
+      <p>Propositional attitudes get at the relationship between some
+      proposition <span class="math inline">\(P\)</span> and another
+      person. For example:</p>
+      <ol start="11" class="example" type="1">
+      <li>Li Na <strong>claims</strong> [ she doesn’t know him ].</li>
+      <li>Dolores <strong>believes</strong> [ they are seeing each other
+      ].</li>
+      <li>He <strong>hopes</strong> [ they will get a divorce ].</li>
+      </ol>
+      <p>None of these sentences say that the proposition in brackets is
+      true or false — they only say what the members of this love
+      triangle <em>say, think, and want</em>.</p>
+      <p>Right off the bat, we can see how such sentences have an issue
+      with references:</p>
+      <ol start="14" class="example" type="1">
+      <li><span class="t rf">true</span> Jozefína <em>thinks</em> the
+      number of English letters is 46.<a href="#fn4"
+      class="footnote-ref" id="fnref4"
+      role="doc-noteref"><sup>4</sup></a></li>
+      <li><span class="f rf">false</span> Jozefína <em>thinks</em> 26 is
+      46.</li>
+      </ol>
+      <p>In (14), Jozefína simply doesn’t know how may letters English
+      speakers use. That certainly doesn’t imply that she is totally
+      ignorant of numbers!</p>
+      <h4 id="names-fails-as-well">Names Fails As Well</h4>
+      <p>Propositional attitudes work just as bad with names as they do
+      with definite descriptions. Consider Omar, who has a test in his
+      Russian history class. He knows there will be an essay question,
+      and he hopes it will be about Lenin. He does not know, however,
+      that Lenin’s birth name was Ulyanov.</p>
+      <ol start="16" class="example" type="1">
+      <li><span class="t rf">true</span> Omar hopes he will write about
+      Lenin.</li>
+      <li><span class="q rf">???</span> Omar hopes he will write about
+      Ulyanov.</li>
+      </ol>
+      <p>(17) is not true, in the sense that, when Omar sees an essay
+      question about Ulyanov, he will probably panic, walk out of the
+      room, and change majors.</p>
+      <p>It gets more complicated, though. Let’s say Omar’s parents
+      (both history professors) are talking over breakfast. Omar’s
+      mother says “Omar hopes the essay is about Ulyanov”. Omar’s
+      father, knowing who Ulyanov is, would declare this sentence to be
+      true!</p>
+      <h4 id="not-just-noun-phrases">Not Just Noun-Phrases</h4>
+      <p>Everything we’ve done so far has been a noun-phrase, but
+      consider my baby cousin Grace, age two.</p>
+      <ol start="18" class="example" type="1">
+      <li><span class="t rf">true</span> Grace knows people have two
+      legs.</li>
+      <li><span class="t rf">true</span> “Being bipedal” means “having
+      two legs”.</li>
+      <li><span class="q rf">???</span> Grace knows people are
+      bipedal.</li>
+      </ol>
+      <p>Grace may know people have two legs, so in some sense (20) is a
+      true statements. That being said, grace is a smart kid, but I
+      wouldn’t put a lot of money on her coming up to me any time soon
+      and saying “people are bipedal”. So, in another sense, (20) is
+      false.</p>
+      <h2 id="possible-worlds">Possible Worlds</h2>
+      <p>Quine didn’t have the tools he needed to understand these
+      sentences, but we’re a luckier bunch. Here’s my claim about the
+      difference between transparent and opaque references:</p>
+      <table>
+      <tbody>
+      <tr class="odd">
+      <td><strong>Transparent:</strong></td>
+      <td style="text-align: left;">Talk about how the actual world
+      <span class="math inline">\(w\)</span> is.</td>
+      </tr>
+      <tr class="even">
+      <td><strong>Opaque:</strong></td>
+      <td style="text-align: left;">Talk about how some other worlds
+      <span class="math inline">\(W&#39; \subseteq W\)</span> are.</td>
+      </tr>
+      </tbody>
+      </table>
+      <p>That might be a little abstract, so here are some examples of
+      what I mean:</p>
+      <table>
+      <caption>Here “<span class="math inline">\(P @ w\)</span>” simply
+      means “<span class="math inline">\(P\)</span> is true in world
+      <span class="math inline">\(w\)</span>”.</caption>
+      <tbody>
+      <tr class="odd">
+      <td style="text-align: left;"><strong><span
+      class="math inline">\(P\)</span> must be</strong></td>
+      <td style="text-align: left;">In all worlds <span
+      class="math inline">\(w \in W\)</span>, <span
+      class="math inline">\(P @ w\)</span> is true.</td>
+      </tr>
+      <tr class="even">
+      <td style="text-align: left;"><strong><span
+      class="math inline">\(P\)</span> might be</strong></td>
+      <td style="text-align: left;">There is a world <span
+      class="math inline">\(w \in W\)</span> where <span
+      class="math inline">\(P @ w\)</span> is true.</td>
+      </tr>
+      <tr class="odd">
+      <td style="text-align: left;"><strong>She thinks <span
+      class="math inline">\(P\)</span></strong></td>
+      <td style="text-align: left;">She believes in a world <span
+      class="math inline">\(w\)</span> where <span
+      class="math inline">\(P @ w\)</span> is true.</td>
+      </tr>
+      <tr class="even">
+      <td style="text-align: left;"><strong>He wants <span
+      class="math inline">\(P\)</span></strong></td>
+      <td style="text-align: left;">He wants to be in any world <span
+      class="math inline">\(w\)</span> in which <span
+      class="math inline">\(P @ w\)</span> is true.</td>
+      </tr>
+      <tr class="odd">
+      <td style="text-align: left;"><strong>I say <span
+      class="math inline">\(P\)</span></strong></td>
+      <td style="text-align: left;">I speak of a world <span
+      class="math inline">\(w\)</span> in which <span
+      class="math inline">\(P @ w\)</span> is true.</td>
+      </tr>
+      </tbody>
+      </table>
+      <p>Once we make this revelation, it starts to become clear what
+      was happening all along: <strong>references resolve within the
+      context of a particular world <span
+      class="math inline">\(w\)</span></strong>, and that world is not
+      always the one in which we are living; it can be the one about
+      which we are speaking.</p>
+      <h2 id="a-computational-connection">A Computational
+      Connection</h2>
+      <p>References are essentially a kind of program — call it
+      <code>ref</code>. If I say the name “Le Guin”, I’m asking you the
+      listener to bring to mind the person who has that name.
+      <code>(ref "Le Guin")</code>. Similarly, if I say “the author of
+      <em>The Dispossessed”</em>, I’m asking you to bring to mind the
+      person who fits that description.
+      <code>(ref "The author of The Dispossessed")</code>. I can only
+      assume that, in your mind, those should be the same
+      individuals.</p>
+      <p><strong>But the result depends which “machine” runs
+      <code>ref</code>!</strong> Remember Jozefína?</p>
+      <div class="sourceCode" id="cb1"><pre
+      class="sourceCode lisp"><code class="sourceCode commonlisp"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>You-Machine&gt; (ref <span class="st">&quot;Num English Letters&quot;</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="dv">26</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>Jozefína-Machína&gt; (ref <span class="st">&quot;Num English Letters&quot;</span>)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="dv">46</span></span></code></pre></div>
+      <p>The programing language Lisp is famously able to “talk about
+      programs”.</p>
+      <table>
+      <caption>The single quote before a list signals that you are
+      writing <em>about</em> code rather than <em>with</em>
+      code.</caption>
+      <tbody>
+      <tr class="odd">
+      <td style="text-align: left;"><code>(let x (+ 1 1))</code></td>
+      <td style="text-align: left;">Assigns the <em>value</em> 2 to
+      <span class="math inline">\(x\)</span>.</td>
+      </tr>
+      <tr class="even">
+      <td style="text-align: left;"><code>(let x '(+ 1 1))</code></td>
+      <td style="text-align: left;">Assigns the <em>program</em>
+      <code>(+ 1 1)</code> to <span
+      class="math inline">\(x\)</span>.</td>
+      </tr>
+      <tr class="odd">
+      <td style="text-align: left;"><code>(print (eval x))</code></td>
+      <td style="text-align: left;">Prints the result of running the
+      program stored in <span class="math inline">\(x\)</span>.</td>
+      </tr>
+      </tbody>
+      </table>
+      <p>In natural language, we also can easily switch between talking
+      with words (known as <strong>de re</strong> statements) and
+      talking about words (known as <strong>de dicto</strong>
+      statements). If I want to say “Jozefína thinks the number of
+      English letters is 26”, there are two interpretations</p>
+      <div class="sourceCode" id="cb2"><pre
+      class="sourceCode lisp"><code class="sourceCode commonlisp"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">;; De Re Interpretation</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co">;; (no normal speaker would parse this way).</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>(<span class="kw">eq</span> (eval-jozefína (ref <span class="st">&quot;English Letters&quot;</span>) <span class="dv">26</span>)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co">;; De Dicto Interpretation</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co">;; (the intended meaning).</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>(<span class="kw">eq</span> (eval-jozefína &#39;(ref <span class="st">&quot;English Letters&quot;</span>) <span class="dv">26</span>)</span></code></pre></div>
+      <p><strong>De dicto</strong> literally means “about words”, so a
+      de dicto reading means “this person thinks/wants/believes
+      <em>these exact words</em>”.</p>
+      <p><strong>De re</strong> means “about the thing”, so a de re
+      reading would be “this person thinks/wants/believes <em>the things
+      these words mean</em>”.</p>
+      <h2 id="scope-is-always-tricky">Scope Is Always Tricky</h2>
+      <p>Natural language, unlike Lisp, doesn’t have clear scope rules.
+      If I say “all students talked about a move”, you could take that
+      in one of two different ways:</p>
+      <ul>
+      <li><span class="math inline">\(\forall k\)</span>, <span
+      class="math inline">\(\exists m\)</span>, <span
+      class="math inline">\(k\)</span> talked about <span
+      class="math inline">\(m\)</span>. (Each kid talked about a
+      movie.)</li>
+      <li><span class="math inline">\(\exists m\)</span>, <span
+      class="math inline">\(\forall k\)</span>, <span
+      class="math inline">\(k\)</span> talked about <span
+      class="math inline">\(m\)</span>. (There is a movie that all kids
+      talked about.)</li>
+      </ul>
+      <p>The way we manage this kind of ambiguity is ultimately a
+      question of psychology — it’s contextual<a href="#fn5"
+      class="footnote-ref" id="fnref5"
+      role="doc-noteref"><sup>5</sup></a>. And, as we’ve described it,
+      we’ve made <strong>reference a problem of scope
+      ambiguity</strong>. When you hear a reference, you mind must
+      decided, “was that reference de dicto, or de re?” For example:</p>
+      <ol start="21" class="example" type="1">
+      <li>Gloria thinks someone here is a murderer.</li>
+      </ol>
+      <p>When you hear this sentence, there are two totally legitimate
+      ways to interpret it.</p>
+      <div class="multicol">
+      <div>
+      <ul>
+      <li><strong>De Dicto:</strong>
+      <ul>
+      <li>Gloria thinks that, among the people here, one of them must be
+      a murderer.</li>
+      <li>Here Gloria thinks <em>the words</em> “someone here is a
+      murderer”.</li>
+      </ul></li>
+      </ul>
+      </div>
+      <div>
+      <ul>
+      <li><strong>De Re:</strong>
+      <ul>
+      <li>There is a person here, and Gloria thinks they are a
+      murderer.</li>
+      <li>Here the speaker is saying “someone” to the listener, to
+      describe what Gloria thinks.</li>
+      </ul></li>
+      </ul>
+      </div>
+      </div>
+      <p>Let’s drive this home with one last example. Consider Antonio
+      and Yolanda, who are visiting an art show. Yolanda points to one
+      painting in particular, and says:</p>
+      <ol start="22" class="example" type="1">
+      <li>That painter is amazing!</li>
+      </ol>
+      <p>Later that night, Antonio says to his sister:</p>
+      <ol start="23" class="example" type="1">
+      <li>Yolanda thinks the girl down the street is an amazing
+      painter.</li>
+      </ol>
+      <p>Antonio “translated” the reference <em>“that painter”</em>
+      (which Antonio’s sister wouldn’t understand) to <em>“the girl down
+      the street”</em> (which Yolanda wouldn’t understand). Antonio’s
+      sister hears the sentence as:</p>
+      <div class="sourceCode" id="cb3"><pre
+      class="sourceCode lisp"><code class="sourceCode commonlisp"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>(think yolanda (is (ref <span class="st">&quot;the girl down the street&quot;</span>) amazing-painter))</span></code></pre></div>
+      <p>And because Yolanda doesn’t know who the girl down the street
+      is, she would not likely think:<a href="#fn6" class="footnote-ref"
+      id="fnref6" role="doc-noteref"><sup>6</sup></a><a href="#fn7"
+      class="footnote-ref" id="fnref7"
+      role="doc-noteref"><sup>7</sup></a></p>
+      <div class="sourceCode" id="cb4"><pre
+      class="sourceCode lisp"><code class="sourceCode commonlisp"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>(think yolanda &#39;(is (ref <span class="st">&quot;the girl down the street&quot;</span>) amazing-painter))</span></code></pre></div>
+      <p>We could also think back to (17) — the de dicto reading is
+      false, because Omar didn’t know who Ulyanov was. However, when his
+      mother made the same statement to a different audience, it was
+      received with a de re meaning, and was therefore true.</p>
+      <h2 id="parting-notes">Parting Notes</h2>
+      <p>I hope you enjoyed following along with me on my topic of the
+      week. Referential Opacity can seem a little abstract; historically
+      the main problem had always been that modeling language would
+      never be possible without understanding reference. <span
+      class="citation" data-cites="quine">Quine (<a href="#ref-quine"
+      role="doc-biblioref">1956</a>)</span> is a remarkably entertaining
+      paper, and I would highly recommend it (it’s a short read, full of
+      great examples)! It and <span class="citation"
+      data-cites="partee">Hall-Partee (<a href="#ref-partee"
+      role="doc-biblioref">1979</a>)</span> do a good job laying out why
+      the problem matters.</p>
+      <p>One critical piece of required reading here that has been left
+      unmentioned is <span class="citation" data-cites="kripke">Kripke
+      (<a href="#ref-kripke" role="doc-biblioref">1980</a>)</span> —
+      <em>“Naming and Necessity”</em> is <em>the</em> book on reference,
+      which servers as the modern foundation of the problem in
+      Philosophy, Language, Logic, and anyone else who may be
+      interested. Before Kripke, this was considered a massive open
+      problem. It’s considered to be required reading in these fields.
+      The computation connections are my own intuition, but they largely
+      shadow the thinking of Sual Kripke.</p>
+      <h2 id="references-1">References</h2>
+      <div class="refs">
+
+      </div>
+      <div id="refs" class="references csl-bib-body hanging-indent"
+      role="list">
+      <div id="ref-partee" class="csl-entry" role="listitem">
+      Hall-Partee, Barbara. 1979. <span>“Semantics — Mathematics or
+      Psychology?”</span> In <em>Semantics from Different Points of
+      View</em>, edited by Rainer Bäuerle, Urs Egli, and Arnim von
+      Stechow, 1–14. Berlin, Heidelberg: Springer Berlin Heidelberg. <a
+      href="https://doi.org/10.1007/978-3-642-67458-7_1">https://doi.org/10.1007/978-3-642-67458-7_1</a>.
+      </div>
+      <div id="ref-kripke" class="csl-entry" role="listitem">
+      Kripke, Saul A. 1980. <em>Naming and Necessity</em>. Harvard
+      University Press.
+      </div>
+      <div id="ref-quine" class="csl-entry" role="listitem">
+      Quine, Willard V. 1956. <span>“Quantifiers and Propositional
+      Attitudes.”</span> <em>The Journal of Philosophy</em> 53 (5):
+      177–87. <a
+      href="https://www.uvm.edu/~lderosse/courses/lang/Quine(1956).pdf">https://www.uvm.edu/~lderosse/courses/lang/Quine(1956).pdf</a>.
+      </div>
+      </div>
+      <aside id="footnotes" class="footnotes footnotes-end-of-document"
+      role="doc-endnotes">
+      <hr />
+      <ol>
+      <li id="fn1"><p>This comes from <a
+      href="https://plato.stanford.edu/entries/identity-indiscernible/">the
+      Indiscernibility of Identicals</a>, also known as “Libniz’ Law”.
+      Don’t worry, we’re not going to show it doesn’t hold. Instead,
+      we’re going to show that, in language, it doesn’t apply.<a
+      href="#fnref1" class="footnote-back"
+      role="doc-backlink">↩︎</a></p></li>
+      <li id="fn2"><p>Together these form the basis of <a
+      href="https://plato.stanford.edu/entries/logic-modal/">Kripke
+      semantics</a>, which is a huge topic, well deserving of another
+      post for another day.<a href="#fnref2" class="footnote-back"
+      role="doc-backlink">↩︎</a></p></li>
+      <li id="fn3"><p>More specifically, <em>referential names</em>
+      behave differently than <em>definite descriptions</em> within a
+      modal scope.<a href="#fnref3" class="footnote-back"
+      role="doc-backlink">↩︎</a></p></li>
+      <li id="fn4"><p>Fun fact, <a
+      href="https://en.wikipedia.org/wiki/Slovak_orthography">Slovak</a>
+      has <em>way</em> too many letters.<a href="#fnref4"
+      class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+      <li id="fn5"><p>The linguistic word for this part of language is
+      <a href="https://en.wikipedia.org/wiki/Pragmatics">pragmatics</a>.
+      Questions at the pragmatic level involve things like what “it”
+      means in “she needs to get it”. Also the “set of all possible
+      worlds” being considered by “<span
+      class="math inline">\(\square\)</span>” and “<span
+      class="math inline">\(\lozenge\)</span>”.<a href="#fnref5"
+      class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+      <li id="fn6"><p>The scoping of “who is evaluating this reference”
+      can become arbitrarily complicated, nesting partially evaluated /
+      non-evaluated reference. You could even add a third person into a
+      sentence.<a href="#fnref6" class="footnote-back"
+      role="doc-backlink">↩︎</a></p></li>
+      <li id="fn7"><p>In case it isn’t obvious, the Lisp notation I’m
+      using here is very wishy-washy. I’m only trying to spur the
+      intuition. In particular, I could have quoted just the reference
+      in this example, and not the entire predicate. Without really
+      defining the semantics of this notation, however, it’s a mute
+      point.<a href="#fnref7" class="footnote-back"
+      role="doc-backlink">↩︎</a></p></li>
+      </ol>
+      </aside>
+    </article>
+
+    <img id="sig" src="/images/tc-logo.svg" alt="Tyler Cecil's Blog"/>
+    <h6 style="text-align:center">Comments mean a lot!</h6>
+    <h5>
+      <a href="/"> More Posts </a>
+      <a href="mailto:blog@tylercecil.com?Subject=What’s In A Name?"
+         style="float: right">
+        Write Me
+      </a>
+    </h5>
+
+    <script
+      defer src="https://commento-tylercecil.herokuapp.com/js/commento.js">
+    </script>
+    <div id="commento"></div>
+
+    <footer>
+      <h6 style="float: right">&copy; 2023 Tyler Cecil</h6>
+      <a href="/feed/atom.xml"
+         style="text-decoration: none;">
+        <!-- SVG taken from: http://genericons.com/ -->
+        <svg xmlns="http://www.w3.org/2000/svg"
+             viewBox="0 0 16 16"
+             height="1.5rem"
+             width="1.5rem"
+             style="fill: currentColor;">
+          <rect x="0" fill="none" width="16" height="16"/>
+          <g>
+          <path d="M2 6v2c3.3 0 6 2.7 6 6h2c0-4.4-3.6-8-8-8zm0-4v2c5.5 0 10 4.5 10 10h2C14 7.4 8.6 2 2 2zm1.5 9c-.8 0-1.5.7-1.5 1.5S2.7 14 3.5 14 5 13.3 5 12.5 4.3 11 3.5 11z"/>
+          </g>
+        </svg>
+        Subscribe via RSS
+      </a>
+      <br/>
+      <a
+         href="https://blogtrottr.com/?subscribe=https://tylercecil.com/feed/atom.xml"
+         target="_blank"
+         title="Powered by BlogTrottr"
+         style="text-decoration: none;">
+        <!-- SVG taken from: http://genericons.com/ -->
+        <svg xmlns="http://www.w3.org/2000/svg"
+             viewBox="0 0 16 16"
+             height="1.5rem"
+             width="1.5rem"
+             style="fill: currentColor;">
+          <rect x="0" fill="none" width="16" height="16"/>
+          <g>
+          <path d="M15 9h-5c-.6 0-1 .4-1 1v5c0 .6.4 1 1 1h5c.6 0 1-.4 1-1v-5c0-.6-.4-1-1-1zm0 4h-2v2h-1v-2h-2v-1h2v-2h1v2h2v1zm-3-5V5c0-1.1-.9-2-2-2H2C.9 3 0 3.9 0 5v5c0 1.1.9 2 2 2h6v-2c0-1.2.8-2 2-2h2zM6 9.1L1 6.2V5l5 2.9L11 5v1.2L6 9.1z"/>
+          </g>
+        </svg>
+        Subscribe via Email
+      </a>
+    </footer>
+    <script>
+      // Causes external links to open in a new tab
+      // TODO: This should really be done by pandoc
+      (function (){
+              var links = document.links;
+
+              for (var i = 0, linksLength = links.length; i < linksLength; i++) {
+                      if (links[i].hostname != window.location.hostname) {
+                              links[i].target = '_blank';
+                            }
+                    }})();
+    </script>
+
+  </body>
+</html>

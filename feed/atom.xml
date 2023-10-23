@@ -1,0 +1,286 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns='http://www.w3.org/2005/Atom' xmlns:g='http://base.google.com/ns/1.0'>
+  <title>Tyler Cecil's Blog</title>
+  <subtitle>Language, Logic, Life</subtitle>
+  <author>
+    <name>Tyler Cecil</name>
+    <email>tyler.i.cecil@gmail.com</email>
+  </author>
+  <updated>2023-10-23T00:00:00Z</updated>
+  <rights type="text">Copyright © 2020 Tyler Cecil. All rights reserved.</rights>
+  <id>https://tylercecil.com/</id>
+  <link rel='self' href='https://tylercecil.com/feed/atom.xml'/>
+  <link type="application/atom+xml" href="https://tylercecil.com/feed/atom.xml" rel="self"/>
+
+      <entry>
+    <title>Let’s Come Somewhere Else</title>
+    <id>https://tylercecil.com/posts/2021/01/31/come-go.html</id>
+    <link href='https://tylercecil.com/posts/2021/01/31/come-go.html'/>
+    <published>2021-01-31T00:00:00Z</published>
+    <updated>2021-01-31T00:00:00Z</updated>
+    <summary type="xhtml">
+      <div xmlns="http://www.w3.org/1999/xhtml">
+                The Semantics of “Come” and “Go”
+        <br/>
+                
+      </div>
+    </summary>
+  </entry>
+      <entry>
+    <title>You Can Contract If You Wanna</title>
+    <id>https://tylercecil.com/posts/2020/11/03/wanna.html</id>
+    <link href='https://tylercecil.com/posts/2020/11/03/wanna.html'/>
+    <published>2020-11-03T00:00:00Z</published>
+    <updated>2020-11-03T00:00:00Z</updated>
+    <summary type="xhtml">
+      <div xmlns="http://www.w3.org/1999/xhtml">
+                The Story of Wanna-Contraction
+        <br/>
+                Syntax textbooks everywhere love, need, and wanna
+                explain what’s up with “wanna”.
+      </div>
+    </summary>
+  </entry>
+      <entry>
+    <title>Go C-Command Yourself!</title>
+    <id>https://tylercecil.com/posts/2020/07/05/c-command.html</id>
+    <link href='https://tylercecil.com/posts/2020/07/05/c-command.html'/>
+    <published>2020-07-05T00:00:00Z</published>
+    <updated>2020-08-31T00:00:00Z</updated>
+    <summary type="xhtml">
+      <div xmlns="http://www.w3.org/1999/xhtml">
+                An Introduction to Binding
+        <br/>
+                When do we use “himself/herself” instead of “him/her”?
+                It’s a more tricky story than you might think, and it
+                all comes down to a simple (albeit unsual) relationship
+                with trees.
+      </div>
+    </summary>
+  </entry>
+      <entry>
+    <title>May, Might, Modality</title>
+    <id>https://tylercecil.com/posts/2020/06/29/may-might.html</id>
+    <link href='https://tylercecil.com/posts/2020/06/29/may-might.html'/>
+    <published>2020-06-29T00:00:00Z</published>
+    <updated>2020-06-29T00:00:00Z</updated>
+    <summary type="xhtml">
+      <div xmlns="http://www.w3.org/1999/xhtml">
+                Probable Words about Possible Worlds
+        <br/>
+                <p><br />
+                An introduction to linguistic modality, as modeled by
+                possible worlds. In particular, what is the difference
+                between the worlds “may” and “might”?<br />
+                </p>
+      </div>
+    </summary>
+  </entry>
+      <entry>
+    <title>The Curious Case of Population Variance</title>
+    <id>https://tylercecil.com/posts/2020/05/10/bessel.html</id>
+    <link href='https://tylercecil.com/posts/2020/05/10/bessel.html'/>
+    <published>2020-05-10T00:00:00Z</published>
+    <updated>2020-05-10T00:00:00Z</updated>
+    <summary type="xhtml">
+      <div xmlns="http://www.w3.org/1999/xhtml">
+                Estimating Variance without Bias
+        <br/>
+                This post is a short introduction to Bessel’s correct —
+                an solution to an unexpected problem in statistics. As
+                it turns out, estimating the variance of a collection of
+                samples the way you might think will almost always
+                underestimate the true variance!
+      </div>
+    </summary>
+  </entry>
+      <entry>
+    <title>Natural Deduction</title>
+    <id>https://tylercecil.com/posts/2020/04/06/natduc.html</id>
+    <link href='https://tylercecil.com/posts/2020/04/06/natduc.html'/>
+    <published>2020-04-06T00:00:00Z</published>
+    <updated>04-27-2020T00:00:00Z</updated>
+    <summary type="xhtml">
+      <div xmlns="http://www.w3.org/1999/xhtml">
+                Notation for the Uninitiated
+        <br/>
+                A beginners introduction into how the hell you read
+                those proof trees that all the scary logicians keep
+                using. Filled with lots of exercises to keep you busy!
+      </div>
+    </summary>
+  </entry>
+      <entry>
+    <title>Winograd Schema Challenge</title>
+    <id>https://tylercecil.com/posts/2020/03/10/b-winograd.html</id>
+    <link href='https://tylercecil.com/posts/2020/03/10/b-winograd.html'/>
+    <published>2020-03-10T00:00:00Z</published>
+    <updated>2020-03-10T00:00:00Z</updated>
+    <summary type="xhtml">
+      <div xmlns="http://www.w3.org/1999/xhtml">
+                Going Beyond the Imitation Game
+        <br/>
+                <p><br />
+                The Winograd Schema Challenge is an alternative to the
+                Turing Test, with some very practical advantages. The
+                test itself boils so much down into a single, simple,
+                and well-defined linguistic function: anaphora
+                resolution.<br />
+                </p>
+      </div>
+    </summary>
+  </entry>
+      <entry>
+    <title>Language and Thought</title>
+    <id>https://tylercecil.com/posts/2020/03/10/a-turing-prelim.html</id>
+    <link href='https://tylercecil.com/posts/2020/03/10/a-turing-prelim.html'/>
+    <published>2020-03-10T00:00:00Z</published>
+    <updated>2020-03-10T00:00:00Z</updated>
+    <summary type="xhtml">
+      <div xmlns="http://www.w3.org/1999/xhtml">
+                Preliminaries on The Turing Test
+        <br/>
+                Did you try and read my post on
+                <a href="/posts/2020/03/10/b-winograd.html">Winograd
+                Schema</a>, and realize you don’t understand or have
+                never heard of the Turing Test? If so, this post is for
+                you!
+      </div>
+    </summary>
+  </entry>
+      <entry>
+    <title>Donkey Sentences</title>
+    <id>https://tylercecil.com/posts/2020/02/24/drt.html</id>
+    <link href='https://tylercecil.com/posts/2020/02/24/drt.html'/>
+    <published>2020-02-24T00:00:00Z</published>
+    <updated>2020-02-24T00:00:00Z</updated>
+    <summary type="xhtml">
+      <div xmlns="http://www.w3.org/1999/xhtml">
+                The Limits of Lexical Scope
+        <br/>
+                A very brief introduction to <em>Discourse
+                Representation Theory</em>, a method of using dynamic
+                scope to better model natural language. Featuring
+                Russell and <em>his</em> donkey.
+      </div>
+    </summary>
+  </entry>
+      <entry>
+    <title>What’s In A Name?</title>
+    <id>https://tylercecil.com/posts/2020/02/13/reference.html</id>
+    <link href='https://tylercecil.com/posts/2020/02/13/reference.html'/>
+    <published>2020-02-13T00:00:00Z</published>
+    <updated>2020-02-13T00:00:00Z</updated>
+    <summary type="xhtml">
+      <div xmlns="http://www.w3.org/1999/xhtml">
+                Problems with Reference
+        <br/>
+                If two things are equal, they can always replace each
+                other, no? Well, “the number of Godfather Movies” equals
+                “3”. My friend Alison only knows the first movie. Why is
+                it that I might say <em>“Alison thinks the number of
+                Godfather Movies is 1”</em>, but I wouldn’t say
+                <em>“Alison thinks 3 is 1”?</em>
+      </div>
+    </summary>
+  </entry>
+      <entry>
+    <title>Beta für Dich</title>
+    <id>https://tylercecil.com/posts/2020/02/02/beta.html</id>
+    <link href='https://tylercecil.com/posts/2020/02/02/beta.html'/>
+    <published>2020-02-02T00:00:00Z</published>
+    <updated>2020-02-02T00:00:00Z</updated>
+    <summary type="xhtml">
+      <div xmlns="http://www.w3.org/1999/xhtml">
+                Die Ursprung des wichtigstes Worts Kletterns
+        <br/>
+                A German writing exercise. Es gibt ein Wort, das man
+                stets in der Kletterhalle hört — “Beta”. “Darf ich dir
+                das Beta geben?” “Kann ich ein bisschen Beta bekommen?”
+                Was hießt es, und wieso benutzen wir es überhaupt?
+      </div>
+    </summary>
+  </entry>
+      <entry>
+    <title>Words that Ever Play Well</title>
+    <id>https://tylercecil.com/posts/2020/01/29/NPI2.html</id>
+    <link href='https://tylercecil.com/posts/2020/01/29/NPI2.html'/>
+    <published>2020-01-29T00:00:00Z</published>
+    <updated>2020-01-29T00:00:00Z</updated>
+    <summary type="xhtml">
+      <div xmlns="http://www.w3.org/1999/xhtml">
+                Part II on Negative Polarity Items
+        <br/>
+                <p><br />
+                In Part II we dive into the work of Anastasia
+                Giannakidou, and come up with a new, more general, more
+                powerful, and more correct licensing condition: the
+                <em>nonveridicality approach</em>.<br />
+                </p>
+      </div>
+    </summary>
+  </entry>
+      <entry>
+    <title>Words that Ever Play Well</title>
+    <id>https://tylercecil.com/posts/2020/01/19/NPI.html</id>
+    <link href='https://tylercecil.com/posts/2020/01/19/NPI.html'/>
+    <published>2020-01-19T00:00:00Z</published>
+    <updated>2020-01-24T00:00:00Z</updated>
+    <summary type="xhtml">
+      <div xmlns="http://www.w3.org/1999/xhtml">
+                Part I on Negative Polarity Items
+        <br/>
+                “Any” is such a common word; with “for-all”-like
+                semantic. “Any” has hardly ever troubled anyone. Then
+                again… maybe “any” <em>has</em> troubled
+                <em>anyone.</em>
+      </div>
+    </summary>
+  </entry>
+      <entry>
+    <title>Making make Easy</title>
+    <id>https://tylercecil.com/posts/2016/04/18/easymake.html</id>
+    <link href='https://tylercecil.com/posts/2016/04/18/easymake.html'/>
+    <published>2016-04-18T00:00:00Z</published>
+    <updated>2016-04-18T00:00:00Z</updated>
+    <summary type="xhtml">
+      <div xmlns="http://www.w3.org/1999/xhtml">
+                How to write more general makefiles. An “easymake oven,”
+                if you will. Covers pointers for organizing your C / C++
+                projects.
+      </div>
+    </summary>
+  </entry>
+      <entry>
+    <title>Circular Programming</title>
+    <id>https://tylercecil.com/posts/2015/07/29/circular.html</id>
+    <link href='https://tylercecil.com/posts/2015/07/29/circular.html'/>
+    <published>2015-07-29T00:00:00Z</published>
+    <updated>2015-07-29T00:00:00Z</updated>
+    <summary type="xhtml">
+      <div xmlns="http://www.w3.org/1999/xhtml">
+                Or “How I Learned to Stop Worrying and Love Lazy
+                Evaluation”
+      </div>
+    </summary>
+  </entry>
+      <entry>
+    <title>Paratype</title>
+    <id>https://tylercecil.com/posts/2014/05/01/paratype.html</id>
+    <link href='https://tylercecil.com/posts/2014/05/01/paratype.html'/>
+    <published>2014-05-01T00:00:00Z</published>
+    <updated>2014-05-01T00:00:00Z</updated>
+    <summary type="xhtml">
+      <div xmlns="http://www.w3.org/1999/xhtml">
+                An Actor Model for Monomorphisers
+        <br/>
+                A proof-of-concept experiment written in Go to
+                understand static monomorphising. Given a program in a
+                toy dummy language with a Haskell-like type system,
+                Paratype will perform type inference and type checking.
+                If type checking passed, it will generate a monomorphic
+                code realization of the given program.
+      </div>
+    </summary>
+  </entry>
+    </feed>

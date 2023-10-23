@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <!-- Meta info
+    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <meta charset="utf-8"/>
+    <meta name="description" content="Personal website of Tyler Cecil"/>
+    <meta name="author" content="Tyler I. Cecil"/>
+    <title>Making make Easy</title>
+    <!-- Mobile Specific Metas
+      –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+    <!-- Favicon <link rel="icon" type="image/png" href="/images/favicon.png">
+      –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon/favicon-16x16.png">
+    <link rel="manifest" href="/images/favicon/site.webmanifest">
+    <link rel="mask-icon" href="/images/favicon/safari-pinned-tab.svg" color="#5bbad5">
+    <link rel="shortcut icon" href="/images/favicon/favicon.ico">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="msapplication-config" content="/images/favicon/browserconfig.xml">
+    <meta name="theme-color" content="#ffffff">
+    <!-- FONT
+      –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+      <!-- <link href="https://fonts.googleapis.com/css?family=Open+Sans|Raleway|Roboto&display=swap" rel="stylesheet"> -->
+    <!-- CSS
+      –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <link href="/css/normalize.css" rel="stylesheet">
+    <link href="/css/post.css" rel="stylesheet">
+    <!-- JS
+      –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async
+            src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+    </script>
+    <!-- HEADER-INCLUDES:
+      –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+      </head>
+
+  <body>
+
+    <nav>
+      <a href="/">Posts</a>
+      &bull;
+      <a href="/about/">About</a>
+      &bull;
+      <a href="/subscribe/">Subscribe</a>
+    </nav>
+    <header>
+      <h1>Making make Easy</h1>
+      
+      <p><small>Posted on 2016-04-18</small></p>
+          </header>
+
+    
+    <article>
+      <p>If you come from a systems programming world, <code>make</code>
+      is a pretty amazing tool. Being able to keep track of a dependence
+      graph of files, and using the last modified time-stamp to automate
+      tasks seems pretty clever and general. It’s small, composable,
+      versatile — a true unix tool.</p>
+      <p>But if you are something of a beginner to C/C++, you may feel a
+      little indignant that you are being forced to write your
+      dependencies in two different places (both the includes in your
+      source files <em>and</em> the makefile itself). Yeah, it is
+      important to compile your project in chunks and link later, but
+      shouldn’t <code>gcc</code> or <code>clang</code> be able to figure
+      out how, all by itself?</p>
+      <p>There are reasons why things aren’t this way, and many of them
+      are legacy reasons (and, yes, many of them are actually good
+      reasons). All the same, I long ago set out to make something of an
+      “<em>automated general makefile.</em>” Many of my students have
+      asked me how exactly it works, so I decided to make this
+      step-by-step walk-through of making a general makefile that should
+      work with most simple C/C++ projects.</p>
+      <h2 id="typical-object-and-executable-rules">Typical Object and
+      Executable Rules</h2>
+      <p>For a typical project (especially for beginners), chances are
+      most of your makefiles look the same, and are probably broken into
+      two main sets of rules: object rules, and executable rules.</p>
+      <h3 id="object-rules">Object Rules</h3>
+      <p><em>Most</em> rules in your makefile likely look something like
+      this:</p>
+      <div class="sourceCode" id="cb1"><pre
+      class="sourceCode makefile"><code class="sourceCode makefile"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="dv">mylib.o :</span><span class="dt"> mylib.c mylib.h</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="ch">$(</span><span class="dt">CC</span><span class="ch">)</span> mylib.c -c -o mylib.o</span></code></pre></div>
+      <p>This is stupidly redundant! Despite popular opinions, computers
+      are supposed to make your life easier. Makefiles provided a number
+      of <a
+      href="https://www.gnu.org/software/make/manual/html_node/Automatic-Variables.html">automatic
+      variables</a> to fix this. Here are arguably the three most
+      important:</p>
+      <table>
+      <thead>
+      <tr class="header">
+      <th>Variable</th>
+      <th>Meaning</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr class="odd">
+      <td><code>$@</code></td>
+      <td>Name of the target.</td>
+      </tr>
+      <tr class="even">
+      <td><code>$&lt;</code></td>
+      <td>Name of the first prerequisite.</td>
+      </tr>
+      <tr class="odd">
+      <td><code>$^</code></td>
+      <td>Name of all the prerequisites.</td>
+      </tr>
+      </tbody>
+      </table>
+      <p>This is made more complicated if you are dealing with <a
+      href="https://www.gnu.org/software/make/manual/html_node/Archives.html#Archives">archives</a>,
+      or are dealing with duplicates in your linking process. I’m just
+      going to cover the basics. With this lovely information, let’s
+      rewrite this rule!</p>
+      <div class="sourceCode" id="cb2"><pre
+      class="sourceCode makefile"><code class="sourceCode makefile"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="dv">mylib.o :</span><span class="dt"> mylib.c mylib.h</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="ch">$(</span><span class="dt">CC</span><span class="ch">)</span> <span class="ch">$&lt;</span> -c -o <span class="ch">$@</span></span></code></pre></div>
+      <p>There we go! Much more readable… Ok, maybe not more readable,
+      but this will help us start to generalize things.</p>
+      <h3 id="executable-rules">Executable Rules</h3>
+      <p>Just like object files, most simple projects have nearly
+      identical final rules for their executable.</p>
+      <div class="sourceCode" id="cb3"><pre
+      class="sourceCode makefile"><code class="sourceCode makefile"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="dv">exec :</span><span class="dt"> thing1.o thing2.o thing3.o thing4.o thing5.o</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="ch">$(</span><span class="dt">CC</span><span class="ch">)</span> thing1.o thing2.o thing3.o thing4.o thing5.o -o exec</span></code></pre></div>
+      <p>Again, we can much more conciesly express this with</p>
+      <div class="sourceCode" id="cb4"><pre
+      class="sourceCode makefile"><code class="sourceCode makefile"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="dv">exec :</span><span class="dt"> thing1.o thing2.o thing3.o thing4.o thing5.o</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="ch">$(</span><span class="dt">CC</span><span class="ch">)</span> <span class="ch">$^</span> -o <span class="ch">$@</span></span></code></pre></div>
+      <h2 id="but-these-rules-are-still-pretty-redundant">But These
+      Rules Are Still Pretty Redundant!</h2>
+      <p><em>Oh, yeah, totally</em>! Let’s see how we can fix that…
+      First thing is first — lets make a list of all the files we
+      have!</p>
+      <div class="sourceCode" id="cb5"><pre
+      class="sourceCode makefile"><code class="sourceCode makefile"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="dt">FILES</span> <span class="ch">:=</span><span class="st"> thing1.c thing2.c thing3.c thing4.c thing5.c</span></span></code></pre></div>
+      <p>Ok, so now what? Well, we probably will have an object file for
+      each one of those source files.</p>
+      <div class="sourceCode" id="cb6"><pre
+      class="sourceCode makefile"><code class="sourceCode makefile"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="dt">OBJECTS</span> <span class="ch">:=</span><span class="st"> </span><span class="ch">$(</span><span class="dt">FILES</span><span class="kw">:</span><span class="ss">.c</span><span class="kw">=</span><span class="ss">.o</span><span class="ch">)</span></span></code></pre></div>
+      <p>That little chunk of magic essentially says make a copy of
+      <code>FILES</code>, replacing the <code>.c</code> extension with
+      <code>.o</code>. Note that the whitespace matters here (and in
+      general everywhere for makefiles).</p>
+      <p>Now that we have a list of files and objects, let’s make a
+      simple makefile which builds every object file, and links them all
+      together into one executable!</p>
+      <div class="sourceCode" id="cb7"><pre
+      class="sourceCode makefile"><code class="sourceCode makefile"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># List our files</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="dt">FILES</span> <span class="ch">:=</span><span class="st"> thing1.c thing2.c thing3.c thing4.c thing5.c</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Turn those files into a list of objects</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="dt">OBJECTS</span> <span class="ch">:=</span><span class="st"> </span><span class="ch">$(</span><span class="dt">FILES</span><span class="kw">:</span><span class="ss">.c</span><span class="kw">=</span><span class="ss">.o</span><span class="ch">)</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="dv">all :</span><span class="dt"> exec</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Object file rules</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="dv">%.o :</span><span class="dt"> %.c</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>    <span class="ch">$(</span><span class="dt">CC</span><span class="ch">)</span> <span class="ch">$&lt;</span> -c -o <span class="ch">$@</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Executable rule</span></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a><span class="dv">exec :</span><span class="dt"> </span><span class="ch">$(</span><span class="dt">OBJECTS</span><span class="ch">)</span></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>    <span class="ch">$(</span><span class="dt">CC</span><span class="ch">)</span> <span class="ch">$^</span> -o <span class="ch">$@</span></span></code></pre></div>
+      <p>Yeah, now we be jammin’! So what’s going on with the
+      <code>%.o</code> rule? Well this is a <a
+      href="https://www.gnu.org/software/make/manual/html_node/Pattern-Rules.html">pattern
+      rule</a>, which does pretty much what you’d expect. Anything
+      looking for a rule of the form <code>stem.o</code> that doesn’t
+      exist will be matched, and will depend on <code>stem.c</code>.
+      <em>(Right now I am ignoring header files, don’t worry!)</em></p>
+      <h2 id="detecting-files">Detecting Files</h2>
+      <p>Ok, we’re getting somewhere, but chances are we probably want
+      an object file for every <code>.c</code> file in our project. Can
+      we make <code>make</code> automatically build our
+      <code>FILES</code> list? Yes, of course we can, that’s why I asked
+      the question. While we’re doing this, let’s try and clean things
+      up a bit.</p>
+      <div class="sourceCode" id="cb8"><pre
+      class="sourceCode makefile"><code class="sourceCode makefile"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Compiler</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="dt">CC</span>       <span class="ch">:=</span><span class="st"> clang</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Directories and targets</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="dt">SRCDIR</span>   <span class="ch">:=</span><span class="st"> src</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="dt">BUILDDIR</span> <span class="ch">:=</span><span class="st"> build</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="dt">TARGET</span>   <span class="ch">:=</span><span class="st"> myprog</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Build a list of files automatically!</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="dt">SRCEXT</span>   <span class="ch">:=</span><span class="st"> c</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="dt">SOURCES</span>  <span class="ch">:=</span><span class="st"> </span><span class="ch">$(</span><span class="kw">shell</span><span class="st"> find </span><span class="ch">$(</span><span class="dt">SRCDIR</span><span class="ch">)</span><span class="st"> -type f -name *.</span><span class="ch">$(</span><span class="dt">SRCEXT</span><span class="ch">))</span></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a><span class="dt">OBJECTS</span>  <span class="ch">:=</span><span class="st"> </span><span class="ch">$(</span><span class="kw">patsubst</span><span class="st"> </span><span class="ch">$(</span><span class="dt">SRCDIR</span><span class="ch">)</span><span class="st">/%</span><span class="kw">,</span><span class="st"> </span><span class="ch">$(</span><span class="dt">BUILDDIR</span><span class="ch">)</span><span class="st">/%</span><span class="kw">,</span><span class="ch">$(</span><span class="dt">SOURCES</span><span class="kw">:</span><span class="ss">.</span><span class="ch">$(</span><span class="dt">SRCEXT</span><span class="ch">)</span><span class="kw">=</span><span class="ss">.o</span><span class="ch">))</span></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a><span class="ot">.SECONDEXPANSION:</span></span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a><span class="dv">all :</span><span class="dt"> </span><span class="ch">$(</span><span class="dt">TARGET</span><span class="ch">)</span></span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a><span class="dv">$(TARGET) :</span><span class="dt"> </span><span class="ch">$(</span><span class="dt">OBJECTS</span><span class="ch">)</span></span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>    <span class="ch">$(</span><span class="dt">CC</span><span class="ch">)</span> <span class="ch">$^</span> -o <span class="ch">$@</span></span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a><span class="dv">$(BUILDDIR)/%.o :</span><span class="dt"> </span><span class="ch">$(</span><span class="dt">SRCDIR</span><span class="ch">)</span><span class="dt">/%.c</span></span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a>    <span class="ch">@</span><span class="fu">mkdir -p </span><span class="ch">$$</span><span class="fu">(dirname </span><span class="ch">$@</span><span class="fu">)</span></span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a>    <span class="ch">$(</span><span class="dt">CC</span><span class="ch">)</span> -o <span class="ch">$@</span> -c <span class="ch">$&lt;</span></span></code></pre></div>
+      <p>Starting to look pretty fancy, right? Other than the general
+      cleaning, this adds a way for <code>make</code> to automatically
+      detect the source files that will be needed when compiling.</p>
+      <p><code>SOURCES := $(shell ...)</code> uses a <code>make</code>
+      function called <a
+      href="https://www.gnu.org/software/make/manual/html_node/Shell-Function.html">shell</a>.
+      Essentially the function just runs it’s arguments as a shell
+      command, and evaluates to its result. We used <code>find</code> to
+      look for all files ending in <code>SRCEXT</code> in the
+      <code>SRCDIR</code> directory. Now <code>make</code> can know what
+      files to compile, without us having to tell it!</p>
+      <p><code>OBJECTS := $(pathsubst ...)</code> uses the <a
+      href="https://www.gnu.org/software/make/manual/html_node/Text-Functions.html">pathsubst</a>
+      function to make sure our object files go to <code>BUILDDIR</code>
+      instead of <code>SRCDIR</code>. This will make sure we don’t have
+      junk files everywhere when we make.</p>
+      <p><code>.SECONDEXPANSION</code> and the <code>mkdir</code> are
+      just housekeeping. It keeps our compiler from complaining that
+      there isn’t a directory to put our object files. See the
+      <code>make</code> manual on <a
+      href="https://www.gnu.org/software/make/manual/html_node/Secondary-Expansion.html">secondary
+      expansion</a> to get an idea of what is going on.</p>
+      <h2 id="what-about-headers">What about Headers?</h2>
+      <p>Right now, if you edit one of your
+      <code>.c</code>/<code>.cc</code>/<code>.cpp</code> files,
+      <code>make</code> will know to recompile properly. But let’s say
+      you edit one of your header files — none of our rules depend on
+      those header files!</p>
+      <p>We could try something like this:</p>
+      <div class="sourceCode" id="cb9"><pre
+      class="sourceCode makefile"><code class="sourceCode makefile"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># A poor attempt at dealing with header files.</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="dv">$(BUILDDIR)/%.o :</span><span class="dt"> </span><span class="ch">$(</span><span class="dt">SRCDIR</span><span class="ch">)</span><span class="dt">/%.c </span><span class="ch">$(</span><span class="dt">HDIR</span><span class="ch">)</span><span class="dt">/%.h</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    <span class="ch">$(</span><span class="dt">CC</span><span class="ch">)</span> -o <span class="ch">$@</span> -c <span class="ch">$&lt;</span></span></code></pre></div>
+      <p>But this assumes that for every <code>.c</code> file there is a
+      <code>.h</code> file. Even for small and simple projects this is a
+      pretty bad assumption! We are going to have to get pretty fancy
+      here. How can we automatically figure out what files are included
+      by a given source file?</p>
+      <h3 id="the--m-compilation-flags">The <code>-M</code> Compilation
+      Flags</h3>
+      <p>Luckily this is a solved problem. Consider the following C
+      program</p>
+      <div class="sourceCode" id="cb10"><pre
+      class="sourceCode c"><code class="sourceCode c"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Dumb C Program</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;myheader.h&quot;</span></span></code></pre></div>
+      <p>Pretty crazy, I know. Now check this out.</p>
+      <div class="sourceCode" id="cb11"><pre
+      class="sourceCode bash"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> <span class="co"># Run your compiler with -M</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> clang <span class="at">-M</span> new.c</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="ex">new.o:</span> new.c myheader.</span></code></pre></div>
+      <p>The <code>-M</code> flag essentially says “read this file, and
+      build me makefile rules!” There are some variations on this flag,
+      bug we will use just a few.</p>
+      <table>
+      <colgroup>
+      <col style="width: 7%" />
+      <col style="width: 92%" />
+      </colgroup>
+      <thead>
+      <tr class="header">
+      <th>Flag</th>
+      <th>Meaning</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr class="odd">
+      <td>M</td>
+      <td>Build makefile dependencies, and stop.</td>
+      </tr>
+      <tr class="even">
+      <td>MM</td>
+      <td>Build makefile dependencies, ignore files on the system path
+      (like <code>stdio.h</code>).</td>
+      </tr>
+      <tr class="odd">
+      <td>MP</td>
+      <td>Give a dumby rule for included files. Prevents
+      <code>make</code> from spitting out an error if the header is
+      deleted.</td>
+      </tr>
+      <tr class="even">
+      <td>MD</td>
+      <td>Compile the file like normal WHILE building makefile
+      dependencies.</td>
+      </tr>
+      <tr class="odd">
+      <td>MF</td>
+      <td>Give a name to this “mini-makefile”</td>
+      </tr>
+      </tbody>
+      </table>
+      <h3 id="using-sub-makefiles">Using Sub-Makefiles</h3>
+      <p>So how is our makefile going to use this? With the <a
+      href="https://www.gnu.org/software/make/manual/html_node/Include.html">include
+      directive</a>. By simply including this files, <code>make</code>
+      will know about these subtle dependencies. Putting it together
+      gives us something like:</p>
+      <div class="sourceCode" id="cb12"><pre
+      class="sourceCode makefile"><code class="sourceCode makefile"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Compiler</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="dt">CC</span>       <span class="ch">:=</span><span class="st"> clang</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Directories and targets</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="dt">SRCDIR</span>   <span class="ch">:=</span><span class="st"> src</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="dt">BUILDDIR</span> <span class="ch">:=</span><span class="st"> build</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="dt">TARGET</span>   <span class="ch">:=</span><span class="st"> myprog</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Build a list of files automatically!</span></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a><span class="dt">SRCEXT</span>   <span class="ch">:=</span><span class="st"> c</span></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a><span class="dt">SOURCES</span>  <span class="ch">:=</span><span class="st"> </span><span class="ch">$(</span><span class="kw">shell</span><span class="st"> find </span><span class="ch">$(</span><span class="dt">SRCDIR</span><span class="ch">)</span><span class="st"> -type f -name *.</span><span class="ch">$(</span><span class="dt">SRCEXT</span><span class="ch">))</span></span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a><span class="dt">OBJECTS</span>  <span class="ch">:=</span><span class="st"> </span><span class="ch">$(</span><span class="kw">patsubst</span><span class="st"> </span><span class="ch">$(</span><span class="dt">SRCDIR</span><span class="ch">)</span><span class="st">/%</span><span class="kw">,</span><span class="st"> </span><span class="ch">$(</span><span class="dt">BUILDDIR</span><span class="ch">)</span><span class="st">/%</span><span class="kw">,</span><span class="ch">$(</span><span class="dt">SOURCES</span><span class="kw">:</span><span class="ss">.</span><span class="ch">$(</span><span class="dt">SRCEXT</span><span class="ch">)</span><span class="kw">=</span><span class="ss">.o</span><span class="ch">))</span></span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a><span class="dt">DEPS</span>     <span class="ch">:=</span><span class="st"> </span><span class="ch">$(</span><span class="dt">OBJECTS</span><span class="kw">:</span><span class="ss">%.o</span><span class="kw">=</span><span class="ss">%.d</span><span class="ch">)</span></span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a><span class="ot">.SECONDEXPANSION:</span></span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a><span class="dv">all :</span><span class="dt"> </span><span class="ch">$(</span><span class="dt">TARGET</span><span class="ch">)</span></span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a><span class="dv">$(TARGET) :</span><span class="dt"> </span><span class="ch">$(</span><span class="dt">OBJECTS</span><span class="ch">)</span></span>
+<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a>    <span class="ch">$(</span><span class="dt">CC</span><span class="ch">)</span> <span class="ch">$^</span> -o <span class="ch">$@</span></span>
+<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a><span class="dv">$(BUILDDIR)/%.o :</span><span class="dt"> </span><span class="ch">$(</span><span class="dt">SRCDIR</span><span class="ch">)</span><span class="dt">/%.c</span></span>
+<span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a>    <span class="ch">@</span><span class="fu">mkdir -p </span><span class="ch">$$</span><span class="fu">(dirname </span><span class="ch">$@</span><span class="fu">)</span></span>
+<span id="cb12-24"><a href="#cb12-24" aria-hidden="true" tabindex="-1"></a>    <span class="ch">$(</span><span class="dt">CC</span><span class="ch">)</span> -c -o <span class="ch">$@</span> -MMD -MP -MF <span class="ch">${</span><span class="dt">@</span><span class="kw">:</span><span class="ss">.o=.d</span><span class="ch">}</span> <span class="ch">$&lt;</span></span>
+<span id="cb12-25"><a href="#cb12-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-26"><a href="#cb12-26" aria-hidden="true" tabindex="-1"></a><span class="co"># Include all dependence information from the last build</span></span>
+<span id="cb12-27"><a href="#cb12-27" aria-hidden="true" tabindex="-1"></a><span class="kw">-include</span> <span class="ch">$(</span><span class="dt">DEPS</span><span class="ch">)</span></span></code></pre></div>
+      <p><strong>Finally! We have a makefile that just… generally
+      works!</strong></p>
+      <h2 id="a-final-cleanup">A Final Cleanup</h2>
+      <p>Before we call this good, let’s do one last cleanup. Part of
+      this cleanup should involve our project structure. I am going to
+      assume my project looks something like this.</p>
+      <pre><code>project
+| -- src     (Source Files)
+| -- include (Header Files)
+| -- lib     (3rd Party Libraries)
+| -- build   (Object Files)
+| -- bin
+|    | -- target</code></pre>
+      <p>This is a pretty typical project layout — if you’re not sure
+      how to organize your simple C / C++ project, consider that layout.
+      So, without really much explanation, here is our final
+      makefile:</p>
+      <div class="sourceCode" id="cb14"><pre
+      class="sourceCode makefile"><code class="sourceCode makefile"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Compiler and flags</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="dt">CC</span>       <span class="ch">:=</span><span class="st"> clang</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="dt">CFLAGS</span>   <span class="ch">:=</span><span class="st"> </span><span class="ch">$(</span><span class="dt">CLAGS</span><span class="ch">)</span><span class="st"> -Wall -Wextra -O3</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="dt">INC</span>      <span class="ch">:=</span><span class="st"> -I include</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="dt">LIB</span>      <span class="ch">:=</span><span class="st"> -lmath -pthread </span><span class="co">#For example</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Directories and targets</span></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a><span class="dt">SRCDIR</span>   <span class="ch">:=</span><span class="st"> src</span></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a><span class="dt">BUILDDIR</span> <span class="ch">:=</span><span class="st"> build</span></span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a><span class="dt">TARGET</span>   <span class="ch">:=</span><span class="st"> bin/myprog</span></span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a><span class="co"># List of files</span></span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a><span class="dt">SRCEXT</span>   <span class="ch">:=</span><span class="st"> c</span></span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a><span class="dt">SOURCES</span>  <span class="ch">:=</span><span class="st"> </span><span class="ch">$(</span><span class="kw">shell</span><span class="st"> find </span><span class="ch">$(</span><span class="dt">SRCDIR</span><span class="ch">)</span><span class="st"> -type f -name *.</span><span class="ch">$(</span><span class="dt">SRCEXT</span><span class="ch">))</span></span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a><span class="dt">OBJECTS</span>  <span class="ch">:=</span><span class="st"> </span><span class="ch">$(</span><span class="kw">patsubst</span><span class="st"> </span><span class="ch">$(</span><span class="dt">SRCDIR</span><span class="ch">)</span><span class="st">/%</span><span class="kw">,</span><span class="st"> </span><span class="ch">$(</span><span class="dt">BUILDDIR</span><span class="ch">)</span><span class="st">/%</span><span class="kw">,</span><span class="ch">$(</span><span class="dt">SOURCES</span><span class="kw">:</span><span class="ss">.</span><span class="ch">$(</span><span class="dt">SRCEXT</span><span class="ch">)</span><span class="kw">=</span><span class="ss">.o</span><span class="ch">))</span></span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a><span class="dt">DEPS</span>     <span class="ch">:=</span><span class="st"> </span><span class="ch">$(</span><span class="dt">OBJECTS</span><span class="kw">:</span><span class="ss">%.o</span><span class="kw">=</span><span class="ss">%.d</span><span class="ch">)</span></span>
+<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Colors</span></span>
+<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a><span class="dt">GREEN</span>  <span class="ch">=</span><span class="st"> \e[0;32m</span></span>
+<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a><span class="dt">YELLOW</span> <span class="ch">=</span><span class="st"> \e[1;33m</span></span>
+<span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a><span class="dt">RED</span>    <span class="ch">=</span><span class="st"> \e[0;31m</span></span>
+<span id="cb14-22"><a href="#cb14-22" aria-hidden="true" tabindex="-1"></a><span class="dt">NC</span>     <span class="ch">=</span><span class="st"> \e[0m</span></span>
+<span id="cb14-23"><a href="#cb14-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-24"><a href="#cb14-24" aria-hidden="true" tabindex="-1"></a><span class="ot">.SECONDEXPANSION:</span></span>
+<span id="cb14-25"><a href="#cb14-25" aria-hidden="true" tabindex="-1"></a><span class="ot">.PHONY:</span><span class="dt"> clean</span></span>
+<span id="cb14-26"><a href="#cb14-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-27"><a href="#cb14-27" aria-hidden="true" tabindex="-1"></a><span class="dv">all :</span><span class="dt"> </span><span class="ch">$(</span><span class="dt">TARGET</span><span class="ch">)</span></span>
+<span id="cb14-28"><a href="#cb14-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-29"><a href="#cb14-29" aria-hidden="true" tabindex="-1"></a><span class="dv">$(TARGET) :</span><span class="dt"> </span><span class="ch">$(</span><span class="dt">OBJECTS</span><span class="ch">)</span></span>
+<span id="cb14-30"><a href="#cb14-30" aria-hidden="true" tabindex="-1"></a>    <span class="ch">@</span><span class="fu">echo -e </span><span class="st">&quot;</span><span class="ch">$(</span><span class="dt">GREEN</span><span class="ch">)</span><span class="st"> Linking... </span><span class="ch">$(</span><span class="dt">NC</span><span class="ch">)</span><span class="st">&quot;</span></span>
+<span id="cb14-31"><a href="#cb14-31" aria-hidden="true" tabindex="-1"></a>    <span class="ch">$(</span><span class="dt">CC</span><span class="ch">)</span> <span class="ch">$(</span><span class="dt">LIB</span><span class="ch">)</span> <span class="ch">$^</span> -o <span class="ch">$@</span></span>
+<span id="cb14-32"><a href="#cb14-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-33"><a href="#cb14-33" aria-hidden="true" tabindex="-1"></a><span class="dv">$(BUILDDIR)/%.o :</span><span class="dt"> </span><span class="ch">$(</span><span class="dt">SRCDIR</span><span class="ch">)</span><span class="dt">/%.c</span></span>
+<span id="cb14-34"><a href="#cb14-34" aria-hidden="true" tabindex="-1"></a>    <span class="ch">@</span><span class="fu">echo -e </span><span class="st">&quot;</span><span class="ch">$(</span><span class="dt">GREEN</span><span class="ch">)</span><span class="st"> Building </span><span class="ch">$@</span><span class="st">... </span><span class="ch">$(</span><span class="dt">NC</span><span class="ch">)</span><span class="st">&quot;</span></span>
+<span id="cb14-35"><a href="#cb14-35" aria-hidden="true" tabindex="-1"></a>    <span class="ch">@</span><span class="fu">mkdir -p </span><span class="ch">$$</span><span class="fu">(dirname </span><span class="ch">$@</span><span class="fu">)</span></span>
+<span id="cb14-36"><a href="#cb14-36" aria-hidden="true" tabindex="-1"></a>    <span class="ch">$(</span><span class="dt">CC</span><span class="ch">)</span> <span class="ch">$(</span><span class="dt">CFLAGS</span><span class="ch">)</span> <span class="ch">$(</span><span class="dt">INC</span><span class="ch">)</span> -c -o <span class="ch">$@</span> -MMD -MP -MF <span class="ch">${</span><span class="dt">@</span><span class="kw">:</span><span class="ss">.o=.d</span><span class="ch">}</span> <span class="ch">$&lt;</span></span>
+<span id="cb14-37"><a href="#cb14-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-38"><a href="#cb14-38" aria-hidden="true" tabindex="-1"></a><span class="dv">clean:</span></span>
+<span id="cb14-39"><a href="#cb14-39" aria-hidden="true" tabindex="-1"></a>    <span class="ch">@</span><span class="fu">echo -e </span><span class="st">&quot;</span><span class="ch">$(</span><span class="dt">GREEN</span><span class="ch">)</span><span class="st"> Cleaning... </span><span class="ch">$(</span><span class="dt">NC</span><span class="ch">)</span><span class="st">&quot;</span><span class="fu">;</span></span>
+<span id="cb14-40"><a href="#cb14-40" aria-hidden="true" tabindex="-1"></a>    <span class="ch">$(</span><span class="dt">RM</span><span class="ch">)</span> -r <span class="ch">$(</span><span class="dt">BUILDDIR</span><span class="ch">)</span> <span class="ch">$(</span><span class="dt">TARGET</span><span class="ch">)</span></span>
+<span id="cb14-41"><a href="#cb14-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-42"><a href="#cb14-42" aria-hidden="true" tabindex="-1"></a><span class="kw">-include</span> <span class="ch">$(</span><span class="dt">DEPS</span><span class="ch">)</span></span></code></pre></div>
+      <p>As long as your project is of the given simple structure, this
+      will just automatically work!</p>
+      <h2 id="limitations">Limitations</h2>
+      <p>You might want to know why everyone doesn’t do this. Just
+      glossing through some reasons quickly:</p>
+      <ol type="1">
+      <li>Sometimes it doesn’t make sense to have a one-to-one
+      relationship with source files and object files.</li>
+      <li>This will not yield a <em>fast</em> makefile. Now, if it’s
+      speed you need, consider investigating one of the alternative
+      build systems, like <a href="https://ninja-build.org/">ninja</a>.
+      This is more directed at smaller projects.</li>
+      <li>No support for the portability power that is provided by
+      something like <a href="https://cmake.org/">cmake</a> or <a
+      href="https://www.gnu.org/software/automake/manual/html_node/Autotools-Introduction.html">autotools</a>.</li>
+      </ol>
+      <p>What this file really does is give you a simple solution to
+      build systems in C, which is easily human editable if need be.
+      Also, hopefully you’ve learned a few things about how to write
+      makefiles, and organize your C / C++ projects.</p>
+    </article>
+
+    <img id="sig" src="/images/tc-logo.svg" alt="Tyler Cecil's Blog"/>
+    <h6 style="text-align:center">Comments mean a lot!</h6>
+    <h5>
+      <a href="/"> More Posts </a>
+      <a href="mailto:blog@tylercecil.com?Subject=Making make Easy"
+         style="float: right">
+        Write Me
+      </a>
+    </h5>
+
+    <script
+      defer src="https://commento-tylercecil.herokuapp.com/js/commento.js">
+    </script>
+    <div id="commento"></div>
+
+    <footer>
+      <h6 style="float: right">&copy; 2023 Tyler Cecil</h6>
+      <a href="/feed/atom.xml"
+         style="text-decoration: none;">
+        <!-- SVG taken from: http://genericons.com/ -->
+        <svg xmlns="http://www.w3.org/2000/svg"
+             viewBox="0 0 16 16"
+             height="1.5rem"
+             width="1.5rem"
+             style="fill: currentColor;">
+          <rect x="0" fill="none" width="16" height="16"/>
+          <g>
+          <path d="M2 6v2c3.3 0 6 2.7 6 6h2c0-4.4-3.6-8-8-8zm0-4v2c5.5 0 10 4.5 10 10h2C14 7.4 8.6 2 2 2zm1.5 9c-.8 0-1.5.7-1.5 1.5S2.7 14 3.5 14 5 13.3 5 12.5 4.3 11 3.5 11z"/>
+          </g>
+        </svg>
+        Subscribe via RSS
+      </a>
+      <br/>
+      <a
+         href="https://blogtrottr.com/?subscribe=https://tylercecil.com/feed/atom.xml"
+         target="_blank"
+         title="Powered by BlogTrottr"
+         style="text-decoration: none;">
+        <!-- SVG taken from: http://genericons.com/ -->
+        <svg xmlns="http://www.w3.org/2000/svg"
+             viewBox="0 0 16 16"
+             height="1.5rem"
+             width="1.5rem"
+             style="fill: currentColor;">
+          <rect x="0" fill="none" width="16" height="16"/>
+          <g>
+          <path d="M15 9h-5c-.6 0-1 .4-1 1v5c0 .6.4 1 1 1h5c.6 0 1-.4 1-1v-5c0-.6-.4-1-1-1zm0 4h-2v2h-1v-2h-2v-1h2v-2h1v2h2v1zm-3-5V5c0-1.1-.9-2-2-2H2C.9 3 0 3.9 0 5v5c0 1.1.9 2 2 2h6v-2c0-1.2.8-2 2-2h2zM6 9.1L1 6.2V5l5 2.9L11 5v1.2L6 9.1z"/>
+          </g>
+        </svg>
+        Subscribe via Email
+      </a>
+    </footer>
+    <script>
+      // Causes external links to open in a new tab
+      // TODO: This should really be done by pandoc
+      (function (){
+              var links = document.links;
+
+              for (var i = 0, linksLength = links.length; i < linksLength; i++) {
+                      if (links[i].hostname != window.location.hostname) {
+                              links[i].target = '_blank';
+                            }
+                    }})();
+    </script>
+
+  </body>
+</html>

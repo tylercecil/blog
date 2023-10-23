@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Meta info
+      –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+      <meta charset="utf-8"/>
+      <meta name="description" content="Personal website of Tyler Cecil"/>
+      <meta name="author" content="Tyler I. Cecil"/>
+      <title>subscribe</title>
+      <!-- Mobile Specific Metas
+        –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+      <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+      <!-- Favicon <link rel="icon" type="image/png" href="/images/favicon.png">
+        –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+      <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon/apple-touch-icon.png">
+      <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32x32.png">
+      <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon/favicon-16x16.png">
+      <link rel="manifest" href="/images/favicon/site.webmanifest">
+      <link rel="mask-icon" href="/images/favicon/safari-pinned-tab.svg" color="#5bbad5">
+      <link rel="shortcut icon" href="/images/favicon/favicon.ico">
+      <meta name="msapplication-TileColor" content="#da532c">
+      <meta name="msapplication-config" content="/images/favicon/browserconfig.xml">
+      <meta name="theme-color" content="#ffffff">
+      <!-- FONT
+        –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+        <!-- <link href="https://fonts.googleapis.com/css?family=Open+Sans|Raleway|Roboto&display=swap" rel="stylesheet"> -->
+      <!-- CSS
+        –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+      <link href="/css/normalize.css" rel="stylesheet">
+      <link href="/css/post.css" rel="stylesheet">
+      <!-- JS
+        –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+      <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      <script id="MathJax-script" async
+              src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+      </script>
+      <!-- HEADER-INCLUDES:
+        –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+          <style>
+      a svg {
+        fill: currentColor;
+      }
+      .blogtrottr input {
+        width: 80%;
+      }
+    </style>
+  </head>
+
+  <body>
+
+    <nav>
+      <a href="/">Posts</a>
+      &bull;
+      <a href="/about/">About</a>
+      &bull;
+      <a href="/subscribe/">Subscribe</a>
+    </nav>
+    <h1> Subscribe </h1>
+
+    <div class="multicol">
+      <div class="center">
+        <h2>Via RSS</h2>
+        <a href="/feed/atom.xml">
+          <!-- SVG taken from: http://genericons.com/ -->
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"
+                                                  width="50%">
+            <rect x="0" fill="none" width="16" height="16"/>
+            <g>
+            <path d="M2 6v2c3.3 0 6 2.7 6 6h2c0-4.4-3.6-8-8-8zm0-4v2c5.5 0 10 4.5 10 10h2C14 7.4 8.6 2 2 2zm1.5 9c-.8 0-1.5.7-1.5 1.5S2.7 14 3.5 14 5 13.3 5 12.5 4.3 11 3.5 11z"/>
+            </g>
+          </svg>
+        </a>
+      </div>
+
+      <div class="center">
+        <h2 style="margin-bottom:0;">Via Email</h2>
+        <h6>Powered by <a href="https://blogtrottr.com">Blogtrottr</a></h6>
+        <form class="blogtrottr" method='post'
+              action='https://blogtrottr.com'
+              target="_blank">
+          <input type='text' name='btr_email' placeholder="Email Address"/>
+          <br/>
+          <input type='hidden' name='btr_url'
+                 value='https://tylercecil.com/feed/atom.xml' />
+          <input type='hidden' name='schedule_type' value='1' />
+          <input type='submit' value='Follow feed via email' />
+        </form>
+      </div>
+    </div>
+
+    <footer>
+      <h6 style="float: right">&copy; 2023 Tyler Cecil</h6>
+      <a href="/feed/atom.xml"
+         style="text-decoration: none;">
+        <!-- SVG taken from: http://genericons.com/ -->
+        <svg xmlns="http://www.w3.org/2000/svg"
+             viewBox="0 0 16 16"
+             height="1.5rem"
+             width="1.5rem"
+             style="fill: currentColor;">
+          <rect x="0" fill="none" width="16" height="16"/>
+          <g>
+          <path d="M2 6v2c3.3 0 6 2.7 6 6h2c0-4.4-3.6-8-8-8zm0-4v2c5.5 0 10 4.5 10 10h2C14 7.4 8.6 2 2 2zm1.5 9c-.8 0-1.5.7-1.5 1.5S2.7 14 3.5 14 5 13.3 5 12.5 4.3 11 3.5 11z"/>
+          </g>
+        </svg>
+        Subscribe via RSS
+      </a>
+      <br/>
+      <a
+         href="https://blogtrottr.com/?subscribe=https://tylercecil.com/feed/atom.xml"
+         target="_blank"
+         title="Powered by BlogTrottr"
+         style="text-decoration: none;">
+        <!-- SVG taken from: http://genericons.com/ -->
+        <svg xmlns="http://www.w3.org/2000/svg"
+             viewBox="0 0 16 16"
+             height="1.5rem"
+             width="1.5rem"
+             style="fill: currentColor;">
+          <rect x="0" fill="none" width="16" height="16"/>
+          <g>
+          <path d="M15 9h-5c-.6 0-1 .4-1 1v5c0 .6.4 1 1 1h5c.6 0 1-.4 1-1v-5c0-.6-.4-1-1-1zm0 4h-2v2h-1v-2h-2v-1h2v-2h1v2h2v1zm-3-5V5c0-1.1-.9-2-2-2H2C.9 3 0 3.9 0 5v5c0 1.1.9 2 2 2h6v-2c0-1.2.8-2 2-2h2zM6 9.1L1 6.2V5l5 2.9L11 5v1.2L6 9.1z"/>
+          </g>
+        </svg>
+        Subscribe via Email
+      </a>
+    </footer>  </body>
+</html>

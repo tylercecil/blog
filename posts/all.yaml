@@ -1,0 +1,136 @@
+---
+title: Posts
+posts:
+  - title: 'Let’s Come Somewhere Else'
+    subtitle: 'The Semantics of “Come” and “Go”'
+    date: '2021-01-31'
+    update: ''
+    abstract: ''
+    url: 'posts/2021/01/31/come-go.html'
+  - title: 'You Can Contract If You Wanna'
+    subtitle: 'The Story of Wanna-Contraction'
+    date: '2020-11-03'
+    update: ''
+    abstract: 'Syntax textbooks everywhere love, need, and wanna explain
+what’s up with “wanna”.'
+    url: 'posts/2020/11/03/wanna.html'
+  - title: 'Go C-Command Yourself!'
+    subtitle: 'An Introduction to Binding'
+    date: '2020-07-05'
+    update: '2020-08-31'
+    abstract: 'When do we use “himself/herself” instead of “him/her”?
+It’s a more tricky story than you might think, and it all comes down to
+a simple (albeit unsual) relationship with trees.'
+    url: 'posts/2020/07/05/c-command.html'
+  - title: 'May, Might, Modality'
+    subtitle: 'Probable Words about Possible Worlds'
+    date: '2020-06-29'
+    update: ''
+    abstract: '<p>An introduction to linguistic modality, as modeled by
+possible worlds. In particular, what is the difference between the
+worlds “may” and “might”?</p>'
+    url: 'posts/2020/06/29/may-might.html'
+  - title: 'The Curious Case of Population Variance'
+    subtitle: 'Estimating Variance without Bias'
+    date: '2020-05-10'
+    update: ''
+    abstract: 'This post is a short introduction to Bessel’s correct —
+an solution to an unexpected problem in statistics. As it turns out,
+estimating the variance of a collection of samples the way you might
+think will almost always underestimate the true variance!'
+    url: 'posts/2020/05/10/bessel.html'
+  - title: 'Natural Deduction'
+    subtitle: 'Notation for the Uninitiated'
+    date: '2020-04-06'
+    update: '04-27-2020'
+    abstract: 'A beginners introduction into how the hell you read those
+proof trees that all the scary logicians keep using. Filled with lots of
+exercises to keep you busy!'
+    url: 'posts/2020/04/06/natduc.html'
+  - title: 'Winograd Schema Challenge'
+    subtitle: 'Going Beyond the Imitation Game'
+    date: '2020-03-10'
+    update: ''
+    abstract: '<p>The Winograd Schema Challenge is an alternative to the
+Turing Test, with some very practical advantages. The test itself boils
+so much down into a single, simple, and well-defined linguistic
+function: anaphora resolution.</p>'
+    url: 'posts/2020/03/10/b-winograd.html'
+  - title: 'Language and Thought'
+    subtitle: 'Preliminaries on The Turing Test'
+    date: '2020-03-10'
+    update: ''
+    abstract: 'Did you try and read my post on <a
+href="/posts/2020/03/10/b-winograd.html">Winograd Schema</a>, and
+realize you don’t understand or have never heard of the Turing Test? If
+so, this post is for you!'
+    url: 'posts/2020/03/10/a-turing-prelim.html'
+  - title: 'Donkey Sentences'
+    subtitle: 'The Limits of Lexical Scope'
+    date: '2020-02-24'
+    update: ''
+    abstract: 'A very brief introduction to <em>Discourse Representation
+Theory</em>, a method of using dynamic scope to better model natural
+language. Featuring Russell and <em>his</em> donkey.'
+    url: 'posts/2020/02/24/drt.html'
+  - title: 'What’s In A Name?'
+    subtitle: 'Problems with Reference'
+    date: '2020-02-13'
+    update: ''
+    abstract: 'If two things are equal, they can always replace each
+other, no? Well, “the number of Godfather Movies” equals “3”. My friend
+Alison only knows the first movie. Why is it that I might say
+<em>“Alison thinks the number of Godfather Movies is 1”</em>, but I
+wouldn’t say <em>“Alison thinks 3 is 1”?</em>'
+    url: 'posts/2020/02/13/reference.html'
+  - title: 'Beta für Dich'
+    subtitle: 'Die Ursprung des wichtigstes Worts Kletterns'
+    date: '2020-02-02'
+    update: ''
+    abstract: 'A German writing exercise. Es gibt ein Wort, das man
+stets in der Kletterhalle hört — “Beta”. “Darf ich dir das Beta geben?”
+“Kann ich ein bisschen Beta bekommen?” Was hießt es, und wieso benutzen
+wir es überhaupt?'
+    url: 'posts/2020/02/02/beta.html'
+  - title: 'Words that Ever Play Well'
+    subtitle: 'Part II on Negative Polarity Items'
+    date: '2020-01-29'
+    update: ''
+    abstract: '<p>In Part II we dive into the work of Anastasia
+Giannakidou, and come up with a new, more general, more powerful, and
+more correct licensing condition: the <em>nonveridicality
+approach</em>.</p>'
+    url: 'posts/2020/01/29/NPI2.html'
+  - title: 'Words that Ever Play Well'
+    subtitle: 'Part I on Negative Polarity Items'
+    date: '2020-01-19'
+    update: '2020-01-24'
+    abstract: '“Any” is such a common word; with “for-all”-like
+semantic. “Any” has hardly ever troubled anyone. Then again… maybe “any”
+<em>has</em> troubled <em>anyone.</em>'
+    url: 'posts/2020/01/19/NPI.html'
+  - title: 'Making make Easy'
+    subtitle: ''
+    date: '2016-04-18'
+    update: ''
+    abstract: 'How to write more general makefiles. An “easymake oven,”
+if you will. Covers pointers for organizing your C / C++ projects.'
+    url: 'posts/2016/04/18/easymake.html'
+  - title: 'Circular Programming'
+    subtitle: ''
+    date: '2015-07-29'
+    update: ''
+    abstract: 'Or “How I Learned to Stop Worrying and Love Lazy
+Evaluation”'
+    url: 'posts/2015/07/29/circular.html'
+  - title: 'Paratype'
+    subtitle: 'An Actor Model for Monomorphisers'
+    date: '2014-05-01'
+    update: ''
+    abstract: 'A proof-of-concept experiment written in Go to understand
+static monomorphising. Given a program in a toy dummy language with a
+Haskell-like type system, Paratype will perform type inference and type
+checking. If type checking passed, it will generate a monomorphic code
+realization of the given program.'
+    url: 'posts/2014/05/01/paratype.html'
+---

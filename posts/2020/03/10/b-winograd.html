@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <!-- Meta info
+    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <meta charset="utf-8"/>
+    <meta name="description" content="Personal website of Tyler Cecil"/>
+    <meta name="author" content="Tyler I. Cecil"/>
+    <title>Winograd Schema Challenge</title>
+    <!-- Mobile Specific Metas
+      –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+    <!-- Favicon <link rel="icon" type="image/png" href="/images/favicon.png">
+      –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon/favicon-16x16.png">
+    <link rel="manifest" href="/images/favicon/site.webmanifest">
+    <link rel="mask-icon" href="/images/favicon/safari-pinned-tab.svg" color="#5bbad5">
+    <link rel="shortcut icon" href="/images/favicon/favicon.ico">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="msapplication-config" content="/images/favicon/browserconfig.xml">
+    <meta name="theme-color" content="#ffffff">
+    <!-- FONT
+      –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+      <!-- <link href="https://fonts.googleapis.com/css?family=Open+Sans|Raleway|Roboto&display=swap" rel="stylesheet"> -->
+    <!-- CSS
+      –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <link href="/css/normalize.css" rel="stylesheet">
+    <link href="/css/post.css" rel="stylesheet">
+    <!-- JS
+      –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async
+            src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+    </script>
+    <!-- HEADER-INCLUDES:
+      –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+      <style>
+        .comment { display: none; }
+
+        .n1 { color: green; }
+        .n2 { color: blue; }
+        .nq { color: red; }
+        .n1::after {
+          font-size: 75%;
+          bottom: -0.25em;
+          position: relative;
+          content: "1";
+        }
+        .n2::after {
+          font-size: 75%;
+          bottom: -0.25em;
+          position: relative;
+          content: "2";
+        }
+        .nq::after {
+          font-size: 75%;
+          bottom: -0.25em;
+          position: relative;
+          content: "?";
+        }
+        .sp { text-decoration: underline; }
+
+        .example .q {
+          width: 70%;
+          margin: 1rem auto;
+          border-top: 1px solid grey;
+          border-bottom: 1px solid grey;
+          padding: 0.5rem;
+        }
+      </style>
+      </head>
+
+  <body>
+
+    <nav>
+      <a href="/">Posts</a>
+      &bull;
+      <a href="/about/">About</a>
+      &bull;
+      <a href="/subscribe/">Subscribe</a>
+    </nav>
+    <header>
+      <h1>Winograd Schema Challenge</h1>
+      <p>Going Beyond the Imitation Game</p>
+      <p><small>Posted on 2020-03-10</small></p>
+          </header>
+
+        <div class="note">
+      <strong>Note:</strong> Did you <em>also</em> not understand (or
+      had never heard of) the Turing Test? I wrote a <a
+      href="/posts/2020/03/10/a-turing-prelim.html">preliminary post</a>
+      just for you!
+    </div>
+    
+    <article>
+      <p>In 2014, in what could be the poster-child of terrible science
+      journalism, the internet was abuzz about <a
+      href="https://www.bbc.com/news/technology-27762088">Eugene
+      Goostman</a>, supposedly the first AI to pass the Turing test.
+      Normally I would toss this into the bucket of “things too stupid
+      for my time”, but this debacle actually hints at something
+      important. Scott Aaronson had a <a
+      href="https://www.scottaaronson.com/blog/?p=1858">conversation</a>
+      with Eugene that really cut to the heart of the matter:<a
+      href="#fn1" class="footnote-ref" id="fnref1"
+      role="doc-noteref"><sup>1</sup></a></p>
+      <blockquote>
+      <p><strong>Scott:</strong> How many legs does an ant have?<br />
+      <strong>Eugene:</strong> Something between 2 and 4. Maybe, three?
+      :-))) Oh, what a fruitful conversation;-)<br />
+      <strong>Scott:</strong> Do you understand why I’m asking such
+      basic questions?<br />
+      <strong>Eugene:</strong> …wait<br />
+      <strong>Scott:</strong> Do you think your ability to fool
+      unsophisticated judges indicates a flaw with the Turing Test
+      itself, or merely with the way people have interpreted the
+      test?<br />
+      <strong>Eugene:</strong> The server is temporarily unable to
+      service your request due to maintenance downtime or capacity
+      problems. Please try again later.<br />
+      <strong>Scott:</strong> Do you think Alan Turing, brilliant though
+      he was, had trouble imagining that the judges of his “imitation
+      game” wouldn’t think to ask commonsense questions like the ones
+      above –— or that, if they did, they’d actually accept evasion or
+      irrelevant banter as answers?<br />
+      <strong>Eugene:</strong> No, not really. I don’t think alan turing
+      brilliant although this guy was had trouble imagining that the
+      judges of his imitation game would not consider to Oooh. Anything
+      else?<br />
+      </p>
+      </blockquote>
+      <p>Yes Eugene… Anything else.</p>
+      <p>This is a very real practical problem with the Imitation Game —
+      <strong>people don’t always seem to get the point.</strong> If the
+      judge doesn’t understand the test, the whole enterprise is
+      worthless!</p>
+      <p>That isn’t an argument against Turing, by the way; the Turing
+      test stands as one of the most compelling definitions of
+      intelligence we have. But for those who are interested in the
+      study of intelligence, it may not be the most practical of
+      tests.</p>
+      <p>In this post, I want to introduce a kind of “Mini Imitation
+      Game”. It will capture the philosophical spirit of the Imitation
+      Game into a single, simple, well-defined linguistic function. This
+      one linguistic function, I hope, will bring you as much wonder
+      about humans and language as it does to me.</p>
+      <h2 id="goals-for-a-new-test">Goals for a New Test</h2>
+      <p>First thing is first: the human judge has to go. We want our
+      new test to be totally non-subjective. We don’t want the human to
+      go easy on the machine; we don’t want her to fall victim to cheap
+      tricks like changing the subject; we don’t want her to chalk
+      things up to a matter of opinion. Humans, obviously, carry out
+      many subjective processes, but this test is going to be more
+      limited in scope. So, no humans (who needs ’em?).</p>
+      <p>Besides that, we have four main goals for our test:</p>
+      <dl>
+      <dt>Goal 1: it should be multiple choice.</dt>
+      <dd>
+      <ul>
+      <li>The answer must be given (no avoiding the question).</li>
+      <li>There is a measurably correct answer.</li>
+      <li>The questions can be curated to cover specific abilities.</li>
+      </ul>
+      </dd>
+      </dl>
+      <p>Think of a <a
+      href="https://en.wikipedia.org/wiki/CAPTCHA">CAPTCHA</a> — you are
+      forced to give an answer, and it better be the right one! (Unless
+      it’s a <a
+      href="https://www.theverge.com/2019/2/1/18205610/google-captcha-ai-robot-human-difficult-artificial-intelligence">really
+      hard one</a>.) Multiple choice will also let us measure progress —
+      we could objectively say “this program scored 80%.”</p>
+      <dl>
+      <dt>Goal 2: it should stay in the language domain.</dt>
+      <dd>
+      The power of language is universal. This means we should be able
+      to fit any possible task into language.
+      </dd>
+      </dl>
+      <p>We want to capture the widest possible array of topics and
+      abilities. “Intelligent” covers a lot of ground, and so should our
+      test. Language is an ideal medium to express any and all
+      intellectual abilities. (Besides, this is ostensibly a linguistics
+      blog — you’d think I’d be writing about language.)</p>
+      <dl>
+      <dt>Goal 3: humans should score perfectly</dt>
+      <dd>
+      Because this new test should be non-subjective, it should be
+      something that any human could do. A question might require some
+      domain knowledge, but any normal human with that knoweledge should
+      pass.
+      </dd>
+      </dl>
+      <p>Again, that’s just like CAPTCHA. It also demonstrates a
+      weakening of the new challenge, because it would exclude
+      subjective thinking.</p>
+      <dl>
+      <dt>Goal 4: it must be “hard”</dt>
+      <dd>
+      The test should be “Google proof”, meaning a computer couldn’t
+      just answer questions by having access to huge amounts of data. It
+      must require creative output of its own.
+      </dd>
+      </dl>
+      <p>Number 4 is obviously a moving target, but the hope is it
+      should be similarly difficult to the Imitation Game (although, as
+      I’ve already stated, will ultimately be easier).</p>
+      <h2 id="winograd-schema">Winograd Schema</h2>
+      <p>A very promising solution is known as the <em>“Winograd Schema
+      Test”</em>, developed by Levesque <span class="citation"
+      data-cites="levesque-2012">(<a href="#ref-levesque-2012"
+      role="doc-biblioref">2012</a>)</span>. I said this new test was
+      going to revolve around a single linguistic function, and as it
+      happens, I introduced this linguistic function in my <a
+      href="/posts/2020/02/24/drt.html#anaphora">last post on donkey
+      sentences</a>: <strong>anaphora resolution.</strong></p>
+      <dl>
+      <dt>Anaphora</dt>
+      <dd>
+      Any expression whose interpretation depends on another expression
+      elsewhere (called the antecedent if it occurred before, postcedent
+      if it occurred after).<br />
+      e.g. “I met <span class="n1">Uma</span> in October, when <span
+      class="n1">she</span> still had a job.” Here the anaphora <span
+      class="n1">“she”</span> referse back to the antecedent <span
+      class="n1">“Uma”</span>.
+      </dd>
+      </dl>
+      <p>In that post, we were a bit hand-wavy about how to resolve what
+      an anaphora is referring to. And that’s because… well… it’s pretty
+      complicated! To show what I mean, let’s look at our first Winograd
+      Schema.</p>
+      <ol class="example" type="1">
+      <li>“<span class="n1">The trophy</span> doesn’t fit in <span
+      class="n2">the brown suitcase</span> because <span
+      class="nq">it’s</span> <span class="sp">too big.</span>”
+      <div class="q">
+      What is <span class="sp">too big</span>?
+      <ul>
+      <li><span class="n1">The trophy</span></li>
+      <li><span class="n2">The brown suitcase</span>
+      </div></li>
+      </ul></li>
+      </ol>
+      <p>Now before you think (1) is simple to explain, consider the
+      following:</p>
+      <ol start="2" class="example" type="1">
+      <li>“<span class="n1">The trophy</span> doesn’t fit in <span
+      class="n2">the brown suitcase</span> because <span
+      class="nq">it’s</span> <span class="sp">too small.</span>”
+      <div class="q">
+      What is <span class="sp">too small</span>?
+      <ul>
+      <li><span class="n1">The trophy</span></li>
+      <li><span class="n2">The brown suitcase</span>
+      </div></li>
+      </ul></li>
+      </ol>
+      <p>Although (2) is <em>almost identical</em> to (1), you probably
+      noticed (unless you are a robot) that the correct answer changed.
+      To resolve this anaphora, one would have to know a thing or two
+      about fitting, being big, and being small. And it’s not as simple
+      as “big things won’t fit, and small things can’t contain”!</p>
+      <ol start="3" class="example" type="1">
+      <li>“<span class="n1">The shirt</span> doesn’t fit <span
+      class="n2">the mannequin</span> because <span
+      class="nq">it’s</span> <span class="sp">too
+      big/small.</span>”</li>
+      </ol>
+      <p>In this case, <strong><span class="nq">it’s</span> is
+      ambiguous;</strong> a shirt might not fit because it’s
+      <em>either</em> too big <em>or</em> too small, and the same goes
+      for a mannequin!<a href="#fn2" class="footnote-ref" id="fnref2"
+      role="doc-noteref"><sup>2</sup></a> My point here is only to
+      demonstrate how much knowledge and reasoning we used to understand
+      the word <em>“it”.</em></p>
+      <p>So, let’s finally write down a definition for a Winograd
+      schema:</p>
+      <dl>
+      <dt>Winograd Schema</dt>
+      <dd>
+      <p>Take a sentence with the following properties:</p>
+      <ul>
+      <li>Contains two noun phrases.</li>
+      <li>Contains an anaphora which grammatically could refer to either
+      NP.</li>
+      <li>A <em>special word</em> determins which NP the anaphora
+      referse to.</li>
+      <li>The special word could be changed, such that the NP also
+      changes.</li>
+      </ul>
+      <p>In the Winograd Schma Test, such a sentence is presented (with
+      either possible special word), and one must determine which NP the
+      anaphora referse to.</p>
+      </dd>
+      </dl>
+      <h3 id="examples">Examples</h3>
+      <p>It might not be immediately obvious just how broad of a test
+      this is, so it’s worth looking at some examples.</p>
+      <ol start="4" class="example" type="1">
+      <li>“<span class="n1">The large ball</span> crashed right through
+      <span class="n2">the table</span> because <span
+      class="nq">it</span> was made of <span
+      class="sp">steel/styrofoam</span>.”
+      <div class="q">
+      What was made of <span class="sp">steel/styrofoam</span>?
+      </div></li>
+      </ol>
+      <p>In (4), one would have to know a bit of physics to correctly
+      answer, not to mention know those materials.</p>
+      <p>One of my favorite examples was designed to demonstrate visual
+      thinking:</p>
+      <ol start="5" class="example" type="1">
+      <li>“Sam tried to paint a picture of <span
+      class="n1">shepherds</span> with <span class="n2">sheep</span>,
+      but <span class="nq">they</span> ended up looking more like <span
+      class="sp">dogs/golfers</span>.”
+      <div class="q">
+      What looked like <span class="sp">dogs/golfers</span>?
+      </div></li>
+      </ol>
+      <p>Here’s an example demonstrating some problem solving
+      skills:</p>
+      <ol start="6" class="example" type="1">
+      <li>“<span class="n1">The sack of potatoes</span> had been placed
+      <span class="sp">above/below</span> <span class="n2">the bag of
+      flour</span>, so <span class="nq">it</span> had to be moved first.
+      <div class="q">
+      What had to be moved first?
+      </div></li>
+      </ol>
+      <h3 id="cross-linguistic">Cross Linguistic</h3>
+      <p>Of course, all languages have anaphora (<a
+      href="/posts/2020/02/24/drt.html#not-just-nouns">of many
+      types</a>), so we’re not bound to English. We could translate (6)
+      into Japanese, for example:</p>
+      <ol start="7" class="example" type="1">
+      <li>じゃがいもの入った袋が、小麦粉の入った袋の<strong>[上/下]</strong>にあるので
+      、最初にそれを動かさなければならない。
+      <div class="q">
+      最初に動かさなければならないのは何か？
+      </div></li>
+      </ol>
+      <p>However, not <em>all</em> schema are translatable. Terry
+      Winograd (for whom these are named after) produced one such
+      example <span class="citation" data-cites="winograd-1972">(<a
+      href="#ref-winograd-1972"
+      role="doc-biblioref">1972</a>)</span>:</p>
+      <ol start="8" class="example" type="1">
+      <li>“<span class="n1">The city councilmen</span> refused to give
+      <span class="n2">the women</span> a permit for a demonstration
+      because <span class="nq">they</span> <span
+      class="sp">feared/advocated</span> violence”</li>
+      </ol>
+      <p>In English this is perfectly fine. However, (8) could never be
+      translated to French, because the gender of “they” would not match
+      both noun phrases (it would either be a masculine or feminine
+      “they”). In this case, the <em>grammatic</em> ambiguity is lost.<a
+      href="#fn3" class="footnote-ref" id="fnref3"
+      role="doc-noteref"><sup>3</sup></a> Similarly, a Hungarian example
+      might not work in English, because Hungarian has no gender system
+      at all.</p>
+      <h3 id="avoiding-easy-questions">Avoiding Easy Questions</h3>
+      <p>Goal #4 was for the challenge to be hard, and unfortunately
+      there are Winograd schema that are just a tad too easy for our
+      tastes. What would make a test easy? <span class="citation"
+      data-cites="levesque-2012">H. Levesque, Davis, and Morgenstern (<a
+      href="#ref-levesque-2012" role="doc-biblioref">2012</a>)</span>
+      identify two main classes of easy problems.</p>
+      <h4 id="ease-of-category">Ease of Category</h4>
+      <ol start="9" class="example" type="1">
+      <li>“<span class="n1">The women</span> stopped taking <span
+      class="n2">the pills</span> because <span class="nq">they</span>
+      were <span class="sp">pregnant/carcinogenic</span>.”</li>
+      </ol>
+      <p>In this case, no complex understanding is actually required.
+      All one needs to know is</p>
+      <ol type="1">
+      <li>Woman are rarely carcinogenic.</li>
+      <li>Pills are rarely pregnant.</li>
+      </ol>
+      <p>That’s really the end of the story. To answer this schema, one
+      <em>only</em> needs to be aware of <a
+      href="https://en.wikipedia.org/wiki/Category_mistake">category
+      mistakes</a>.</p>
+      <h4 id="easily-googleable">Easily “Googleable”</h4>
+      <ol start="10" class="example" type="1">
+      <li>“<span class="n1">The racecar</span> zoomed by <span
+      class="n2">the school bus</span> because <span
+      class="nq">it</span> was so <span class="sp">fast/slow.</span>”
+      <div class="q">
+      What was <span class="sp">fast/slow</span>?
+      </div></li>
+      </ol>
+      <p>This schema has what Levesque calls the “googleable problem.”
+      In (10), indeed slow and fast <em>could</em> be attributed to both
+      <span class="n1">the racecar</span> and <span class="n2">the
+      school bus</span>, but there is a <em>strong association</em> with
+      racecars and speed. Simply knowing that “fast” and “racecare”
+      appear near each other in texts would be enough to solve this
+      schema.<a href="#fn4" class="footnote-ref" id="fnref4"
+      role="doc-noteref"><sup>4</sup></a></p>
+      <p>We want to avoid cases like this, which could be easily solved
+      by systems such as <a
+      href="https://en.wikipedia.org/wiki/Watson_(computer)">IBM’s
+      Watson</a>, which only use statistical methods to answer
+      questions. For example:</p>
+      <ol start="11" class="example" type="1">
+      <li><span class="n1">Fred</span> is the only man alive who still
+      remembers <span class="n2">my father</span> as an infant. When
+      Fred first saw my father, <span class="nq">he</span> was twelve
+      <span class="sp">years/months</span> old.
+      <div class="q">
+      Who was twelve <span class="sp">years/months</span> old?
+      </div></li>
+      </ol>
+      <p>It’s hard to imagine a system using only “dumb” statistical
+      methods being able to answer (11). What corpus would possibly
+      contain an answer?</p>
+      <h3 id="avoiding-hard-questions">Avoiding Hard Questions</h3>
+      <p>If we’re not careful, we might go in the other direction, and
+      introduce sentences which humans aren’t actually able to
+      solve.</p>
+      <ol start="12" class="example" type="1">
+      <li>“<span class="n1">Frank</span> was <span
+      class="sp">jealous/pleased</span> when <span
+      class="n2">Bill</span> said that <span class="nq">he</span> was
+      the winner
+      <div class="q">
+      Who was the winner?
+      </div></li>
+      </ol>
+      <p>In the first case, Frank is jealous that Bill won. In the other
+      case, however, there isn’t a clear answer. Is Frank happy for
+      Bill, or is Frank happy for himself? Without more context, this
+      question isn’t necessarily answerable.</p>
+      <h3 id="better-than-turing">Better Than Turing?</h3>
+      <p>Levesque makes the claim that the Winograd Schema Challenge can
+      be seen as a replacement for the Turing test <span
+      class="citation" data-cites="levesque-2012">(<a
+      href="#ref-levesque-2012" role="doc-biblioref">2012</a>)</span>.
+      It may be the case that a huge number of intellectual tasks can be
+      encoded into a schema, but I think it’s almost self-evident that
+      this is a weaker test.</p>
+      <p><span class="math display">\[\text{Winograd Passing}
+      \subsetneqq \text{Turing Passing}\]</span></p>
+      <p>In fact, I would argue that any test which is multiple choice /
+      non-ambiguous would have this property, as much intelligent
+      behaviour is creative and ambiguous. Reading comprehension (the
+      heart of this challenge) is likely a much simpler task than that
+      of creative synthesis.</p>
+      <p>That being said, it has a huge amount of pragmatic benefits.
+      Perhaps my favorite aspect of Winograd schema is <strong>it helps
+      people understand what the point of the Imitation Game really
+      is.</strong> It shows off how effortlessly we leverage complex
+      reasoning into simple sentences.</p>
+      <h2 id="current-progress">Current Progress</h2>
+      <p>So, to get to everyone’s first question: <strong>how well do
+      machines score on the test?</strong></p>
+      <p>The answer: <strong>not great!</strong></p>
+      <p>In 2016 <em>Nuance Communications</em> hosted <a
+      href="http://commonsensereasoning.org/winograd.html">a
+      competition</a>, in which no program even qualified to compete
+      (having failed a “easy” Round 1). <span class="citation"
+      data-cites="liu-2016">Liu et al. (<a href="#ref-liu-2016"
+      role="doc-biblioref">2016</a>)</span> had a very thorough report
+      on their approach to that competition, which scored 66.7%, a
+      state-of-the-art result at the time. Remember, just “guessing”
+      would yield 50%, so there’s plenty of work to be done.</p>
+      <p>More recent results report scores as high as 72%, a small but
+      impressive edge above guessing <span class="citation"
+      data-cites="kocijan-2019">(<a href="#ref-kocijan-2019"
+      role="doc-biblioref">Kocijan et al. 2019</a>)</span>.</p>
+      <h2 id="future-tests">Future Tests</h2>
+      <p>I believe this challenge will be a useful one for those
+      interested in AI and Linguistics for some time to come. Still, an
+      interesting thought experiment is what tests might be used in the
+      future, building off of Levensque’s test.</p>
+      <p>For example, <span class="citation"
+      data-cites="levesque-2014">H. J. Levesque (<a
+      href="#ref-levesque-2014" role="doc-biblioref">2014</a>)</span>
+      presents an unusual schema:</p>
+      <ol start="13" class="example" type="1">
+      <li><span class="n1">The large ball</span> crashed right through
+      <span class="n2">the table</span> because <span
+      class="nq">it</span> was made of <span class="sp">XYZ</span>.
+      <div class="q">
+      What was made of <span class="sp">XYZ</span>?
+      </div></li>
+      </ol>
+      <p>Unsurprisingly this is pretty hard to answer. But what if the
+      question also included the following?</p>
+      <div class="example">
+      <ol type="1">
+      <li>XYZ is a trademarked product of Dow Chemical.</li>
+      <li>XYZ is usually white, but there are green and blue
+      varieties.</li>
+      <li>XYZ is ninety-eight percent air, making it lightweight and
+      buoyant.</li>
+      <li>XYZ was first discovered by a Swedish inventor, Carl Georg
+      Munters.</li>
+      </ol>
+      </div>
+      <p>Now we could talk about “Extended-Winograd-Schema” which
+      include information like that above.</p>
+      <p>Another possible idea would be resolving non-noun-phrase
+      anaphora. Temporal anaphora could be interesting.</p>
+      <ol start="14" class="example" type="1">
+      <li>Russell had a party last Friday, and his donkey got drunk. I
+      left before the drinking started, and couldn’t believe the stories
+      I heard that morning.
+      <div class="q">
+      Order the following events:
+      <ul>
+      <li>Russell has a party</li>
+      <li>Donkey became drunk</li>
+      <li>Drinking starts</li>
+      <li>I leave</li>
+      <li>I can’t believe stories
+      </div></li>
+      </ul></li>
+      </ol>
+      <p>This would be tricky depending on the language, however, as
+      some languages are very grammatically clear with temporal order.
+      In English, the morphology largely gives the order of events, but
+      in Lao one could only use reason to build a logical timeline.</p>
+      <p>I <em>personaly</em> would be interested in tests of creativity
+      (which, by definition, couldn’t be multiple choice). For example,
+      the test could be to find a possible special word.</p>
+      <ol start="15" class="example" type="1">
+      <li>What is a word for “XYZ” in (13) would cause the answer to be
+      <span class="n1">the large ball</span>?</li>
+      </ol>
+      <h2 id="notes-and-further-reading">Notes and Further Reading</h2>
+      <p>For more information and reasoning about Winograd schema, I’d
+      recommend <span class="citation" data-cites="levesque-2014">H. J.
+      Levesque (<a href="#ref-levesque-2014"
+      role="doc-biblioref">2014</a>)</span>. Perhaps more fun, though,
+      would be to look at <a
+      href="https://cs.nyu.edu/faculty/davise/papers/WinogradSchemas/WS.html">this
+      list</a> of 150 schema, with commentary, available in English,
+      Chinese, Japanese, French, and Portuguese. A collection of
+      state-of-the-art results can be found at that site as well.</p>
+      <p>For a more linguistic analysis of the schema, I’d recommend
+      <em>“The Role of Pragmatics in Solving the Winograd Schema
+      Challenge”</em> <span class="citation"
+      data-cites="richard-bollans-2018">(<a
+      href="#ref-richard-bollans-2018"
+      role="doc-biblioref">Richard-Bollans, Gomez Alvarez, and Cohn
+      2018</a>)</span>.</p>
+      <p>Special thanks to Duncan Gibbs, and Tessa Guengerich for both
+      independently suggesting this topic. It’s been a lot of fun
+      reading about it!</p>
+      <h2 id="references">References</h2>
+      <div class="#refs">
+
+      </div>
+      <div id="refs" class="references csl-bib-body hanging-indent"
+      role="list">
+      <div id="ref-kocijan-2019" class="csl-entry" role="listitem">
+      Kocijan, Vid, Ana-Maria Cretu, Oana-Maria Camburu, Yordan
+      Yordanov, and Thomas Lukasiewicz. 2019. <span>“A Surprisingly
+      Robust Trick for Winograd Schema Challenge.”</span>
+      <em>Proceedings of the 57th Annual Meeting of the Association for
+      Computational Linguistics</em>, 4837–42. <a
+      href="https://doi.org/10.18653/v1/P19-1478">https://doi.org/10.18653/v1/P19-1478</a>.
+      </div>
+      <div id="ref-levesque-2014" class="csl-entry" role="listitem">
+      Levesque, Hector J. 2014. <span>“On Our Best Behaviour.”</span>
+      <em>Artificial Intelligence</em> 212 (July): 27–35. <a
+      href="https://doi.org/10.1016/j.artint.2014.03.007">https://doi.org/10.1016/j.artint.2014.03.007</a>.
+      </div>
+      <div id="ref-levesque-2012" class="csl-entry" role="listitem">
+      Levesque, Hector, Ernest Davis, and Leora Morgenstern. 2012.
+      <span>“The Winograd Schema Challenge.”</span> In <em>Thirteenth
+      International Conference on the Principles of Knowledge
+      Representation and Reasoning</em>.
+      </div>
+      <div id="ref-liu-2016" class="csl-entry" role="listitem">
+      Liu, Quan, Hui Jiang, Zhen-Hua Ling, Xiaodan Zhu, Si Wei, and Yu
+      Hu. 2016. <span>“Commonsense Knowledge Enhanced Embeddings for
+      Solving Pronoun Disambiguation Problems in Winograd Schema
+      Challenge.”</span> <em><span>arXiv</span>:1611.04146 [Cs]</em>,
+      December. <a
+      href="http://arxiv.org/abs/1611.04146">http://arxiv.org/abs/1611.04146</a>.
+      </div>
+      <div id="ref-richard-bollans-2018" class="csl-entry"
+      role="listitem">
+      Richard-Bollans, A. L., L. Gomez Alvarez, and A. G. Cohn. 2018.
+      <span>“The Role of Pragmatics in Solving the Winograd Schema
+      Challenge. Proceedings of the Thirteenth International Symposium
+      on Commonsense Reasoning (Commonsense 2017).”</span> Proceedings
+      Paper. January 23, 2018. <a
+      href="http://ceur-ws.org/Vol-2052/">http://ceur-ws.org/Vol-2052/</a>.
+      </div>
+      <div id="ref-winograd-1972" class="csl-entry" role="listitem">
+      Winograd, Terry. 1972. <span>“Understanding Natural
+      Language.”</span> <em>Cognitive Psychology</em> 3 (1): 1–191. <a
+      href="https://doi.org/10.1016/0010-0285(72)90002-3">https://doi.org/10.1016/0010-0285(72)90002-3</a>.
+      </div>
+      </div>
+      <aside id="footnotes" class="footnotes footnotes-end-of-document"
+      role="doc-endnotes">
+      <hr />
+      <ol>
+      <li id="fn1"><p>This conversation has been edited by me for length
+      and emphasis.<a href="#fnref1" class="footnote-back"
+      role="doc-backlink">↩︎</a></p></li>
+      <li id="fn2"><p>I think most readers would assume the shirt is too
+      big or too small, because it would be unusual to talk about a
+      mannequin as being the wrong size. But if you had just purchased a
+      bunch of mannequins, and someone said (3) to you, you’d probably
+      assume the mannequin was the wrong size. In this case, because the
+      sentence is ambiguous, we wouldn’t consider it a valid test.<a
+      href="#fnref2" class="footnote-back"
+      role="doc-backlink">↩︎</a></p></li>
+      <li id="fn3"><p>Remember, there is no <em>semantic</em> ambiguity
+      here. A Winograd schema always has clear meaning, but ambiguous
+      grammar. That’s the key to why this test works as a measure of
+      intelligence — it operates at the meaning level, and not the
+      syntax level.<a href="#fnref3" class="footnote-back"
+      role="doc-backlink">↩︎</a></p></li>
+      <li id="fn4"><p>A better test here would be, instead of having a
+      special word, swapping the order of the noun phrases, so that
+      sometimes the school bus is passing the racecar.<a href="#fnref4"
+      class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+      </ol>
+      </aside>
+    </article>
+
+    <img id="sig" src="/images/tc-logo.svg" alt="Tyler Cecil's Blog"/>
+    <h6 style="text-align:center">Comments mean a lot!</h6>
+    <h5>
+      <a href="/"> More Posts </a>
+      <a href="mailto:blog@tylercecil.com?Subject=Winograd Schema
+Challenge"
+         style="float: right">
+        Write Me
+      </a>
+    </h5>
+
+    <script
+      defer src="https://commento-tylercecil.herokuapp.com/js/commento.js">
+    </script>
+    <div id="commento"></div>
+
+    <footer>
+      <h6 style="float: right">&copy; 2023 Tyler Cecil</h6>
+      <a href="/feed/atom.xml"
+         style="text-decoration: none;">
+        <!-- SVG taken from: http://genericons.com/ -->
+        <svg xmlns="http://www.w3.org/2000/svg"
+             viewBox="0 0 16 16"
+             height="1.5rem"
+             width="1.5rem"
+             style="fill: currentColor;">
+          <rect x="0" fill="none" width="16" height="16"/>
+          <g>
+          <path d="M2 6v2c3.3 0 6 2.7 6 6h2c0-4.4-3.6-8-8-8zm0-4v2c5.5 0 10 4.5 10 10h2C14 7.4 8.6 2 2 2zm1.5 9c-.8 0-1.5.7-1.5 1.5S2.7 14 3.5 14 5 13.3 5 12.5 4.3 11 3.5 11z"/>
+          </g>
+        </svg>
+        Subscribe via RSS
+      </a>
+      <br/>
+      <a
+         href="https://blogtrottr.com/?subscribe=https://tylercecil.com/feed/atom.xml"
+         target="_blank"
+         title="Powered by BlogTrottr"
+         style="text-decoration: none;">
+        <!-- SVG taken from: http://genericons.com/ -->
+        <svg xmlns="http://www.w3.org/2000/svg"
+             viewBox="0 0 16 16"
+             height="1.5rem"
+             width="1.5rem"
+             style="fill: currentColor;">
+          <rect x="0" fill="none" width="16" height="16"/>
+          <g>
+          <path d="M15 9h-5c-.6 0-1 .4-1 1v5c0 .6.4 1 1 1h5c.6 0 1-.4 1-1v-5c0-.6-.4-1-1-1zm0 4h-2v2h-1v-2h-2v-1h2v-2h1v2h2v1zm-3-5V5c0-1.1-.9-2-2-2H2C.9 3 0 3.9 0 5v5c0 1.1.9 2 2 2h6v-2c0-1.2.8-2 2-2h2zM6 9.1L1 6.2V5l5 2.9L11 5v1.2L6 9.1z"/>
+          </g>
+        </svg>
+        Subscribe via Email
+      </a>
+    </footer>
+    <script>
+      // Causes external links to open in a new tab
+      // TODO: This should really be done by pandoc
+      (function (){
+              var links = document.links;
+
+              for (var i = 0, linksLength = links.length; i < linksLength; i++) {
+                      if (links[i].hostname != window.location.hostname) {
+                              links[i].target = '_blank';
+                            }
+                    }})();
+    </script>
+
+  </body>
+</html>

@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <!-- Meta info
+    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <meta charset="utf-8"/>
+    <meta name="description" content="Personal website of Tyler Cecil"/>
+    <meta name="author" content="Tyler I. Cecil"/>
+    <title>May, Might, Modality</title>
+    <!-- Mobile Specific Metas
+      –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+    <!-- Favicon <link rel="icon" type="image/png" href="/images/favicon.png">
+      –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon/favicon-16x16.png">
+    <link rel="manifest" href="/images/favicon/site.webmanifest">
+    <link rel="mask-icon" href="/images/favicon/safari-pinned-tab.svg" color="#5bbad5">
+    <link rel="shortcut icon" href="/images/favicon/favicon.ico">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="msapplication-config" content="/images/favicon/browserconfig.xml">
+    <meta name="theme-color" content="#ffffff">
+    <!-- FONT
+      –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+      <!-- <link href="https://fonts.googleapis.com/css?family=Open+Sans|Raleway|Roboto&display=swap" rel="stylesheet"> -->
+    <!-- CSS
+      –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <link href="/css/normalize.css" rel="stylesheet">
+    <link href="/css/post.css" rel="stylesheet">
+    <!-- JS
+      –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async
+            src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+    </script>
+    <!-- HEADER-INCLUDES:
+      –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+      <style>
+        .bad { color: red; }
+        .good { color: green; }
+        .meh { color: orange; }
+        .example * { margin-bottom: 0em; }
+      </style>
+      </head>
+
+  <body>
+
+    <nav>
+      <a href="/">Posts</a>
+      &bull;
+      <a href="/about/">About</a>
+      &bull;
+      <a href="/subscribe/">Subscribe</a>
+    </nav>
+    <header>
+      <h1>May, Might, Modality</h1>
+      <p>Probable Words about Possible Worlds</p>
+      <p><small>Posted on 2020-06-29</small></p>
+          </header>
+
+        <div class="note">
+      <p><strong>Note:</strong> I’ve been on a bit of a hiatus, but it’s
+      important to me that I get back to writing! This post is a bit
+      less polished than I’d like, but it’s short, which I think is a
+      good way to keep me writing on a regular schedule.</p>
+    </div>
+    
+    <article>
+      <p>The expert steps in, and gives an assessment of the
+      situation:</p>
+      <ol class="example" type="1">
+      <li>“They might have survived”, they explain.</li>
+      </ol>
+      <p>Now tell me, with what little context you have, how do
+      <em>you</em> read (1)? <em>Did</em> they die? <em>Could</em> they
+      still be out there? Was there something we could have done to save
+      them?</p>
+      <blockquote>
+      <p>If you assumed they died, you are a pessimist, and likely a
+      drain on the people around you. If you assumed they lived, you’re
+      wrong — they were all eaten alive by lions.</p>
+      </blockquote>
+      <p>Today’s very short post is about the <strong>semantics of
+      modality.</strong> Really though, it’s just an excuse for me to
+      share some amusing sentences, focused around usage of the English
+      words <em>may</em> and <em>might</em>; two words, I would venture,
+      that the average native English speaker has trouble defining, and,
+      in fact, whose meanings appear to be changing in modern English.
+      <a href="#fn1" class="footnote-ref" id="fnref1"
+      role="doc-noteref"><sup>1</sup></a></p>
+      <h2 id="modality">Modality</h2>
+      <p>First, what exactly was the ambiguity in (1)?</p>
+      <ol start="2" class="example" type="1">
+      <li>“They might have survived if the lions hadn’t found
+      them.”</li>
+      <li>“They might have survived — we haven’t found any bodies.”</li>
+      </ol>
+      <p>In (2), it is clear that our heros met an unsavory end.
+      However, (3) is markedly more positive, expressing uncertainty
+      about their fate. In both cases, though, <strong>the expert did
+      not say they necessarily survived.</strong> So then, how do we
+      model these logically?</p>
+      <p>To answer that, we need to understand <em>logical
+      modality</em>. I’ve actually <a
+      href="/posts/2020/02/13/reference.html#modal">written about
+      modality before</a>, but let’s recap.</p>
+      <p>There are things in this world that are true, like <em>“stop
+      signs are red”</em>. There are also things, however, that
+      <em>could</em> be true, like <em>“stop signs could be
+      blue”</em>.<a href="#fn2" class="footnote-ref" id="fnref2"
+      role="doc-noteref"><sup>2</sup></a> There are even things that
+      <em>must</em> be true, like <em>“stop signs must have been
+      invented by someone”</em>.<a href="#fn3" class="footnote-ref"
+      id="fnref3" role="doc-noteref"><sup>3</sup></a><a href="#fn4"
+      class="footnote-ref" id="fnref4"
+      role="doc-noteref"><sup>4</sup></a></p>
+      <p>In English, sentences with words like <em>shall, should, can,
+      could, may, might, would</em>, or <em>must</em> (as well as some
+      other words and constructs) express <em>modality</em>. In the
+      simplest case, modality is logically represented with two
+      operators:</p>
+      <dl>
+      <dt>Necessity: <span class="math inline">\(\square P\)</span></dt>
+      <dd>
+      <span class="math inline">\(P\)</span> <em>must</em> be
+      true.<br />
+      i.e. <span class="math inline">\(\square
+      \text{SURVIVE}(\text{they})\)</span> could model <em>“they must
+      have survived”</em>.
+      </dd>
+      <dt>Possibility: <span class="math inline">\(\lozenge
+      P\)</span></dt>
+      <dd>
+      <span class="math inline">\(P\)</span> is possibly true.<br />
+      i.e. <span class="math inline">\(\lozenge
+      \text{SURVIVE}(\text{they})\)</span> could mode <em>“it is
+      possible they survived”</em>.
+      </dd>
+      </dl>
+      <p>Both of these are subtly different than claiming some <span
+      class="math inline">\(P\)</span> is true. This gets especially
+      tricky with necessity — is there a difference between saying
+      something <em>must be</em> true, and something <em>is</em> true?
+      What’s more, while this is all well and good for (3), it’s not
+      exactly clear how this can be used to model (2). It’s worth us
+      diving into exactly how <span
+      class="math inline">\(\square\)</span> and <span
+      class="math inline">\(\lozenge\)</span> work.</p>
+      <h3 id="possible-worlds">Possible Worlds</h3>
+      <p>I need you to do a favor for me, and picture the set of all
+      possible worlds.</p>
+      <blockquote>
+      <p>That wasn’t so hard, was it?</p>
+      </blockquote>
+      <p>Let’s call this set <span class="math inline">\(W\)</span>.
+      With this new friend of ours, we can break down our two new
+      operators.</p>
+      <dl>
+      <dt>Necessity: <span class="math inline">\(\square P\)</span></dt>
+      <dd>
+      <span class="math inline">\(\forall w \in W,\; P @
+      w\)</span><br />
+      <em>For all worlds in <span class="math inline">\(W\)</span>,
+      <span class="math inline">\(P\)</span> is true in that world.</em>
+      </dd>
+      <dt>Possibility: <span class="math inline">\(\lozenge
+      P\)</span></dt>
+      <dd>
+      <span class="math inline">\(\exists w \in W,\; P @
+      w\)</span><br />
+      <em>There exists a world <span class="math inline">\(w\)</span> in
+      the set of all worlds <span class="math inline">\(W\)</span>, such
+      that <span class="math inline">\(P\)</span> is true in that world
+      <span class="math inline">\(w\)</span>.</em>
+      </dd>
+      </dl>
+      <p>The real magic here is this <span
+      class="math inline">\(@\)</span> operator, which allows us to
+      express that <span class="math inline">\(P\)</span> is true in
+      some world. That world might be a world someone believes in
+      (<em>“Li believes she knows the answer”</em>), worlds across time
+      (<em>“it has always been true”</em>), or all logically conceivable
+      worlds (<em>“no matter what, 1 + 1 must be 2!”</em>).</p>
+      <p>Modality is more than just possibility and necessity;
+      <strong>modality allows us to talk about the worlds where
+      propositions are true, and not just the propositions
+      themselves.</strong></p>
+      <h3 id="types-of-modality">Types of Modality</h3>
+      <p>“The set of all worlds” is kinda a tricky idea, of course. In
+      fact, there are a number of various <em>types</em> of modality,
+      each corresponding to a different set of worlds. Here are the most
+      commonly discussed:</p>
+      <h4 id="logical-modality">Logical Modality</h4>
+      <p>Logical modality deals with the set of all logically consistent
+      worlds, and is one of the strongest / most general modalities.</p>
+      <table>
+      <tbody>
+      <tr class="odd">
+      <td><strong>Possibility</strong></td>
+      <td style="text-align: left;"><em>“The first prime can not be
+      4!”</em></td>
+      <td><span class="math inline">\(\neg\lozenge_L\)</span>first prime
+      is 4</td>
+      </tr>
+      <tr class="even">
+      <td><strong>Necessity</strong></td>
+      <td style="text-align: left;"><em>“There must be infinite
+      primes!”</em></td>
+      <td><span class="math inline">\(\square_L\)</span>there are
+      infinite primes</td>
+      </tr>
+      </tbody>
+      </table>
+      <h4 id="epistemic-modality">Epistemic Modality</h4>
+      <p>Epistemic modality deals with a smaller set of worlds — only
+      those worlds consistent with what the speaker knows. This is the
+      “as-far-as-I-know” set. For example, I might know someone has been
+      stealing cookies, based on the state of the cookie jar. It is not
+      <em>logically necessary</em> that someone is stealing cookies, but
+      with the evidence at hand… there must be a cookie-thief among
+      us.</p>
+      <table>
+      <tbody>
+      <tr class="odd">
+      <td><strong>Possibility</strong></td>
+      <td><em>“It’s possible he was at the party.”</em></td>
+      <td style="text-align: left;"><span
+      class="math inline">\(\lozenge_E\)</span>he was at party</td>
+      </tr>
+      <tr class="even">
+      <td><strong>Necessity</strong></td>
+      <td><em>“The gods must be crazy!”</em></td>
+      <td style="text-align: left;"><span
+      class="math inline">\(\square_E\)</span>gods are crazy</td>
+      </tr>
+      </tbody>
+      </table>
+      <p>In “the gods must be crazy”, the meaning here is not that
+      “logically speaking, if there are gods, they must be crazy, in all
+      possible words”. Instead, it’s making a statement about a
+      conclusion the speaker has come to. The speaker has looked around
+      them and said “I don’t know everything about this world, but all
+      signs point towards some bonkers gods”.</p>
+      <h4 id="deontic-modality">Deontic Modality</h4>
+      <p>Deontic modality is substantially different than the others<a
+      href="#fn5" class="footnote-ref" id="fnref5"
+      role="doc-noteref"><sup>5</sup></a>. The set of worlds being
+      described here are the worlds which are being declared “allowed”.
+      I think an example could show this best:</p>
+      <table>
+      <tbody>
+      <tr class="odd">
+      <td><strong>Possibility</strong></td>
+      <td style="text-align: left;"><em>“You may have one more
+      slice”</em></td>
+      <td><span class="math inline">\(\lozenge_D\)</span>you have one
+      more slice</td>
+      </tr>
+      <tr class="even">
+      <td><strong>Necessity</strong></td>
+      <td style="text-align: left;"><em>“you must come home”</em></td>
+      <td><span class="math inline">\(\square_D\)</span>you come
+      home</td>
+      </tr>
+      </tbody>
+      </table>
+      <p>In this case, the speaker isn’t so much declaring conclusions
+      about worlds, but giving commands of a sort.</p>
+      <h2 id="might-and-may">Might and May</h2>
+      <p>Writing a little intro on modality, however, was really only an
+      excuse to get to a set of sentences I found to be mildly
+      interesting. They come down to this question: <strong>what is the
+      difference between “may” and “might”?</strong></p>
+      <p>At first glance, they are almost interchangeable (both express
+      <span class="math inline">\(\lozenge\)</span>, modal possibility).
+      On closer observation, however, each word is used with a different
+      set of modes.</p>
+      <table>
+      <thead>
+      <tr class="header">
+      <th style="text-align: right;">Mode Type</th>
+      <th style="text-align: left;">May</th>
+      <th style="text-align: left;">Might</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr class="odd">
+      <td style="text-align: right;"><strong>Logical
+      Possibility</strong></td>
+      <td style="text-align: left;"><span class="bad">Not
+      Used</span></td>
+      <td style="text-align: left;"><span class="good">Used</span></td>
+      </tr>
+      <tr class="even">
+      <td style="text-align: right;"><strong>Epistemic
+      Possibility</strong></td>
+      <td style="text-align: left;"><span class="good">Used</span></td>
+      <td style="text-align: left;"><span class="good">Used</span></td>
+      </tr>
+      <tr class="odd">
+      <td style="text-align: right;"><strong>Deontic
+      Possibility</strong></td>
+      <td style="text-align: left;"><span class="good">Used</span></td>
+      <td style="text-align: left;"><span class="meh">Not Used</span><a
+      href="#fn6" class="footnote-ref" id="fnref6"
+      role="doc-noteref"><sup>6</sup></a></td>
+      </tr>
+      </tbody>
+      </table>
+      <p>Now you shouldn’t just take my word for that. Instead, read
+      these example sentences taken from <span class="citation"
+      data-cites="kearns2011">Kearns (<a href="#ref-kearns2011"
+      role="doc-biblioref">2011, 81</a>)</span>, and see if you agree
+      with the judgments.</p>
+      <div class="example">
+      <p><strong>Logical Possibility</strong></p>
+      <ol type="a">
+      <li><span class="good">She <strong><em>might</em></strong> have
+      fallen down the cliff — thank goodness the safety harness
+      held.</span></li>
+      <li><span class="bad">#She <strong><em>may</em></strong> have
+      fallen down the cliff — thank goodness the safety harness
+      held.</span></li>
+      </ol>
+      <p><strong>Epistemic Possibility</strong></p>
+      <ol type="a">
+      <li><span class="good">She <strong><em>may</em></strong> have
+      fallen down the cliff — we’re still waiting for the rescue team’s
+      report.</span></li>
+      <li><span class="good">She <strong><em>might</em></strong> have
+      fallen down the cliff — we’re still waiting for the rescue team’s
+      report.</span></li>
+      </ol>
+      </div>
+      <p>Interesting, no? <span class="citation"
+      data-cites="kearns2011">Kearns (<a href="#ref-kearns2011"
+      role="doc-biblioref">2011</a>)</span> claims that this difference
+      seems to be disappearing in modern English. I haven’t been able to
+      find research supporting that claim, but I’ve been thinking about
+      how I might test it. If I find the time, I’d be interested in
+      doing a little follow up work.</p>
+      <p>If these judgments don’t line up with your own, I’d love to
+      hear more from you! Or if you could point me to some research on
+      this possible semantic drift in English, that would be just as
+      helpful!</p>
+      <p>Thanks as always for reading (especially this less-polished
+      post)! Feel free to leave a comment — it always means a lot!</p>
+      <h2 id="references">References</h2>
+      <div class="refs">
+
+      </div>
+      <div id="refs" class="references csl-bib-body hanging-indent"
+      role="list">
+      <div id="ref-austin2009" class="csl-entry" role="listitem">
+      Austin, John L., and James O. Urmson. 2009. <em>How to Do Things
+      with Words: The <span>William James</span> Lectures Delivered at
+      <span>Harvard University</span> in 1955</em>. 2. ed., [repr.].
+      <span>Cambridge, Mass</span>: <span>Harvard Univ. Press</span>.
+      </div>
+      <div id="ref-kearns2011" class="csl-entry" role="listitem">
+      Kearns, Kate. 2011. <em>Semantics</em>. 2. ed. Modern Linguistics
+      Series. <span>Basingstoke</span>: <span>Palgrave Macmillan</span>.
+      </div>
+      </div>
+      <aside id="footnotes" class="footnotes footnotes-end-of-document"
+      role="doc-endnotes">
+      <hr />
+      <ol>
+      <li id="fn1"><p>Of course, modality is a very large topic. This is
+      just a brief introduction. A good, more thorough introduction
+      would be <span class="citation" data-cites="kearns2011">Kearns (<a
+      href="#ref-kearns2011" role="doc-biblioref">2011, chap.
+      5</a>)</span>.<a href="#fnref1" class="footnote-back"
+      role="doc-backlink">↩︎</a></p></li>
+      <li id="fn2"><p>Like <a
+      href="https://www.reddit.com/r/mildlyinteresting/comments/87pigt/this_blue_stop_sign_in_hawaii/">in
+      Hawaii</a><a href="#fnref2" class="footnote-back"
+      role="doc-backlink">↩︎</a></p></li>
+      <li id="fn3"><p>Whoever it was, they were someone <a
+      href="https://www.nytimes.com/2011/12/11/magazine/stop-sign.html">in
+      Detroit circa, 1915.</a><a href="#fnref3" class="footnote-back"
+      role="doc-backlink">↩︎</a></p></li>
+      <li id="fn4"><p>Note how this is subtly different than <em>“stop
+      signs were invented by someone”.</em><a href="#fnref4"
+      class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+      <li id="fn5"><p>One reason why deontic is significantly different
+      than the others is because it has a different “intent” behind it.
+      One uses it with the intention of eliciting a behavior from
+      others. The categorization of a “speech act” is known as
+      <strong>illocutionary force</strong>. Speech acts are a pretty
+      fascinating topic that should probably be looked into more often
+      in semantics <span class="citation" data-cites="austin2009">(<a
+      href="#ref-austin2009" role="doc-biblioref">Austin and Urmson
+      2009</a>)</span>.<a href="#fnref5" class="footnote-back"
+      role="doc-backlink">↩︎</a></p></li>
+      <li id="fn6"><p>Usage of a deontic “might” does exist, but it’s a
+      bit archaic. “Might I have another?” is typically judged to be
+      correct, but with a feeling of over-formality or datedness.
+      Getting data on these subtle differences strikes me as quite the
+      challenge!<a href="#fnref6" class="footnote-back"
+      role="doc-backlink">↩︎</a></p></li>
+      </ol>
+      </aside>
+    </article>
+
+    <img id="sig" src="/images/tc-logo.svg" alt="Tyler Cecil's Blog"/>
+    <h6 style="text-align:center">Comments mean a lot!</h6>
+    <h5>
+      <a href="/"> More Posts </a>
+      <a href="mailto:blog@tylercecil.com?Subject=May, Might, Modality"
+         style="float: right">
+        Write Me
+      </a>
+    </h5>
+
+    <script
+      defer src="https://commento-tylercecil.herokuapp.com/js/commento.js">
+    </script>
+    <div id="commento"></div>
+
+    <footer>
+      <h6 style="float: right">&copy; 2023 Tyler Cecil</h6>
+      <a href="/feed/atom.xml"
+         style="text-decoration: none;">
+        <!-- SVG taken from: http://genericons.com/ -->
+        <svg xmlns="http://www.w3.org/2000/svg"
+             viewBox="0 0 16 16"
+             height="1.5rem"
+             width="1.5rem"
+             style="fill: currentColor;">
+          <rect x="0" fill="none" width="16" height="16"/>
+          <g>
+          <path d="M2 6v2c3.3 0 6 2.7 6 6h2c0-4.4-3.6-8-8-8zm0-4v2c5.5 0 10 4.5 10 10h2C14 7.4 8.6 2 2 2zm1.5 9c-.8 0-1.5.7-1.5 1.5S2.7 14 3.5 14 5 13.3 5 12.5 4.3 11 3.5 11z"/>
+          </g>
+        </svg>
+        Subscribe via RSS
+      </a>
+      <br/>
+      <a
+         href="https://blogtrottr.com/?subscribe=https://tylercecil.com/feed/atom.xml"
+         target="_blank"
+         title="Powered by BlogTrottr"
+         style="text-decoration: none;">
+        <!-- SVG taken from: http://genericons.com/ -->
+        <svg xmlns="http://www.w3.org/2000/svg"
+             viewBox="0 0 16 16"
+             height="1.5rem"
+             width="1.5rem"
+             style="fill: currentColor;">
+          <rect x="0" fill="none" width="16" height="16"/>
+          <g>
+          <path d="M15 9h-5c-.6 0-1 .4-1 1v5c0 .6.4 1 1 1h5c.6 0 1-.4 1-1v-5c0-.6-.4-1-1-1zm0 4h-2v2h-1v-2h-2v-1h2v-2h1v2h2v1zm-3-5V5c0-1.1-.9-2-2-2H2C.9 3 0 3.9 0 5v5c0 1.1.9 2 2 2h6v-2c0-1.2.8-2 2-2h2zM6 9.1L1 6.2V5l5 2.9L11 5v1.2L6 9.1z"/>
+          </g>
+        </svg>
+        Subscribe via Email
+      </a>
+    </footer>
+    <script>
+      // Causes external links to open in a new tab
+      // TODO: This should really be done by pandoc
+      (function (){
+              var links = document.links;
+
+              for (var i = 0, linksLength = links.length; i < linksLength; i++) {
+                      if (links[i].hostname != window.location.hostname) {
+                              links[i].target = '_blank';
+                            }
+                    }})();
+    </script>
+
+  </body>
+</html>

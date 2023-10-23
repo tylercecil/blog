@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <!-- Meta info
+    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <meta charset="utf-8"/>
+    <meta name="description" content="Personal website of Tyler Cecil"/>
+    <meta name="author" content="Tyler I. Cecil"/>
+    <title>Language and Thought</title>
+    <!-- Mobile Specific Metas
+      –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+    <!-- Favicon <link rel="icon" type="image/png" href="/images/favicon.png">
+      –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon/favicon-16x16.png">
+    <link rel="manifest" href="/images/favicon/site.webmanifest">
+    <link rel="mask-icon" href="/images/favicon/safari-pinned-tab.svg" color="#5bbad5">
+    <link rel="shortcut icon" href="/images/favicon/favicon.ico">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="msapplication-config" content="/images/favicon/browserconfig.xml">
+    <meta name="theme-color" content="#ffffff">
+    <!-- FONT
+      –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+      <!-- <link href="https://fonts.googleapis.com/css?family=Open+Sans|Raleway|Roboto&display=swap" rel="stylesheet"> -->
+    <!-- CSS
+      –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <link href="/css/normalize.css" rel="stylesheet">
+    <link href="/css/post.css" rel="stylesheet">
+    <!-- JS
+      –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async
+            src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+    </script>
+    <!-- HEADER-INCLUDES:
+      –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+      
+      </head>
+
+  <body>
+
+    <nav>
+      <a href="/">Posts</a>
+      &bull;
+      <a href="/about/">About</a>
+      &bull;
+      <a href="/subscribe/">Subscribe</a>
+    </nav>
+    <header>
+      <h1>Language and Thought</h1>
+      <p>Preliminaries on The Turing Test</p>
+      <p><small>Posted on 2020-03-10</small></p>
+          </header>
+
+        <div class="note">
+      <strong>Note:</strong> I originally wrote this as a introduction
+      to my <a href="/posts/2020/03/10/b-winograd.html">Winograd Schema
+      post</a>, but cut it. Because not all my readers are familiar with
+      the Turing Test, however, I made it into a short and easy
+      standalone post. It’s not as polished as my normal posts. If you
+      are familiar with the Turing Test, feel free to skip to the <a
+      href="/posts/2020/03/10/b-winograd.html">main event.</a>
+    </div>
+    
+    <article>
+      <p>For as famous as it is, <strong>I don’t think most people
+      understand the <em>Turing Test</em>.</strong> People seem to know
+      that:</p>
+      <ul>
+      <li>A computer has a textual conversation with a human.</li>
+      <li>The computer attempts to trick the human into thinking it
+      isn’t a machine.</li>
+      <li>Turing said, if that computer succeeds, we should call it
+      intelligent.</li>
+      </ul>
+      <p>Unfortunately that’s as far as most people go. They don’t seem
+      to ask themselves <em>why</em> Turing thought that the
+      <em>Imitation Game</em> defines intelligence.</p>
+      <p>Most seem to imagine <em>chatbots</em> like Weizenbaum’s <a
+      href="https://en.wikipedia.org/wiki/ELIZA">ELIZA</a>:</p>
+      <blockquote>
+      <p><strong>ELIZA:</strong> Your boyfriend made you come
+      here?<br />
+      <strong>Person:</strong> He says I’m depressed much of the
+      time.<br />
+      <strong>ELIZA:</strong> I am sorry to hear that you are
+      depressed.<br />
+      <strong>Person:</strong> It’s true. I am unhappy.<br />
+      <strong>ELIZA:</strong> Do you think coming here will help you not
+      to be unhappy?<br />
+      <strong>Person:</strong> I need some help, that much seems
+      certain.</p>
+      </blockquote>
+      <blockquote>
+      <p><em>“Neat, it sounds just like a human! It’s obviously not very
+      intelligent though… That Turing guy must have been
+      wrong.”</em></p>
+      </blockquote>
+      <p>Let me be clear here: <strong>the Turing Test has nothing to do
+      with being able to hold a conversation.</strong></p>
+      <p>This week I’m writing about a different test — it’s a kind of
+      “Mini Imitation Game.” But before I do that, some might need a
+      taste of the original Imitation Game. This post is a short
+      introduction to the Turing Test, getting at the question <em>“why
+      did Turing consider the Imitation Game a suitable definition of
+      intelligence?”</em></p>
+      <h2 id="why-the-imitation-game">Why The Imitation Game</h2>
+      <p>When Turing wrote <em>Computing Machinery and
+      Intelligence</em>, he started with a now almost cliché question:
+      <em>“can machines think?”</em> This would lead him to two ideas —
+      one about intelligence, and another about language.</p>
+      <h3 id="intelligence">Intelligence</h3>
+      <p>On the intelligence side of things, Turing was concerned by the
+      fact that “to think” is a pretty undefined term. In fact, we
+      almost treat it as a matter of opinion. Do I think? Do you think?
+      Does my dog think? We tend to tie up the word with some idea of a
+      soul, or another by-definition-undefinable quality.</p>
+      <div class="comment">
+      <p>Something about racist views of thinking?</p>
+      </div>
+      <p>Turing’s solution to this problem was to avoid it entirely.</p>
+      <dl>
+      <dt>Turing’s Definition of Intelligence</dt>
+      <dd>
+      Anything that <em>can</em> behave like a human must be <em>at
+      least</em> as intelligent as one.
+      </dd>
+      </dl>
+      <p>If it <em>behaves</em> like it’s intelligent, who are you to
+      say it isn’t? Who cares what’s going on inside? Turing is saying
+      that looking into the black-box of intelligence isn’t necessary to
+      know something can think — the only thing that’s important is how
+      something acts.</p>
+      <blockquote>
+      <p><em>But Tyler, aren’t there intelligent things that can’t
+      behave like humans?</em></p>
+      </blockquote>
+      <p>I don’t know, and neither does Turing! All he is saying is
+      <strong>there aren’t things that can behave like humans which
+      aren’t intelligent.</strong></p>
+      <p><span class="math display">\[ \text{Behave Thinky} \subseteq
+      \text{Thinky} \]</span></p>
+      <h3 id="language">Language</h3>
+      <blockquote>
+      <p><em>Well… then how do humans behave?</em></p>
+      </blockquote>
+      <p>To answer this, Turing had a pretty powerful hot take:</p>
+      <dl>
+      <dt>Turing’s Observation on Intelligence</dt>
+      <dd>
+      There aren’t tasks/behaviors which humans do, about which they
+      cannot speak.
+      </dd>
+      </dl>
+      <p>Describe one thing we do that is indescribable… It’s OK, I’ll
+      wait. While I’m waiting, let’s make clear some things a human
+      <em>could</em> speak about:</p>
+      <div class="multicol" style="font-size: 90%">
+      <div>
+      <ul>
+      <li>She could explain why one chess move is better than
+      another.</li>
+      <li>She could prove why a solution to a math problem is
+      correct.</li>
+      <li>She could describe any political system, as well as it’s
+      merits and detriments.</li>
+      </ul>
+      </div>
+      <div>
+      <ul>
+      <li>She could express how she thinks someone else feels about
+      something.</li>
+      <li>She could hypothesize what would happen if people had wheels
+      instead of legs.</li>
+      <li>She could discuss why Turing saw language as central to
+      intelligence.</li>
+      </ul>
+      </div>
+      </div>
+      <p>Not a single thing on this list we would call a language skill
+      — instead we have math, problem solving, hypothesizing, and
+      empathizing. Turing wasn’t picturing asking a computer questions
+      like “how are you today?” Instead, he was thinking about questions
+      like “what would go wrong if I made my desk out of bacon?”</p>
+      <p><strong>The Turing test isn’t a test about the mastery of
+      language. It’s a test about the mastery of thinking, expressed
+      through the universal medium of language.</strong></p>
+      <h2 id="language-and-thought">Language and Thought</h2>
+      <p>“The universal medium of language” is an incredibly powerful
+      idea, central to the Turing test, and much modern thought. The
+      idea is pretty simple: <strong>you can’t name something you can’t
+      talk about,</strong> because if you did, then you’re talking about
+      it.</p>
+      <p>There are many ideas out there about the relationship between
+      language and thought. <em>Linguistic Determinism</em> and
+      <em>Linguistic Relativity</em> are strong and weak versions of the
+      idea that language <em>is</em> thought. <em>Language of
+      Thought</em> theories argue that expressed language is not
+      essential for unexpressed thought. Chompsky’s independent theory
+      argues that language is one cognitive system, working in concert
+      with many others. But in all of these cases, we run into the same
+      conclusion: <strong>language is our only way of expressing our own
+      cognition.</strong> To quote Chomsky:</p>
+      <blockquote>
+      <p><em>Language is a mirror of mind in a deep and significant
+      sense. It is a product of human intelligence… By studying the
+      properties of natural languages, their structure, organization,
+      and use, we may hope to learn something about human nature;
+      something significant, if it is true that human cognitive capacity
+      is the truly distinctive and most remarkable characteristic of the
+      species.</em></p>
+      </blockquote>
+      <h2 id="what-did-turing-picture">What Did Turing Picture?</h2>
+      <p>Turing was clear that his game was a high bar for intelligence.
+      He considered passing to be sufficient, albeit not necessary, in
+      saying something is intelligent. And he went out of his way to
+      defend the power of his definition, even addressing how the test
+      would have to change for humans with psychic abilities (yes,
+      that’s real).</p>
+      <p>To wrap things up, here’s a now famous excerpt from Turing’s
+      original paper. I think it gives us a flavor for what he was
+      picturing when he wrote about the Imitation Game.</p>
+      <blockquote>
+      <p><strong>Interrogator:</strong> In the first line of your sonnet
+      which reads “Shall I compare thee to a summer’s day”, would not “a
+      spring day” do as well or better?<br />
+      <strong>Witness:</strong> It wouldn’t scan.<br />
+      <strong>Interrogator:</strong> How about “a winter’s day.” That
+      would scan all right.<br />
+      <strong>Witness:</strong> Yes, but nobody wants to be compared to
+      a winter’s day.<br />
+      <strong>Interrogator:</strong> Would you say Mr. Pickwick reminded
+      you of Christmas?<br />
+      <strong>Witness:</strong> In a way.<br />
+      <strong>Interrogator:</strong> Yet Christmas is a winter’s day,
+      and I do not think Mr. Pickwick would mind the comparison.<br />
+      <strong>Witness:</strong> I don’t think you’re serious. By a
+      winter’s day one means a typical winter’s day, rather than a
+      special one like Christmas.</p>
+      </blockquote>
+      <p>Could it be that there are intelligences out there which
+      couldn’t communicate like this? Quite possibly. But if you were to
+      claim that the Witness in this dialog wasn’t intelligent, that
+      says a lot more about you, than it does about the Witness.</p>
+      <h2 id="reading">Reading</h2>
+      <ul>
+      <li><a
+      href="https://phil415.pbworks.com/f/TuringComputing.pdf">Computing
+      Machinery and Intelligence</a>, Turing’s paper which introduces
+      the Imitation Game, is an incredibly compelling read. I feel
+      almost silly for having summarized it.</li>
+      <li>For more context on Language and Though, I’d recommend <a
+      href="https://www.academia.edu/35782145/A_Review_of_the_Language-Thought_Debate_Multivariant_Perspectives">A
+      Review of the Language-Thought Debate: Multivariant
+      Perspectives</a>, by Parviz Birjandi and Somayyeh Sabah.</li>
+      </ul>
+    </article>
+
+    <img id="sig" src="/images/tc-logo.svg" alt="Tyler Cecil's Blog"/>
+    <h6 style="text-align:center">Comments mean a lot!</h6>
+    <h5>
+      <a href="/"> More Posts </a>
+      <a href="mailto:blog@tylercecil.com?Subject=Language and Thought"
+         style="float: right">
+        Write Me
+      </a>
+    </h5>
+
+    <script
+      defer src="https://commento-tylercecil.herokuapp.com/js/commento.js">
+    </script>
+    <div id="commento"></div>
+
+    <footer>
+      <h6 style="float: right">&copy; 2023 Tyler Cecil</h6>
+      <a href="/feed/atom.xml"
+         style="text-decoration: none;">
+        <!-- SVG taken from: http://genericons.com/ -->
+        <svg xmlns="http://www.w3.org/2000/svg"
+             viewBox="0 0 16 16"
+             height="1.5rem"
+             width="1.5rem"
+             style="fill: currentColor;">
+          <rect x="0" fill="none" width="16" height="16"/>
+          <g>
+          <path d="M2 6v2c3.3 0 6 2.7 6 6h2c0-4.4-3.6-8-8-8zm0-4v2c5.5 0 10 4.5 10 10h2C14 7.4 8.6 2 2 2zm1.5 9c-.8 0-1.5.7-1.5 1.5S2.7 14 3.5 14 5 13.3 5 12.5 4.3 11 3.5 11z"/>
+          </g>
+        </svg>
+        Subscribe via RSS
+      </a>
+      <br/>
+      <a
+         href="https://blogtrottr.com/?subscribe=https://tylercecil.com/feed/atom.xml"
+         target="_blank"
+         title="Powered by BlogTrottr"
+         style="text-decoration: none;">
+        <!-- SVG taken from: http://genericons.com/ -->
+        <svg xmlns="http://www.w3.org/2000/svg"
+             viewBox="0 0 16 16"
+             height="1.5rem"
+             width="1.5rem"
+             style="fill: currentColor;">
+          <rect x="0" fill="none" width="16" height="16"/>
+          <g>
+          <path d="M15 9h-5c-.6 0-1 .4-1 1v5c0 .6.4 1 1 1h5c.6 0 1-.4 1-1v-5c0-.6-.4-1-1-1zm0 4h-2v2h-1v-2h-2v-1h2v-2h1v2h2v1zm-3-5V5c0-1.1-.9-2-2-2H2C.9 3 0 3.9 0 5v5c0 1.1.9 2 2 2h6v-2c0-1.2.8-2 2-2h2zM6 9.1L1 6.2V5l5 2.9L11 5v1.2L6 9.1z"/>
+          </g>
+        </svg>
+        Subscribe via Email
+      </a>
+    </footer>
+    <script>
+      // Causes external links to open in a new tab
+      // TODO: This should really be done by pandoc
+      (function (){
+              var links = document.links;
+
+              for (var i = 0, linksLength = links.length; i < linksLength; i++) {
+                      if (links[i].hostname != window.location.hostname) {
+                              links[i].target = '_blank';
+                            }
+                    }})();
+    </script>
+
+  </body>
+</html>

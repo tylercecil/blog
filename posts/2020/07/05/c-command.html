@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <!-- Meta info
+    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <meta charset="utf-8"/>
+    <meta name="description" content="Personal website of Tyler Cecil"/>
+    <meta name="author" content="Tyler I. Cecil"/>
+    <title>Go C-Command Yourself!</title>
+    <!-- Mobile Specific Metas
+      –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+    <!-- Favicon <link rel="icon" type="image/png" href="/images/favicon.png">
+      –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon/favicon-16x16.png">
+    <link rel="manifest" href="/images/favicon/site.webmanifest">
+    <link rel="mask-icon" href="/images/favicon/safari-pinned-tab.svg" color="#5bbad5">
+    <link rel="shortcut icon" href="/images/favicon/favicon.ico">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="msapplication-config" content="/images/favicon/browserconfig.xml">
+    <meta name="theme-color" content="#ffffff">
+    <!-- FONT
+      –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+      <!-- <link href="https://fonts.googleapis.com/css?family=Open+Sans|Raleway|Roboto&display=swap" rel="stylesheet"> -->
+    <!-- CSS
+      –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <link href="/css/normalize.css" rel="stylesheet">
+    <link href="/css/post.css" rel="stylesheet">
+    <!-- JS
+      –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async
+            src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+    </script>
+    <!-- HEADER-INCLUDES:
+      –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+      <style>
+      .i {
+        color: green;
+      }
+      .i::after {
+        font-size: 75%;
+        bottom: -0.25em;
+        position: relative;
+        content: "i";
+      }
+      .j {
+        color: blue;
+      }
+      .j::after {
+        font-size: 75%;
+        bottom: -0.25em;
+        position: relative;
+        content: "j";
+      }
+      .ij {
+        color: orange;
+      }
+      .ij::after {
+        font-size: 75%;
+        bottom: -0.25em;
+        position: relative;
+        content: "i/j";
+      }
+      .bad::before {
+        color: red;
+        content: "*";
+      }
+      .bad {
+        text-decoration: underline;
+        text-decoration-color: red;
+      }
+      .tree .node rect {
+        opacity: 0;
+      }
+      .tree .node.selected rect.pBox {
+        fill: red;
+        opacity: 0.25;
+      }
+      .tree .node.commanded rect.pBox {
+        fill: green;
+        opacity: 0.25;
+      }
+      .tree .node.hover rect.pBox {
+        fill: gray;
+        opacity: 0.25;
+      }
+      .tree .links {
+        stroke: black;
+        opacity:1;
+      }
+      </style>
+      </head>
+
+  <body>
+
+    <nav>
+      <a href="/">Posts</a>
+      &bull;
+      <a href="/about/">About</a>
+      &bull;
+      <a href="/subscribe/">Subscribe</a>
+    </nav>
+    <header>
+      <h1>Go C-Command Yourself!</h1>
+      <p>An Introduction to Binding</p>
+      <p><small>Posted on 2020-07-05</small></p>
+            <p><small>Last updated on 2020-08-31</small></p>
+          </header>
+
+        <div class="note">
+      <strong>Note</strong>: ‘Wait, why are you drawing trees this way?!
+      That’s all wrong!!’ Yes, it is all wrong. Because of the
+      introductory-nature of this post, I’ve chosen to use very
+      over-simplified flat trees. If you know something about syntax, I
+      hope you can ignore this, and if you’re wanting to learn why I
+      organized the trees I did… maybe don’t! <br>
+      <strong>Update</strong>: I’ve improved the Tree rendering with a
+      new library I wrote, <a
+      href="https://github.com/tylercecil/chomTree">ChomTree</a>! Let me
+      know if you notice any bugs!
+    </div>
+    
+    <article>
+      <p>I have a puzzle for you: <strong>when would use him/her/them vs
+      himself/herself/themselves? Can you ever swap one out for the
+      other?</strong></p>
+      <blockquote>
+      <p>Got an answer in your head? Cool!</p>
+      </blockquote>
+      <p>In this post, I hope to break whatever answer you came up with,
+      and replace it with a surprising yet simple answer! You’ll laugh.
+      You’ll cry. And maybe… just maybe, you’ll learn yourself
+      something.</p>
+      <h2 id="definitions">Definitions</h2>
+      <p>First, let’s define some terms. For our purposes there are
+      three types of noun phrases:</p>
+      <dl>
+      <dt>R-Expression</dt>
+      <dd>
+      Referse to something specific or concrete.<a href="#fn1"
+      class="footnote-ref" id="fnref1"
+      role="doc-noteref"><sup>1</sup></a><br />
+      <em>i.e.</em> “The cat”, “Tom”, “My hopes and dreams”
+      </dd>
+      <dt>Pronoun</dt>
+      <dd>
+      May (or may not) refere to another NP in the sentence (or
+      discourse).<br />
+      <em>i.e.</em> he/him, she/her, they/them
+      </dd>
+      <dt>Anaphor<a href="#fn2" class="footnote-ref" id="fnref2"
+      role="doc-noteref"><sup>2</sup></a></dt>
+      <dd>
+      <em>Must</em> refere to another NP in the sentence.<br />
+      <em>i.e.</em> himself, herself, themselves
+      </dd>
+      </dl>
+      <p>Here’s an example to make that a bit more concrete. We’ll use
+      an index to mark what each NP could be referring to.</p>
+      <ol class="example" type="1">
+      <li><span class="i">Jeremy</span> fooled <span
+      class="i">himself</span> into thinking <span class="ij">he</span>
+      could love another man.</li>
+      </ol>
+      <table>
+      <thead>
+      <tr class="header">
+      <th style="text-align: left;">NP</th>
+      <th style="text-align: left;">Type</th>
+      <th style="text-align: left;">Index</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr class="odd">
+      <td style="text-align: left;">“Jeremy”</td>
+      <td style="text-align: left;">R-Expression</td>
+      <td style="text-align: left;"><span
+      class="math inline">\(i\)</span></td>
+      </tr>
+      <tr class="even">
+      <td style="text-align: left;">“himself”</td>
+      <td style="text-align: left;">Anaphor</td>
+      <td style="text-align: left;"><span
+      class="math inline">\(i\)</span></td>
+      </tr>
+      <tr class="odd">
+      <td style="text-align: left;">“he”</td>
+      <td style="text-align: left;">Pronoun</td>
+      <td style="text-align: left;"><span
+      class="math inline">\(i\)</span> or <span
+      class="math inline">\(j\)</span></td>
+      </tr>
+      </tbody>
+      </table>
+      <p>Note how “he” could refer to Jeremy (likely how you read it
+      without context), <em>or</em> it could refer to some other man,
+      like Kyle!</p>
+      <ol start="2" class="example" type="1">
+      <li><span class="i">Jeremy</span> fooled <span
+      class="i">himself</span> into thinking <span class="j">Kyle</span>
+      could love another man.</li>
+      </ol>
+      <p>It’s that flexibility that makes “he” a pronoun, and the lack
+      of flexibility “himself” an anaphor.</p>
+      <h2 id="the-puzzle">The Puzzle</h2>
+      <p>So, let me phrase our riddle a bit more exactly: <strong>what
+      syntactic rule governs the distribution<a href="#fn3"
+      class="footnote-ref" id="fnref3"
+      role="doc-noteref"><sup>3</sup></a> of pronouns and
+      anaphora?</strong></p>
+      <h3 id="indexing">Indexing</h3>
+      <p>First thing I want to point out that <em>the index
+      matters!</em> While a pronoun <em>can</em> refer to multiple
+      things, when actually used there is an intended meaning. For
+      example…</p>
+      <ol start="3" class="example" type="1">
+      <li><span class="i">Roberto</span> taught <span
+      class="i">himself</span> to fly.<br />
+      <span class="i">Roberto</span> taught <span class="j">him</span>
+      to fly.</li>
+      </ol>
+      <p>Using “him” to refer to some <span class="math inline">\(j
+      \not= i\)</span> works just fine. However, if “him” means
+      “Roberto”, things don’t work!</p>
+      <ol start="4" class="example" type="1">
+      <li><span class="bad"><span class="i">Roberto</span> taught <span
+      class="j">himself</span> to fly.</span><br />
+      <span class="bad"><span class="i">Roberto</span> taught <span
+      class="i">him</span> to fly.</span></li>
+      </ol>
+      <p>Word for word the sentences in (4) are the exact same sentences
+      as (3). But these sentences syntactically cannot match with the
+      semantics being expressed. If Roberto has taught himself to fly,
+      “Roberto taught him to fly” just doesn’t communicate the right
+      idea!</p>
+      <p>It’s also worth pointing out that duplicating the R-Expression
+      is also unnatural:</p>
+      <ol start="5" class="example" type="1">
+      <li><span class="bad"><span class="i">Roberto</span> taught <span
+      class="i">Roberto</span> to fly.</span><br />
+      <span class="i">Roberto</span> taught <span
+      class="j">Roberto</span> to fly. (Two men named “Roberto”)</li>
+      </ol>
+      <p>So, whatever rule we come up with, it’s going to have to keep
+      the indices in mind!</p>
+      <h3 id="word-order">Word Order</h3>
+      <p>Ok, maybe you came up with a rule like this:</p>
+      <blockquote>
+      <p>“If a noun follows another noun, and they share indices, an
+      anaphor must be used.”</p>
+      </blockquote>
+      <ol start="6" class="example" type="1">
+      <li><span class="i">He</span> taught <span class="j">Robert</span>
+      to fly.<br />
+      <span class="bad"><span class="i">He</span> taught <span
+      class="i">Robert</span> to fly.</span><br />
+      <span class="i">He</span> taught <span class="i">himself</span> to
+      fly.</li>
+      </ol>
+      <p>Seems reasonable, but it’s a little too simple. Remember (1)?
+      This was a totally valid reading:</p>
+      <ol start="7" class="example" type="1">
+      <li><span class="i">Jeremy</span> fooled <span
+      class="i">himself</span> into thinking <span class="i">he</span>
+      could love another man.</li>
+      </ol>
+      <p><span class="i">He</span> followed <span
+      class="i">himself</span> here, yet <span class="bad">“Jeremy
+      fooled himself into thinking himself could love another
+      man”</span> certainly didn’t work.<a href="#fn4"
+      class="footnote-ref" id="fnref4"
+      role="doc-noteref"><sup>4</sup></a></p>
+      <blockquote>
+      <p>“Ok… if the last noun was an R-Expression with the same
+      index…”</p>
+      </blockquote>
+      <ol start="8" class="example" type="1">
+      <li><span class="j">[<span class="i">[Heidi]</span>’s
+      mother]</span> bopped <span class="j">herself</span> on the head
+      with a zucchini.<br />
+      <span class="bad"><span class="j">[<span
+      class="i">[Heidi]</span>’s mother]</span> bopped <span
+      class="i">herself</span> on the head with a zucchini.</span><br />
+      <span class="j">[<span class="i">[Heidi]</span>’s mother]</span>
+      bopped <span class="i">her</span> on the head with a
+      zucchini.<br />
+      <span class="bad"><span class="j">[<span
+      class="i">[Heidi]</span>’s mother]</span> bopped <span
+      class="j">her</span> on the head with a zucchini.</span> <span
+      class="citation" data-cites="carnie2013">(<a
+      href="#ref-carnie2013" role="doc-biblioref">Carnie 2013, chap.
+      5</a>)</span></li>
+      </ol>
+      <p>Not bad, but what about this:</p>
+      <ol start="9" class="example" type="1">
+      <li><span class="j">[The mother of <span
+      class="i">[Heidi]</span>]</span> bopped <span
+      class="j">herslef</span> on the head with a zucchini.</li>
+      </ol>
+      <p>In (9), Heidi was the most recent R-Expression! Whatever rule
+      we come up with, we’re going to need a bit more structure…</p>
+      <h3 id="subject-object-relationship">Subject-Object
+      Relationship</h3>
+      <p>You might know anaphora as “reflexive-pronouns”, so maybe you
+      gave a rule like</p>
+      <blockquote>
+      <p>“If the object of a verb shares an index with the subject, an
+      anaphor must be used. Otherwise, it can never be used.”</p>
+      </blockquote>
+      <p>This is a pretty good rule, but unfortunately it <em>under
+      generates</em> (meaning anaphora get used in more places than this
+      rule would suggest). Consider:</p>
+      <ol start="10" class="example" type="1">
+      <li><span class="i">She</span> told me all about <span
+      class="i">herself</span>.</li>
+      </ol>
+      <p>“About herself” is a prepositional phrase, not exactly an
+      object! We’re close though… One thing that seems to be true — if
+      an anaphor <em>can</em> be used, it <em>must</em> be used.</p>
+      <p>Alright, enough playing around, let’s take a more structured
+      look at things!</p>
+      <h2 id="c-command">C-Command</h2>
+      <p>Our solution is going to be rooted in the tree structure of our
+      sentences. Often with trees we use relationships like “parent”,
+      “child”, “sibling”, “cousin”, etc… The relationship we need here
+      is just a tad richer — <em>c-command</em>.</p>
+      <dl>
+      <dt>C-Command</dt>
+      <dd>
+      <em>(Informal)</em> Node A c-commands its siblings and all of
+      their decendents.<br />
+      <em>(Formal)</em> Node A c-commands node B if every node branching
+      dominating A also dominates B, and neither A nor B dominates the
+      other.
+      </dd>
+      </dl>
+      <p>To get a feel for this relationship, here is a very simple
+      syntax tree<a href="#fn5" class="footnote-ref" id="fnref5"
+      role="doc-noteref"><sup>5</sup></a>. Click on any node, and it
+      will show which nodes that node c-commands!</p>
+      <div class="tree">
+      <p>[TP [NP [D The] [AdjP.Adj big] [Adj fat] [N man]] [VP [AdvP.Adv
+      quickly] [V eats] [NP [AdjP.Adj tasty] [N cake.]]]]</p>
+      </div>
+      <p>In the formal definition I have to note that we calculate
+      siblings from the first “branching” ancestor. For example, in the
+      above sentence you might notice that “The” c-commands all nodes in
+      the NP, even though it technically has no siblings. It’s like we
+      skip-over D, and go strait to the NP root.</p>
+      <p>Now that we understand the c-command relationship, we should be
+      able to come up with a solution to our puzzle!</p>
+      <h2 id="binding-principals">Binding Principals</h2>
+      <p>Let’s look at the tree for (8).</p>
+      <div class="tree">
+      <p>[TP [NP [DP [N Heidi] [Gen ’s]] [N mother]] [VP [V bopped]
+      [NP.N herself] [PP [P on] [NP [D the] [N head]]] [PP [P with] [NP
+      [D a] [N zucchini]]]]]</p>
+      </div>
+      <p>Now, we have a few notes we can make here:</p>
+      <ul>
+      <li>The NP “Heidi’s mother” c-commands the entire VP.</li>
+      <li>The N “Heidi” doesn’t c-command the VP.</li>
+      <li>“Herself” doesn’t c-command the subject phrase.</li>
+      </ul>
+      <p>We can use this information to come up with a pretty good set
+      of rules! First, to make our definitions a bit more clear, we
+      should define the term “syntactic binding”.</p>
+      <dl>
+      <dt>Binding</dt>
+      <dd>
+      A binds B if A c-commands B, and A and B share the same
+      index.<br />
+      We say A is the <strong>binder</strong> and B is the
+      <strong>bindee</strong>.<br />
+      If A is unbound, we call it <strong>free</strong>.
+      </dd>
+      </dl>
+      <p>Now, <em>finally</em>, let’s look at our rules!</p>
+      <dl>
+      <dt>The Binding Principals</dt>
+      <dd>
+      <strong>Anaphor:</strong> An Anaphor must be bound.<br />
+      <strong>Pronoun:</strong> A pronoun must be free.<br />
+      <strong>R-Expression:</strong> An R-Expression must be free.
+      </dd>
+      </dl>
+      <p>Look back at our examples thus far, and see if they work
+      out!</p>
+      <h3 id="binding-domain">Binding Domain</h3>
+      <p>These binding principals describe things fairly well, solving
+      the problems we’ve seen thus far, but it needs one little
+      revision! Let’s look back at our first example</p>
+      <ol start="11" class="example" type="1">
+      <li><span class="i">Jeremy</span> fooled <span
+      class="i">himself</span> into thinking <span class="ij">he</span>
+      could love another man.</li>
+      </ol>
+      <p>“Jeremy” is certainly free. “Himself” bound. But what about
+      “he”? It looks like “he” could be bound, or not, yet “he” seems to
+      be ok in both cases! To address this, we add one last idea — a
+      binding domain. Because “he could love another man” is its own
+      clause, we say “Jeremy” is outside the binding domain of “he”.</p>
+      <p>It’s as if, when choosing between “he” or “himself”, we only
+      look at the tree for that clause:</p>
+      <div class="tree">
+      <p>[TP [NP.N he] [T could] [VP [V love] [NP [D another] [N
+      man]]]]</p>
+      </div>
+      <p>In this <em>subtree</em>, “he” is free, even though it is
+      <em>bound</em> outside of this clause.</p>
+      <p>At the same time, R-Expressions don’t seem to have this binding
+      domain!</p>
+      <ol start="12" class="example" type="1">
+      <li><span class="bad"><span class="i">Jeremy</span> fooled <span
+      class="i">himself</span> into thinking <span
+      class="i">Jeremy</span> could love another man.</span></li>
+      </ol>
+      <p>With all of this, we can revise our answer, and come up with a
+      final rule.</p>
+      <dl>
+      <dt>The Binding Principals (Revised)</dt>
+      <dd>
+      <strong>Anaphor:</strong> An Anaphor must be bound in its binding
+      domain.<br />
+      <strong>Pronoun:</strong> A pronoun must be free in its binding
+      domain.<br />
+      <strong>R-Expression:</strong> An R-Expression must be globaly
+      free.
+      </dd>
+      </dl>
+      <p><strong>That, my friends, is our answer!</strong></p>
+      <h3 id="does-this-cover-everything">Does this Cover
+      Everything?</h3>
+      <p>You may have found some examples which don’t seem to fit our
+      definition. For example, sentences such as “she read the letter
+      <em>herself”</em>. It turns out this isn’t as much of a problem,
+      as this usage of”herself” is, in fact, acting as an adverb / focus
+      particle, and not actually a noun phrase. In some languages, this
+      focus particle would actually be a different word (“sie hat es
+      selbst gelessen” and not <span class="bad">“sie hat es sich
+      gelessen”</span>).</p>
+      <p>There are also some problems with our idea of binding domain,
+      which muddies the waters a bit — clarifying it, however, would
+      require some background in <a
+      href="https://en.wikipedia.org/wiki/Syntactic_movement">movement</a>,
+      which I don’t want to get into.</p>
+      <h2 id="conclusions">Conclusions</h2>
+      <p>Early in my introduction to linguistics I learned about the
+      <em>c-command</em> relationship, only being told it was “very
+      important” (which I didn’t find to be particularly helpful).
+      Binding, however, was when I realized it really was important!</p>
+      <p>Binding is a very well developed theory, and in fact <a
+      href="https://en.wikipedia.org/wiki/Government_and_binding_theory">Government
+      and Binding Theory</a> was an early form of <a
+      href="https://en.wikipedia.org/wiki/Minimalist_program">The
+      Minmalist Program</a> (the current dominant theoretical program in
+      Transformational Grammar). For an introduction to how binding
+      operates in these frameworks, I’d recomend <span class="citation"
+      data-cites="chomsky1980">Chomsky (<a href="#ref-chomsky1980"
+      role="doc-biblioref">1980</a>)</span> (but be warned, this paper
+      is very technical). <span class="citation"
+      data-cites="higginbotham1980">Higginbotham (<a
+      href="#ref-higginbotham1980" role="doc-biblioref">1980</a>)</span>
+      gives a similar (and a bit more accessible) introduction to the
+      idea, which only focuses on the uses we touched on here. While
+      Higginbotham uses complex theories of movement, I think the paper
+      is at least skimable to the beginner.</p>
+      <p>For a lighter introduction, I learned about binding from my
+      first syntax book, <span class="citation"
+      data-cites="carnie2013">Carnie (<a href="#ref-carnie2013"
+      role="doc-biblioref">2013, chaps. 5, 17</a>)</span>. For someone
+      new to linguistics (which… if you just read this post, that’s
+      probably you) I would strongly recommend that book.</p>
+      <p>Thanks for reading! Let me know if something didn’t makes
+      sense! I’d be curious how these rules fit within your own
+      languages!</p>
+      <h2 id="references">References</h2>
+      <div id="refs" class="references csl-bib-body hanging-indent"
+      role="list">
+      <div id="ref-carnie2013" class="csl-entry" role="listitem">
+      Carnie, Andrew. 2013. <em>Syntax: A Generative Introduction</em>.
+      Third Edition. Introducing Linguistics 16. <span>Hoboken, New
+      Jersey</span>: <span>Wiley-Blackwell</span>.
+      </div>
+      <div id="ref-chomsky1980" class="csl-entry" role="listitem">
+      Chomsky, Noam. 1980. <span>“On <span>Binding</span>.”</span>
+      <em>Linguistic Inquiry</em> 11 (1): 1–46.
+      </div>
+      <div id="ref-higginbotham1980" class="csl-entry" role="listitem">
+      Higginbotham, James. 1980. <span>“Pronouns and <span>Bound
+      Variables</span>.”</span> <em>Linguistic Inquiry</em> 11 (4):
+      679–708.
+      </div>
+      </div>
+      <script src="/js/c-com/chomTree_dist.js"></script>
+      <script src="/js/c-com/c-com.js"></script>
+      <aside id="footnotes" class="footnotes footnotes-end-of-document"
+      role="doc-endnotes">
+      <hr />
+      <ol>
+      <li id="fn1"><p><a href="/posts/2020/02/13/reference.html">Well,
+      kinda</a>… but that’s not the point right now!<a href="#fnref1"
+      class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+      <li id="fn2"><p>I’ve used the word anaphor in my post on <a
+      href="/posts/2020/03/10/b-winograd.html">Winograd schema</a>. I
+      have to admit, I think I may have been using it incorrectly /
+      confusingly. Consider this an updated definition.<a href="#fnref2"
+      class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+      <li id="fn3"><p>“Governs the distribution” might sound a bit
+      technical, but it’s nothing special. The “distribution” of a class
+      of words defines, syntactically, where they occur. For example,
+      “adjectives are placed before nouns”.<a href="#fnref3"
+      class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+      <li id="fn4"><p>You might have noticed that “himself” doesn’t work
+      well here, because it is the <strong>nominative case</strong>.
+      That is, we have “he” and “him” in English, but not “heself” and
+      “himself”. Therefore, you would certainly be right if you noted
+      “an anaphor may never be nominative”.<a href="#fnref4"
+      class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+      <li id="fn5"><p>Why did I draw this tree as I did? In fact, these
+      are very over-simplified, and would universally be considered
+      wrong. There’s a rich conversation about what the structure of
+      these trees should be. What I’ve drawn here is something you might
+      see in an intro to linguistics course (specifically with flat
+      trees, rather than binary trees). For more information maybe read
+      up on the (now outmoded) <a
+      href="https://en.wikipedia.org/wiki/X-bar_theory">X-bar theory</a>
+      — that’s a good place to start.<a href="#fnref5"
+      class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+      </ol>
+      </aside>
+    </article>
+
+    <img id="sig" src="/images/tc-logo.svg" alt="Tyler Cecil's Blog"/>
+    <h6 style="text-align:center">Comments mean a lot!</h6>
+    <h5>
+      <a href="/"> More Posts </a>
+      <a href="mailto:blog@tylercecil.com?Subject=Go C-Command
+Yourself!"
+         style="float: right">
+        Write Me
+      </a>
+    </h5>
+
+    <script
+      defer src="https://commento-tylercecil.herokuapp.com/js/commento.js">
+    </script>
+    <div id="commento"></div>
+
+    <footer>
+      <h6 style="float: right">&copy; 2023 Tyler Cecil</h6>
+      <a href="/feed/atom.xml"
+         style="text-decoration: none;">
+        <!-- SVG taken from: http://genericons.com/ -->
+        <svg xmlns="http://www.w3.org/2000/svg"
+             viewBox="0 0 16 16"
+             height="1.5rem"
+             width="1.5rem"
+             style="fill: currentColor;">
+          <rect x="0" fill="none" width="16" height="16"/>
+          <g>
+          <path d="M2 6v2c3.3 0 6 2.7 6 6h2c0-4.4-3.6-8-8-8zm0-4v2c5.5 0 10 4.5 10 10h2C14 7.4 8.6 2 2 2zm1.5 9c-.8 0-1.5.7-1.5 1.5S2.7 14 3.5 14 5 13.3 5 12.5 4.3 11 3.5 11z"/>
+          </g>
+        </svg>
+        Subscribe via RSS
+      </a>
+      <br/>
+      <a
+         href="https://blogtrottr.com/?subscribe=https://tylercecil.com/feed/atom.xml"
+         target="_blank"
+         title="Powered by BlogTrottr"
+         style="text-decoration: none;">
+        <!-- SVG taken from: http://genericons.com/ -->
+        <svg xmlns="http://www.w3.org/2000/svg"
+             viewBox="0 0 16 16"
+             height="1.5rem"
+             width="1.5rem"
+             style="fill: currentColor;">
+          <rect x="0" fill="none" width="16" height="16"/>
+          <g>
+          <path d="M15 9h-5c-.6 0-1 .4-1 1v5c0 .6.4 1 1 1h5c.6 0 1-.4 1-1v-5c0-.6-.4-1-1-1zm0 4h-2v2h-1v-2h-2v-1h2v-2h1v2h2v1zm-3-5V5c0-1.1-.9-2-2-2H2C.9 3 0 3.9 0 5v5c0 1.1.9 2 2 2h6v-2c0-1.2.8-2 2-2h2zM6 9.1L1 6.2V5l5 2.9L11 5v1.2L6 9.1z"/>
+          </g>
+        </svg>
+        Subscribe via Email
+      </a>
+    </footer>
+    <script>
+      // Causes external links to open in a new tab
+      // TODO: This should really be done by pandoc
+      (function (){
+              var links = document.links;
+
+              for (var i = 0, linksLength = links.length; i < linksLength; i++) {
+                      if (links[i].hostname != window.location.hostname) {
+                              links[i].target = '_blank';
+                            }
+                    }})();
+    </script>
+
+  </body>
+</html>

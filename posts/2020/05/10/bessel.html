@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <!-- Meta info
+    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <meta charset="utf-8"/>
+    <meta name="description" content="Personal website of Tyler Cecil"/>
+    <meta name="author" content="Tyler I. Cecil"/>
+    <title>The Curious Case of Population Variance</title>
+    <!-- Mobile Specific Metas
+      –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+    <!-- Favicon <link rel="icon" type="image/png" href="/images/favicon.png">
+      –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon/favicon-16x16.png">
+    <link rel="manifest" href="/images/favicon/site.webmanifest">
+    <link rel="mask-icon" href="/images/favicon/safari-pinned-tab.svg" color="#5bbad5">
+    <link rel="shortcut icon" href="/images/favicon/favicon.ico">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="msapplication-config" content="/images/favicon/browserconfig.xml">
+    <meta name="theme-color" content="#ffffff">
+    <!-- FONT
+      –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+      <!-- <link href="https://fonts.googleapis.com/css?family=Open+Sans|Raleway|Roboto&display=swap" rel="stylesheet"> -->
+    <!-- CSS
+      –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <link href="/css/normalize.css" rel="stylesheet">
+    <link href="/css/post.css" rel="stylesheet">
+    <!-- JS
+      –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async
+            src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+    </script>
+    <!-- HEADER-INCLUDES:
+      –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+      
+      </head>
+
+  <body>
+
+    <nav>
+      <a href="/">Posts</a>
+      &bull;
+      <a href="/about/">About</a>
+      &bull;
+      <a href="/subscribe/">Subscribe</a>
+    </nav>
+    <header>
+      <h1>The Curious Case of Population Variance</h1>
+      <p>Estimating Variance without Bias</p>
+      <p><small>Posted on 2020-05-10</small></p>
+          </header>
+
+        <div class="note">
+      <p><strong>Note:</strong> This post is available as a <a
+      href="https://github.com/tylercecil/bessels-correction">Jupyter
+      Notebook</a>!<br />
+      <strong>Note:</strong> Let me know if you’d like me to annotate
+      the math with hover-over text, like I did in <a
+      href="/posts/2020/04/06/natduc.html">my last post</a>.</p>
+    </div>
+    
+    <article>
+      <p>Let’s remind ourselves about the definition of variance:</p>
+      <p><span class="math display">\[ \text{Var}(X) = E[ (X - \mu)^2 ]
+      \]</span></p>
+      <p>That is, it’s the expected difference squared between an random
+      variable <span class="math inline">\(X\)</span> and its mean,
+      <span class="math inline">\(\mu\)</span>. This is Prob ’n Stats
+      Day 1 stuff.</p>
+      <p>Obviously, in most situations we don’t actually know the
+      parameters of our probability distribution. Instead we have some
+      sample data <span class="math inline">\(X_1, \ldots, X_n\)</span>.
+      With our sample population, we try to estimate the parameters of
+      our PDF. The most obvious example is estimating <span
+      class="math inline">\(\mu\)</span>:</p>
+      <p><span class="math display">\[ \overline{X} = \frac{1}{n}
+      \sum_{i=1}^n X_i \]</span></p>
+      <p>I would also guess that the average person would estimate
+      variance in more-or-less the same way</p>
+      <p><span class="math display">\[ s^2_n = \frac{1}{n} \sum_{i=1}^n
+      (X_i - \overline{X})^2 \]</span></p>
+      <p>And that person (like me) might be shocked to learn that <span
+      class="math inline">\(s^2_n\)</span> (the <em>uncorrected sample
+      variance</em>) <strong>is a biased estimator!</strong> It will, in
+      fact, consistently <em>underestimate</em> the true variance of the
+      population! Allow me to demonstrate…</p>
+      <div class="sourceCode" id="cb1"><pre
+      class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># `samples` is 100000 rows of 50 columns, each drawn from a</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co"># normal distribution with μ = 0 and σ^2 = 1.</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Each row is represents an experiment with 50 observations</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>samples <span class="op">=</span> np.random.normal(<span class="dv">0</span>, <span class="dv">1</span>, (<span class="dv">50</span>, <span class="dv">100000</span>))</span></code></pre></div>
+      <div class="sourceCode" id="cb2"><pre
+      class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> uncorrected_variance(sample):</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">&quot;&quot;&quot; Given a sample populations, computes the uncorrected</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co">    sample variance:</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co">    s^2_n = (1 / n) Sum( (x_i - μ)^2 )</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co">    &quot;&quot;&quot;</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    n <span class="op">=</span> sample.size</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    μ <span class="op">=</span> sample.mean()</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    s <span class="op">=</span> np.<span class="bu">sum</span>(np.vectorize(<span class="kw">lambda</span> xi: (xi <span class="op">-</span> μ)<span class="op">**</span><span class="dv">2</span>)(sample)) <span class="op">/</span> n</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> s</span></code></pre></div>
+      <div class="sourceCode" id="cb3"><pre
+      class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>s_uncorrected <span class="op">=</span> np.apply_along_axis(uncorrected_variance, <span class="dv">0</span>, samples)</span></code></pre></div>
+      <div class="sourceCode" id="cb4"><pre
+      class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> plot_variance_exp(variances, true_μ<span class="op">=</span><span class="dv">1</span>):</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    mean <span class="op">=</span> variances.mean()</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    lbl <span class="op">=</span> <span class="bu">str</span>.<span class="bu">format</span>(<span class="st">&quot;Mean: </span><span class="sc">{0:.4f}</span><span class="ch">\n</span><span class="st">Biase: </span><span class="sc">{1:.4f}</span><span class="st">&quot;</span>, mean, mean <span class="op">-</span> true_μ)</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    pyplot.hist(variances, bins<span class="op">=</span><span class="dv">25</span>, alpha<span class="op">=</span><span class="fl">0.5</span>)</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    pyplot.axvline(mean, color<span class="op">=</span><span class="st">&#39;b&#39;</span>, linestyle<span class="op">=</span><span class="st">&#39;dashed&#39;</span>)</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    pyplot.text(x<span class="op">=</span><span class="fl">1.5</span>, y<span class="op">=</span><span class="dv">10000</span>, s<span class="op">=</span>lbl)</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="va">None</span></span></code></pre></div>
+      <div class="sourceCode" id="cb5"><pre
+      class="sourceCode python"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>plot_variance_exp(s_uncorrected)</span></code></pre></div>
+      <figure>
+      <img src="/images/posts/bessel/output_6_0.png"
+      alt="Estimated Variance using s^2_n" />
+      <figcaption aria-hidden="true">Estimated Variance using <span
+      class="math inline">\(s^2_n\)</span></figcaption>
+      </figure>
+      <p><strong>After running 100,000 experiments, being off by 2% sure
+      seems like a lot!</strong> And again, it’s not just wrong, but
+      consistently too small!</p>
+      <h2 id="correcting-the-bias">Correcting the Bias</h2>
+      <p>Before we get to <em>why</em> <span
+      class="math inline">\(s^2_n\)</span> is biased, let’s actually
+      start with the correction, and work backwards from there. As it
+      happens, <span class="math inline">\(s^2_n\)</span> will be off by
+      a factor of <span class="math inline">\(\frac{n}{n - 1}\)</span>.
+      This factor is known as <em>Bessel’s correction</em> (what a guy,
+      Bessel…). Scaling up the uncorrected variance estimation by this
+      factor gives us our corrected (and unbiased) variance estimator,
+      <span class="math inline">\(s^2_{n-1}\)</span>.</p>
+      <p><span class="math display">\[ s^2_{n - 1} = \frac{n}{n - 1}
+      s^2_n = \frac{1}{n -1} \sum_{i=1}^n (X_i -
+      \overline{X})^2 \]</span></p>
+      <p>This new estimator is unbiased — I wouldn’t lie to you about
+      that! But let’s run another experiment, just to make ourselves
+      feel better.</p>
+      <div class="sourceCode" id="cb6"><pre
+      class="sourceCode python"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> bessel_variance(sample):</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">&quot;&quot;&quot;Given a sample population, computes the corrected</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co">    sample variance:</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="co">    s^2_(n-1) = (1 / (n - 1)) Sum( (x_i - μ)^2 )</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="co">    &quot;&quot;&quot;</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    n <span class="op">=</span> sample.size</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>    μ <span class="op">=</span> sample.mean()</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>    s <span class="op">=</span> np.<span class="bu">sum</span>(np.vectorize(<span class="kw">lambda</span> xi: (xi <span class="op">-</span> μ)<span class="op">**</span><span class="dv">2</span>)(sample)) <span class="op">/</span> (n <span class="op">-</span> <span class="dv">1</span>)</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> s</span></code></pre></div>
+      <div class="sourceCode" id="cb7"><pre
+      class="sourceCode python"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>s_corrected <span class="op">=</span> np.apply_along_axis(bessel_variance, <span class="dv">0</span>, samples)</span></code></pre></div>
+      <div class="sourceCode" id="cb8"><pre
+      class="sourceCode python"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>plot_variance_exp(s_corrected)</span></code></pre></div>
+      <figure>
+      <img src="/images/posts/bessel/output_11_0.png"
+      alt="Estimated Variance using s^2_{n-1}" />
+      <figcaption aria-hidden="true">Estimated Variance using <span
+      class="math inline">\(s^2_{n-1}\)</span></figcaption>
+      </figure>
+      <p>That’s more like it, huh! Now we’re seeing <span
+      class="math inline">\(\overline{s^2_{n-1}}\)</span> being within
+      0.01% of the true <span
+      class="math inline">\(\text{Var}(X)\)</span>.</p>
+      <h2 id="so-what-just-happened">So… What Just Happened?</h2>
+      <p>I have to admit, this kinda blew me away at first. I just
+      happened to read somewhere “of course, the naive <span
+      class="math inline">\(s^2_n\)</span> estimator is biased”, and had
+      to do a double take. I even pulled out my university Prob &amp;
+      Stats textbook to see if we learned this (as it happens, the book
+      just defines <span class="math inline">\(s^2_{n-1}\)</span>, and
+      says you should use that on the problem sets with no
+      explanation…)</p>
+      <p>It is a very well known correction, though; I just seem to have
+      missed the memo.</p>
+      <p>Luckily, though, it’s actually pretty simple to explain what
+      went wrong with <span class="math inline">\(s^2_n\)</span>. To
+      start, I’ll give a high-level explanation for the source of our
+      bias.</p>
+      <h3 id="high-level-problem">High-Level Problem</h3>
+      <p>There are two terms used to describe how “far-off” some <span
+      class="math inline">\(X_i\)</span> was from the “theoretical
+      value”.</p>
+      <table>
+      <tbody>
+      <tr class="odd">
+      <td style="text-align: left;"><strong>Errors:</strong></td>
+      <td style="text-align: left;"><span class="math inline">\(e_i =
+      X_i - \mu\)</span></td>
+      </tr>
+      <tr class="even">
+      <td style="text-align: left;"><strong>Residuals:</strong></td>
+      <td style="text-align: left;"><span class="math inline">\(r_i =
+      X_i - \overline{X}\)</span></td>
+      </tr>
+      </tbody>
+      </table>
+      <p>Often in experiments, the true <span
+      class="math inline">\(\mu\)</span> is unknown to us, and we are
+      forced to estimate it with <span
+      class="math inline">\(\overline{X}\)</span>. This means, in an
+      experiment, we can measure the residuals but we <strong>may not be
+      able to measure the errors.</strong></p>
+      <p>Because <span class="math inline">\(\text{Var}(X) = E[ (X -
+      \mu)^2 ]\)</span>, <em>variance is the expected value of the sum
+      of the squared errors.</em> But we didn’t know the errors! We used
+      the residuals instead. How well would things have worked if we
+      knew the true errors, and not just the residuals?</p>
+      <div class="sourceCode" id="cb9"><pre
+      class="sourceCode python"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> error_variance(sample):</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">&quot;&quot;&quot; Given a sample populations, computes the sample variance with the</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="co">    known true μ, rather than the residuals. In our case, we know that μ=0.</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="co">    s^2_n = (1 / n) Sum( (x_i - μ)^2 )</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="co">    &quot;&quot;&quot;</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>    n <span class="op">=</span> sample.size</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>    μ <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>    s <span class="op">=</span> np.<span class="bu">sum</span>(np.vectorize(<span class="kw">lambda</span> xi: (xi <span class="op">-</span> μ)<span class="op">**</span><span class="dv">2</span>)(sample)) <span class="op">/</span> n</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> s</span></code></pre></div>
+      <div class="sourceCode" id="cb10"><pre
+      class="sourceCode python"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>s_errors <span class="op">=</span> np.apply_along_axis(error_variance, <span class="dv">0</span>, samples)</span></code></pre></div>
+      <div class="sourceCode" id="cb11"><pre
+      class="sourceCode python"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>plot_variance_exp(s_errors)</span></code></pre></div>
+      <figure>
+      <img src="/images/posts/bessel/output_16_0.png"
+      alt="Estimated Variance using s^2_{n} and the true \mu." />
+      <figcaption aria-hidden="true">Estimated Variance using <span
+      class="math inline">\(s^2_{n}\)</span> and the true <span
+      class="math inline">\(\mu\)</span>.</figcaption>
+      </figure>
+      <p>This, in fact, gives us an unbiased estimator! <strong>So
+      obviously the secret lies in the difference between errors and
+      residuals.</strong></p>
+      <p><span class="math inline">\(X_i - \mu\)</span> and <span
+      class="math inline">\(X_i - \overline{X}\)</span> don’t seem that
+      different, especially considering <span
+      class="math inline">\(\overline{X}\)</span> is an estimator for
+      <span class="math inline">\(\mu\)</span>. As an estimator, though,
+      <span class="math inline">\(\overline{X}\)</span> is itself a
+      random variable. The crux is that <span
+      class="math inline">\(X_i\)</span> and <span
+      class="math inline">\(\overline{X}\)</span> <strong>are not
+      independent variables!</strong> A small part of <span
+      class="math inline">\(X_i\)</span> is “inside” <span
+      class="math inline">\(\overline{X}\)</span>. So even though we are
+      adding <span class="math inline">\(n\)</span> terms together, we
+      actually only have <span class="math inline">\(n-1\)</span>
+      degrees of freedom between those terms.</p>
+      <p>Put even more exactly, our uncorrected estimator is being drawn
+      from a chi-squared distribution with only <span
+      class="math inline">\(n-1\)</span> degrees of freedom.</p>
+      <p><span class="math display">\[ \frac{1}{\sigma^2} \sum r_i^2
+      \sim \chi^2_{n-1} \]</span></p>
+      <h3 id="but-where-is-the-bias-coming-from">But Where is the Bias
+      Coming From?</h3>
+      <p>Once we realize that the relationship between any <span
+      class="math inline">\(X_i\)</span> and <span
+      class="math inline">\(\overline{X}\)</span>, we can quickly break
+      things down and see where this bias is coming from. We’ve already
+      noted that the true variance can be estimated as <span
+      class="math inline">\(\frac{1}{n} \sum_i e_i^2\)</span>. We’re
+      going to be using the residuals, however, which begs the question
+      “what’s the relationship between <span
+      class="math inline">\(e_i\)</span> and <span
+      class="math inline">\(r_i\)</span>?”</p>
+      <p><span class="math display">\[ e_i = \underbrace{(X_i -
+      \overline{X})}_{r_i} + (\overline{X} - \mu) \]</span></p>
+      <p><span class="math display">\[
+      \begin{align*}
+        \frac{1}{n} \sum_i e_i^2 &amp;= \frac{1}{n} \sum_i (r_i +
+      (\overline{X} - \mu))^2\\
+        &amp;= \frac{1}{n} \sum_i \left (r_i^2 + 2r_i(\overline{X} -
+      \mu) +
+           (\overline{X} - \mu)^2 \right )\\
+        &amp;= \frac{1}{n} \left[ \sum_i \left( r_i^2 \right) + 2 \sum_i
+      \left(
+            r_i(\overline{X} - \mu) \right) + n(\overline{X} - \mu)^2
+      \right]
+      \end{align*}
+      \]</span></p>
+      <p>The first term is our “uncorrected estimator” (the mean of the
+      residuals, rather than the errors). I want to dive into the middle
+      term quickly, where we will see this interaction between <span
+      class="math inline">\(X_i\)</span> and <span
+      class="math inline">\(\overline{X}\)</span> play out.</p>
+      <p><span class="math display">\[
+      \begin{align*}
+          \sum_i r_i(\overline{X} - \mu) &amp;= \sum_i (X_i -
+      \overline{X})(\overline{X} - \mu)\\
+          &amp;= \sum_i \left( \overline{X}X_i - X_i\mu - \overline{X}^2
+      + \overline{X}\mu \right)\\
+          &amp;= \overline{X} \sum X_i - \mu \sum X_i - n \overline{X}^2
+      + n\mu\overline{X}\\
+      \end{align*}
+      \]</span></p>
+      <p>Now, of course <span class="math inline">\(\overline{X} =
+      \frac{1}{n} \sum X_i\)</span>…</p>
+      <p><span class="math display">\[
+      \begin{align*}
+          &amp;= n \overline{X}^2 - n\mu\overline{X} - n\overline{X}^2 +
+      n\mu\overline{X}\\
+          &amp;= 0
+      \end{align*}
+      \]</span></p>
+      <p>Finally, we are left with a big fat bias staring back at
+      us…</p>
+      <p><span class="math display">\[
+      \begin{align*}
+          \frac{1}{n} \sum e_i &amp;= \frac{1}{n} \sum r_i^2 +
+      (\overline{X} - \mu)^2\\
+          &amp;= s^2_n + (\overline{X} - \mu)^2
+      \end{align*}
+      \]</span></p>
+      <h3 id="how-does-n---1-fix-this">How Does <span
+      class="math inline">\(n - 1\)</span> Fix This?</h3>
+      <p>Well, we know that <span class="math inline">\(E\left[
+      \frac{1}{n} \sum e_i \right] = \sigma^2\)</span>, right? Then
+      let’s take a look at the last line from above…</p>
+      <p><span class="math display">\[
+      \begin{align*}
+          E\left[ \frac{1}{n} \sum e_i \right] &amp;= E[s^2_n] +
+      E[(\overline{X} - \mu)^2]\\
+          \sigma^2 &amp;= E[s^2_n] + \frac{\sigma^2}{n}\\
+          E[s^2_n] &amp;= \frac{n - 1}{n} \sigma^2
+      \end{align*}
+      \]</span></p>
+      <p>And there it is! Simply scaling up by <span
+      class="math inline">\(\frac{n}{n - 1}\)</span> will yield an
+      unbiased estimator!</p>
+      <h2 id="so-always-use-s2_n-1">So Always Use <span
+      class="math inline">\(s^2_{n-1}\)</span>?</h2>
+      <p>That sure would make life simple, huh? Well I have bad news —
+      the unbiased estimator will, in fact, yield a worse <em>mean
+      squared error.</em> Here’s another simulation to demonstrate.</p>
+      <div class="sourceCode" id="cb12"><pre
+      class="sourceCode python"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> MSE(estimates, θ<span class="op">=</span><span class="dv">1</span>):</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">&quot;&quot;&quot;Calculates the MSE of a set of estimates against a known θ.&quot;&quot;&quot;</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    n <span class="op">=</span> estimates.size</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>    mse <span class="op">=</span> np.<span class="bu">sum</span>(np.vectorize(<span class="kw">lambda</span> ti: (ti <span class="op">-</span> θ)<span class="op">**</span><span class="dv">2</span>)(estimates)) <span class="op">/</span> (n)</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> mse</span></code></pre></div>
+      <div class="sourceCode" id="cb13"><pre
+      class="sourceCode python"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>mse_uncorrected, mse_corrected <span class="op">=</span> MSE(s_uncorrected), MSE(s_corrected)</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Uncorrected MSE:  &quot;</span> <span class="op">+</span> <span class="bu">str</span>(mse_uncorrected))</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Corrected MSE:    &quot;</span> <span class="op">+</span> <span class="bu">str</span>(mse_corrected))</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Percent Increase: &quot;</span> <span class="op">+</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>      <span class="bu">str</span>(<span class="dv">100</span> <span class="op">*</span> (mse_corrected <span class="op">-</span> mse_uncorrected) <span class="op">/</span> mse_uncorrected))</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;</span>   Uncorrected MSE:  <span class="fl">0.039765490470560265</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;</span>   Corrected MSE:    <span class="fl">0.04101443329481074</span></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;</span>   Percent Increase: <span class="fl">3.1407705763747864</span></span></code></pre></div>
+      <h2 id="the-mse-of-variance-estimators">The MSE of Variance
+      Estimators</h2>
+      <p>A 4% increase in MSE… we just can’t win, can we!?</p>
+      <blockquote>
+      <p>“So to minimize bias use <span
+      class="math inline">\(s^2_{n-1}\)</span>, and to minimize error
+      use <span class="math inline">\(s^2_n\)</span>?”</p>
+      </blockquote>
+      <p>My friend, meet <span
+      class="math inline">\(s^2_{n+1}\)</span>…</p>
+      <div class="sourceCode" id="cb14"><pre
+      class="sourceCode python"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> mse_min_variance(sample):</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">&quot;&quot;&quot;Given a sample population, computes the sample variance,</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="co">    minimizing the MSE (for a normal distribution).</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="co">    s^2_(n+1) = (1 / (n + 1)) Sum( (x_i - μ)^2 )</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="co">    &quot;&quot;&quot;</span></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>    n <span class="op">=</span> sample.size</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>    μ <span class="op">=</span> sample.mean()</span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>    s <span class="op">=</span> np.<span class="bu">sum</span>(np.vectorize(<span class="kw">lambda</span> xi: (xi <span class="op">-</span> μ)<span class="op">**</span><span class="dv">2</span>)(sample)) <span class="op">/</span> (n <span class="op">+</span> <span class="dv">1</span>)</span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> s</span></code></pre></div>
+      <div class="sourceCode" id="cb15"><pre
+      class="sourceCode python"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>s_mse_min <span class="op">=</span> np.apply_along_axis(mse_min_variance, <span class="dv">0</span>, samples)</span></code></pre></div>
+      <div class="sourceCode" id="cb16"><pre
+      class="sourceCode python"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>plot_variance_exp(s_mse_min)</span></code></pre></div>
+      <figure>
+      <img src="/images/posts/bessel/output_26_0.png"
+      alt="Estimated Variance using s^2_{n+1}" />
+      <figcaption aria-hidden="true">Estimated Variance using <span
+      class="math inline">\(s^2_{n+1}\)</span></figcaption>
+      </figure>
+      <div class="sourceCode" id="cb17"><pre
+      class="sourceCode python"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>MSE(s_mse_min)</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;</span>   <span class="fl">0.03935094118106912</span></span></code></pre></div>
+      <p>As it happens, for a normal distribution, <span
+      class="math inline">\(s^2_{n + 1}\)</span> will minimize our MSE.
+      As is often the case in modeling and statistics, we have a
+      trade-off to consider. Should we minimize the bias, or the
+      MSE?</p>
+      <p>I should warn you, however, <strong><span
+      class="math inline">\(s^2_{n+1}\)</span> will only minimize the
+      MSE with a normal distribution.</strong> Different distributions
+      will have their own optimal error-reducing estimators. Answering
+      “why” is really a matter of crunching the numbers — I don’t think
+      I can explain it better than <a
+      href="https://en.wikipedia.org/wiki/Mean_squared_error#Variance">Wikipedia
+      does</a>, but for completeness sake, let’s put the results
+      here.</p>
+      <p>We can take a variance estimator <span
+      class="math inline">\(s^2_a = \frac{1}{a} \sum (X_i -
+      \overline{X})\)</span>, and calculate it’s MSE. This works out to
+      (just trust me on this one):</p>
+      <p><span class="math display">\[
+      \text{MSE}(s^2_a) = \frac{n - 1}{na^2} ((n - 1) \gamma_2 + n^2 +
+      n)\sigma^4 - 2
+      \left( \frac{n-1}{a} \right) \sigma^4 + \sigma^4
+      \]</span></p>
+      <p>A bit of a mouthful, but ok. <span
+      class="math inline">\(\gamma_2\)</span> here, by the way, is the
+      <em>excess kurtosis</em> of this distribution (a measure of how
+      “tailed” a distribution is). This is the kind of number that you
+      could easily find for any distribution.</p>
+      <p>Now, to find the optimal <span
+      class="math inline">\(s^2_a\)</span> for some distribution, we
+      simply minimize the MSE function, which happens when</p>
+      <p><span class="math display">\[
+      a = n + 1 + \frac{n - 1}{n} \gamma_2
+      \]</span></p>
+      <p>The normal distribution has <span
+      class="math inline">\(\gamma_2 = 0\)</span>, which is where our
+      <span class="math inline">\(a = n + 1\)</span> is coming from. If
+      we were drawing from a Bernoulli distribution, however, <span
+      class="math inline">\(\gamma_2 = -2\)</span>, and we’d find <span
+      class="math inline">\(a = n - 1 + \frac{2}{n}\)</span>.</p>
+      <h2 id="thats-all-folks">That’s All, Folks!</h2>
+      <p>It’s when the most mundane things don’t work as you’d expect
+      that always seem the most exciting. I <em>might</em> be the last
+      person to have gotten the memo on variance estimation. If not,
+      though, I hope some of you were just as take by it as me.</p>
+      <p>Thanks for reading, and as always, leave a comment, and let me
+      know your thoughts, questions, or comments!</p>
+    </article>
+
+    <img id="sig" src="/images/tc-logo.svg" alt="Tyler Cecil's Blog"/>
+    <h6 style="text-align:center">Comments mean a lot!</h6>
+    <h5>
+      <a href="/"> More Posts </a>
+      <a href="mailto:blog@tylercecil.com?Subject=The Curious Case of
+Population Variance"
+         style="float: right">
+        Write Me
+      </a>
+    </h5>
+
+    <script
+      defer src="https://commento-tylercecil.herokuapp.com/js/commento.js">
+    </script>
+    <div id="commento"></div>
+
+    <footer>
+      <h6 style="float: right">&copy; 2023 Tyler Cecil</h6>
+      <a href="/feed/atom.xml"
+         style="text-decoration: none;">
+        <!-- SVG taken from: http://genericons.com/ -->
+        <svg xmlns="http://www.w3.org/2000/svg"
+             viewBox="0 0 16 16"
+             height="1.5rem"
+             width="1.5rem"
+             style="fill: currentColor;">
+          <rect x="0" fill="none" width="16" height="16"/>
+          <g>
+          <path d="M2 6v2c3.3 0 6 2.7 6 6h2c0-4.4-3.6-8-8-8zm0-4v2c5.5 0 10 4.5 10 10h2C14 7.4 8.6 2 2 2zm1.5 9c-.8 0-1.5.7-1.5 1.5S2.7 14 3.5 14 5 13.3 5 12.5 4.3 11 3.5 11z"/>
+          </g>
+        </svg>
+        Subscribe via RSS
+      </a>
+      <br/>
+      <a
+         href="https://blogtrottr.com/?subscribe=https://tylercecil.com/feed/atom.xml"
+         target="_blank"
+         title="Powered by BlogTrottr"
+         style="text-decoration: none;">
+        <!-- SVG taken from: http://genericons.com/ -->
+        <svg xmlns="http://www.w3.org/2000/svg"
+             viewBox="0 0 16 16"
+             height="1.5rem"
+             width="1.5rem"
+             style="fill: currentColor;">
+          <rect x="0" fill="none" width="16" height="16"/>
+          <g>
+          <path d="M15 9h-5c-.6 0-1 .4-1 1v5c0 .6.4 1 1 1h5c.6 0 1-.4 1-1v-5c0-.6-.4-1-1-1zm0 4h-2v2h-1v-2h-2v-1h2v-2h1v2h2v1zm-3-5V5c0-1.1-.9-2-2-2H2C.9 3 0 3.9 0 5v5c0 1.1.9 2 2 2h6v-2c0-1.2.8-2 2-2h2zM6 9.1L1 6.2V5l5 2.9L11 5v1.2L6 9.1z"/>
+          </g>
+        </svg>
+        Subscribe via Email
+      </a>
+    </footer>
+    <script>
+      // Causes external links to open in a new tab
+      // TODO: This should really be done by pandoc
+      (function (){
+              var links = document.links;
+
+              for (var i = 0, linksLength = links.length; i < linksLength; i++) {
+                      if (links[i].hostname != window.location.hostname) {
+                              links[i].target = '_blank';
+                            }
+                    }})();
+    </script>
+
+  </body>
+</html>

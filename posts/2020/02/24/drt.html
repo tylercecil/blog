@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <!-- Meta info
+    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <meta charset="utf-8"/>
+    <meta name="description" content="Personal website of Tyler Cecil"/>
+    <meta name="author" content="Tyler I. Cecil"/>
+    <title>Donkey Sentences</title>
+    <!-- Mobile Specific Metas
+      –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+    <!-- Favicon <link rel="icon" type="image/png" href="/images/favicon.png">
+      –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon/favicon-16x16.png">
+    <link rel="manifest" href="/images/favicon/site.webmanifest">
+    <link rel="mask-icon" href="/images/favicon/safari-pinned-tab.svg" color="#5bbad5">
+    <link rel="shortcut icon" href="/images/favicon/favicon.ico">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="msapplication-config" content="/images/favicon/browserconfig.xml">
+    <meta name="theme-color" content="#ffffff">
+    <!-- FONT
+      –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+      <!-- <link href="https://fonts.googleapis.com/css?family=Open+Sans|Raleway|Roboto&display=swap" rel="stylesheet"> -->
+    <!-- CSS
+      –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <link href="/css/normalize.css" rel="stylesheet">
+    <link href="/css/post.css" rel="stylesheet">
+    <!-- JS
+      –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async
+            src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+    </script>
+    <!-- HEADER-INCLUDES:
+      –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+      <style>
+        .n1 {
+          color: green;
+        }
+
+        .n2 {
+          color: blue;
+        }
+
+        .nq {
+          color: red;
+        }
+
+        .n1::after {
+          font-size: 75%;
+          bottom: -0.25em;
+          position: relative;
+          content: "1";
+        }
+
+        .n2::after {
+          font-size: 75%;
+          bottom: -0.25em;
+          position: relative;
+          content: "2";
+        }
+
+        .nq::after {
+          font-size: 75%;
+          bottom: -0.25em;
+          position: relative;
+          content: "?";
+        }
+      </style>
+      </head>
+
+  <body>
+
+    <nav>
+      <a href="/">Posts</a>
+      &bull;
+      <a href="/about/">About</a>
+      &bull;
+      <a href="/subscribe/">Subscribe</a>
+    </nav>
+    <header>
+      <h1>Donkey Sentences</h1>
+      <p>The Limits of Lexical Scope</p>
+      <p><small>Posted on 2020-02-24</small></p>
+          </header>
+
+    
+    <article>
+      <div style="display:none;">
+      <p><span
+      class="math inline">\(\newcommand{drs}[2]{  \begin{array}{|c|}  \hline  #1
+      \\\hline  #2 \\\hline  \end{array}}\)</span></p>
+      </div>
+      <p>In semantics, we typically take a sentence, and convert it into
+      a formal logical representation.<a href="#fn1"
+      class="footnote-ref" id="fnref1"
+      role="doc-noteref"><sup>1</sup></a> <em>“All dogs bark”</em> might
+      be represented as <em><span class="math inline">\([\forall
+      x\)</span> : DOG<span class="math inline">\((x)]\)</span>
+      BARK<span class="math inline">\((x)\)</span>.</em> Formal logical
+      systems tend to use <strong>lexical scope</strong> — “<span
+      class="math inline">\(\forall\)</span>” introduces an <span
+      class="math inline">\(x\)</span>, some things are said about <span
+      class="math inline">\(x\)</span>, and then we throw the <span
+      class="math inline">\(x\)</span> away.</p>
+      <p>My background is in PL Theory, so this makes me feel pretty
+      warm and fuzzy inside. But… this might be a case of trying to fit
+      a round peg into a square hole, as can be demonstrated by a man
+      and his donkey:</p>
+      <ol class="example" type="1">
+      <li><span class="n1">Russell</span> saw a <span
+      class="n2">donkey</span>. <span class="n1">He</span> smiled at
+      <span class="n2">it</span>.</li>
+      </ol>
+      <p>We could be lazy, and just say <span class="n1">he</span> and
+      <span class="n2">it</span> come from “context”, and leave it at
+      that. But even then, what does this look like in a logical
+      representation?</p>
+      <p><span class="math display">\[
+      \begin{align*}
+        [\exists x : \text{DONKEY}(x) ]\; &amp;\text{SEE}(r, x)\\
+        [\exists x : \text{DONKEY}(x) ]\; &amp;\text{SMILE}(r, x)\\
+      \end{align*}
+      \]</span></p>
+      <p>That obviously doesn’t work, because the donkey Russell saw was
+      the same one he smiled at. Maybe we could “merge” these sentences
+      together?</p>
+      <p><span class="math display">\[
+      [\exists x : \text{DONKEY}(x) ]\; \text{SEE}(r, x) \wedge
+      \text{SMILE}(r, x)
+      \]</span></p>
+      <p>But why did the scope of “<span
+      class="math inline">\(\exists\)</span>” extend to the next
+      sentence? What if we put a sentence between the two? And we still
+      haven’t dealt with <span class="n1">he</span> and <span
+      class="n2">it</span>!</p>
+      <p>This week I want to dive into so-called <em>Donkey
+      Sentences</em>, and the advantages of tossing lexical-scope out
+      the window, using a technique known as <strong>Discourse
+      Representation Theory</strong>, or <strong>DRT</strong>.</p>
+      <h2 id="anaphora">Anaphora</h2>
+      <blockquote>
+      <p><em>Did you just say “Donkey Sentences?”</em></p>
+      </blockquote>
+      <p>Why yes I did — <a
+      href="https://en.wikipedia.org/wiki/Donkey_sentence">they’re a
+      thing</a>! Donkey sentences are totally correct sentences, that
+      have clear meanings, but have one small problem: they use
+      <em>anaphora</em>.</p>
+      <dl>
+      <dt>Anaphora</dt>
+      <dd>
+      Any expression whose interpretation depends on another expression
+      elsewhere (called the <strong>antecedent</strong> if it occurred
+      before, <strong>postcedent</strong> if it occurred after).<br />
+      e.g. “<span class="n1">The president was there</span>, and <span
+      class="n1"><strong>that</strong></span> made everyone
+      uncomfortable.” The meaning of <span class="n1">that</span>
+      depends on the antecedent <span class="n1">the president was
+      there</span>.
+      </dd>
+      </dl>
+      <p>So in (1) the anaphora were <span class="n1">he</span> and
+      <span class="n2">it</span>.</p>
+      <p>When I say <em>“depends on”</em>, what do I mean exactly? At
+      first glance, you might think you can simply cut-and-past anaphora
+      out of a sentence.</p>
+      <ol start="2" class="example" type="1">
+      <li><span class="n1">Russell</span> woke up. <span
+      class="n1">He</span> was surprised to see <span
+      class="n1">his</span> donkey.</li>
+      <li><em>Russell</em> was surprised to see <em>Russell’s</em>
+      donkey.</li>
+      </ol>
+      <p>That would make our life easy, but the simple solution of (3)
+      doesn’t always work. Trying the same method on (1):</p>
+      <ol start="4" class="example" type="1">
+      <li>Russell saw a donkey. <em>Russell</em> smiled at <em>a
+      donkey</em>.</li>
+      </ol>
+      <p>This isn’t exactly the same sentence — it’s not clear that
+      we’re talking about the same donkey.<a href="#fn2"
+      class="footnote-ref" id="fnref2"
+      role="doc-noteref"><sup>2</sup></a> It’s also worth mentioning
+      that anaphora don’t just extend across sentences, but can happen
+      within sentences, too!</p>
+      <ol start="5" class="example" type="1">
+      <li>If <span class="n1">Russell</span> had <span class="n2">a
+      donkey</span>, <span class="n1">he</span> would beat <span
+      class="n2">it</span>.</li>
+      <li>If Russell had a donkey, <em>Russell</em> would beat <em>a
+      donkey</em>.</li>
+      </ol>
+      <p>Yeah, that’s just no good.</p>
+      <p>An interesting note here, is cutting-and-pasting the word
+      “Russell” seems to be just fine; it’s this “a donkey” that’s
+      causing problems. Let’s keep this in the back of our minds for
+      now.</p>
+      <h3 id="not-just-nouns">Not just Nouns!</h3>
+      <p>It’s worth pointing out there there are <em>all kinds</em> of
+      anaphora, not just pronouns. These (and others) all occur
+      cross-linguistically.<a href="#fn3" class="footnote-ref"
+      id="fnref3" role="doc-noteref"><sup>3</sup></a></p>
+      <table>
+      <caption>For more information on anaphora, I’d look at <a
+      href="https://plato.stanford.edu/entries/anaphora">The Stanford
+      Encyclopedia of Philosophy</a>.</caption>
+      <colgroup>
+      <col style="width: 23%" />
+      <col style="width: 76%" />
+      </colgroup>
+      <tbody>
+      <tr class="odd">
+      <td style="text-align: left;"><strong>Verb Phrase</strong></td>
+      <td style="text-align: left;">“I just got a donkey. Irma did too.”
+      (Here <em>“did”</em> refers back to last sentence)</td>
+      </tr>
+      <tr class="even">
+      <td style="text-align: left;"><strong>Propositional</strong></td>
+      <td style="text-align: left;">“Russell says it was his donkey. I
+      don’t believe that.” (What is it I don’t beleive?)</td>
+      </tr>
+      <tr class="odd">
+      <td style="text-align: left;"><strong>Adjectival</strong></td>
+      <td style="text-align: left;">This was a stubborn donkey. I guess
+      all donkeys are. (We just dropped the last word of the sentence,
+      “stubborn”!)</td>
+      </tr>
+      <tr class="even">
+      <td style="text-align: left;"><strong>Modal</strong></td>
+      <td style="text-align: left;">Russell might buy a donkey. He would
+      pay cash. (The world in which Russell is paying cash is the same
+      world where he is buying a donkey.)</td>
+      </tr>
+      <tr class="odd">
+      <td style="text-align: left;"><strong>Temporal</strong></td>
+      <td style="text-align: left;">Russell had a party last Friday, and
+      his donkey got drunk. (The time in which the donkey got drunk was
+      during the party.)</td>
+      </tr>
+      </tbody>
+      </table>
+      <h2 id="scope-woes">Scope Woes</h2>
+      <p>So why was it that “Russell” could be copied-and-pasted in
+      sentences like (4) and (6), but “a donkey” couldn’t? Looking back
+      at the logical representation, we have</p>
+      <p><span class="math display">\[
+      [\exists x : \text{DONKEY}(x) ]\; \text{SEE}(r, x)
+      \]</span></p>
+      <p>We converted “a donkey” into <span
+      class="math inline">\([\exists x : \text{DONKEY}(x) ]\)</span>,
+      which is pretty reasonable. However, this commits us to a scope
+      for <span class="math inline">\(x\)</span> — outside this <span
+      class="math inline">\(\exists\)</span>-expression, <span
+      class="math inline">\(x\)</span> will be thrown out.</p>
+      <p>Russell, on the other hand, was simply assigned to <span
+      class="math inline">\(r\)</span>. <span
+      class="math inline">\(r\)</span> has no quantifier, and therefore
+      no scope. Russell is “global” — there is only one (relevant)
+      Russell to speak of, and we can put him wherever we like in our
+      sentences.</p>
+      <p>And that’s the main difference: Russell isn’t giving us any
+      trouble, because <span class="math inline">\(r\)</span> has no
+      scope. “A donkey”, however, is confusing because <strong>it’s not
+      clear how big the scope of <span class="math inline">\(x\)</span>
+      should be.</strong></p>
+      <h3 id="dynamic-scoping">Dynamic Scoping</h3>
+      <p>Here’s a hot take: <strong>language is stateful.</strong> When
+      I say something about a donkey, you don’t just throw it away once
+      the sentence is over. Maybe this donkey will make an appearance
+      later on down the road — who’s to say? You incrementally keep a
+      model of what is being said. This is so intuitive, it borders on
+      obvious, yet trying to fit language into lexical scope is wilfully
+      ignoring this reality!</p>
+      <p>This was the intuition of <span class="citation"
+      data-cites="kamp81">Kamp (<a href="#ref-kamp81"
+      role="doc-biblioref">1981</a>)</span>, and it caused him to
+      develop <strong>Discourse Representation Theory</strong>. At its
+      core, <em>DRT</em> and systems like it involve keeping track of a
+      <strong>dynamic scope</strong>.<a href="#fn4" class="footnote-ref"
+      id="fnref4" role="doc-noteref"><sup>4</sup></a></p>
+      <p>Let’s see what this actually looks like.</p>
+      <h2 id="drt">DRT</h2>
+      <p><em>DRT</em> revolves around the idea of a <em>Discourse
+      Representation Structure</em>.</p>
+      <dl>
+      <dt>Discourse Representation Structure (DRS)</dt>
+      <dd>
+      <p>A structure made up of two lists:</p>
+      <ul>
+      <li>A list of <em>discourse referents</em> (the things being
+      talked about)</li>
+      <li>A list of the <em>conditions</em> (what is being said about
+      them)<a href="#fn5" class="footnote-ref" id="fnref5"
+      role="doc-noteref"><sup>5</sup></a></li>
+      </ul>
+      </dd>
+      </dl>
+      <p>As sentences are received, the <em>DRT</em> becomes updated.
+      Let’s start with the first half of our original sentence.</p>
+      <ol start="7" class="example" type="1">
+      <li>Russell saw a donkey.</li>
+      </ol>
+      <p>We started with an empty DRS, which just became updated after
+      (7).</p>
+      <p><span class="math display">\[
+      \drs{r, x}{\text{RUSSELL}(r)\\ \text{DONKEY}(x) \\ \text{SEE}(r,
+      x)}
+      \]</span></p>
+      <p>With this state in our brains, we then receive the second
+      sentence.</p>
+      <ol start="8" class="example" type="1">
+      <li>He smiled at it.</li>
+      </ol>
+      <p>Now we have two new names, “he” and “it” (both of which are
+      anaphora), and one new conditional.</p>
+      <p><span class="math display">\[
+      \drs{r, x}{\text{RUSSELL}(r)\\ \text{DONKEY}(x) \\ \text{SEE}(r,
+      x)}
+      \Rightarrow
+      \drs{r, x, \hat{y}, \hat{z}}
+      {\text{RUSSELL}(r)\\ \text{DONKEY}(x) \\ \text{SEE}(r, x) \\
+      \text{SMILE}(\hat{y}, \hat{z})}
+      \]</span></p>
+      <p>The anaphora <span class="math inline">\(\hat{y}\)</span> and
+      <span class="math inline">\(\hat{z}\)</span> at this point are
+      incomplete — we need to resolve which antecedent goes with which.
+      This is actually trivial in our example. <span
+      class="math inline">\(\hat{y}\)</span> can <em>only</em> map to
+      <span class="math inline">\(r\)</span>, and <span
+      class="math inline">\(\hat{z}\)</span> to <span
+      class="math inline">\(x\)</span>.<a href="#fn6"
+      class="footnote-ref" id="fnref6"
+      role="doc-noteref"><sup>6</sup></a></p>
+      <p><span class="math display">\[
+      \drs{r, x, \hat{y}, \hat{z}}
+      {\text{RUSSELL}(r)\\ \text{DONKEY}(x) \\ \text{SEE}(r, x) \\
+      \text{SMILE}(\hat{y}, \hat{z})}
+      \Rightarrow
+      \drs{r, x, \hat{y}, \hat{z}}
+      {r = \hat{y} \\ x = \hat{z} \\
+      \text{RUSSELL}(r)\\ \text{DONKEY}(x) \\ \text{SEE}(r, x) \\
+      \text{SMILE}(\hat{y}, \hat{z})}
+      \Rightarrow
+      \drs{r, x}
+      {\text{RUSSELL}(r)\\ \text{DONKEY}(x) \\ \text{SEE}(r, x) \\
+      \text{SMILE}(r, x)}
+      \]</span></p>
+      <h3 id="some-intuition-on-new-names">Some Intuition on New
+      Names</h3>
+      <p>So much of this work revolves around rethinking what
+      quantifiers mean in a dynamic context. Should we be adding
+      discourse referents for every noun we see?</p>
+      <p>Probably not. Consider if I said:</p>
+      <ol start="9" class="example" type="1">
+      <li>Russell loves a donkey. The donkey does not love him
+      back.</li>
+      </ol>
+      <p>When you hear “Russell”, your brain says “ok, we’re talking
+      about a guy named Russell”. Then you hear “a donkey” — “ah! A
+      donkey has entered the picture”. “The donkey” however, did not add
+      a new character to our world. Because it is definite<a href="#fn7"
+      class="footnote-ref" id="fnref7"
+      role="doc-noteref"><sup>7</sup></a>, we know not to add a new
+      referent. Any time we hear the indefinite “a farmer” or “another
+      donkey”, however, we know to add a discourse referent.</p>
+      <h3 id="negation-of-drss">Negation of DRSs</h3>
+      <p>It turns out global scope isn’t exactly always what you
+      want.</p>
+      <ol start="10" class="example" type="1">
+      <li>#There is <span class="n1">no donkey</span>. Russell smiles at
+      <span class="nq">it</span>.</li>
+      </ol>
+      <p><span class="nq">It</span> here certainly can’t refer to <span
+      class="n1">no donkey</span>! This negative-quantifier has a very
+      narrow scope — you can never refer back to the donkey that doesn’t
+      exist. To deal with this, we can nest DRSs!</p>
+      <p><span class="math display">\[
+      \drs{r, \hat{y}}{
+      \text{RUSSELL}(r) \\ \text{SMILE}(r, \hat{y}) \\
+      \neg \; \drs{x}{\text{DONKEY}(x)}_{R_1}
+      }_{R_0}
+      \]</span></p>
+      <p>We can read this as <strong>“any extension to <span
+      class="math inline">\(R_0\)</span> which includes the content of
+      <span class="math inline">\(R_1\)</span> must be
+      false”.</strong></p>
+      <h3 id="conditionals">Conditionals</h3>
+      <p>So how do we model conditionals with this system?</p>
+      <ol start="11" class="example" type="1">
+      <li>If <span class="n1">Russell</span> had <span class="n2">a
+      donkey</span>, <span class="n1">he</span> would beat <span
+      class="n2">it</span>.</li>
+      </ol>
+      <p>Again, we’re going to use a method of nested DRSs.</p>
+      <p><span class="math display">\[
+      \drs{r}{ \text{RUSSELL}(r) \\
+      \drs{x}{ \text{DONKEY}(x) \\ \text{HAS}(r,x) }_{R_1} \Rightarrow
+      \drs{\hat{y}, \hat{z}}{ \text{BEAT}(\hat{y}, \hat{z}) }_{R_2}
+      }_{R_0}
+      \]</span></p>
+      <p>A lot like negation, <span class="math inline">\(R_1
+      \Rightarrow R_2\)</span> is giving us rules about how <span
+      class="math inline">\(R_0\)</span> might be expanded. Namely,
+      <strong>any extension which includes the contents of <span
+      class="math inline">\(R_1\)</span> must also include the contents
+      of <span class="math inline">\(R_2\)</span>.</strong></p>
+      <h2 id="dynamic-is-useful">Dynamic is Useful</h2>
+      <p>Obviously I’ve only barely introduced DRT<a href="#fn8"
+      class="footnote-ref" id="fnref8"
+      role="doc-noteref"><sup>8</sup></a>, but it might quickly be
+      apparent how <em>dynamic semantics</em> can be very powerful. It
+      seems to address anaphora fairly well, but that’s really just the
+      beginning.</p>
+      <p>DRT is also something that can be easily modeled by a computer.
+      This has led to a whole swath of fruitful research in AI and
+      Computational Linguistics. For the same reason, it also bridges
+      formal semantics with psychological models of language.</p>
+      <p>What I find particularly interesting, is that dynamic semantics
+      also seems to bring the <em>pragmatic-semantic</em> interface more
+      into focus. <strong>Pragmatics</strong>, which is loosely the
+      subfield of linguistics dealing with how context contributes to
+      meaning, has been a rather elusive topic. With a DRS, however, we
+      can more clearly see when and how pragmatics jumps into the
+      picture — for example, searching for an antecedent <span
+      class="math inline">\(x\)</span> to bind to some anaphora <span
+      class="math inline">\(\hat{y}\)</span>.</p>
+      <h2 id="parting-notes">Parting Notes</h2>
+      <p>If you’d like a deeper look at DRT, I’d strongly suggest <span
+      class="citation" data-cites="kamp">Kamp, Genabith, and Reyle (<a
+      href="#ref-kamp" role="doc-biblioref">2010</a>)</span> and <span
+      class="citation" data-cites="stan-drt">Geurts and Maier (<a
+      href="#ref-stan-drt" role="doc-biblioref">2020</a>)</span>,
+      probably in that order. They both read very easy, and go much more
+      in-depth on the subject.</p>
+      <p>I haven’t seen the actual phrase “dynamic scope” used in
+      discussion about these theories, but the idea is there. I’m just
+      using my computer science vocabulary.</p>
+      <p>I actually originally wanted to write exclusively about <span
+      class="citation" data-cites="partee">Partee (<a href="#ref-partee"
+      role="doc-biblioref">1984</a>)</span>, and her use of DRT for the
+      analysis of tense, but… I couldn’t actually find a copy of the
+      paper online! The tragic realities of not being affiliated with a
+      university… I hope to post a mini-post soon, introducing those
+      ideas.</p>
+      <p>If I were to write a part-two, I think I’d like to look at
+      judgments, inferences, and maybe even a computational
+      implementation (this feel like it would be fun to implement in
+      Coq, for example). It’s also worth noting that there are a number
+      of different <em>flavors</em> of DRT, each with their own pros and
+      cons.</p>
+      <p>Stay tuned later this week for a spiritual sequel, though! I
+      have a fun topic planed related to anaphora.</p>
+      <p><strong>Thanks as always for reading!</strong> Every week I
+      write about something I’m learning to test my own understanding,
+      but also to work on my writing and explanatory skills. If you have
+      questions, critiques, or thoughts, please <strong>leave a
+      comment!</strong> They might teach me something, and they’ll let
+      me know someone’s reading!</p>
+      <h2 id="references">References</h2>
+      <div class="refs">
+
+      </div>
+      <div id="refs" class="references csl-bib-body hanging-indent"
+      role="list">
+      <div id="ref-stan-drt" class="csl-entry" role="listitem">
+      Geurts, Beaver, Bart, and Emar Maier. 2020. <span>“Discourse
+      Representation Theory.”</span> In <em>The Stanford Encyclopedia of
+      Philosophy</em>, edited by Edward N. Zalta, Spring 2020. <a
+      href="https://plato.stanford.edu/archives/spr2020/entries/discourse-representation-theory/"
+      class="uri">https://plato.stanford.edu/archives/spr2020/entries/discourse-representation-theory/</a>;
+      Metaphysics Research Lab, Stanford University.
+      </div>
+      <div id="ref-kamp81" class="csl-entry" role="listitem">
+      Kamp, Hans. 1981. <span>“A Theory of Truth and Semantic
+      Representation.”</span> <em>Formal Semantics-the Essential
+      Readings</em>, 189–222.
+      </div>
+      <div id="ref-kamp" class="csl-entry" role="listitem">
+      Kamp, Hans, Josef Genabith, and Uwe Reyle. 2010. <span>“Discourse
+      Representation Theory.”</span> In <em>Handbook of Philosophical
+      Logic, Handbook of Philosophical Logic, Volume 15. ISBN
+      978-94-007-0484-8. Springer Science+Business Media B.V., 2011,
+      p. 125</em>, 125–394. <a
+      href="https://doi.org/10.1007/978-94-007-0485-5_3">https://doi.org/10.1007/978-94-007-0485-5_3</a>.
+      </div>
+      <div id="ref-partee" class="csl-entry" role="listitem">
+      Partee, Barbara H. 1984. <span>“Nominal and Temporal
+      Anaphora.”</span> <em>Linguistics and Philosophy</em> 7 (3):
+      243–86. <a
+      href="http://www.jstor.org/stable/25001168">http://www.jstor.org/stable/25001168</a>.
+      </div>
+      </div>
+      <aside id="footnotes" class="footnotes footnotes-end-of-document"
+      role="doc-endnotes">
+      <hr />
+      <ol>
+      <li id="fn1"><p>Specifically, this is the tradition of Montague
+      grammar (which is pretty pervasive). Montague’s thesis is
+      essentially that <em>natural languages</em> and <em>formal
+      languages</em> (like programming languages) ultimately can be
+      treated the same way.<a href="#fnref1" class="footnote-back"
+      role="doc-backlink">↩︎</a></p></li>
+      <li id="fn2"><p>This is a bit more clear with a sentence added in
+      the middle. e.g. <em>“Russell saw a donkey. In fact, he saw
+      hundreds of donkeys. Russell smiled at a donkey”.</em><a
+      href="#fnref2" class="footnote-back"
+      role="doc-backlink">↩︎</a></p></li>
+      <li id="fn3"><p>This includes sign languages, which I find to be
+      objectively cool. Look up some recent work by Philippe Schlenker
+      for more information.<a href="#fnref3" class="footnote-back"
+      role="doc-backlink">↩︎</a></p></li>
+      <li id="fn4"><p>If you want a programming example to draw
+      intuition from, I would point out <code>bash</code>. In
+      <code>bash</code>, all variables are global, and they only come
+      into existence when you first assign something to them.<a
+      href="#fnref4" class="footnote-back"
+      role="doc-backlink">↩︎</a></p></li>
+      <li id="fn5"><p>This is actually essentially the same of
+      converting to logical notation, but now we keep a dynamic list of
+      names.<a href="#fnref5" class="footnote-back"
+      role="doc-backlink">↩︎</a></p></li>
+      <li id="fn6"><p>This is because the syntax of “he” requires a
+      male.<a href="#fnref6" class="footnote-back"
+      role="doc-backlink">↩︎</a></p></li>
+      <li id="fn7"><p>Definite here means “there is only one”. By saying
+      “the <span class="math inline">\(x\)</span>”, you are stating that
+      there is only one <span class="math inline">\(x\)</span>. Pronouns
+      are another form of definite references.<a href="#fnref7"
+      class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+      <li id="fn8"><p><strong>Question for my readers:</strong> have my
+      posts been too “introductory”? Would a deep-dive into topics be
+      more interesting than a brief overview? Because I haven’t been
+      writing much about novel work, I’ve been under the assumption that
+      those who wish to learn more will read the source research. There
+      are a number of extensions to DRT, critiques, and we haven’t
+      touched at all on judgments within the system, or computational
+      implementations.<a href="#fnref8" class="footnote-back"
+      role="doc-backlink">↩︎</a></p></li>
+      </ol>
+      </aside>
+    </article>
+
+    <img id="sig" src="/images/tc-logo.svg" alt="Tyler Cecil's Blog"/>
+    <h6 style="text-align:center">Comments mean a lot!</h6>
+    <h5>
+      <a href="/"> More Posts </a>
+      <a href="mailto:blog@tylercecil.com?Subject=Donkey Sentences"
+         style="float: right">
+        Write Me
+      </a>
+    </h5>
+
+    <script
+      defer src="https://commento-tylercecil.herokuapp.com/js/commento.js">
+    </script>
+    <div id="commento"></div>
+
+    <footer>
+      <h6 style="float: right">&copy; 2023 Tyler Cecil</h6>
+      <a href="/feed/atom.xml"
+         style="text-decoration: none;">
+        <!-- SVG taken from: http://genericons.com/ -->
+        <svg xmlns="http://www.w3.org/2000/svg"
+             viewBox="0 0 16 16"
+             height="1.5rem"
+             width="1.5rem"
+             style="fill: currentColor;">
+          <rect x="0" fill="none" width="16" height="16"/>
+          <g>
+          <path d="M2 6v2c3.3 0 6 2.7 6 6h2c0-4.4-3.6-8-8-8zm0-4v2c5.5 0 10 4.5 10 10h2C14 7.4 8.6 2 2 2zm1.5 9c-.8 0-1.5.7-1.5 1.5S2.7 14 3.5 14 5 13.3 5 12.5 4.3 11 3.5 11z"/>
+          </g>
+        </svg>
+        Subscribe via RSS
+      </a>
+      <br/>
+      <a
+         href="https://blogtrottr.com/?subscribe=https://tylercecil.com/feed/atom.xml"
+         target="_blank"
+         title="Powered by BlogTrottr"
+         style="text-decoration: none;">
+        <!-- SVG taken from: http://genericons.com/ -->
+        <svg xmlns="http://www.w3.org/2000/svg"
+             viewBox="0 0 16 16"
+             height="1.5rem"
+             width="1.5rem"
+             style="fill: currentColor;">
+          <rect x="0" fill="none" width="16" height="16"/>
+          <g>
+          <path d="M15 9h-5c-.6 0-1 .4-1 1v5c0 .6.4 1 1 1h5c.6 0 1-.4 1-1v-5c0-.6-.4-1-1-1zm0 4h-2v2h-1v-2h-2v-1h2v-2h1v2h2v1zm-3-5V5c0-1.1-.9-2-2-2H2C.9 3 0 3.9 0 5v5c0 1.1.9 2 2 2h6v-2c0-1.2.8-2 2-2h2zM6 9.1L1 6.2V5l5 2.9L11 5v1.2L6 9.1z"/>
+          </g>
+        </svg>
+        Subscribe via Email
+      </a>
+    </footer>
+    <script>
+      // Causes external links to open in a new tab
+      // TODO: This should really be done by pandoc
+      (function (){
+              var links = document.links;
+
+              for (var i = 0, linksLength = links.length; i < linksLength; i++) {
+                      if (links[i].hostname != window.location.hostname) {
+                              links[i].target = '_blank';
+                            }
+                    }})();
+    </script>
+
+  </body>
+</html>

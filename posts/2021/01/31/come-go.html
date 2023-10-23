@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <!-- Meta info
+    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <meta charset="utf-8"/>
+    <meta name="description" content="Personal website of Tyler Cecil"/>
+    <meta name="author" content="Tyler I. Cecil"/>
+    <title>Let’s Come Somewhere Else</title>
+    <!-- Mobile Specific Metas
+      –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+    <!-- Favicon <link rel="icon" type="image/png" href="/images/favicon.png">
+      –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon/favicon-16x16.png">
+    <link rel="manifest" href="/images/favicon/site.webmanifest">
+    <link rel="mask-icon" href="/images/favicon/safari-pinned-tab.svg" color="#5bbad5">
+    <link rel="shortcut icon" href="/images/favicon/favicon.ico">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="msapplication-config" content="/images/favicon/browserconfig.xml">
+    <meta name="theme-color" content="#ffffff">
+    <!-- FONT
+      –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+      <!-- <link href="https://fonts.googleapis.com/css?family=Open+Sans|Raleway|Roboto&display=swap" rel="stylesheet"> -->
+    <!-- CSS
+      –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <link href="/css/normalize.css" rel="stylesheet">
+    <link href="/css/post.css" rel="stylesheet">
+    <!-- JS
+      –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async
+            src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+    </script>
+    <!-- HEADER-INCLUDES:
+      –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+      <style>
+        img.fig {
+          display: inline-block;
+          max-width: 25%;
+          min-width: 150px;
+          padding: 0 1em;
+        }
+
+        .bad {
+          color: red;
+        }
+
+        .bad::before {
+          content: "*";
+        }
+
+        .good {
+          color: green;
+        }
+
+        .good::before {
+          content: "✔";
+        }
+
+        #pronouns {
+          border-collapse: collapse;
+        }
+        #pronouns td {
+          border: 1px solid black;
+        }
+
+        #pronouns td:last-child {
+          padding-right: 15px;
+        }
+
+        #pronouns td:first-child {
+          padding-left: 15px;
+        }
+
+        #pronouns em {
+          font-style: normal;
+          font-variant: small-caps;
+        }
+
+        .vens img {
+          width: 100%;
+        }
+        .vens figure {
+          width: 90%;
+        }
+      </style>
+      </head>
+
+  <body>
+
+    <nav>
+      <a href="/">Posts</a>
+      &bull;
+      <a href="/about/">About</a>
+      &bull;
+      <a href="/subscribe/">Subscribe</a>
+    </nav>
+    <header>
+      <h1>Let’s Come Somewhere Else</h1>
+      <p>The Semantics of “Come” and “Go”</p>
+      <p><small>Posted on 2021-01-31</small></p>
+          </header>
+
+        <div class="note">
+      <p><strong>Note:</strong> This post is a small adaptaion of a
+      paper I wrote for the University of Washington’s <em>Ling 578</em>
+      course. If you’d rather read the paper, you can find it <a
+      href="/static/posts/come-go/paper.pdf">here</a>.</p>
+    </div>
+    
+    <article>
+      <div class="comment">
+      <p><span class="math display">\[
+      \newcommand{\w}[1]{\text{#1}}
+      \newcommand{\cont}{\mathcal{C}}
+      \newcommand{\ucont}{\hat{\cont}}
+      \newcommand{\dis}[1]{\cont\left[{#1}\right]}
+      \newcommand{\udis}[1]{\ucont\left[{#1}\right]}
+      \newcommand{\cat}[1]{\text{#1}}
+      \newcommand{\speaker}{\cat{+speaker}}
+      \newcommand{\hearer}{\cat{+hearer}}
+      \newcommand{\participant}{\cat{+participant}}
+      \newcommand{\coloneqq}{≔}
+      \]</span></p>
+      </div>
+      <p>Define “come” and “go” to yourself. Go ahead, say it out loud —
+      I won’t comment on how funny your voice sounds. Does your
+      definition look something like this?</p>
+      <div class="center">
+      <p><img src="/images/posts/come-go/come.svg" class="fig" /> <img
+      src="/images/posts/come-go/go.svg" class="fig" /></p>
+      </div>
+      <p>Interesting. Well you’re wrong (and your voice <em>does</em>
+      sound a little funny).</p>
+      <p>Most people usually think of ingress and egress — moving either
+      towards or away from the speaker. And in some ways that’s
+      true!</p>
+      <ol class="example" type="1">
+      <li><span class="good">Come towards me!</span></li>
+      <li><span class="bad">Come away from me!</span></li>
+      <li><span class="bad">Go towards me!</span> <a href="#fn1"
+      class="footnote-ref" id="fnref1"
+      role="doc-noteref"><sup>1</sup></a></li>
+      <li><span class="good">Go away from me!</span></li>
+      </ol>
+      <p>The problem is sentences like this:</p>
+      <ol start="5" class="example" type="1">
+      <li><span class="good">I’m coming over to your house.</span></li>
+      </ol>
+      <p>If (5) is said over the phone, with the listener sitting in
+      their own home, it works just fine. But if both speaker and
+      listener are at the park talking, (5) no longer makes sense! It’s
+      almost as if the speaker is taking the point of view of the
+      listener, thinking “what verb would <em>they</em> use?”, and
+      conforming to that.</p>
+      <p>Is this just a psychology thing? Well… not all languages work
+      this way, so not exactly.</p>
+      <p>To me, the conclusion is that <strong>the English words “come”
+      and “go” have more complicated semantics than ingress or
+      egress.</strong> With a little bit of trial and error, we can
+      pretty succinctly describe those rules. Before we do that, though,
+      let’s take this opportunity to learn a new word!</p>
+      <h2 id="deixis">Deixis</h2>
+      <dl>
+      <dt>Deixis</dt>
+      <dd>
+      Language’s ability to “point” to the world in context.<br />
+      A word is deictic if its <em>semantic meaning</em> is fixed, but
+      its <em>denotation</em> depends on the context.<br />
+      <strong>i.e.</strong> <em>“this”</em> and <em>“that”</em> are the
+      linguistic equivalents to (and often accompanied by) physical
+      pointing.
+      </dd>
+      </dl>
+      <p>This dips heavily into the forbidden art of psychology. But,
+      even though deixis gets messy, there is a sense that the
+      <em>kind</em> of deixis available to us is more or less
+      universal.</p>
+      <p>Typically deictic expressions are oriented around <strong>the
+      deictic center</strong>. Along all kinds of axes like person,
+      time, and location, there is a center, and points radiating
+      outward.</p>
+      <div class="center">
+      <figure>
+      <img src="/images/posts/come-go/center.svg" class="fig"
+      alt="In modern English, orientation around the deictic center looks like this." />
+      <figcaption aria-hidden="true">In modern English, orientation
+      around the deictic center looks like this.</figcaption>
+      </figure>
+      </div>
+      <p>This picture isn’t exactly complete, though! For example, in
+      Japanese there is actually a third outer-ring missing from the
+      picture above!</p>
+      <!--
+        Speaker Hearer 3rd Person
+        ------- ------ ----------
+        Here    There  There (Middle English "yonder")
+        ここ    そこ   あそこ
+        This    That   That
+        これ    それ   あれ
+      -->
+      <table>
+      <thead class="center">
+      <tr class="header">
+      <th>
+      </th>
+      <th>
+      Proximal
+      </th>
+      <th>
+      Medial
+      </th>
+      <th>
+      Distal
+      </th>
+      </tr>
+      </thead>
+      <tbody class="center">
+      <tr class="odd">
+      <td rowspan="2">
+      <strong>Place</strong>
+      </td>
+      <td>
+      Here
+      </td>
+      <td>
+      There
+      </td>
+      <td>
+      There <em>(Middle English “yonder”)</em>
+      </td>
+      </tr>
+      <tr class="even">
+      <td>
+      ここ<br>(ko·ko)
+      </td>
+      <td>
+      そこ<br>(so·ko)
+      </td>
+      <td>
+      あそこ<br>(a·so·ko)
+      </td>
+      </tr>
+      <tr class="odd">
+      <td rowspan="2">
+      <strong>Object</strong>
+      </td>
+      <td>
+      This
+      </td>
+      <td>
+      That
+      </td>
+      <td>
+      That
+      </td>
+      </tr>
+      <tr class="even">
+      <td>
+      これ<br>(ko·re)
+      </td>
+      <td>
+      それ<br>(so·re)
+      </td>
+      <td>
+      あれ<br>(a·re)
+      </td>
+      </tr>
+      </tbody>
+      </table>
+      <p>That is <em>あそこ</em> is a version of <em>there</em> meaning
+      “neither location of speaker nor hearer”. And three levels isn’t
+      the limit — Sinhala (spoken in Sri Lanka) has four, distinguishing
+      between a “visible” and “out-of-sight” 3rd person. And, I kid you
+      not, the Canadian Inuit language has claim to fourteen different
+      spatial deictic terms <span class="citation"
+      data-cites="denny1982">(<a href="#ref-denny1982"
+      role="doc-biblioref">Denny 1982</a>)</span>!</p>
+      <p>Even the axes of deixis vary! Honorifics are a kind of deixis
+      encoding the difference in social status between speaker and
+      listener — common in many languages, totally absent in others. The
+      <em>direction</em> of motion is sometimes also captured, as is the
+      case with the German hin/her prefixes (related to the archaic
+      “hither”/“thither” in English).</p>
+      <p>But we’re always on this hunt for a universal picture. Some
+      theorize that all deixis boils down to a foreground/background
+      mechanic. “Foregrounded” items are near, salient, or recent,
+      whereas “backgrounded” are far, oblique, or past. I find that
+      interesting when you think about axis of <em>information</em>.</p>
+      <blockquote>
+      <p>Consider this: “this” can refer to things you’re about to say.
+      And if you think <em>that</em> was interesting, “that” can refer
+      to things you’ve already said.</p>
+      </blockquote>
+      <p>Obviously there is a lot to say about deixis, so I would
+      <em>highly</em> recommend <em>Spatial Deixis-The Use of Spatial
+      Co-ordinates in Spoken Language</em> by Barbara Cairns -<span
+      class="citation" data-cites="cairns1991">Cairns (<a
+      href="#ref-cairns1991" role="doc-biblioref">1991</a>)</span> —
+      it’s just a good introduction on the subject, full of surprising
+      uses of language.</p>
+      <h3 id="formally-encoding-deixis">Formally Encoding Deixis</h3>
+      <p>Typically deictic expressions aren’t actually 1-to-1 with
+      denotations, and act more like “filters”. Take English pronouns as
+      an example:</p>
+      <div class="example">
+
+      <p><strong>English Pronouns:</strong> each pronoun can be seen as
+      a series of constraints.</p>
+      <table id="pronouns" class="center">
+      <tbody>
+      <tr>
+      <td colspan="5">
+      <em>+participant</em>
+      </td>
+      </tr>
+      <tr>
+      <td colspan="2">
+      <em>+speaker<br>-hearer</em>
+      </td>
+      <td>
+      <em>+speaker<br>+hearer</em>
+      </td>
+      <td colspan="2">
+      <em>-speaker<br>+hearer</em>
+      </td>
+      <tr>
+      <tr>
+      <td>
+      Singular <br> <em>I</em>
+      </td>
+      <td>
+      Plural <br> <em>we</em>
+      </td>
+      <td>
+      Plural <br> <em>we</em>
+      </td>
+      <td>
+      Singular <br> <em>you</em>
+      </td>
+      <td>
+      Plural <br> <em>you</em>
+      </td>
+      <tr>
+      </tbody>
+      </table>
+      <p>These constraints can then be called upon in the semantics of a
+      sentence. “I see you” could be written as</p>
+      <span class="math display">\[
+      \text{SEE}(\dis{+speaker,-hearer},\dis{-speaker,+hearer})
+      \]</span>
+      </div>
+      <p><span class="math inline">\(\cont\)</span> here is the
+      “context”, where we lookup information. We’ll use this idea of
+      constraints to express <em>come</em> and <em>go.</em></p>
+      <h2 id="the-real-rules-of-coming-and-going">The Real Rules of
+      Coming and Going</h2>
+      <p>To find the <em>real</em> rules governing “come” and “go”,
+      basically I wrote down a <em>lot</em> of sentences. I started with
+      a template sentence:</p>
+      <ol start="6" class="example" type="1">
+      <li>I am coming/going to New York!</li>
+      </ol>
+      <p>Then I tweaked a bunch of parameters, like person, tense, who
+      <em>was</em> and <em>was not</em> in New York, and looked at which
+      made sense.</p>
+      <p>In the present tense, we can look at the results as a bunch of
+      Venn diagrams. <strong>Each circle of the Venn Diagram shows if
+      someone is or isn’t in New York.</strong> We have a “Speaker”
+      circle, “Hearer” circle, and maybe a “3rd Person” circle.</p>
+      <div class="vens multicol">
+      <figure>
+      <img src="/images/posts/come-go/pres_1_come.svg"
+      alt="“I am coming to New York!”" />
+      <figcaption aria-hidden="true"><strong>“I am coming to New
+      York!”</strong></figcaption>
+      </figure>
+      <figure>
+      <img src="/images/posts/come-go/pres_1_go.svg"
+      alt="“I am going to New York!”" />
+      <figcaption aria-hidden="true"><strong>“I am going to New
+      York!”</strong></figcaption>
+      </figure>
+      <figure>
+      <img src="/images/posts/come-go/pres_2_come.svg"
+      alt="“You are coming to New York!”" />
+      <figcaption aria-hidden="true"><strong>“You are coming to New
+      York!”</strong></figcaption>
+      </figure>
+      <figure>
+      <img src="/images/posts/come-go/pres_2_go.svg"
+      alt="“You are going to New York!”" />
+      <figcaption aria-hidden="true"><strong>“You are going to New
+      York!”</strong></figcaption>
+      </figure>
+      <figure>
+      <img src="/images/posts/come-go/pres_3_come.svg"
+      alt="“Sven is coming to New York!”" />
+      <figcaption aria-hidden="true"><strong>“Sven is coming to New
+      York!”</strong></figcaption>
+      </figure>
+      <figure>
+      <img src="/images/posts/come-go/pres_3_go.svg"
+      alt="“Sven is going to New York!”" />
+      <figcaption aria-hidden="true"><strong>“Sven is going to New
+      York!”</strong></figcaption>
+      </figure>
+      </div>
+      <p>Now we can see that “I am coming to New York” works if the
+      listener is in New York. “I am <em>going</em> to New York” works
+      as long as <em>I</em> am not already <em>in New York</em> (though
+      using <em>come</em> is often a bit more natural).</p>
+      <h3 id="formalization">Formalization</h3>
+      <p>Formally, our naïve <em>come</em> and <em>go</em> definition
+      looked something like this<a href="#fn2" class="footnote-ref"
+      id="fnref2" role="doc-noteref"><sup>2</sup></a>:</p>
+      <div class="example">
+      <p><strong>Naïve Come and Go:</strong> <span
+      class="math display">\[
+      \begin{align*}
+        \|\textrm{come}\| &amp;≔ \text{MOVE}(agent, goal) \wedge
+                                     \text{PROXIMAL}(goal,
+      \dis{\speaker})\\
+        \|\textrm{go}\| &amp;≔ \text{MOVE}(agent, goal) \wedge
+                                   \neg\text{PROXIMAL}(goal,
+      \dis{\speaker})
+      \end{align*}
+      \]</span></p>
+      </div>
+      <p>Now we want to take the data above, and make some new rules! I
+      should note, these rules are going to look a lot like (though are
+      a slight improvement on) those developed by <span class="citation"
+      data-cites="fillmore1966">Fillmore (<a href="#ref-fillmore1966"
+      role="doc-biblioref">1966</a>)</span>. Looking at the Venn
+      diagrams, there’s one pretty obvious rule<a href="#fn3"
+      class="footnote-ref" id="fnref3"
+      role="doc-noteref"><sup>3</sup></a>:</p>
+      <div class="example">
+      <p><strong>Rule 1</strong> <span class="math display">\[
+      \neg\text{PRESENT}(agent, goal)
+      \]</span></p>
+      </div>
+      <p>You can’t go somewhere you already are! Next, there is a clear
+      rule governing <em>go</em>: the speaker cannot be present at the
+      goal.</p>
+      <div class="example">
+      <p><strong>Rule 2 (Go Rule)</strong> <span class="math display">\[
+      \neg\text{PRESENT}(\dis{\cat{+speaker}}, goal)
+      \]</span></p>
+      </div>
+      <p>The rule for <em>come</em> is a little trickier: either speaker
+      or hearer must be present at the goal (this matches the
+      point-of-view intuitions).</p>
+      <div class="example">
+      <p><strong>Rule 3: (Come Rule)</strong> <span
+      class="math display">\[
+      \text{PRESENT}(\dis{\cat{+participant}}, goal)
+      \]</span></p>
+      </div>
+      <p>Ok. Cool. … … Are we done?</p>
+      <h3 id="what-about-tense">What About Tense?</h3>
+      <p>Ok, I kinda left something out here. It turns out <strong>tense
+      matters when using come or go!</strong> Consider this little
+      example:</p>
+      <div class="example">
+      <p><strong>P1:</strong> I’ll be in New York this Christmas. I’m
+      going to miss you!<br />
+      <strong>P2:</strong> Don’t worry! I’ll come to New York to see
+      you!</p>
+      </div>
+      <p>In this example, <strong>neither speaker or hearer are in New
+      York, but <em>come</em> was used!</strong> It seemed to matter
+      more that the hearer <em>would be</em> in New York when the action
+      was going to take place. But then there is this example:</p>
+      <div class="example">
+      <p><strong>P1:</strong> Did you hear about Duncan? He came here
+      last night!<br />
+      <strong>P2:</strong> While we were out shopping?</p>
+      </div>
+      <p><strong>Now neither participant was present at action
+      time!</strong></p>
+      <h3 id="the-final-rules">The Final Rules</h3>
+      <p>We can clean up our rules by adding this temporal constraint on
+      things. I’ll use “<span class="math inline">\(@
+      \text{time}\)</span>” to mean “true at a time”. Gluing everything
+      together gives us these rules:</p>
+      <div class="example">
+      <p><strong>Rule 1: (come &amp; go)</strong></p>
+      <p><span class="math display">\[
+        \neg\text{PRESENT}(agent, goal) @(\dis{\cat{+event-time}})
+      \]</span></p>
+      <p><strong>Rule 2: (go)</strong> <span class="math display">\[
+      \neg\text{PRESENT}(\dis{\cat{+speaker}}, goal) @
+        (\dis{\cat{+event-time}})
+      \]</span></p>
+      <p><strong>Rule 3: (come)</strong> <span class="math display">\[
+        \begin{align*}
+        \text{PRESENT}&amp;(\dis{\cat{+participant}}, goal) @
+        (\dis{\cat{+event-time}}) \\
+          \vee
+          \text{PRESENT}&amp;(\dis{\cat{+participant}}, goal) @
+          (\dis{\cat{+speech-time}}) \\
+        \end{align*}
+      \]</span></p>
+      </div>
+      <h2 id="parting-notes">Parting Notes</h2>
+      <p>I found these rules pretty surprising! They’re far more
+      complicated than what one would think for two words as “simple” as
+      <em>come</em> and <em>go</em>!</p>
+      <p>I’ve been spending a lot of time thinking about these words,
+      their rules, exceptions and edge cases, and have been really
+      fascinated by their intricacies — <em>especially</em>
+      cross-linguistically! For the sake of time, though, let me just
+      leave you with some teasers:</p>
+      <ul>
+      <li>These rules seem to hold for the words “bring” and
+      “take”.</li>
+      <li>I said the speaker “takes the point of view of the listener” —
+      there is actually psychological data for this! For example,
+      children with Autism seem to use <em>come</em> and <em>go</em>
+      differently than other children <span class="citation"
+      data-cites="hobson2010">(<a href="#ref-hobson2010"
+      role="doc-biblioref">Hobson, García-Pérez, and Lee
+      2010</a>)</span>.</li>
+      <li>These rules don’t seem to be exactly complete. <em>“I’ll come
+      with!”</em> is one example that confuses me. Interrogatives and
+      modals seem to also have odd behaviors.</li>
+      </ul>
+      <p>I’ll leave you all with some further reading, if anyone is
+      interested!</p>
+      <ul>
+      <li>This post is a micro version of <a
+      href="/static/posts/come-go/paper.pdf">a paper I wrote</a> for a
+      semantics course.</li>
+      <li>Again, <span class="citation" data-cites="cairns1991">Cairns
+      (<a href="#ref-cairns1991" role="doc-biblioref">1991</a>)</span>
+      is a great introduction to Deixis, and a thoroughly enjoyable
+      read.</li>
+      <li><span class="citation" data-cites="fillmore1966">Fillmore (<a
+      href="#ref-fillmore1966" role="doc-biblioref">1966</a>)</span> is
+      <em>the</em> paper on “Come” and “Go”.</li>
+      <li><span class="citation" data-cites="wilkins1995">Wilkins and
+      Hill (<a href="#ref-wilkins1995"
+      role="doc-biblioref">1995</a>)</span> is a paper on “Come” and
+      “Go” in two very different languages. The paper challenges just
+      how “basic” these words really are.</li>
+      </ul>
+      <h2 id="references">References</h2>
+      <div class="refs">
+
+      </div>
+      <div id="refs" class="references csl-bib-body hanging-indent"
+      role="list">
+      <div id="ref-cairns1991" class="csl-entry" role="listitem">
+      Cairns, Barbara. 1991. <span>“Spatial
+      <span>Deixis</span>-<span>The Use</span> of <span>Spatial
+      Co</span>-Ordinates in <span>Spoken Language</span>”</span> 38:
+      19–21.
+      </div>
+      <div id="ref-denny1982" class="csl-entry" role="listitem">
+      Denny, J. Peter. 1982. <span>“Semantics of the
+      <span>Inuktitut</span> (<span>Eskimo</span>) <span>Spatial
+      Deictics</span>.”</span> <em>International Journal of American
+      Linguistics</em> 48 (4): 359–84. <a
+      href="https://doi.org/10.1086/465747">https://doi.org/10.1086/465747</a>.
+      </div>
+      <div id="ref-fillmore1966" class="csl-entry" role="listitem">
+      Fillmore, Charles J. 1966. <span>“Deictic <span>Categories</span>
+      in the <span>Semantics</span> of
+      <span>‘<span>Come</span>’</span>.”</span> <em>Foundations of
+      Language</em> 2 (3): 219–27. <a
+      href="https://www.jstor.org/stable/25000226">https://www.jstor.org/stable/25000226</a>.
+      </div>
+      <div id="ref-hobson2010" class="csl-entry" role="listitem">
+      Hobson, R. Peter, Rosa M. García-Pérez, and Anthony Lee. 2010.
+      <span>“Person-<span>Centred</span> (<span>Deictic</span>)
+      <span>Expressions</span> and <span>Autism</span>.”</span>
+      <em>Journal of Autism and Developmental Disorders</em> 40 (4):
+      403–15. <a
+      href="https://doi.org/10.1007/s10803-009-0882-5">https://doi.org/10.1007/s10803-009-0882-5</a>.
+      </div>
+      <div id="ref-wilkins1995" class="csl-entry" role="listitem">
+      Wilkins, David P., and Deborah Hill. 1995. <span>“When
+      <span>‘Go’</span> Means <span>‘Come’</span>:
+      <span>Questioning</span> the Basicness of Basic Motion
+      Verbs.”</span> <em>Cognitive Linguistics</em> 6: 209–60. <a
+      href="https://doi.org/10.1515/cogl.1995.6.2-3.209">https://doi.org/10.1515/cogl.1995.6.2-3.209</a>.
+      </div>
+      </div>
+      <aside id="footnotes" class="footnotes footnotes-end-of-document"
+      role="doc-endnotes">
+      <hr />
+      <ol>
+      <li id="fn1"><p>This sentence actually doesn’t <em>sound</em> bad
+      — it just can’t be “go towards me, the actual speaker, where I am
+      now”. It makes sense if “me” is some kind of avatar, or maybe
+      where the speaker will be in the future. I’ll get back to this,
+      don’t worry.<a href="#fnref1" class="footnote-back"
+      role="doc-backlink">↩︎</a></p></li>
+      <li id="fn2"><p>“Agent” here means “person coming/going”, and
+      “goal” is “where they are coming/going to”.<a href="#fnref2"
+      class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+      <li id="fn3"><p>Actually, Fillmore did not include this rule (not
+      that he would disagree with it, it just was left unstated).
+      Including, it turns out, greatly simplifies things.<a
+      href="#fnref3" class="footnote-back"
+      role="doc-backlink">↩︎</a></p></li>
+      </ol>
+      </aside>
+    </article>
+
+    <img id="sig" src="/images/tc-logo.svg" alt="Tyler Cecil's Blog"/>
+    <h6 style="text-align:center">Comments mean a lot!</h6>
+    <h5>
+      <a href="/"> More Posts </a>
+      <a href="mailto:blog@tylercecil.com?Subject=Let’s Come Somewhere
+Else"
+         style="float: right">
+        Write Me
+      </a>
+    </h5>
+
+    <script
+      defer src="https://commento-tylercecil.herokuapp.com/js/commento.js">
+    </script>
+    <div id="commento"></div>
+
+    <footer>
+      <h6 style="float: right">&copy; 2023 Tyler Cecil</h6>
+      <a href="/feed/atom.xml"
+         style="text-decoration: none;">
+        <!-- SVG taken from: http://genericons.com/ -->
+        <svg xmlns="http://www.w3.org/2000/svg"
+             viewBox="0 0 16 16"
+             height="1.5rem"
+             width="1.5rem"
+             style="fill: currentColor;">
+          <rect x="0" fill="none" width="16" height="16"/>
+          <g>
+          <path d="M2 6v2c3.3 0 6 2.7 6 6h2c0-4.4-3.6-8-8-8zm0-4v2c5.5 0 10 4.5 10 10h2C14 7.4 8.6 2 2 2zm1.5 9c-.8 0-1.5.7-1.5 1.5S2.7 14 3.5 14 5 13.3 5 12.5 4.3 11 3.5 11z"/>
+          </g>
+        </svg>
+        Subscribe via RSS
+      </a>
+      <br/>
+      <a
+         href="https://blogtrottr.com/?subscribe=https://tylercecil.com/feed/atom.xml"
+         target="_blank"
+         title="Powered by BlogTrottr"
+         style="text-decoration: none;">
+        <!-- SVG taken from: http://genericons.com/ -->
+        <svg xmlns="http://www.w3.org/2000/svg"
+             viewBox="0 0 16 16"
+             height="1.5rem"
+             width="1.5rem"
+             style="fill: currentColor;">
+          <rect x="0" fill="none" width="16" height="16"/>
+          <g>
+          <path d="M15 9h-5c-.6 0-1 .4-1 1v5c0 .6.4 1 1 1h5c.6 0 1-.4 1-1v-5c0-.6-.4-1-1-1zm0 4h-2v2h-1v-2h-2v-1h2v-2h1v2h2v1zm-3-5V5c0-1.1-.9-2-2-2H2C.9 3 0 3.9 0 5v5c0 1.1.9 2 2 2h6v-2c0-1.2.8-2 2-2h2zM6 9.1L1 6.2V5l5 2.9L11 5v1.2L6 9.1z"/>
+          </g>
+        </svg>
+        Subscribe via Email
+      </a>
+    </footer>
+    <script>
+      // Causes external links to open in a new tab
+      // TODO: This should really be done by pandoc
+      (function (){
+              var links = document.links;
+
+              for (var i = 0, linksLength = links.length; i < linksLength; i++) {
+                      if (links[i].hostname != window.location.hostname) {
+                              links[i].target = '_blank';
+                            }
+                    }})();
+    </script>
+
+  </body>
+</html>
